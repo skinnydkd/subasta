@@ -105,10 +105,14 @@ Veure `README.md` secció "Roadmap MVP". Fases:
 6. ⏳ Seed inicial (La Liga 25-26, Barça/Madrid/Villarreal històrics)
 7. ⏳ Polish UI (dark mode "no-IA", PWA install, anti-disconnect)
 
+## Decisions resoltes
+
+- **Paleta dark mode**: warm blacks + warm greys + sport-bar red accent. NO blaus. Tokens a `src/app.css`.
+- **Auth**: anonymous sign-in (`supabase.auth.signInAnonymously()`) + nickname editable. Cap email/magic-link al MVP.
+- **Ordre dels jugadors a subhasta**: random per room.
+
 ## Decisions pendents abans de codi (revisar amb usuari)
 
-- Estètica concreta del dark mode (preference user té un typo a aclarir: "negros y azules" mentre diu "no azules" — confirmar paleta).
-- Ordre dels jugadors a subhasta dins d'una room (random / per posició / mixt).
 - Què passa amb diners no gastats al final (bonus / penalització / res).
 - UX per a jugadors amb sospita de cheating o desconnectats llargament.
 - Detalls del sobre tancat 1st/2nd-price (per a v2; ambdós ja decidits com a opcions).
