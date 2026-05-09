@@ -56,6 +56,60 @@
 	let bidSubmitting = $state(false);
 	let advancing = $state(false);
 	let starting = $state(false);
+	let voteSubmitting = $state(false);
+	let finishingVoting = $state(false);
+
+	// Voting state
+	const teamsByUser = $derived(data.teamsByUser);
+	const myVote = $derived(data.myVote);
+	const tally = $derived(data.tally);
+
+	const otherMembers = $derived(members.filter((m) => m.user_id !== myUserId));
+	let editingVote = $state(false);
+	let rank1 = $state('');
+	let rank2 = $state('');
+	let rank3 = $state('');
+
+	// Initialize rank dropdowns from existing vote if present and not editing
+	$effect(() => {
+		if (myVote && !editingVote) {
+			rank1 = myVote.rank_1_user_id;
+			rank2 = myVote.rank_2_user_id ?? '';
+			rank3 = myVote.rank_3_user_id ?? '';
+		}
+	});
+
+	const rankedSet = $derived(new Set([rank1, rank2, rank3].filter(Boolean)));
+
+	function rankOptions(currentValue: string) {
+		// Members not yet selected, plus the currently-selected one (so it stays visible)
+		return otherMembers.filter((m) => m.user_id === currentValue || !rankedSet.has(m.user_id));
+	}
+
+	const podium = $derived.by(() => {
+		// Build full ranking including members with 0 points
+		const byUser = new Map<string, { points: number; received: number }>();
+		for (const t of tally) {
+			byUser.set(t.user_id, { points: t.total_points, received: t.votes_received });
+		}
+		return members
+			.map((m) => ({
+				user_id: m.user_id,
+				display_name: m.profile?.display_name ?? '—',
+				points: byUser.get(m.user_id)?.points ?? 0,
+				received: byUser.get(m.user_id)?.received ?? 0
+			}))
+			.sort((a, b) => b.points - a.points || b.received - a.received);
+	});
+
+	function teamSpentCents(userId: string): number {
+		return (teamsByUser[userId] ?? []).reduce((sum, p) => sum + (p.final_price_cents ?? 0), 0);
+	}
+
+	function memberName(userId: string | null | undefined): string {
+		if (!userId) return '—';
+		return members.find((m) => m.user_id === userId)?.profile?.display_name ?? '—';
+	}
 
 	function setBidPreset(amountCents: number) {
 		bidInput = `${amountCents / 1_000_000_00}M`;
@@ -294,12 +348,207 @@
 			<p class="text-sm text-[color:var(--color-text-muted)]">Carregant subhasta…</p>
 		</section>
 	{:else if room.status === 'voting'}
-		<section class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-6 text-center">
-			<p>Fase de votació (aviat).</p>
+		<section class="flex flex-col gap-3">
+			<header class="text-center">
+				<h2 class="text-2xl" style="font-family: var(--font-display);">Vota</h2>
+				<p class="mt-1 text-sm text-[color:var(--color-text-muted)]">
+					Tria els 3 millors equips. 3-2-1 punts. No pots votar-te.
+				</p>
+			</header>
+
+			<!-- Other members' teams -->
+			<div class="flex flex-col gap-3">
+				{#each otherMembers as member}
+					{@const team = teamsByUser[member.user_id] ?? []}
+					<details class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]">
+						<summary class="flex cursor-pointer items-center justify-between px-4 py-3 text-sm">
+							<span class="font-medium">{member.profile?.display_name ?? 'Convidat'}</span>
+							<span class="tnum text-[color:var(--color-text-muted)]">
+								{team.length} jug. · {formatCents(teamSpentCents(member.user_id))}
+							</span>
+						</summary>
+						<ul class="flex flex-col gap-1 border-t border-[color:var(--color-border)] px-4 py-3 text-sm">
+							{#each team as p}
+								<li class="flex items-baseline justify-between gap-3">
+									<span>
+										<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-faint)]">{p.position_slot}</span>
+										<span class="ml-2">{p.player_name}</span>
+									</span>
+									<span class="tnum text-xs text-[color:var(--color-text-muted)]">
+										{p.final_price_cents ? formatCents(p.final_price_cents) : 'auto'}
+									</span>
+								</li>
+							{/each}
+						</ul>
+					</details>
+				{/each}
+			</div>
+
+			<!-- Vote form -->
+			{#if myVote && !editingVote}
+				<div class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4">
+					<p class="text-sm text-[color:var(--color-text-muted)]">El teu vot:</p>
+					<ol class="mt-2 flex flex-col gap-1 text-sm">
+						<li><span class="tnum">1.</span> {memberName(myVote.rank_1_user_id)} <span class="text-[color:var(--color-text-faint)]">(3 pts)</span></li>
+						{#if myVote.rank_2_user_id}<li><span class="tnum">2.</span> {memberName(myVote.rank_2_user_id)} <span class="text-[color:var(--color-text-faint)]">(2 pts)</span></li>{/if}
+						{#if myVote.rank_3_user_id}<li><span class="tnum">3.</span> {memberName(myVote.rank_3_user_id)} <span class="text-[color:var(--color-text-faint)]">(1 pt)</span></li>{/if}
+					</ol>
+					<button
+						type="button"
+						onclick={() => (editingVote = true)}
+						class="mt-3 text-sm text-[color:var(--color-accent)] hover:underline"
+					>
+						Editar vot
+					</button>
+					<p class="mt-2 text-xs text-[color:var(--color-text-faint)]">
+						Esperant que voten els altres. Quan tothom haja votat, els resultats apareixeran.
+					</p>
+				</div>
+			{:else}
+				<form
+					method="POST"
+					action="?/castVote"
+					class="flex flex-col gap-3 rounded-[var(--radius-lg)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] p-4"
+					use:enhance={() => {
+						voteSubmitting = true;
+						return async ({ update }) => {
+							await update();
+							voteSubmitting = false;
+							editingVote = false;
+						};
+					}}
+				>
+					<label class="flex flex-col gap-1">
+						<span class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">Top 1 — 3 pts (obligatori)</span>
+						<select
+							name="rank_1"
+							required
+							bind:value={rank1}
+							class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
+						>
+							<option value="">— tria —</option>
+							{#each rankOptions(rank1) as m}
+								<option value={m.user_id}>{m.profile?.display_name ?? 'Convidat'}</option>
+							{/each}
+						</select>
+					</label>
+
+					<label class="flex flex-col gap-1">
+						<span class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">Top 2 — 2 pts</span>
+						<select
+							name="rank_2"
+							bind:value={rank2}
+							class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
+						>
+							<option value="">— cap —</option>
+							{#each rankOptions(rank2) as m}
+								<option value={m.user_id}>{m.profile?.display_name ?? 'Convidat'}</option>
+							{/each}
+						</select>
+					</label>
+
+					<label class="flex flex-col gap-1">
+						<span class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">Top 3 — 1 pt</span>
+						<select
+							name="rank_3"
+							bind:value={rank3}
+							disabled={!rank2}
+							class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm disabled:opacity-50"
+						>
+							<option value="">— cap —</option>
+							{#each rankOptions(rank3) as m}
+								<option value={m.user_id}>{m.profile?.display_name ?? 'Convidat'}</option>
+							{/each}
+						</select>
+					</label>
+
+					{#if form && 'vote' in form && form.vote && 'error' in form.vote}
+						<p class="text-sm text-[color:var(--color-accent)]">{form.vote.error}</p>
+					{/if}
+
+					<button
+						type="submit"
+						disabled={voteSubmitting || !rank1}
+						class="rounded-[var(--radius)] bg-[color:var(--color-accent)] px-4 py-3 text-base font-medium text-[color:var(--color-on-accent)] transition-colors hover:bg-[color:var(--color-accent-hover)] disabled:opacity-50"
+					>
+						{voteSubmitting ? 'Enviant…' : myVote ? 'Actualitzar vot' : 'Enviar vot'}
+					</button>
+				</form>
+			{/if}
+
+			{#if isHost}
+				<form
+					method="POST"
+					action="?/finishVoting"
+					use:enhance={() => {
+						finishingVoting = true;
+						return async ({ update }) => {
+							await update();
+							finishingVoting = false;
+						};
+					}}
+				>
+					<button
+						type="submit"
+						disabled={finishingVoting}
+						class="w-full rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-xs text-[color:var(--color-text-muted)] transition-colors hover:bg-[color:var(--color-elevated)] disabled:opacity-50"
+					>
+						{finishingVoting ? 'Tancant…' : 'Forçar tancament de votació (host)'}
+					</button>
+				</form>
+			{/if}
 		</section>
 	{:else}
-		<section class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-6 text-center">
-			<p>Partida finalitzada.</p>
+		<!-- finished -->
+		<section class="flex flex-col gap-4">
+			<header class="text-center">
+				<h2 class="text-3xl" style="font-family: var(--font-display);">Resultats</h2>
+			</header>
+
+			<ol class="flex flex-col gap-2">
+				{#each podium as row, i}
+					<li
+						class="flex items-baseline justify-between rounded-[var(--radius-lg)] border bg-[color:var(--color-surface)] px-4 py-3"
+						class:border-[color:var(--color-accent)]={i === 0}
+						class:border-[color:var(--color-border-strong)]={i !== 0}
+					>
+						<div class="flex items-baseline gap-3">
+							<span class="text-2xl tnum text-[color:var(--color-text-muted)]" style="font-family: var(--font-display);">{i + 1}</span>
+							<span class="text-lg">{row.display_name}</span>
+						</div>
+						<div class="text-right">
+							<p class="text-xl tnum">{row.points} <span class="text-sm text-[color:var(--color-text-muted)]">pts</span></p>
+							<p class="text-xs text-[color:var(--color-text-faint)]">{row.received} vot{row.received === 1 ? '' : 's'}</p>
+						</div>
+					</li>
+				{/each}
+			</ol>
+
+			<!-- Teams revealed -->
+			<details class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]">
+				<summary class="cursor-pointer px-4 py-3 text-sm">Veure tots els equips</summary>
+				<div class="flex flex-col gap-4 border-t border-[color:var(--color-border)] px-4 py-3">
+					{#each members as member}
+						{@const team = teamsByUser[member.user_id] ?? []}
+						<div>
+							<p class="font-medium">{member.profile?.display_name ?? 'Convidat'} <span class="text-xs text-[color:var(--color-text-faint)]">— {formatCents(teamSpentCents(member.user_id))}</span></p>
+							<ul class="mt-1 flex flex-col gap-0.5 text-sm">
+								{#each team as p}
+									<li class="flex justify-between gap-2">
+										<span>
+											<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-faint)]">{p.position_slot}</span>
+											<span class="ml-2">{p.player_name}</span>
+										</span>
+										<span class="tnum text-xs text-[color:var(--color-text-muted)]">
+											{p.final_price_cents ? formatCents(p.final_price_cents) : 'auto'}
+										</span>
+									</li>
+								{/each}
+							</ul>
+						</div>
+					{/each}
+				</div>
+			</details>
 		</section>
 	{/if}
 

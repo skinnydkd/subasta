@@ -2,7 +2,18 @@ import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
 import { advanceAuction, placeBid, startRoom } from '$lib/server/auctionRpc';
+import { castVote, finishVoting } from '$lib/server/votingRpc';
 import { parseAmountToCents } from '$lib/utils/currency';
+
+type TeamPlayer = {
+	auction_id: string;
+	position_slot: string;
+	final_price_cents: number | null;
+	auction_status: string;
+	player_id: string;
+	player_name: string;
+	player_position: string;
+};
 
 export const load: PageServerLoad = async ({ params, locals }) => {
 	if (!locals.user) {
@@ -69,13 +80,64 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		}
 	}
 
+	let teamsByUser: Record<string, TeamPlayer[]> = {};
+	let myVote: {
+		rank_1_user_id: string;
+		rank_2_user_id: string | null;
+		rank_3_user_id: string | null;
+	} | null = null;
+	let tally: Array<{ user_id: string; total_points: number; votes_received: number }> = [];
+
+	if (room.status === 'voting' || room.status === 'finished') {
+		const { data: rows } = await locals.supabase
+			.from('auctions')
+			.select(
+				'id, winner_id, position_slot, final_price_cents, status, player:players(id, name, primary_position)'
+			)
+			.eq('room_id', room.id)
+			.not('winner_id', 'is', null);
+
+		teamsByUser = {};
+		for (const row of rows ?? []) {
+			if (!row.winner_id || !row.player) continue;
+			(teamsByUser[row.winner_id] ??= []).push({
+				auction_id: row.id,
+				position_slot: row.position_slot,
+				final_price_cents: row.final_price_cents,
+				auction_status: row.status,
+				player_id: row.player.id,
+				player_name: row.player.name,
+				player_position: row.player.primary_position
+			});
+		}
+
+		const { data: vote } = await locals.supabase
+			.from('votes')
+			.select('rank_1_user_id, rank_2_user_id, rank_3_user_id')
+			.eq('room_id', room.id)
+			.eq('voter_id', locals.user.id)
+			.maybeSingle();
+		myVote = vote;
+	}
+
+	if (room.status === 'finished') {
+		const { data: tallyData } = await locals.supabase
+			.from('vote_tally' as never)
+			.select('user_id, total_points, votes_received')
+			.eq('room_id', room.id);
+		tally = (tallyData ?? []) as never;
+	}
+
 	return {
 		room,
 		members: members ?? [],
 		isHost: room.host_id === locals.user.id,
 		activeAuction,
 		activePlayer,
-		recentBids
+		recentBids,
+		teamsByUser,
+		myVote,
+		tally
 	};
 };
 
@@ -134,5 +196,51 @@ export const actions: Actions = {
 		const result = await advanceAuction(locals.supabase, room.id);
 		if (!result.ok) return fail(400, { advance: { error: result.error } });
 		return { advance: { ok: true, ...result.data } };
+	},
+
+	castVote: async ({ request, params, locals }) => {
+		if (!locals.user) return fail(401, { vote: { error: 'No autenticat.' } });
+
+		const formData = await request.formData();
+		const rank1 = String(formData.get('rank_1') ?? '').trim() || null;
+		const rank2 = String(formData.get('rank_2') ?? '').trim() || null;
+		const rank3 = String(formData.get('rank_3') ?? '').trim() || null;
+
+		if (!rank1) return fail(400, { vote: { error: 'Tria almenys el Top 1.' } });
+
+		const code = normalizeRoomCode(params.code!);
+		const { data: room } = await locals.supabase
+			.from('rooms')
+			.select('id')
+			.eq('code', code)
+			.maybeSingle();
+		if (!room) return fail(404, { vote: { error: 'Sala no trobada.' } });
+
+		const result = await castVote(locals.supabase, room.id, {
+			rank1,
+			rank2,
+			rank3
+		});
+		if (!result.ok) return fail(400, { vote: { error: result.error } });
+		return { vote: { ok: true } };
+	},
+
+	finishVoting: async ({ params, locals }) => {
+		if (!locals.user) return fail(401, { finishVoting: { error: 'No autenticat.' } });
+
+		const code = normalizeRoomCode(params.code!);
+		const { data: room } = await locals.supabase
+			.from('rooms')
+			.select('id, host_id')
+			.eq('code', code)
+			.maybeSingle();
+		if (!room) return fail(404, { finishVoting: { error: 'Sala no trobada.' } });
+		if (room.host_id !== locals.user.id) {
+			return fail(403, { finishVoting: { error: 'Només el host.' } });
+		}
+
+		const result = await finishVoting(locals.supabase, room.id);
+		if (!result.ok) return fail(400, { finishVoting: { error: result.error } });
+		return { finishVoting: { ok: true } };
 	}
 };
