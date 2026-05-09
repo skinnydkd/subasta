@@ -8,7 +8,11 @@
 -- ============================================================================
 
 -- ------------------------------------------------------------------ extensions
-create extension if not exists "uuid-ossp";
+-- pg_trgm for fuzzy player name search. In Supabase extensions live in the
+-- `extensions` schema, so we must reference operator classes with that prefix.
+create extension if not exists pg_trgm with schema extensions;
+
+-- gen_random_uuid() is built into Postgres 13+ core; no extension needed.
 
 -- ----------------------------------------------------------------------- enums
 create type position_code as enum (
@@ -42,7 +46,7 @@ create type auction_status as enum (
 -- ----------------------------------------------------------------- tag catalog
 -- Multidimensional tags applied to players. A theme is a filter over tags.
 create table tags (
-  id          uuid primary key default uuid_generate_v4(),
+  id          uuid primary key default gen_random_uuid(),
   slug        text not null unique,        -- e.g. 'laliga-2025-26', 'barca-2008-09'
   display_name text not null,
   category    text not null,               -- 'league_season' | 'club_season' | 'national_team' | 'mixed'
@@ -54,7 +58,7 @@ create index idx_tags_category on tags (category);
 
 -- ---------------------------------------------------------------------- players
 create table players (
-  id                  uuid primary key default uuid_generate_v4(),
+  id                  uuid primary key default gen_random_uuid(),
   name                text not null,
   photo_url           text,
   birth_year          int,
@@ -68,9 +72,7 @@ create table players (
 
 create index idx_players_position on players (primary_position);
 create index idx_players_scrub    on players (is_scrub) where is_scrub = true;
-create index idx_players_name_trgm on players using gin (name gin_trgm_ops);
-
-create extension if not exists pg_trgm;
+create index idx_players_name_trgm on players using gin (name extensions.gin_trgm_ops);
 
 -- ----------------------------------------------------------- player ↔ tag link
 create table player_tags (
@@ -90,7 +92,7 @@ create index idx_player_tags_tag on player_tags (tag_id);
 --     "must_have_all": []                    -- (optional) player must have ALL of these
 --   }
 create table themes (
-  id                uuid primary key default uuid_generate_v4(),
+  id                uuid primary key default gen_random_uuid(),
   slug              text not null unique,
   display_name      text not null,
   description       text,
@@ -144,7 +146,7 @@ create trigger on_auth_user_created
 --     "min_opening_bid_cents": 100000000     -- 1M€
 --   }
 create table rooms (
-  id          uuid primary key default uuid_generate_v4(),
+  id          uuid primary key default gen_random_uuid(),
   code        text not null unique,
   host_id     uuid references profiles(id) on delete set null,
   theme_id    uuid not null references themes(id) on delete restrict,
@@ -171,7 +173,7 @@ create index idx_room_members_user on room_members (user_id);
 
 -- --------------------------------------------------------------------- auctions
 create table auctions (
-  id                  uuid primary key default uuid_generate_v4(),
+  id                  uuid primary key default gen_random_uuid(),
   room_id             uuid not null references rooms(id) on delete cascade,
   player_id           uuid not null references players(id) on delete restrict,
   position_slot       position_code not null,
@@ -196,7 +198,7 @@ create index idx_auctions_room_seq    on auctions (room_id, sequence_number);
 
 -- ------------------------------------------------------------------------- bids
 create table bids (
-  id          uuid primary key default uuid_generate_v4(),
+  id          uuid primary key default gen_random_uuid(),
   auction_id  uuid not null references auctions(id) on delete cascade,
   user_id     uuid not null references profiles(id) on delete cascade,
   amount_cents bigint not null check (amount_cents > 0),
@@ -222,7 +224,7 @@ create view team_view as
 -- -------------------------------------------------------------------- voting
 -- Each voter ranks their top-3 OTHER players in the room.
 create table votes (
-  id              uuid primary key default uuid_generate_v4(),
+  id              uuid primary key default gen_random_uuid(),
   room_id         uuid not null references rooms(id) on delete cascade,
   voter_id        uuid not null references profiles(id) on delete cascade,
   rank_1_user_id  uuid not null references profiles(id) on delete restrict,
