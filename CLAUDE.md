@@ -1,3 +1,11 @@
+## Project Configuration
+
+- **Language**: TypeScript
+- **Package Manager**: pnpm
+- **Add-ons**: prettier, eslint, vitest, playwright, tailwindcss
+
+---
+
 # subasta — Project guide for Claude Code
 
 > Aquest fitxer complementa el global `~/.claude/CLAUDE.md`. Aquí van **convencions específiques d'aquest projecte**. Si veus contradicció entre ambdós, mana aquest.
