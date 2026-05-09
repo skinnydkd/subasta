@@ -14,7 +14,7 @@ import type { AuctionType } from './settings';
 export type AuctionState = {
 	id: string;
 	roomId: string;
-	status: 'pending' | 'active' | 'closed' | 'auto_assigned';
+	status: 'pending' | 'active' | 'closed' | 'auto_assigned' | 'skipped';
 	currentBidCents: number | null;
 	currentBidderId: string | null;
 	endsAt: Date | null;
