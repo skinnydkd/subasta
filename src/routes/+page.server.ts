@@ -48,6 +48,22 @@ export const actions: Actions = {
 		return { signIn: { ok: true } };
 	},
 
+	linkEmail: async ({ request, locals }) => {
+		if (!locals.user) return fail(401, { linkEmail: { error: 'No autenticat.' } });
+
+		const formData = await request.formData();
+		const email = String(formData.get('email') ?? '').trim().toLowerCase();
+		if (!email || !email.includes('@') || email.length > 254) {
+			return fail(400, { linkEmail: { error: 'Email invàlid.' } });
+		}
+
+		const { error } = await locals.supabase.auth.updateUser({ email });
+		if (error) {
+			return fail(400, { linkEmail: { error: error.message } });
+		}
+		return { linkEmail: { ok: true, email } };
+	},
+
 	createRoom: async ({ request, locals }) => {
 		if (!locals.user) return fail(401, { create: { error: 'No autenticat.' } });
 

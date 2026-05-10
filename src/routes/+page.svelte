@@ -81,6 +81,55 @@
 			<p class="text-2xl" style="font-family: var(--font-display);">{data.profile?.display_name ?? 'Convidat'}</p>
 		</div>
 
+		{#if data.user}
+			{#if data.user.is_anonymous && !data.user.email}
+				<details class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2">
+					<summary class="cursor-pointer text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
+						Guardar el teu compte
+					</summary>
+					<form
+						method="POST"
+						action="?/linkEmail"
+						class="mt-3 flex flex-col gap-2"
+						use:enhance
+					>
+						<p class="text-xs text-[color:var(--color-text-muted)]">
+							Si poses un email, podràs recuperar el teu compte i historial des d'altres dispositius.
+						</p>
+						<input
+							name="email"
+							type="email"
+							required
+							placeholder="tu@example.com"
+							class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-sm"
+						/>
+						{#if form && 'linkEmail' in form && form.linkEmail && 'error' in form.linkEmail}
+							<p class="text-xs text-[color:var(--color-accent)]">{form.linkEmail.error}</p>
+						{/if}
+						{#if form && 'linkEmail' in form && form.linkEmail && 'ok' in form.linkEmail && form.linkEmail.ok}
+							<p class="text-xs text-[color:var(--color-success)]">
+								Email enviat. Revisa la safata d'entrada per a verificar.
+							</p>
+						{/if}
+						<button
+							type="submit"
+							class="rounded-[var(--radius-sm)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-3 py-2 text-sm transition-colors hover:bg-[color:var(--color-surface)]"
+						>
+							Enviar email
+						</button>
+					</form>
+				</details>
+			{:else if data.user.email && data.user.is_anonymous}
+				<p class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-center text-xs text-[color:var(--color-text-muted)]">
+					Email pendent de verificar a <span class="text-[color:var(--color-text)]">{data.user.email}</span>
+				</p>
+			{:else if data.user.email}
+				<p class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-center text-xs text-[color:var(--color-text-muted)]">
+					Compte vinculat amb <span class="text-[color:var(--color-text)]">{data.user.email}</span>
+				</p>
+			{/if}
+		{/if}
+
 		<section class="flex flex-col gap-3">
 			<h2 class="text-xl">Crear sala</h2>
 
