@@ -17,7 +17,7 @@
 		"test:e2e": "playwright install && playwright test",
 		"db:push": "supabase db push",
 		"db:types": "node scripts/gen-types.mjs",
-		"db:seed": "node scripts/run-sql.mjs supabase/seed/01_dev_theme.sql supabase/seed/02_dev_players.sql supabase/seed/03_dev_scrubs.sql"
+		"db:seed": "node scripts/run-sql.mjs supabase/seed/01_dev_theme.sql supabase/seed/02_dev_players.sql supabase/seed/03_dev_scrubs.sql supabase/seed/04_real_laliga_25_26.sql"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^2.0.4",

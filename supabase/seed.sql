@@ -6,3 +6,4 @@
 \ir seed/01_dev_theme.sql
 \ir seed/02_dev_players.sql
 \ir seed/03_dev_scrubs.sql
+\ir seed/04_real_laliga_25_26.sql
