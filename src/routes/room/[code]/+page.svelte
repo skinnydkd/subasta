@@ -383,6 +383,79 @@
 				{#if form && 'startRoom' in form && form.startRoom && 'error' in form.startRoom}
 					<p class="mt-2 text-sm text-[color:var(--color-accent)]">{form.startRoom.error}</p>
 				{/if}
+
+				<details class="mt-3 rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-left">
+					<summary class="cursor-pointer text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
+						Editar configuració
+					</summary>
+					<form
+						method="POST"
+						action="?/updateSettings"
+						class="mt-3 flex flex-col gap-2"
+						use:enhance
+					>
+						<label class="flex items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]">
+							<span class="uppercase tracking-wider">Formació</span>
+							<select
+								name="formation"
+								class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
+							>
+								<option value="">— sense canvi —</option>
+								<option value="4-3-3">4-3-3</option>
+								<option value="4-4-2">4-4-2</option>
+								<option value="3-5-2">3-5-2</option>
+								<option value="5-3-2">5-3-2</option>
+							</select>
+						</label>
+						<label class="flex items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]">
+							<span class="uppercase tracking-wider">Timer</span>
+							<select
+								name="timer"
+								class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
+							>
+								<option value="">— sense canvi —</option>
+								<option value="30">30s</option>
+								<option value="60">60s</option>
+								<option value="90">90s</option>
+								<option value="120">120s</option>
+							</select>
+						</label>
+						<div class="grid grid-cols-2 gap-2">
+							<label class="flex flex-col gap-1 text-xs text-[color:var(--color-text-muted)]">
+								<span class="uppercase tracking-wider">Jugadors</span>
+								<input
+									type="number"
+									name="max_members"
+									min="2"
+									max="8"
+									placeholder={String(settings.max_members ?? 5)}
+									class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
+								/>
+							</label>
+							<label class="flex flex-col gap-1 text-xs text-[color:var(--color-text-muted)]">
+								<span class="uppercase tracking-wider">Extres</span>
+								<input
+									type="number"
+									name="extras"
+									min="0"
+									max="3"
+									placeholder={String(settings.extra_per_position ?? 1)}
+									class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
+								/>
+							</label>
+						</div>
+						{#if form && 'settings' in form && form.settings && 'error' in form.settings}
+							<p class="text-xs text-[color:var(--color-accent)]">{form.settings.error}</p>
+						{/if}
+						<button
+							type="submit"
+							class="rounded-[var(--radius-sm)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-3 py-2 text-sm transition-colors hover:bg-[color:var(--color-surface)]"
+						>
+							Aplicar canvis
+						</button>
+					</form>
+				</details>
+
 				<form
 					method="POST"
 					action="?/deleteRoom"
@@ -599,7 +672,7 @@
 
 				<form
 					method="POST"
-					action="?/updateTimer"
+					action="?/updateSettings"
 					class="flex items-center gap-2"
 					use:enhance
 				>

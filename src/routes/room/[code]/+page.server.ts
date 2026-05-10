@@ -4,6 +4,7 @@ import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
 import { advanceAuction, placeBid, startRoom } from '$lib/server/auctionRpc';
 import { castVote, finishVoting } from '$lib/server/votingRpc';
 import { deleteRoom, leaveRoom, updateRoomSettings } from '$lib/server/rooms';
+import { FORMATION_PRESETS, type FormationPreset } from '$lib/auction/settings';
 import { parseAmountToCents } from '$lib/utils/currency';
 
 type RpcAny = (
@@ -210,13 +211,50 @@ export const actions: Actions = {
 		return { vote: { ok: true } };
 	},
 
-	updateTimer: async ({ request, params, locals }) => {
+	updateSettings: async ({ request, params, locals }) => {
 		if (!locals.user) return fail(401, { settings: { error: 'No autenticat.' } });
 
 		const formData = await request.formData();
-		const timer = Number.parseInt(String(formData.get('timer') ?? ''), 10);
-		if (!Number.isFinite(timer) || timer < 10 || timer > 600) {
-			return fail(400, { settings: { error: 'Timer ha de ser entre 10 i 600 segons.' } });
+		const patch: Record<string, unknown> = {};
+
+		const timerRaw = formData.get('timer');
+		if (timerRaw !== null && timerRaw !== '') {
+			const timer = Number.parseInt(String(timerRaw), 10);
+			if (!Number.isFinite(timer) || timer < 10 || timer > 600) {
+				return fail(400, { settings: { error: 'Timer ha de ser entre 10 i 600 segons.' } });
+			}
+			patch.timer_seconds = timer;
+		}
+
+		const formationRaw = formData.get('formation');
+		if (formationRaw !== null && formationRaw !== '') {
+			const preset = String(formationRaw) as FormationPreset;
+			if (!FORMATION_PRESETS[preset]) {
+				return fail(400, { settings: { error: 'Formació desconeguda.' } });
+			}
+			patch.formation = FORMATION_PRESETS[preset];
+		}
+
+		const maxMembersRaw = formData.get('max_members');
+		if (maxMembersRaw !== null && maxMembersRaw !== '') {
+			const m = Number.parseInt(String(maxMembersRaw), 10);
+			if (!Number.isFinite(m) || m < 2 || m > 8) {
+				return fail(400, { settings: { error: 'Jugadors entre 2 i 8.' } });
+			}
+			patch.max_members = m;
+		}
+
+		const extrasRaw = formData.get('extras');
+		if (extrasRaw !== null && extrasRaw !== '') {
+			const e = Number.parseInt(String(extrasRaw), 10);
+			if (!Number.isFinite(e) || e < 0 || e > 3) {
+				return fail(400, { settings: { error: 'Extres entre 0 i 3.' } });
+			}
+			patch.extra_per_position = e;
+		}
+
+		if (Object.keys(patch).length === 0) {
+			return fail(400, { settings: { error: 'Cap canvi.' } });
 		}
 
 		const code = normalizeRoomCode(params.code!);
@@ -227,7 +265,7 @@ export const actions: Actions = {
 			.maybeSingle();
 		if (!room) return fail(404, { settings: { error: 'Sala no trobada.' } });
 
-		const result = await updateRoomSettings(locals.supabase, room.id, { timer_seconds: timer });
+		const result = await updateRoomSettings(locals.supabase, room.id, patch);
 		if (!result.ok) return fail(400, { settings: { error: result.error } });
 		return { settings: { ok: true } };
 	},
