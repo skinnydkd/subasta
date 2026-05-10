@@ -1,15 +1,15 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { createRoom, joinRoom } from '$lib/server/rooms';
+import { createRoom, getUserStats, joinRoom } from '$lib/server/rooms';
 import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
 import { FORMATION_PRESETS, type FormationPreset } from '$lib/auction/settings';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.user) {
-		return { user: null, profile: null, themes: [] };
+		return { user: null, profile: null, themes: [], stats: null };
 	}
 
-	const [{ data: profile }, { data: themes }] = await Promise.all([
+	const [{ data: profile }, { data: themes }, stats] = await Promise.all([
 		locals.supabase
 			.from('profiles')
 			.select('id, display_name')
@@ -19,10 +19,11 @@ export const load: PageServerLoad = async ({ locals }) => {
 			.from('themes')
 			.select('id, slug, display_name, description, cover_image_url')
 			.eq('is_published', true)
-			.order('display_name')
+			.order('display_name'),
+		getUserStats(locals.supabase, locals.user.id)
 	]);
 
-	return { user: locals.user, profile, themes: themes ?? [] };
+	return { user: locals.user, profile, themes: themes ?? [], stats };
 };
 
 export const actions: Actions = {

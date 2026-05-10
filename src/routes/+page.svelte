@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { onMount } from 'svelte';
+	import { formatCents } from '$lib/utils/currency';
 	import type { ActionData, PageData } from './$types';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
@@ -278,6 +279,36 @@
 					{joining ? 'Entrant…' : 'Entrar a la sala'}
 				</button>
 			</form>
+		</section>
+	{/if}
+
+	{#if data.stats && data.stats.rooms_played > 0}
+		<section class="flex flex-col gap-2">
+			<h2 class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">Les meves estadístiques</h2>
+			<div class="grid grid-cols-3 gap-2">
+				<div class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center">
+					<p class="text-2xl tnum">{data.stats.rooms_played}</p>
+					<p class="text-[10px] uppercase tracking-wider text-[color:var(--color-text-faint)]">sales</p>
+				</div>
+				<div class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center">
+					<p class="text-2xl tnum">{data.stats.first_places}</p>
+					<p class="text-[10px] uppercase tracking-wider text-[color:var(--color-text-faint)]">1rs llocs</p>
+				</div>
+				<div class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center">
+					<p class="text-2xl tnum">{data.stats.players_won}</p>
+					<p class="text-[10px] uppercase tracking-wider text-[color:var(--color-text-faint)]">jugadors</p>
+				</div>
+			</div>
+			{#if data.stats.total_spent_cents > 0 || data.stats.top_position}
+				<div class="flex justify-between rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-xs text-[color:var(--color-text-muted)]">
+					{#if data.stats.total_spent_cents > 0}
+						<span>Total gastat: <span class="tnum text-[color:var(--color-text)]">{formatCents(data.stats.total_spent_cents)}</span></span>
+					{/if}
+					{#if data.stats.top_position}
+						<span>Posició preferida: <span class="text-[color:var(--color-text)]">{data.stats.top_position}</span></span>
+					{/if}
+				</div>
+			{/if}
 		</section>
 	{/if}
 

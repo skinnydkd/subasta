@@ -3,7 +3,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
 import { advanceAuction, placeBid, startRoom } from '$lib/server/auctionRpc';
 import { castVote, finishVoting } from '$lib/server/votingRpc';
-import { leaveRoom, updateRoomSettings } from '$lib/server/rooms';
+import { deleteRoom, leaveRoom, updateRoomSettings } from '$lib/server/rooms';
 import { parseAmountToCents } from '$lib/utils/currency';
 
 type RpcAny = (
@@ -245,6 +245,22 @@ export const actions: Actions = {
 
 		const result = await leaveRoom(locals.supabase, room.id);
 		if (!result.ok) return fail(400, { leave: { error: result.error } });
+		throw redirect(303, '/');
+	},
+
+	deleteRoom: async ({ params, locals }) => {
+		if (!locals.user) return fail(401, { deleteRoom: { error: 'No autenticat.' } });
+
+		const code = normalizeRoomCode(params.code!);
+		const { data: room } = await locals.supabase
+			.from('rooms')
+			.select('id')
+			.eq('code', code)
+			.maybeSingle();
+		if (!room) return fail(404, { deleteRoom: { error: 'Sala no trobada.' } });
+
+		const result = await deleteRoom(locals.supabase, room.id);
+		if (!result.ok) return fail(400, { deleteRoom: { error: result.error } });
 		throw redirect(303, '/');
 	},
 

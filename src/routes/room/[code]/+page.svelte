@@ -383,6 +383,21 @@
 				{#if form && 'startRoom' in form && form.startRoom && 'error' in form.startRoom}
 					<p class="mt-2 text-sm text-[color:var(--color-accent)]">{form.startRoom.error}</p>
 				{/if}
+				<form
+					method="POST"
+					action="?/deleteRoom"
+					class="mt-3"
+					use:enhance={({ cancel }) => {
+						if (!confirm('Tancar la sala? Els altres jugadors quedaran fora.')) cancel();
+					}}
+				>
+					<button
+						type="submit"
+						class="text-xs text-[color:var(--color-text-faint)] hover:text-[color:var(--color-accent)]"
+					>
+						Tancar sala
+					</button>
+				</form>
 			{:else}
 				<p class="mt-3 text-sm text-[color:var(--color-text-muted)]">
 					Esperant que l'amfitrió inicie…
