@@ -17,13 +17,72 @@ type TeamPlayer = {
 };
 
 export const load: PageServerLoad = async ({ params, locals }) => {
-	if (!locals.user) {
-		throw redirect(303, '/');
-	}
-
 	const code = normalizeRoomCode(params.code);
 	if (!isValidRoomCode(code)) {
 		throw error(404, 'Sala no trobada.');
+	}
+
+	// Public read of finished rooms — bypasses RLS so anonymous users (or
+	// members who lost their cookies) can still see the results.
+	const { data: publicData } = await (
+		locals.supabase.rpc as unknown as (fn: string, args: unknown) => Promise<{ data: unknown; error: unknown }>
+	)('get_finished_room', { p_code: code });
+
+	if (publicData) {
+		const pd = publicData as {
+			room: {
+				id: string;
+				code: string;
+				status: string;
+				host_id: string | null;
+				settings: Record<string, unknown>;
+				theme: { display_name: string };
+			};
+			members: Array<{ user_id: string; display_name: string; budget_remaining_cents: number }>;
+			teams: Record<string, Array<{ position_slot: string; player_name: string; final_price_cents: number | null; auction_status: string }>>;
+			tally: Array<{ user_id: string; total_points: number; votes_received: number }>;
+		};
+		const teamsByUser: Record<string, TeamPlayer[]> = {};
+		for (const [uid, players] of Object.entries(pd.teams)) {
+			teamsByUser[uid] = players.map((p, i) => ({
+				auction_id: `${uid}-${i}`,
+				position_slot: p.position_slot,
+				final_price_cents: p.final_price_cents,
+				auction_status: p.auction_status,
+				player_id: '',
+				player_name: p.player_name,
+				player_position: p.position_slot
+			}));
+		}
+		return {
+			room: {
+				id: pd.room.id,
+				code: pd.room.code,
+				host_id: pd.room.host_id,
+				status: pd.room.status,
+				settings: pd.room.settings,
+				theme: { id: '', slug: '', display_name: pd.room.theme.display_name }
+			},
+			members: pd.members.map((m) => ({
+				user_id: m.user_id,
+				budget_remaining_cents: m.budget_remaining_cents,
+				joined_at: '',
+				profile: { id: m.user_id, display_name: m.display_name }
+			})),
+			isHost: locals.user?.id === pd.room.host_id,
+			activeAuction: null,
+			activePlayer: null,
+			recentBids: [],
+			upcomingAuctions: [],
+			teamsByUser,
+			myVote: null,
+			tally: pd.tally,
+			readOnly: true
+		};
+	}
+
+	if (!locals.user) {
+		throw redirect(303, '/');
 	}
 
 	const { data: room, error: roomError } = await locals.supabase
@@ -157,7 +216,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		upcomingAuctions,
 		teamsByUser,
 		myVote,
-		tally
+		tally,
+		readOnly: false
 	};
 };
 

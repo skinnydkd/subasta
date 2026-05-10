@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
+	import { onMount } from 'svelte';
 	import type { ActionData, PageData } from './$types';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
@@ -7,6 +8,24 @@
 	let creating = $state(false);
 	let joining = $state(false);
 	let signing = $state(false);
+
+	type RecentRoom = { code: string; visited_at: number; status?: string };
+	let recentRooms = $state<RecentRoom[]>([]);
+	onMount(() => {
+		try {
+			const raw = localStorage.getItem('subasta:recent_rooms');
+			recentRooms = raw ? (JSON.parse(raw) as RecentRoom[]) : [];
+		} catch {
+			recentRooms = [];
+		}
+	});
+
+	function clearRecent() {
+		recentRooms = [];
+		try {
+			localStorage.removeItem('subasta:recent_rooms');
+		} catch {}
+	}
 </script>
 
 <main class="mx-auto flex min-h-dvh max-w-md flex-col justify-center gap-10 px-6 py-16">
@@ -207,6 +226,36 @@
 					{joining ? 'Entrant…' : 'Entrar a la sala'}
 				</button>
 			</form>
+		</section>
+	{/if}
+
+	{#if recentRooms.length > 0}
+		<section class="flex flex-col gap-2">
+			<div class="flex items-baseline justify-between">
+				<h2 class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">Sales recents</h2>
+				<button
+					type="button"
+					onclick={clearRecent}
+					class="text-xs text-[color:var(--color-text-faint)] hover:text-[color:var(--color-accent)]"
+				>
+					Esborrar
+				</button>
+			</div>
+			<ul class="flex flex-col gap-1">
+				{#each recentRooms as r (r.code)}
+					<li>
+						<a
+							href={`/room/${r.code}`}
+							class="flex items-center justify-between rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm transition-colors hover:bg-[color:var(--color-elevated)]"
+						>
+							<span class="tnum tracking-[0.3em]" style="font-family: var(--font-mono);">{r.code}</span>
+							<span class="text-xs text-[color:var(--color-text-faint)]">
+								{r.status === 'finished' ? 'acabada' : r.status === 'voting' ? 'votant' : r.status === 'drafting' ? 'en joc' : 'lobby'}
+							</span>
+						</a>
+					</li>
+				{/each}
+			</ul>
 		</section>
 	{/if}
 </main>

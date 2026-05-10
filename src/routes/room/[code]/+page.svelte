@@ -193,6 +193,17 @@
 			document.removeEventListener('click', unlock);
 		};
 		document.addEventListener('click', unlock, { once: true });
+
+		// Track recent rooms in localStorage so the lobby can list them.
+		try {
+			const key = 'subasta:recent_rooms';
+			const raw = localStorage.getItem(key);
+			const list = raw ? (JSON.parse(raw) as Array<{ code: string; visited_at: number; status?: string }>) : [];
+			const filtered = list.filter((r) => r.code !== room.code);
+			filtered.unshift({ code: room.code, visited_at: Date.now(), status: room.status });
+			localStorage.setItem(key, JSON.stringify(filtered.slice(0, 8)));
+		} catch {}
+
 		return () => document.removeEventListener('click', unlock);
 	});
 	function toggleMute() {
