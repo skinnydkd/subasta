@@ -49,6 +49,11 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		user_id: string;
 		profile: { display_name: string } | null;
 	}> = [];
+	let upcomingAuctions: Array<{
+		sequence_number: number;
+		position_slot: string;
+		player_name: string;
+	}> = [];
 
 	if (room.status === 'drafting') {
 		const { data: auction } = await locals.supabase
@@ -78,6 +83,19 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 				.limit(10);
 			recentBids = (bids ?? []) as never;
 		}
+
+		const { data: upcoming } = await locals.supabase
+			.from('auctions')
+			.select('sequence_number, position_slot, player:players(name)')
+			.eq('room_id', room.id)
+			.eq('status', 'pending')
+			.order('sequence_number')
+			.limit(3);
+		upcomingAuctions = (upcoming ?? []).map((a) => ({
+			sequence_number: a.sequence_number,
+			position_slot: a.position_slot,
+			player_name: (a.player as { name: string } | null)?.name ?? '—'
+		}));
 	}
 
 	let teamsByUser: Record<string, TeamPlayer[]> = {};
@@ -135,6 +153,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		activeAuction,
 		activePlayer,
 		recentBids,
+		upcomingAuctions,
 		teamsByUser,
 		myVote,
 		tally

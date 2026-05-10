@@ -115,6 +115,25 @@
 		bidInput = `${amountCents / 1_000_000_00}M`;
 	}
 
+	// Pending auctions for the "next up" preview (sequence_number > active).
+	const upcomingAuctions = $derived(data.upcomingAuctions ?? []);
+
+	// Timer styling: red+pulse under 10s, normal otherwise.
+	const timerLow = $derived(secondsLeft > 0 && secondsLeft <= 10);
+
+	// Flash when current_bid_cents changes — track previous value.
+	let lastBidCents = $state<number | null>(null);
+	let bidJustChanged = $state(false);
+	$effect(() => {
+		const cur = activeAuction?.current_bid_cents ?? null;
+		if (cur !== lastBidCents) {
+			lastBidCents = cur;
+			bidJustChanged = true;
+			const id = setTimeout(() => (bidJustChanged = false), 600);
+			return () => clearTimeout(id);
+		}
+	});
+
 	// Auto-advance: when the active auction's timer hits zero, any client
 	// pings the advance endpoint. The server is idempotent on terminal
 	// states and rate-limits expired auctions to one progression, so it's
@@ -243,7 +262,14 @@
 				</div>
 				<div class="text-right">
 					<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">temps</p>
-					<p class="text-3xl tnum" style="font-family: var(--font-mono);">{secondsLeft}s</p>
+					<p
+						class="text-3xl tnum transition-colors"
+						class:text-[color:var(--color-accent)]={timerLow}
+						class:animate-pulse={timerLow}
+						style="font-family: var(--font-mono);"
+					>
+						{secondsLeft}s
+					</p>
 				</div>
 			</div>
 
@@ -251,7 +277,13 @@
 				<div>
 					<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">puja actual</p>
 					{#if activeAuction.current_bid_cents}
-						<p class="mt-1 text-2xl tnum">{formatCents(activeAuction.current_bid_cents)}</p>
+						<p
+							class="mt-1 text-2xl tnum transition-all duration-300"
+							class:scale-110={bidJustChanged}
+							class:text-[color:var(--color-accent)]={bidJustChanged}
+						>
+							{formatCents(activeAuction.current_bid_cents)}
+						</p>
 						<p class="text-xs text-[color:var(--color-text-muted)]">
 							per {members.find((m) => m.user_id === activeAuction.current_bidder_id)?.profile?.display_name ?? '—'}
 						</p>
@@ -286,13 +318,20 @@
 		>
 			<input type="hidden" name="auction_id" value={activeAuction.id} />
 			<div class="flex gap-2">
-				{#each [1_000_000_00, 5_000_000_00, 10_000_000_00] as preset}
+				<button
+					type="button"
+					onclick={() => setBidPreset(minNextBid)}
+					class="flex-1 rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] py-2 text-sm transition-colors hover:bg-[color:var(--color-elevated)]"
+				>
+					Mín ({formatCents(minNextBid)})
+				</button>
+				{#each [5_000_000_00, 10_000_000_00] as bump}
 					<button
 						type="button"
-						onclick={() => setBidPreset(Math.max(preset, minNextBid))}
+						onclick={() => setBidPreset(minNextBid + bump)}
 						class="flex-1 rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] py-2 text-sm transition-colors hover:bg-[color:var(--color-elevated)]"
 					>
-						+{formatCents(preset)}
+						+{formatCents(bump)}
 					</button>
 				{/each}
 			</div>
@@ -328,6 +367,24 @@
 						<li class="flex justify-between rounded-[var(--radius-sm)] bg-[color:var(--color-surface)] px-3 py-1.5 text-sm">
 							<span>{bid.profile?.display_name ?? '—'}</span>
 							<span class="tnum">{formatCents(bid.amount_cents)}</span>
+						</li>
+					{/each}
+				</ul>
+			</section>
+		{/if}
+
+		<!-- Next up -->
+		{#if upcomingAuctions.length > 0}
+			<section class="flex flex-col gap-1">
+				<h3 class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">següents</h3>
+				<ul class="flex flex-col gap-1">
+					{#each upcomingAuctions as up}
+						<li class="flex justify-between rounded-[var(--radius-sm)] border border-[color:var(--color-border)] px-3 py-1.5 text-sm text-[color:var(--color-text-muted)]">
+							<span>
+								<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-faint)]">{up.position_slot}</span>
+								<span class="ml-2">{up.player_name}</span>
+							</span>
+							<span class="tnum text-xs">#{up.sequence_number}</span>
 						</li>
 					{/each}
 				</ul>
