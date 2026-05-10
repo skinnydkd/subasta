@@ -115,6 +115,22 @@
 		bidInput = `${amountCents / 1_000_000_00}M`;
 	}
 
+	// Auto-advance: when the active auction's timer hits zero, any client
+	// pings the advance endpoint. The server is idempotent on terminal
+	// states and rate-limits expired auctions to one progression, so it's
+	// safe for several clients to race each other on the same tick.
+	let lastAutoAdvanceAuctionId = $state<string | null>(null);
+	$effect(() => {
+		if (!activeAuction) return;
+		if (secondsLeft > 0) return;
+		if (lastAutoAdvanceAuctionId === activeAuction.id) return;
+
+		lastAutoAdvanceAuctionId = activeAuction.id;
+		fetch('?/advanceAuction', { method: 'POST', body: new FormData() })
+			.then(() => invalidateAll())
+			.catch(() => {});
+	});
+
 	// Realtime: re-fetch the load function on any change to auctions/bids/members/rooms.
 	onMount(() => {
 		const supabase = createClient();

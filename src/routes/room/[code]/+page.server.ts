@@ -182,16 +182,15 @@ export const actions: Actions = {
 	advanceAuction: async ({ params, locals }) => {
 		if (!locals.user) return fail(401, { advance: { error: 'No autenticat.' } });
 
+		// Authorization is enforced by the RPC: host can always advance,
+		// any room member can advance an expired or queue-done auction.
 		const code = normalizeRoomCode(params.code!);
 		const { data: room } = await locals.supabase
 			.from('rooms')
-			.select('id, host_id')
+			.select('id')
 			.eq('code', code)
 			.maybeSingle();
 		if (!room) return fail(404, { advance: { error: 'Sala no trobada.' } });
-		if (room.host_id !== locals.user.id) {
-			return fail(403, { advance: { error: 'Només el host.' } });
-		}
 
 		const result = await advanceAuction(locals.supabase, room.id);
 		if (!result.ok) return fail(400, { advance: { error: result.error } });
