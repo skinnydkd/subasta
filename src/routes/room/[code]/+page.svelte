@@ -5,6 +5,8 @@
 	import { createClient } from '$lib/supabase/client';
 	import { formatCents } from '$lib/utils/currency';
 	import { OpenTimerEngine } from '$lib/auction/engines/openTimer';
+	import { enableAudio, isMuted, setMuted, sounds } from '$lib/utils/sounds';
+	import { fly } from 'svelte/transition';
 	import type { ActionData, PageData } from './$types';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
@@ -123,16 +125,80 @@
 
 	// Flash when current_bid_cents changes — track previous value.
 	let lastBidCents = $state<number | null>(null);
+	let lastBidderId = $state<string | null>(null);
 	let bidJustChanged = $state(false);
 	$effect(() => {
 		const cur = activeAuction?.current_bid_cents ?? null;
+		const curBidder = activeAuction?.current_bidder_id ?? null;
 		if (cur !== lastBidCents) {
+			// Skip the very first read (initial mount).
+			if (lastBidCents !== null || cur !== null) {
+				if (curBidder && curBidder !== myUserId && lastBidderId === myUserId) {
+					sounds.outbid();
+				} else if (curBidder && curBidder !== myUserId) {
+					sounds.bid();
+				}
+			}
 			lastBidCents = cur;
+			lastBidderId = curBidder;
 			bidJustChanged = true;
 			const id = setTimeout(() => (bidJustChanged = false), 600);
 			return () => clearTimeout(id);
 		}
 	});
+
+	// Timer warning: fire once when secondsLeft passes through 5.
+	let warnedFor = $state<string | null>(null);
+	$effect(() => {
+		if (!activeAuction) return;
+		if (secondsLeft === 5 && warnedFor !== activeAuction.id) {
+			warnedFor = activeAuction.id;
+			sounds.warning();
+		}
+	});
+
+	// Win sound when an auction closes in your favour.
+	let lastSeenAuctionId = $state<string | null>(null);
+	$effect(() => {
+		if (activeAuction?.id && activeAuction.id !== lastSeenAuctionId) {
+			// Auction changed → previous one was just closed. The realtime
+			// payload includes winner if we re-fetch, but recentBids is for
+			// the new auction. So we use the simpler heuristic: if the most
+			// recent bid we saw was ours and the auction just changed, we
+			// likely won.
+			if (lastSeenAuctionId !== null && lastBidderId === myUserId) {
+				sounds.win();
+			} else if (lastSeenAuctionId !== null) {
+				sounds.close();
+			}
+			lastSeenAuctionId = activeAuction.id;
+		}
+	});
+
+	// Voting phase fanfare: fires when room transitions away from drafting.
+	let lastRoomStatus = $state<string | null>(null);
+	$effect(() => {
+		if (lastRoomStatus !== null && room.status !== lastRoomStatus && room.status === 'voting') {
+			sounds.voting();
+		}
+		lastRoomStatus = room.status;
+	});
+
+	// Mute toggle (persisted) + audio unlock on first user gesture.
+	let isMutedState = $state(false);
+	onMount(() => {
+		isMutedState = isMuted();
+		const unlock = () => {
+			enableAudio();
+			document.removeEventListener('click', unlock);
+		};
+		document.addEventListener('click', unlock, { once: true });
+		return () => document.removeEventListener('click', unlock);
+	});
+	function toggleMute() {
+		isMutedState = !isMutedState;
+		setMuted(isMutedState);
+	}
 
 	// Auto-advance: when the active auction's timer hits zero, any client
 	// pings the advance endpoint. The server is idempotent on terminal
@@ -150,10 +216,15 @@
 			.catch(() => {});
 	});
 
-	// Realtime: re-fetch the load function on any change to auctions/bids/members/rooms.
+	// Presence: track which member ids are currently connected to this room.
+	let onlineUserIds = $state<Set<string>>(new Set());
+
+	// Realtime: re-fetch the load function on any change to auctions/bids/members/rooms,
+	// plus a presence channel so each client announces itself and sees others.
 	onMount(() => {
 		const supabase = createClient();
-		const channel = supabase
+
+		const dbChannel = supabase
 			.channel(`room:${room.id}`)
 			.on(
 				'postgres_changes',
@@ -172,8 +243,23 @@
 			)
 			.subscribe();
 
+		const presenceChannel = supabase
+			.channel(`room:${room.id}:presence`, {
+				config: { presence: { key: myUserId ?? 'anon' } }
+			})
+			.on('presence', { event: 'sync' }, () => {
+				const state = presenceChannel.presenceState();
+				onlineUserIds = new Set(Object.keys(state));
+			})
+			.subscribe(async (status) => {
+				if (status === 'SUBSCRIBED' && myUserId) {
+					await presenceChannel.track({ user_id: myUserId, online_at: Date.now() });
+				}
+			});
+
 		return () => {
-			supabase.removeChannel(channel);
+			supabase.removeChannel(dbChannel);
+			supabase.removeChannel(presenceChannel);
 		};
 	});
 
@@ -193,9 +279,23 @@
 		>
 			{room.code}
 		</button>
-		{#if room.theme}
-			<span class="text-right text-xs text-[color:var(--color-text-muted)]">{room.theme.display_name}</span>
-		{/if}
+		<div class="flex items-center gap-2">
+			{#if room.theme}
+				<span class="text-right text-xs text-[color:var(--color-text-muted)]">{room.theme.display_name}</span>
+			{/if}
+			<button
+				type="button"
+				onclick={toggleMute}
+				class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-2 py-1 text-xs uppercase tracking-wider transition-colors hover:bg-[color:var(--color-elevated)]"
+				class:text-[color:var(--color-text-muted)]={isMutedState}
+				class:text-[color:var(--color-text)]={!isMutedState}
+				class:line-through={isMutedState}
+				title={isMutedState ? 'Activar sons' : 'Silenciar sons'}
+				aria-label={isMutedState ? 'Activar sons' : 'Silenciar sons'}
+			>
+				Sons
+			</button>
+		</div>
 	</header>
 
 	<!-- Members + budgets -->
@@ -205,6 +305,12 @@
 				class="flex items-center justify-between rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
 			>
 				<div class="flex items-center gap-2">
+					<span
+						class="inline-block h-2 w-2 rounded-full transition-colors"
+						class:bg-[color:var(--color-success)]={onlineUserIds.has(member.user_id)}
+						class:bg-[color:var(--color-text-faint)]={!onlineUserIds.has(member.user_id)}
+						title={onlineUserIds.has(member.user_id) ? 'Connectat' : 'Desconnectat'}
+					></span>
 					<span>{member.profile?.display_name ?? 'Convidat'}</span>
 					{#if member.user_id === room.host_id}
 						<span class="rounded-full bg-[color:var(--color-accent-muted)] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-[color:var(--color-on-accent)]">host</span>
@@ -262,12 +368,14 @@
 		<!-- Active auction card -->
 		<section class="rounded-[var(--radius-lg)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] p-5">
 			<div class="flex items-baseline justify-between gap-2">
-				<div>
-					<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
-						{activePlayer.primary_position} · #{activeAuction.sequence_number}
-					</p>
-					<h2 class="mt-1 text-2xl" style="font-family: var(--font-display);">{activePlayer.name}</h2>
-				</div>
+				{#key activeAuction.id}
+					<div in:fly={{ y: 8, duration: 250 }}>
+						<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
+							{activePlayer.primary_position} · #{activeAuction.sequence_number}
+						</p>
+						<h2 class="mt-1 text-2xl" style="font-family: var(--font-display);">{activePlayer.name}</h2>
+					</div>
+				{/key}
 				<div class="text-right">
 					<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">temps</p>
 					<p
@@ -371,8 +479,11 @@
 			<section class="flex flex-col gap-1">
 				<h3 class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">historial</h3>
 				<ul class="flex flex-col gap-1">
-					{#each recentBids as bid}
-						<li class="flex justify-between rounded-[var(--radius-sm)] bg-[color:var(--color-surface)] px-3 py-1.5 text-sm">
+					{#each recentBids as bid (bid.id)}
+						<li
+							in:fly={{ y: -6, duration: 200 }}
+							class="flex justify-between rounded-[var(--radius-sm)] bg-[color:var(--color-surface)] px-3 py-1.5 text-sm"
+						>
 							<span>{bid.profile?.display_name ?? '—'}</span>
 							<span class="tnum">{formatCents(bid.amount_cents)}</span>
 						</li>
