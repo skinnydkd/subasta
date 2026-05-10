@@ -28,7 +28,10 @@
 	}
 </script>
 
-<main class="mx-auto flex min-h-dvh max-w-md flex-col justify-center gap-10 px-6 py-16">
+<main
+	class="mx-auto flex min-h-dvh max-w-md flex-col justify-center gap-10 px-6 py-16"
+	style="padding-bottom: max(4rem, env(safe-area-inset-bottom)); padding-top: max(4rem, env(safe-area-inset-top));"
+>
 	<header class="space-y-2 text-center">
 		<h1 class="text-balance" style="font-family: var(--font-display);">subasta</h1>
 		<p class="text-[color:var(--color-text-muted)]">

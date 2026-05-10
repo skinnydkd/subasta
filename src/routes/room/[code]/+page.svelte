@@ -113,6 +113,13 @@
 		return members.find((m) => m.user_id === userId)?.profile?.display_name ?? '—';
 	}
 
+	function initials(fullName: string): string {
+		const parts = fullName.trim().split(/\s+/).filter(Boolean);
+		if (parts.length === 0) return '?';
+		if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+		return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+	}
+
 	function setBidPreset(amountCents: number) {
 		bidInput = `${amountCents / 1_000_000_00}M`;
 	}
@@ -279,7 +286,10 @@
 	}
 </script>
 
-<main class="mx-auto flex min-h-dvh max-w-md flex-col gap-6 px-4 py-6">
+<main
+	class="mx-auto flex min-h-dvh max-w-md flex-col gap-6 px-4 py-6"
+	style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); padding-top: max(1.5rem, env(safe-area-inset-top));"
+>
 	<header class="flex items-center justify-between gap-3">
 		<button
 			type="button"
@@ -297,7 +307,7 @@
 			<button
 				type="button"
 				onclick={toggleMute}
-				class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-2 py-1 text-xs uppercase tracking-wider transition-colors hover:bg-[color:var(--color-elevated)]"
+				class="min-h-[36px] rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-xs uppercase tracking-wider transition-colors hover:bg-[color:var(--color-elevated)]"
 				class:text-[color:var(--color-text-muted)]={isMutedState}
 				class:text-[color:var(--color-text)]={!isMutedState}
 				class:line-through={isMutedState}
@@ -378,13 +388,22 @@
 	{:else if room.status === 'drafting' && activeAuction && activePlayer}
 		<!-- Active auction card -->
 		<section class="rounded-[var(--radius-lg)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] p-5">
-			<div class="flex items-baseline justify-between gap-2">
+			<div class="flex items-baseline justify-between gap-3">
 				{#key activeAuction.id}
-					<div in:fly={{ y: 8, duration: 250 }}>
-						<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
-							{activePlayer.primary_position} · #{activeAuction.sequence_number}
-						</p>
-						<h2 class="mt-1 text-2xl" style="font-family: var(--font-display);">{activePlayer.name}</h2>
+					<div in:fly={{ y: 8, duration: 250 }} class="flex items-center gap-3">
+						<div
+							class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg)] text-xl font-medium tracking-wide"
+							style="font-family: var(--font-display);"
+							aria-hidden="true"
+						>
+							{initials(activePlayer.name)}
+						</div>
+						<div>
+							<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
+								{activePlayer.primary_position} · #{activeAuction.sequence_number}
+							</p>
+							<h2 class="mt-1 text-xl leading-tight" style="font-family: var(--font-display);">{activePlayer.name}</h2>
+						</div>
 					</div>
 				{/key}
 				<div class="text-right">
@@ -523,28 +542,55 @@
 
 		<!-- Host controls -->
 		{#if isHost}
-			<form
-				method="POST"
-				action="?/advanceAuction"
-				use:enhance={() => {
-					advancing = true;
-					return async ({ update }) => {
-						await update();
-						advancing = false;
-					};
-				}}
-			>
-				<button
-					type="submit"
-					disabled={advancing}
-					class="w-full rounded-[var(--radius)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-4 py-3 text-sm transition-colors hover:bg-[color:var(--color-surface)] disabled:opacity-50"
+			<div class="flex flex-col gap-2">
+				<form
+					method="POST"
+					action="?/advanceAuction"
+					use:enhance={() => {
+						advancing = true;
+						return async ({ update }) => {
+							await update();
+							advancing = false;
+						};
+					}}
 				>
-					{advancing ? 'Avançant…' : secondsLeft === 0 ? 'Tancar i següent' : 'Següent (forçar)'}
-				</button>
-				{#if form && 'advance' in form && form.advance && 'error' in form.advance}
-					<p class="mt-2 text-sm text-[color:var(--color-accent)]">{form.advance.error}</p>
-				{/if}
-			</form>
+					<button
+						type="submit"
+						disabled={advancing}
+						class="w-full rounded-[var(--radius)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-4 py-3 text-sm transition-colors hover:bg-[color:var(--color-surface)] disabled:opacity-50"
+					>
+						{advancing ? 'Avançant…' : secondsLeft === 0 ? 'Tancar i següent' : 'Següent (forçar)'}
+					</button>
+					{#if form && 'advance' in form && form.advance && 'error' in form.advance}
+						<p class="mt-2 text-sm text-[color:var(--color-accent)]">{form.advance.error}</p>
+					{/if}
+				</form>
+
+				<form
+					method="POST"
+					action="?/updateTimer"
+					class="flex items-center gap-2"
+					use:enhance
+				>
+					<label class="flex flex-1 items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]">
+						<span class="uppercase tracking-wider">Timer següent</span>
+						<select
+							name="timer"
+							value={String(settings.timer_seconds ?? 60)}
+							class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
+							onchange={(e) => (e.currentTarget.form as HTMLFormElement).requestSubmit()}
+						>
+							<option value="30">30s</option>
+							<option value="60">60s</option>
+							<option value="90">90s</option>
+							<option value="120">120s</option>
+						</select>
+					</label>
+					{#if form && 'settings' in form && form.settings && 'error' in form.settings}
+						<span class="text-xs text-[color:var(--color-accent)]">{form.settings.error}</span>
+					{/if}
+				</form>
+			</div>
 		{/if}
 	{:else if room.status === 'drafting'}
 		<section class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-6 text-center">

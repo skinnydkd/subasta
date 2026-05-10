@@ -3,7 +3,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
 import { advanceAuction, placeBid, startRoom } from '$lib/server/auctionRpc';
 import { castVote, finishVoting } from '$lib/server/votingRpc';
-import { leaveRoom } from '$lib/server/rooms';
+import { leaveRoom, updateRoomSettings } from '$lib/server/rooms';
 import { parseAmountToCents } from '$lib/utils/currency';
 
 type TeamPlayer = {
@@ -302,6 +302,28 @@ export const actions: Actions = {
 		});
 		if (!result.ok) return fail(400, { vote: { error: result.error } });
 		return { vote: { ok: true } };
+	},
+
+	updateTimer: async ({ request, params, locals }) => {
+		if (!locals.user) return fail(401, { settings: { error: 'No autenticat.' } });
+
+		const formData = await request.formData();
+		const timer = Number.parseInt(String(formData.get('timer') ?? ''), 10);
+		if (!Number.isFinite(timer) || timer < 10 || timer > 600) {
+			return fail(400, { settings: { error: 'Timer ha de ser entre 10 i 600 segons.' } });
+		}
+
+		const code = normalizeRoomCode(params.code!);
+		const { data: room } = await locals.supabase
+			.from('rooms')
+			.select('id')
+			.eq('code', code)
+			.maybeSingle();
+		if (!room) return fail(404, { settings: { error: 'Sala no trobada.' } });
+
+		const result = await updateRoomSettings(locals.supabase, room.id, { timer_seconds: timer });
+		if (!result.ok) return fail(400, { settings: { error: result.error } });
+		return { settings: { ok: true } };
 	},
 
 	leaveRoom: async ({ params, locals }) => {
