@@ -493,13 +493,22 @@
 			<div class="flex items-baseline justify-between gap-3">
 				{#key activeAuction.id}
 					<div in:fly={{ y: 8, duration: 250 }} class="flex items-center gap-3">
-						<div
-							class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg)] text-xl font-medium tracking-wide"
-							style="font-family: var(--font-display);"
-							aria-hidden="true"
-						>
-							{initials(activePlayer.name)}
-						</div>
+						{#if activePlayer.photo_url}
+							<img
+								src={activePlayer.photo_url}
+								alt={activePlayer.name}
+								loading="eager"
+								class="h-14 w-14 flex-shrink-0 rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg)] object-cover"
+							/>
+						{:else}
+							<div
+								class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg)] text-xl font-medium tracking-wide"
+								style="font-family: var(--font-display);"
+								aria-hidden="true"
+							>
+								{initials(activePlayer.name)}
+							</div>
+						{/if}
 						<div>
 							<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
 								{activePlayer.primary_position} · #{activeAuction.sequence_number}
