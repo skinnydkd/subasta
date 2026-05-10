@@ -54,10 +54,7 @@ export const actions: Actions = {
 		const themeId = String(formData.get('theme_id') ?? '').trim();
 		if (!themeId) return fail(400, { create: { error: 'Selecciona un tema.' } });
 
-		const result = await createRoom(locals.supabase, {
-			hostId: locals.user.id,
-			themeId
-		});
+		const result = await createRoom(locals.supabase, { themeId });
 
 		if (!result.ok) {
 			return fail(500, { create: { error: result.error } });
@@ -77,7 +74,7 @@ export const actions: Actions = {
 			return fail(400, { join: { error: 'Codi invàlid (6 caràcters).' } });
 		}
 
-		const result = await joinRoom(locals.supabase, locals.user.id, code);
+		const result = await joinRoom(locals.supabase, code);
 		if (!result.ok) {
 			return fail(400, { join: { error: result.error } });
 		}

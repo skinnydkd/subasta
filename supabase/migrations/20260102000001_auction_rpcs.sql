@@ -6,12 +6,10 @@
 -- are SECURITY DEFINER and validate everything atomically with row locks.
 -- ============================================================================
 
--- ----------------------------------------------------------------- enum + check
--- New status: a player went to auction but nobody bid → skipped (no winner).
--- This requires relaxing the existing check constraint that demanded
--- winner_id NOT NULL whenever status was 'closed' or 'auto_assigned'.
-alter type auction_status add value if not exists 'skipped';
-
+-- ----------------------------------------------------------------- check relax
+-- The 'skipped' enum value was added in 20260102000000_add_skipped_enum.sql.
+-- Now we relax the original check constraint to permit winner_id NULL when
+-- status is pending/active/skipped.
 do $$
 declare
 	v_cname text;
