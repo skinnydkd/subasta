@@ -2,6 +2,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { createRoom, joinRoom } from '$lib/server/rooms';
 import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
+import { FORMATION_PRESETS, type FormationPreset } from '$lib/auction/settings';
 
 export const load: PageServerLoad = async ({ locals }) => {
 	if (!locals.user) {
@@ -54,7 +55,27 @@ export const actions: Actions = {
 		const themeId = String(formData.get('theme_id') ?? '').trim();
 		if (!themeId) return fail(400, { create: { error: 'Selecciona un tema.' } });
 
-		const result = await createRoom(locals.supabase, { themeId });
+		// Optional advanced settings.
+		const formation = String(formData.get('formation') ?? '4-3-3') as FormationPreset;
+		const timer = Number.parseInt(String(formData.get('timer') ?? '60'), 10);
+		const maxMembers = Number.parseInt(String(formData.get('max_members') ?? '5'), 10);
+		const extras = Number.parseInt(String(formData.get('extras') ?? '1'), 10);
+
+		const settings: Record<string, unknown> = {};
+		if (FORMATION_PRESETS[formation]) {
+			settings.formation = FORMATION_PRESETS[formation];
+		}
+		if (Number.isFinite(timer) && timer >= 10 && timer <= 600) {
+			settings.timer_seconds = timer;
+		}
+		if (Number.isFinite(maxMembers) && maxMembers >= 2 && maxMembers <= 8) {
+			settings.max_members = maxMembers;
+		}
+		if (Number.isFinite(extras) && extras >= 0 && extras <= 3) {
+			settings.extra_per_position = extras;
+		}
+
+		const result = await createRoom(locals.supabase, { themeId, settings });
 
 		if (!result.ok) {
 			return fail(500, { create: { error: result.error } });

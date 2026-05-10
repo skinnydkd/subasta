@@ -29,6 +29,15 @@ export const DEFAULT_FORMATION: RoomSettings['formation'] = {
 	ST: 1
 };
 
+export type FormationPreset = '4-3-3' | '4-4-2' | '3-5-2' | '5-3-2';
+
+export const FORMATION_PRESETS: Record<FormationPreset, RoomSettings['formation']> = {
+	'4-3-3': { GK: 1, LB: 1, RB: 1, CB: 2, CM: 3, LW: 1, RW: 1, ST: 1 },
+	'4-4-2': { GK: 1, LB: 1, RB: 1, CB: 2, CM: 2, LW: 1, RW: 1, ST: 2 },
+	'3-5-2': { GK: 1, CB: 3, CM: 5, ST: 2 },
+	'5-3-2': { GK: 1, LB: 1, RB: 1, CB: 3, CM: 3, ST: 2 }
+};
+
 export const DEFAULT_ROOM_SETTINGS: RoomSettings = {
 	formation: DEFAULT_FORMATION,
 	extra_per_position: 1,

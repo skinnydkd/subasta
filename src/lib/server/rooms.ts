@@ -16,13 +16,29 @@ function rawRpc(supabase: SupabaseClient<Database>): RpcAny {
 
 export async function createRoom(
 	supabase: SupabaseClient<Database>,
-	input: { themeId: string }
+	input: { themeId: string; settings?: Record<string, unknown> | null }
 ): Promise<CreateRoomResult> {
-	const { data, error } = await rawRpc(supabase)('create_room', { p_theme_id: input.themeId });
+	const { data, error } = await rawRpc(supabase)('create_room', {
+		p_theme_id: input.themeId,
+		p_settings: input.settings ?? null
+	});
 	if (error) return { ok: false, error: error.message };
 	const rows = data as Array<{ room_id: string; code: string }>;
 	if (!rows?.length) return { ok: false, error: 'No s\'ha pogut crear la sala.' };
 	return { ok: true, code: rows[0].code, roomId: rows[0].room_id };
+}
+
+export async function updateRoomSettings(
+	supabase: SupabaseClient<Database>,
+	roomId: string,
+	settings: Record<string, unknown>
+): Promise<{ ok: true } | { ok: false; error: string }> {
+	const { error } = await rawRpc(supabase)('update_room_settings', {
+		p_room_id: roomId,
+		p_settings: settings
+	});
+	if (error) return { ok: false, error: error.message };
+	return { ok: true };
 }
 
 export type JoinRoomResult =

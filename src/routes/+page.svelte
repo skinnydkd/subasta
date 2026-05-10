@@ -91,7 +91,66 @@
 							{/each}
 						</select>
 					</label>
-					{#if form?.create?.error}
+
+					<details class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2">
+						<summary class="cursor-pointer text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
+							Configuració avançada
+						</summary>
+						<div class="mt-3 flex flex-col gap-3">
+							<label class="flex flex-col gap-1">
+								<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">Formació</span>
+								<select
+									name="formation"
+									class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-sm"
+								>
+									<option value="4-3-3" selected>4-3-3</option>
+									<option value="4-4-2">4-4-2</option>
+									<option value="3-5-2">3-5-2</option>
+									<option value="5-3-2">5-3-2</option>
+								</select>
+							</label>
+
+							<label class="flex flex-col gap-1">
+								<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">Timer per puja (s)</span>
+								<select
+									name="timer"
+									class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-sm"
+								>
+									<option value="30">30s — ràpid</option>
+									<option value="60" selected>60s — normal</option>
+									<option value="90">90s — relaxat</option>
+									<option value="120">120s — molt relaxat</option>
+								</select>
+							</label>
+
+							<div class="grid grid-cols-2 gap-3">
+								<label class="flex flex-col gap-1">
+									<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">Jugadors</span>
+									<input
+										type="number"
+										name="max_members"
+										value="5"
+										min="2"
+										max="8"
+										class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-sm"
+									/>
+								</label>
+								<label class="flex flex-col gap-1">
+									<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">Extres/posició</span>
+									<input
+										type="number"
+										name="extras"
+										value="1"
+										min="0"
+										max="3"
+										class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-sm"
+									/>
+								</label>
+							</div>
+						</div>
+					</details>
+
+					{#if form && 'create' in form && form.create && 'error' in form.create}
 						<p class="text-sm text-[color:var(--color-accent)]">{form.create.error}</p>
 					{/if}
 					<button
