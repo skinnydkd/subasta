@@ -14,6 +14,7 @@
 	const room = $derived(data.room);
 	const members = $derived(data.members);
 	const isHost = $derived(data.isHost);
+	const isReadOnly = $derived(data.readOnly ?? false);
 	const activeAuction = $derived(data.activeAuction);
 	const activePlayer = $derived(data.activePlayer);
 	const recentBids = $derived(data.recentBids);
@@ -39,7 +40,7 @@
 			{
 				id: activeAuction.id,
 				roomId: room.id,
-				status: activeAuction.status,
+				status: activeAuction.status as 'pending' | 'active' | 'closed' | 'auto_assigned' | 'skipped',
 				currentBidCents: activeAuction.current_bid_cents,
 				currentBidderId: activeAuction.current_bidder_id,
 				endsAt: new Date(activeAuction.ends_at)
@@ -237,9 +238,15 @@
 	// Presence: track which member ids are currently connected to this room.
 	let onlineUserIds = $state<Set<string>>(new Set());
 
-	// Realtime: re-fetch the load function on any change to auctions/bids/members/rooms,
-	// plus a presence channel so each client announces itself and sees others.
+	// Realtime for members; polling for spectators (RLS hides events from
+	// non-members so postgres_changes wouldn't reach them).
 	onMount(() => {
+		if (isReadOnly) {
+			if (room.status === 'finished') return; // no need to refresh once done
+			const id = setInterval(() => invalidateAll(), 3000);
+			return () => clearInterval(id);
+		}
+
 		const supabase = createClient();
 
 		const dbChannel = supabase
@@ -301,6 +308,11 @@
 			{room.code}
 		</button>
 		<div class="flex items-center gap-2">
+			{#if isReadOnly}
+				<span class="rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-2 py-0.5 text-[10px] uppercase tracking-wider text-[color:var(--color-text-muted)]">
+					Espectador
+				</span>
+			{/if}
 			{#if room.theme}
 				<span class="text-right text-xs text-[color:var(--color-text-muted)]">{room.theme.display_name}</span>
 			{/if}
@@ -347,7 +359,7 @@
 			<p class="text-sm text-[color:var(--color-text-muted)]">
 				{members.length} jugador{members.length === 1 ? '' : 's'} a la sala. Mínim 2 per a començar.
 			</p>
-			{#if isHost}
+			{#if isHost && !isReadOnly}
 				<form
 					method="POST"
 					action="?/startRoom"
@@ -375,14 +387,16 @@
 				<p class="mt-3 text-sm text-[color:var(--color-text-muted)]">
 					Esperant que l'amfitrió inicie…
 				</p>
-				<form method="POST" action="?/leaveRoom" class="mt-4" use:enhance>
-					<button
-						type="submit"
-						class="text-xs text-[color:var(--color-text-faint)] hover:text-[color:var(--color-accent)]"
-					>
-						Sortir de la sala
-					</button>
-				</form>
+				{#if !isReadOnly}
+					<form method="POST" action="?/leaveRoom" class="mt-4" use:enhance>
+						<button
+							type="submit"
+							class="text-xs text-[color:var(--color-text-faint)] hover:text-[color:var(--color-accent)]"
+						>
+							Sortir de la sala
+						</button>
+					</form>
+				{/if}
 			{/if}
 		</section>
 	{:else if room.status === 'drafting' && activeAuction && activePlayer}
@@ -448,7 +462,8 @@
 			</div>
 		</section>
 
-		<!-- Bid form -->
+		<!-- Bid form (members only) -->
+		{#if !isReadOnly}
 		<form
 			method="POST"
 			action="?/placeBid"
@@ -503,6 +518,7 @@
 				<p class="text-sm text-[color:var(--color-accent)]">{form.bid.error}</p>
 			{/if}
 		</form>
+		{/if}
 
 		<!-- Recent bids -->
 		{#if recentBids.length > 0}
@@ -541,7 +557,7 @@
 		{/if}
 
 		<!-- Host controls -->
-		{#if isHost}
+		{#if isHost && !isReadOnly}
 			<div class="flex flex-col gap-2">
 				<form
 					method="POST"
@@ -633,8 +649,12 @@
 				{/each}
 			</div>
 
-			<!-- Vote form -->
-			{#if myVote && !editingVote}
+			<!-- Vote form (members only) -->
+			{#if isReadOnly}
+				<p class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 text-center text-sm text-[color:var(--color-text-muted)]">
+					Espectador — esperant que els jugadors votin.
+				</p>
+			{:else if myVote && !editingVote}
 				<div class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4">
 					<p class="text-sm text-[color:var(--color-text-muted)]">El teu vot:</p>
 					<ol class="mt-2 flex flex-col gap-1 text-sm">
@@ -725,7 +745,7 @@
 				</form>
 			{/if}
 
-			{#if isHost}
+			{#if isHost && !isReadOnly}
 				<form
 					method="POST"
 					action="?/finishVoting"

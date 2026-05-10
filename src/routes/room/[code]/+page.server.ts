@@ -6,6 +6,11 @@ import { castVote, finishVoting } from '$lib/server/votingRpc';
 import { leaveRoom, updateRoomSettings } from '$lib/server/rooms';
 import { parseAmountToCents } from '$lib/utils/currency';
 
+type RpcAny = (
+	fn: string,
+	args: unknown
+) => Promise<{ data: unknown; error: { message: string } | null }>;
+
 type TeamPlayer = {
 	auction_id: string;
 	position_slot: string;
@@ -16,208 +21,111 @@ type TeamPlayer = {
 	player_position: string;
 };
 
-export const load: PageServerLoad = async ({ params, locals }) => {
-	const code = normalizeRoomCode(params.code);
-	if (!isValidRoomCode(code)) {
-		throw error(404, 'Sala no trobada.');
-	}
-
-	// Public read of finished rooms — bypasses RLS so anonymous users (or
-	// members who lost their cookies) can still see the results.
-	const { data: publicData } = await (
-		locals.supabase.rpc as unknown as (fn: string, args: unknown) => Promise<{ data: unknown; error: unknown }>
-	)('get_finished_room', { p_code: code });
-
-	if (publicData) {
-		const pd = publicData as {
-			room: {
-				id: string;
-				code: string;
-				status: string;
-				host_id: string | null;
-				settings: Record<string, unknown>;
-				theme: { display_name: string };
-			};
-			members: Array<{ user_id: string; display_name: string; budget_remaining_cents: number }>;
-			teams: Record<string, Array<{ position_slot: string; player_name: string; final_price_cents: number | null; auction_status: string }>>;
-			tally: Array<{ user_id: string; total_points: number; votes_received: number }>;
-		};
-		const teamsByUser: Record<string, TeamPlayer[]> = {};
-		for (const [uid, players] of Object.entries(pd.teams)) {
-			teamsByUser[uid] = players.map((p, i) => ({
-				auction_id: `${uid}-${i}`,
-				position_slot: p.position_slot,
-				final_price_cents: p.final_price_cents,
-				auction_status: p.auction_status,
-				player_id: '',
-				player_name: p.player_name,
-				player_position: p.position_slot
-			}));
-		}
-		return {
-			room: {
-				id: pd.room.id,
-				code: pd.room.code,
-				host_id: pd.room.host_id,
-				status: pd.room.status,
-				settings: pd.room.settings,
-				theme: { id: '', slug: '', display_name: pd.room.theme.display_name }
-			},
-			members: pd.members.map((m) => ({
-				user_id: m.user_id,
-				budget_remaining_cents: m.budget_remaining_cents,
-				joined_at: '',
-				profile: { id: m.user_id, display_name: m.display_name }
-			})),
-			isHost: locals.user?.id === pd.room.host_id,
-			activeAuction: null,
-			activePlayer: null,
-			recentBids: [],
-			upcomingAuctions: [],
-			teamsByUser,
-			myVote: null,
-			tally: pd.tally,
-			readOnly: true
-		};
-	}
-
-	if (!locals.user) {
-		throw redirect(303, '/');
-	}
-
-	const { data: room, error: roomError } = await locals.supabase
-		.from('rooms')
-		.select('id, code, host_id, status, settings, theme:themes(id, slug, display_name)')
-		.eq('code', code)
-		.maybeSingle();
-
-	if (roomError) throw error(500, roomError.message);
-	if (!room) throw error(404, 'Sala no trobada.');
-
-	const { data: members } = await locals.supabase
-		.from('room_members')
-		.select('user_id, budget_remaining_cents, joined_at, profile:profiles(id, display_name)')
-		.eq('room_id', room.id)
-		.order('joined_at');
-
-	let activeAuction = null;
-	let activePlayer = null;
-	let recentBids: Array<{
+type RoomView = {
+	room: {
+		id: string;
+		code: string;
+		host_id: string | null;
+		status: string;
+		settings: Record<string, unknown>;
+		theme: { id: string; display_name: string };
+	};
+	members: Array<{
+		user_id: string;
+		display_name: string;
+		budget_remaining_cents: number;
+		joined_at: string;
+	}>;
+	active_auction: null | {
+		id: string;
+		sequence_number: number;
+		status: string;
+		current_bid_cents: number | null;
+		current_bidder_id: string | null;
+		ends_at: string | null;
+		started_at: string | null;
+		position_slot: string;
+		player_id: string;
+	};
+	active_player: null | {
+		id: string;
+		name: string;
+		photo_url: string | null;
+		primary_position: string;
+		secondary_positions: string[] | null;
+		market_value_cents: number | null;
+		metadata: Record<string, unknown> | null;
+	};
+	recent_bids: Array<{
 		id: string;
 		amount_cents: number;
 		created_at: string;
 		user_id: string;
 		profile: { display_name: string } | null;
-	}> = [];
-	let upcomingAuctions: Array<{
+	}>;
+	upcoming_auctions: Array<{
 		sequence_number: number;
 		position_slot: string;
 		player_name: string;
-	}> = [];
+	}>;
+	teams: Record<string, TeamPlayer[]>;
+	tally: Array<{ user_id: string; total_points: number; votes_received: number }>;
+};
 
-	if (room.status === 'drafting') {
-		const { data: auction } = await locals.supabase
-			.from('auctions')
-			.select(
-				'id, sequence_number, status, current_bid_cents, current_bidder_id, ends_at, started_at, position_slot, player_id'
-			)
-			.eq('room_id', room.id)
-			.eq('status', 'active')
-			.maybeSingle();
+export const load: PageServerLoad = async ({ params, locals }) => {
+	const code = normalizeRoomCode(params.code);
+	if (!isValidRoomCode(code)) throw error(404, 'Sala no trobada.');
 
-		if (auction) {
-			activeAuction = auction;
+	const rpc = (locals.supabase.rpc as unknown as RpcAny).bind(locals.supabase);
+	const { data: viewData } = await rpc('get_room_view', { p_code: code });
+	if (!viewData) throw error(404, 'Sala no trobada.');
 
-			const { data: player } = await locals.supabase
-				.from('players')
-				.select('id, name, photo_url, primary_position, secondary_positions, market_value_cents, metadata')
-				.eq('id', auction.player_id)
-				.maybeSingle();
-			activePlayer = player;
+	const view = viewData as RoomView;
+	const userId = locals.user?.id ?? null;
+	const isMember = !!userId && view.members.some((m) => m.user_id === userId);
+	const readOnly = !isMember;
 
-			const { data: bids } = await locals.supabase
-				.from('bids')
-				.select('id, amount_cents, created_at, user_id, profile:profiles(display_name)')
-				.eq('auction_id', auction.id)
-				.order('created_at', { ascending: false })
-				.limit(10);
-			recentBids = (bids ?? []) as never;
-		}
-
-		const { data: upcoming } = await locals.supabase
-			.from('auctions')
-			.select('sequence_number, position_slot, player:players(name)')
-			.eq('room_id', room.id)
-			.eq('status', 'pending')
-			.order('sequence_number')
-			.limit(3);
-		upcomingAuctions = (upcoming ?? []).map((a) => ({
-			sequence_number: a.sequence_number,
-			position_slot: a.position_slot,
-			player_name: (a.player as { name: string } | null)?.name ?? '—'
-		}));
-	}
-
-	let teamsByUser: Record<string, TeamPlayer[]> = {};
+	// Member-only extras: their existing vote (RLS allows the voter to read
+	// their own vote regardless of phase).
 	let myVote: {
 		rank_1_user_id: string;
 		rank_2_user_id: string | null;
 		rank_3_user_id: string | null;
 	} | null = null;
-	let tally: Array<{ user_id: string; total_points: number; votes_received: number }> = [];
-
-	if (room.status === 'voting' || room.status === 'finished') {
-		const { data: rows } = await locals.supabase
-			.from('auctions')
-			.select(
-				'id, winner_id, position_slot, final_price_cents, status, player:players(id, name, primary_position)'
-			)
-			.eq('room_id', room.id)
-			.not('winner_id', 'is', null);
-
-		teamsByUser = {};
-		for (const row of rows ?? []) {
-			if (!row.winner_id || !row.player) continue;
-			(teamsByUser[row.winner_id] ??= []).push({
-				auction_id: row.id,
-				position_slot: row.position_slot,
-				final_price_cents: row.final_price_cents,
-				auction_status: row.status,
-				player_id: row.player.id,
-				player_name: row.player.name,
-				player_position: row.player.primary_position
-			});
-		}
-
-		const { data: vote } = await locals.supabase
+	if (isMember && (view.room.status === 'voting' || view.room.status === 'finished')) {
+		const { data } = await locals.supabase
 			.from('votes')
 			.select('rank_1_user_id, rank_2_user_id, rank_3_user_id')
-			.eq('room_id', room.id)
-			.eq('voter_id', locals.user.id)
+			.eq('room_id', view.room.id)
+			.eq('voter_id', userId!)
 			.maybeSingle();
-		myVote = vote;
-	}
-
-	if (room.status === 'finished') {
-		const { data: tallyData } = await locals.supabase
-			.from('vote_tally' as never)
-			.select('user_id, total_points, votes_received')
-			.eq('room_id', room.id);
-		tally = (tallyData ?? []) as never;
+		myVote = data;
 	}
 
 	return {
-		room,
-		members: members ?? [],
-		isHost: room.host_id === locals.user.id,
-		activeAuction,
-		activePlayer,
-		recentBids,
-		upcomingAuctions,
-		teamsByUser,
+		room: {
+			id: view.room.id,
+			code: view.room.code,
+			host_id: view.room.host_id,
+			status: view.room.status,
+			settings: view.room.settings,
+			theme: { id: view.room.theme.id, slug: '', display_name: view.room.theme.display_name }
+		},
+		members: view.members.map((m) => ({
+			user_id: m.user_id,
+			budget_remaining_cents: m.budget_remaining_cents,
+			joined_at: m.joined_at,
+			profile: { id: m.user_id, display_name: m.display_name }
+		})),
+		isHost: userId === view.room.host_id,
+		activeAuction: view.active_auction,
+		activePlayer: view.active_player,
+		recentBids: view.recent_bids,
+		upcomingAuctions: view.upcoming_auctions,
+		teamsByUser: view.teams,
 		myVote,
-		tally,
-		readOnly: false
+		tally: view.tally,
+		readOnly
 	};
 };
 
@@ -262,8 +170,6 @@ export const actions: Actions = {
 	advanceAuction: async ({ params, locals }) => {
 		if (!locals.user) return fail(401, { advance: { error: 'No autenticat.' } });
 
-		// Authorization is enforced by the RPC: host can always advance,
-		// any room member can advance an expired or queue-done auction.
 		const code = normalizeRoomCode(params.code!);
 		const { data: room } = await locals.supabase
 			.from('rooms')
