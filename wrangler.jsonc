@@ -1,0 +1,20 @@
+/**
+ * wrangler.jsonc — Cloudflare Workers deploy config for SvelteKit + adapter-cloudflare.
+ * The build emits .svelte-kit/cloudflare/_worker.js plus the static assets in the
+ * same directory; we expose the assets via the ASSETS binding (the adapter's
+ * convention).
+ */
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "subasta",
+	"main": ".svelte-kit/cloudflare/_worker.js",
+	"compatibility_date": "2025-09-23",
+	"compatibility_flags": ["nodejs_compat"],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": ".svelte-kit/cloudflare"
+	},
+	"observability": {
+		"enabled": true
+	}
+}
