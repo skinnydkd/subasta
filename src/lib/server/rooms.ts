@@ -74,6 +74,32 @@ export async function deleteRoom(
 	return { ok: true };
 }
 
+export async function kickMember(
+	supabase: SupabaseClient<Database>,
+	roomId: string,
+	userId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+	const { error } = await rawRpc(supabase)('kick_member', {
+		p_room_id: roomId,
+		p_user_id: userId
+	});
+	if (error) return { ok: false, error: error.message };
+	return { ok: true };
+}
+
+export async function transferHost(
+	supabase: SupabaseClient<Database>,
+	roomId: string,
+	newHostUserId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+	const { error } = await rawRpc(supabase)('transfer_host', {
+		p_room_id: roomId,
+		p_new_host_user_id: newHostUserId
+	});
+	if (error) return { ok: false, error: error.message };
+	return { ok: true };
+}
+
 export type UserStats = {
 	rooms_played: number;
 	first_places: number;

@@ -349,7 +349,34 @@
 						<span class="rounded-full bg-[color:var(--color-accent-muted)] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-[color:var(--color-on-accent)]">host</span>
 					{/if}
 				</div>
-				<span class="tnum text-[color:var(--color-text-muted)]">{formatCents(member.budget_remaining_cents)}</span>
+				<div class="flex items-center gap-2">
+					<span class="tnum text-[color:var(--color-text-muted)]">{formatCents(member.budget_remaining_cents)}</span>
+					{#if isHost && !isReadOnly && member.user_id !== myUserId && room.status !== 'finished'}
+						<details class="relative">
+							<summary class="cursor-pointer list-none rounded px-1.5 py-0.5 text-[color:var(--color-text-faint)] hover:text-[color:var(--color-text)]" aria-label="Accions">⋯</summary>
+							<div class="absolute right-0 top-full z-10 mt-1 flex flex-col rounded-[var(--radius-sm)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] py-1 text-xs shadow">
+								<form method="POST" action="?/transferHost" use:enhance={({ cancel }) => {
+									if (!confirm('Transferir el rol de host a aquest jugador?')) cancel();
+								}}>
+									<input type="hidden" name="user_id" value={member.user_id} />
+									<button type="submit" class="w-full whitespace-nowrap px-3 py-1.5 text-left hover:bg-[color:var(--color-surface)]">
+										Fer host
+									</button>
+								</form>
+								{#if room.status === 'lobby'}
+									<form method="POST" action="?/kickMember" use:enhance={({ cancel }) => {
+										if (!confirm('Fer fora aquest jugador?')) cancel();
+									}}>
+										<input type="hidden" name="user_id" value={member.user_id} />
+										<button type="submit" class="w-full whitespace-nowrap px-3 py-1.5 text-left text-[color:var(--color-accent)] hover:bg-[color:var(--color-surface)]">
+											Fer fora
+										</button>
+									</form>
+								{/if}
+							</div>
+						</details>
+					{/if}
+				</div>
 			</div>
 		{/each}
 	</section>

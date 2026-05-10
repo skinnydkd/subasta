@@ -3,7 +3,7 @@ import type { Actions, PageServerLoad } from './$types';
 import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
 import { advanceAuction, placeBid, startRoom } from '$lib/server/auctionRpc';
 import { castVote, finishVoting } from '$lib/server/votingRpc';
-import { deleteRoom, leaveRoom, updateRoomSettings } from '$lib/server/rooms';
+import { deleteRoom, kickMember, leaveRoom, transferHost, updateRoomSettings } from '$lib/server/rooms';
 import { FORMATION_PRESETS, type FormationPreset } from '$lib/auction/settings';
 import { parseAmountToCents } from '$lib/utils/currency';
 
@@ -284,6 +284,46 @@ export const actions: Actions = {
 		const result = await leaveRoom(locals.supabase, room.id);
 		if (!result.ok) return fail(400, { leave: { error: result.error } });
 		throw redirect(303, '/');
+	},
+
+	kickMember: async ({ request, params, locals }) => {
+		if (!locals.user) return fail(401, { kick: { error: 'No autenticat.' } });
+
+		const formData = await request.formData();
+		const userIdToKick = String(formData.get('user_id') ?? '').trim();
+		if (!userIdToKick) return fail(400, { kick: { error: 'Falta user_id.' } });
+
+		const code = normalizeRoomCode(params.code!);
+		const { data: room } = await locals.supabase
+			.from('rooms')
+			.select('id')
+			.eq('code', code)
+			.maybeSingle();
+		if (!room) return fail(404, { kick: { error: 'Sala no trobada.' } });
+
+		const result = await kickMember(locals.supabase, room.id, userIdToKick);
+		if (!result.ok) return fail(400, { kick: { error: result.error } });
+		return { kick: { ok: true } };
+	},
+
+	transferHost: async ({ request, params, locals }) => {
+		if (!locals.user) return fail(401, { transfer: { error: 'No autenticat.' } });
+
+		const formData = await request.formData();
+		const newHostId = String(formData.get('user_id') ?? '').trim();
+		if (!newHostId) return fail(400, { transfer: { error: 'Falta user_id.' } });
+
+		const code = normalizeRoomCode(params.code!);
+		const { data: room } = await locals.supabase
+			.from('rooms')
+			.select('id')
+			.eq('code', code)
+			.maybeSingle();
+		if (!room) return fail(404, { transfer: { error: 'Sala no trobada.' } });
+
+		const result = await transferHost(locals.supabase, room.id, newHostId);
+		if (!result.ok) return fail(400, { transfer: { error: result.error } });
+		return { transfer: { ok: true } };
 	},
 
 	deleteRoom: async ({ params, locals }) => {
