@@ -39,3 +39,12 @@ export async function joinRoom(
 	if (!rows?.length) return { ok: false, error: 'No s\'ha pogut unir a la sala.' };
 	return { ok: true, code: rows[0].code, roomId: rows[0].room_id };
 }
+
+export async function leaveRoom(
+	supabase: SupabaseClient<Database>,
+	roomId: string
+): Promise<{ ok: true } | { ok: false; error: string }> {
+	const { error } = await rawRpc(supabase)('leave_room', { p_room_id: roomId });
+	if (error) return { ok: false, error: error.message };
+	return { ok: true };
+}

@@ -248,6 +248,14 @@
 				<p class="mt-3 text-sm text-[color:var(--color-text-muted)]">
 					Esperant que l'amfitrió inicie…
 				</p>
+				<form method="POST" action="?/leaveRoom" class="mt-4" use:enhance>
+					<button
+						type="submit"
+						class="text-xs text-[color:var(--color-text-faint)] hover:text-[color:var(--color-accent)]"
+					>
+						Sortir de la sala
+					</button>
+				</form>
 			{/if}
 		</section>
 	{:else if room.status === 'drafting' && activeAuction && activePlayer}
