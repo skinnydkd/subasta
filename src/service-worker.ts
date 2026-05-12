@@ -69,4 +69,10 @@ sw.addEventListener('fetch', (event) => {
 	);
 });
 
+sw.addEventListener('message', (event) => {
+	if (event.data?.type === 'SKIP_WAITING') {
+		sw.skipWaiting();
+	}
+});
+
 export {};
