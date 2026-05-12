@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { formatCents } from '$lib/utils/currency';
 	import type { ActionData, PageData } from './$types';
+	import InstallPrompt from '$lib/components/InstallPrompt.svelte';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -39,6 +40,8 @@
 			Subhasta de jugadors amb amics. 1.000M€. Que guanye el millor equip.
 		</p>
 	</header>
+
+	<InstallPrompt />
 
 	{#if !data.user}
 		<form
