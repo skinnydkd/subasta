@@ -31,10 +31,23 @@ describe('parseAmountToCents', () => {
 		['10M', 10_000_000_00n],
 		['1000M', 1_000_000_000_00n],
 		['500K', 500_000_00n],
-		['100', 100_00n], // plain euros
+		['100', 10_000_000_000n], // bare numbers are millions: 100 = 100M€
 		['  5m  ', 5_000_000_00n],
 		['5M€', 5_000_000_00n]
 	])('parses "%s" → %d cents', (input, expected) => {
+		expect(parseAmountToCents(input)).toBe(expected);
+	});
+
+	it.each([
+		['50', 5_000_000_000n],
+		['1', 100_000_000n],
+		['1000', 100_000_000_000n],
+		['0,5', 50_000_000n],
+		['0.5', 50_000_000n],
+		['5,5', 550_000_000n],
+		['50€', 5_000_000_000n],
+		['5M€', 500_000_000n]
+	])('parses bare-number "%s" as millions → %d cents', (input, expected) => {
 		expect(parseAmountToCents(input)).toBe(expected);
 	});
 

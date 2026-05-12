@@ -50,7 +50,8 @@ export function parseAmountToCents(input: string): bigint | null {
 	const trimmed = input.trim().toUpperCase().replace(/\s+/g, '').replace('€', '');
 	if (!trimmed) return null;
 
-	let multiplier = 1n;
+	// Bare numbers (no M/K suffix) default to millions — the game runs at million-scale.
+	let multiplier = M;
 	let core = trimmed;
 	if (core.endsWith('M')) {
 		multiplier = M;
@@ -64,16 +65,9 @@ export function parseAmountToCents(input: string): bigint | null {
 	if (!/^\d+(\.\d+)?$/.test(normalized)) return null;
 
 	const [whole, frac = ''] = normalized.split('.');
-	const fracPadded = (frac + '0000000000').slice(0, 10); // up to 10 decimals — plenty
 	const fracDigits = frac.length;
-	const fracBig = BigInt(fracPadded.slice(0, fracDigits || 0) || '0');
+	const fracBig = BigInt(frac || '0');
 	const wholeBig = BigInt(whole);
-
-	if (multiplier === 1n) {
-		// Plain euros — convert to cents
-		const fracCents = fracDigits ? BigInt((frac + '00').slice(0, 2)) : 0n;
-		return wholeBig * 100n + fracCents;
-	}
 
 	if (!fracDigits) return wholeBig * multiplier;
 	const denom = 10n ** BigInt(fracDigits);
