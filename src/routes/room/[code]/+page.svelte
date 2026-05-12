@@ -8,6 +8,8 @@
 	import { enableAudio, isMuted, setMuted, sounds } from '$lib/utils/sounds';
 	import { fly } from 'svelte/transition';
 	import type { ActionData, PageData } from './$types';
+	import { createRealtimeKeepalive } from '$lib/realtime/keepalive.svelte';
+	import ConnectionPill from '$lib/components/ConnectionPill.svelte';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -240,52 +242,78 @@
 
 	// Realtime for members; polling for spectators (RLS hides events from
 	// non-members so postgres_changes wouldn't reach them).
+	// Keepalive handles visibility / online / offline reconnect + wake lock.
+	let keepalive = $state<ReturnType<typeof createRealtimeKeepalive> | null>(null);
+
 	onMount(() => {
 		if (isReadOnly) {
-			if (room.status === 'finished') return; // no need to refresh once done
+			if (room.status === 'finished') return;
 			const id = setInterval(() => invalidateAll(), 3000);
 			return () => clearInterval(id);
 		}
 
 		const supabase = createClient();
 
-		const dbChannel = supabase
-			.channel(`room:${room.id}`)
-			.on(
-				'postgres_changes',
-				{ event: '*', schema: 'public', table: 'auctions', filter: `room_id=eq.${room.id}` },
-				() => invalidateAll()
-			)
-			.on(
-				'postgres_changes',
-				{ event: '*', schema: 'public', table: 'room_members', filter: `room_id=eq.${room.id}` },
-				() => invalidateAll()
-			)
-			.on(
-				'postgres_changes',
-				{ event: 'UPDATE', schema: 'public', table: 'rooms', filter: `id=eq.${room.id}` },
-				() => invalidateAll()
-			)
-			.subscribe();
+		const ka = createRealtimeKeepalive({
+			client: supabase,
+			channels: () => {
+				const db = supabase
+					.channel(`room:${room.id}`)
+					.on(
+						'postgres_changes',
+						{ event: '*', schema: 'public', table: 'auctions', filter: `room_id=eq.${room.id}` },
+						() => invalidateAll()
+					)
+					.on(
+						'postgres_changes',
+						{ event: '*', schema: 'public', table: 'room_members', filter: `room_id=eq.${room.id}` },
+						() => invalidateAll()
+					)
+					.on(
+						'postgres_changes',
+						{ event: 'UPDATE', schema: 'public', table: 'rooms', filter: `id=eq.${room.id}` },
+						() => invalidateAll()
+					);
 
-		const presenceChannel = supabase
-			.channel(`room:${room.id}:presence`, {
-				config: { presence: { key: myUserId ?? 'anon' } }
-			})
-			.on('presence', { event: 'sync' }, () => {
-				const state = presenceChannel.presenceState();
-				onlineUserIds = new Set(Object.keys(state));
-			})
-			.subscribe(async (status) => {
-				if (status === 'SUBSCRIBED' && myUserId) {
-					await presenceChannel.track({ user_id: myUserId, online_at: Date.now() });
-				}
-			});
+				const presence = supabase.channel(`room:${room.id}:presence`, {
+					config: { presence: { key: myUserId ?? 'anon' } }
+				});
+				presence.on('presence', { event: 'sync' }, () => {
+					const state = presence.presenceState();
+					onlineUserIds = new Set(Object.keys(state));
+				});
+
+				// Wrap subscribe so presence.track fires once the channel is up,
+				// while still letting keepalive observe the status callback.
+				const origSubscribe = presence.subscribe.bind(presence);
+				presence.subscribe = ((cb?: (status: string) => void) =>
+					origSubscribe(async (status: string) => {
+						cb?.(status);
+						if (status === 'SUBSCRIBED' && myUserId) {
+							await presence.track({ user_id: myUserId, online_at: Date.now() });
+						}
+					})) as typeof presence.subscribe;
+
+				return [db, presence];
+			},
+			onResync: () => { invalidateAll(); },
+			isAuctionActive: () => activeAuction?.status === 'active'
+		});
+
+		ka.start();
+		keepalive = ka;
 
 		return () => {
-			supabase.removeChannel(dbChannel);
-			supabase.removeChannel(presenceChannel);
+			ka.stop();
+			keepalive = null;
 		};
+	});
+
+	// Re-evaluate the wake lock when the active auction transitions.
+	$effect(() => {
+		// Re-run on auction status changes.
+		void activeAuction?.status;
+		void keepalive?.refreshWakeLock();
 	});
 
 	function copyCode() {
@@ -308,6 +336,9 @@
 			{room.code}
 		</button>
 		<div class="flex items-center gap-2">
+			{#if !isReadOnly && keepalive}
+				<ConnectionPill status={keepalive.status} />
+			{/if}
 			{#if isReadOnly}
 				<span class="rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-2 py-0.5 text-[10px] uppercase tracking-wider text-[color:var(--color-text-muted)]">
 					Espectador
