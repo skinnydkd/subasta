@@ -24,7 +24,7 @@ export async function createRoom(
 	});
 	if (error) return { ok: false, error: error.message };
 	const rows = data as Array<{ room_id: string; code: string }>;
-	if (!rows?.length) return { ok: false, error: 'No s\'ha pogut crear la sala.' };
+	if (!rows?.length) return { ok: false, error: "No s'ha pogut crear la sala." };
 	return { ok: true, code: rows[0].code, roomId: rows[0].room_id };
 }
 
@@ -52,7 +52,7 @@ export async function joinRoom(
 	const { data, error } = await rawRpc(supabase)('join_room', { p_code: code });
 	if (error) return { ok: false, error: error.message };
 	const rows = data as Array<{ room_id: string; code: string }>;
-	if (!rows?.length) return { ok: false, error: 'No s\'ha pogut unir a la sala.' };
+	if (!rows?.length) return { ok: false, error: "No s'ha pogut unir a la sala." };
 	return { ok: true, code: rows[0].code, roomId: rows[0].room_id };
 }
 

@@ -8,12 +8,15 @@ import pg from 'pg';
 
 const REAL_PREFIXES = ['rm-', 'bar-', 'atm-', 'ath-', 'rso-', 'bar0809-', 'rm0203-'];
 const WIKI_REST = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
-const WIKI_SEARCH = 'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=3&search=';
+const WIKI_SEARCH =
+	'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=3&search=';
 const USER_AGENT = 'subasta-photo-fetcher/1.0 (https://github.com/skinnydkd/subasta)';
 
 async function fetchSummary(title) {
 	const url = WIKI_REST + encodeURIComponent(title.replace(/ /g, '_'));
-	const res = await fetch(url, { headers: { 'User-Agent': USER_AGENT, accept: 'application/json' } });
+	const res = await fetch(url, {
+		headers: { 'User-Agent': USER_AGENT, accept: 'application/json' }
+	});
 	if (!res.ok) return null;
 	const data = await res.json();
 	if (data.type === 'disambiguation') return null;
@@ -67,13 +70,16 @@ const c = new pg.Client({
 });
 await c.connect();
 
-const { rows } = await c.query(`
+const { rows } = await c.query(
+	`
 	select id, name, metadata
 	from players
 	where photo_url is null
 		and (${REAL_PREFIXES.map((_, i) => `metadata ->> 'dev_seed_id' like $${i + 1}`).join(' or ')})
 	order by name
-`, REAL_PREFIXES.map((p) => `${p}%`));
+`,
+	REAL_PREFIXES.map((p) => `${p}%`)
+);
 
 console.log(`Found ${rows.length} players without photos.`);
 

@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { formatCents } from '$lib/utils/currency';
 	import type { ActionData, PageData } from './$types';
+	import InstallPrompt from '$lib/components/InstallPrompt.svelte';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -25,7 +26,9 @@
 		recentRooms = [];
 		try {
 			localStorage.removeItem('subasta:recent_rooms');
-		} catch {}
+		} catch {
+			// storage unavailable — ignore
+		}
 	}
 </script>
 
@@ -39,6 +42,8 @@
 			Subhasta de jugadors amb amics. 1.000M€. Que guanye el millor equip.
 		</p>
 	</header>
+
+	<InstallPrompt />
 
 	{#if !data.user}
 		<form
@@ -62,7 +67,7 @@
 					required
 					autocomplete="nickname"
 					placeholder="Pau"
-					class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-base outline-none transition-colors focus:border-[color:var(--color-accent)]"
+					class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-base transition-colors outline-none focus:border-[color:var(--color-accent)]"
 				/>
 			</label>
 			{#if form?.signIn && 'error' in form.signIn}
@@ -79,23 +84,25 @@
 	{:else}
 		<div class="flex flex-col gap-2 text-center">
 			<p class="text-sm text-[color:var(--color-text-muted)]">Hola,</p>
-			<p class="text-2xl" style="font-family: var(--font-display);">{data.profile?.display_name ?? 'Convidat'}</p>
+			<p class="text-2xl" style="font-family: var(--font-display);">
+				{data.profile?.display_name ?? 'Convidat'}
+			</p>
 		</div>
 
 		{#if data.user}
 			{#if data.user.is_anonymous && !data.user.email}
-				<details class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2">
-					<summary class="cursor-pointer text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
+				<details
+					class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2"
+				>
+					<summary
+						class="cursor-pointer text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase"
+					>
 						Guardar el teu compte
 					</summary>
-					<form
-						method="POST"
-						action="?/linkEmail"
-						class="mt-3 flex flex-col gap-2"
-						use:enhance
-					>
+					<form method="POST" action="?/linkEmail" class="mt-3 flex flex-col gap-2" use:enhance>
 						<p class="text-xs text-[color:var(--color-text-muted)]">
-							Si poses un email, podràs recuperar el teu compte i historial des d'altres dispositius.
+							Si poses un email, podràs recuperar el teu compte i historial des d'altres
+							dispositius.
 						</p>
 						<input
 							name="email"
@@ -121,11 +128,17 @@
 					</form>
 				</details>
 			{:else if data.user.email && data.user.is_anonymous}
-				<p class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-center text-xs text-[color:var(--color-text-muted)]">
-					Email pendent de verificar a <span class="text-[color:var(--color-text)]">{data.user.email}</span>
+				<p
+					class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-center text-xs text-[color:var(--color-text-muted)]"
+				>
+					Email pendent de verificar a <span class="text-[color:var(--color-text)]"
+						>{data.user.email}</span
+					>
 				</p>
 			{:else if data.user.email}
-				<p class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-center text-xs text-[color:var(--color-text-muted)]">
+				<p
+					class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2 text-center text-xs text-[color:var(--color-text-muted)]"
+				>
 					Compte vinculat amb <span class="text-[color:var(--color-text)]">{data.user.email}</span>
 				</p>
 			{/if}
@@ -135,7 +148,9 @@
 			<h2 class="text-xl">Crear sala</h2>
 
 			{#if data.themes.length === 0}
-				<p class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-sm text-[color:var(--color-text-muted)]">
+				<p
+					class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-sm text-[color:var(--color-text-muted)]"
+				>
 					Cap tema disponible encara. Carrega un tema a la BD per a començar.
 				</p>
 			{:else}
@@ -158,19 +173,25 @@
 							required
 							class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-base outline-none focus:border-[color:var(--color-accent)]"
 						>
-							{#each data.themes as theme}
+							{#each data.themes as theme (theme.id)}
 								<option value={theme.id}>{theme.display_name}</option>
 							{/each}
 						</select>
 					</label>
 
-					<details class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2">
-						<summary class="cursor-pointer text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
+					<details
+						class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2"
+					>
+						<summary
+							class="cursor-pointer text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase"
+						>
 							Configuració avançada
 						</summary>
 						<div class="mt-3 flex flex-col gap-3">
 							<label class="flex flex-col gap-1">
-								<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">Formació</span>
+								<span class="text-xs tracking-wider text-[color:var(--color-text-muted)] uppercase"
+									>Formació</span
+								>
 								<select
 									name="formation"
 									class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-sm"
@@ -183,7 +204,9 @@
 							</label>
 
 							<label class="flex flex-col gap-1">
-								<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">Timer per puja (s)</span>
+								<span class="text-xs tracking-wider text-[color:var(--color-text-muted)] uppercase"
+									>Timer per puja (s)</span
+								>
 								<select
 									name="timer"
 									class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-sm"
@@ -197,7 +220,10 @@
 
 							<div class="grid grid-cols-2 gap-3">
 								<label class="flex flex-col gap-1">
-									<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">Jugadors</span>
+									<span
+										class="text-xs tracking-wider text-[color:var(--color-text-muted)] uppercase"
+										>Jugadors</span
+									>
 									<input
 										type="number"
 										name="max_members"
@@ -208,7 +234,10 @@
 									/>
 								</label>
 								<label class="flex flex-col gap-1">
-									<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-muted)]">Extres/posició</span>
+									<span
+										class="text-xs tracking-wider text-[color:var(--color-text-muted)] uppercase"
+										>Extres/posició</span
+									>
 									<input
 										type="number"
 										name="extras"
@@ -238,7 +267,7 @@
 
 		<div class="flex items-center gap-3">
 			<div class="h-px flex-1 bg-[color:var(--color-border)]"></div>
-			<span class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">o</span>
+			<span class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">o</span>
 			<div class="h-px flex-1 bg-[color:var(--color-border)]"></div>
 		</div>
 
@@ -265,7 +294,7 @@
 					autocomplete="off"
 					required
 					placeholder="ABC234"
-					class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-center text-2xl uppercase tracking-[0.4em] tnum outline-none focus:border-[color:var(--color-accent)]"
+					class="tnum rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-center text-2xl tracking-[0.4em] uppercase outline-none focus:border-[color:var(--color-accent)]"
 					style="font-family: var(--font-mono);"
 				/>
 				{#if form?.join?.error}
@@ -284,28 +313,52 @@
 
 	{#if data.stats && data.stats.rooms_played > 0}
 		<section class="flex flex-col gap-2">
-			<h2 class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">Les meves estadístiques</h2>
+			<h2 class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
+				Les meves estadístiques
+			</h2>
 			<div class="grid grid-cols-3 gap-2">
-				<div class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center">
-					<p class="text-2xl tnum">{data.stats.rooms_played}</p>
-					<p class="text-[10px] uppercase tracking-wider text-[color:var(--color-text-faint)]">sales</p>
+				<div
+					class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center"
+				>
+					<p class="tnum text-2xl">{data.stats.rooms_played}</p>
+					<p class="text-[10px] tracking-wider text-[color:var(--color-text-faint)] uppercase">
+						sales
+					</p>
 				</div>
-				<div class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center">
-					<p class="text-2xl tnum">{data.stats.first_places}</p>
-					<p class="text-[10px] uppercase tracking-wider text-[color:var(--color-text-faint)]">1rs llocs</p>
+				<div
+					class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center"
+				>
+					<p class="tnum text-2xl">{data.stats.first_places}</p>
+					<p class="text-[10px] tracking-wider text-[color:var(--color-text-faint)] uppercase">
+						1rs llocs
+					</p>
 				</div>
-				<div class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center">
-					<p class="text-2xl tnum">{data.stats.players_won}</p>
-					<p class="text-[10px] uppercase tracking-wider text-[color:var(--color-text-faint)]">jugadors</p>
+				<div
+					class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center"
+				>
+					<p class="tnum text-2xl">{data.stats.players_won}</p>
+					<p class="text-[10px] tracking-wider text-[color:var(--color-text-faint)] uppercase">
+						jugadors
+					</p>
 				</div>
 			</div>
 			{#if data.stats.total_spent_cents > 0 || data.stats.top_position}
-				<div class="flex justify-between rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-xs text-[color:var(--color-text-muted)]">
+				<div
+					class="flex justify-between rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-xs text-[color:var(--color-text-muted)]"
+				>
 					{#if data.stats.total_spent_cents > 0}
-						<span>Total gastat: <span class="tnum text-[color:var(--color-text)]">{formatCents(data.stats.total_spent_cents)}</span></span>
+						<span
+							>Total gastat: <span class="tnum text-[color:var(--color-text)]"
+								>{formatCents(data.stats.total_spent_cents)}</span
+							></span
+						>
 					{/if}
 					{#if data.stats.top_position}
-						<span>Posició preferida: <span class="text-[color:var(--color-text)]">{data.stats.top_position}</span></span>
+						<span
+							>Posició preferida: <span class="text-[color:var(--color-text)]"
+								>{data.stats.top_position}</span
+							></span
+						>
 					{/if}
 				</div>
 			{/if}
@@ -315,7 +368,9 @@
 	{#if recentRooms.length > 0}
 		<section class="flex flex-col gap-2">
 			<div class="flex items-baseline justify-between">
-				<h2 class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">Sales recents</h2>
+				<h2 class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
+					Sales recents
+				</h2>
 				<button
 					type="button"
 					onclick={clearRecent}
@@ -331,9 +386,17 @@
 							href={`/room/${r.code}`}
 							class="flex items-center justify-between rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm transition-colors hover:bg-[color:var(--color-elevated)]"
 						>
-							<span class="tnum tracking-[0.3em]" style="font-family: var(--font-mono);">{r.code}</span>
+							<span class="tnum tracking-[0.3em]" style="font-family: var(--font-mono);"
+								>{r.code}</span
+							>
 							<span class="text-xs text-[color:var(--color-text-faint)]">
-								{r.status === 'finished' ? 'acabada' : r.status === 'voting' ? 'votant' : r.status === 'drafting' ? 'en joc' : 'lobby'}
+								{r.status === 'finished'
+									? 'acabada'
+									: r.status === 'voting'
+										? 'votant'
+										: r.status === 'drafting'
+											? 'en joc'
+											: 'lobby'}
 							</span>
 						</a>
 					</li>

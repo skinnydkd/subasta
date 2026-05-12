@@ -32,7 +32,7 @@ export const actions: Actions = {
 		const displayName = String(formData.get('display_name') ?? '').trim();
 
 		if (!displayName) {
-			return fail(400, { signIn: { error: 'Posa\'t un nom.' } });
+			return fail(400, { signIn: { error: "Posa't un nom." } });
 		}
 		if (displayName.length > 30) {
 			return fail(400, { signIn: { error: 'El nom és massa llarg (màx 30).' } });
@@ -53,7 +53,9 @@ export const actions: Actions = {
 		if (!locals.user) return fail(401, { linkEmail: { error: 'No autenticat.' } });
 
 		const formData = await request.formData();
-		const email = String(formData.get('email') ?? '').trim().toLowerCase();
+		const email = String(formData.get('email') ?? '')
+			.trim()
+			.toLowerCase();
 		if (!email || !email.includes('@') || email.length > 254) {
 			return fail(400, { linkEmail: { error: 'Email invàlid.' } });
 		}

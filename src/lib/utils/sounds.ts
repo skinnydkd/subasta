@@ -16,7 +16,9 @@ if (typeof localStorage !== 'undefined') {
 function getCtx(): AudioContext | null {
 	if (typeof window === 'undefined') return null;
 	if (!ctx) {
-		const Ctor = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+		const Ctor =
+			window.AudioContext ||
+			(window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
 		if (!Ctor) return null;
 		ctx = new Ctor();
 	}
@@ -46,15 +48,15 @@ export const sounds = {
 	bid: () => tone(880, 0.08, 'sine', 0.05),
 	/** You were just outbid. */
 	outbid: () => {
-		tone(660, 0.10, 'sine', 0.06);
-		setTimeout(() => tone(440, 0.10, 'sine', 0.06), 90);
+		tone(660, 0.1, 'sine', 0.06);
+		setTimeout(() => tone(440, 0.1, 'sine', 0.06), 90);
 	},
 	/** Timer warning, fired once when seconds drop to 5. */
 	warning: () => tone(523, 0.12, 'square', 0.04),
 	/** You won the active auction. */
 	win: () => {
-		tone(523.25, 0.10, 'triangle', 0.07); // C5
-		setTimeout(() => tone(659.25, 0.10, 'triangle', 0.07), 90); // E5
+		tone(523.25, 0.1, 'triangle', 0.07); // C5
+		setTimeout(() => tone(659.25, 0.1, 'triangle', 0.07), 90); // E5
 		setTimeout(() => tone(783.99, 0.18, 'triangle', 0.08), 180); // G5
 	},
 	/** Auction closed (any winner / skip). */
@@ -63,7 +65,7 @@ export const sounds = {
 	voting: () => {
 		tone(440, 0.14, 'sine', 0.04);
 		setTimeout(() => tone(554.37, 0.14, 'sine', 0.04), 130);
-		setTimeout(() => tone(659.25, 0.20, 'sine', 0.05), 260);
+		setTimeout(() => tone(659.25, 0.2, 'sine', 0.05), 260);
 	}
 };
 

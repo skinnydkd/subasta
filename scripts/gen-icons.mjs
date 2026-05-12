@@ -6,7 +6,7 @@ import sharp from 'sharp';
 
 const svg = readFileSync('static/favicon.svg');
 
-async function gen(size, outName, opts = {}) {
+async function gen(size, outName) {
 	const buf = await sharp(svg).resize(size, size).png().toBuffer();
 	writeFileSync(`static/${outName}`, buf);
 	console.log(`  ✓ static/${outName} (${size}×${size})`);

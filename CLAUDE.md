@@ -97,13 +97,14 @@ Tota acció que muta estat de joc (puja, vot, tancar subhasta) **ha de** passar 
 ## Estat actual / roadmap
 
 Veure `README.md` secció "Roadmap MVP". Fases:
+
 1. ✅ Scaffold + schema + CLAUDE.md (aquest commit)
 2. ⏳ Init SvelteKit + Supabase local + auth bàsica + types generats
 3. ⏳ Lobby + room creation + room code join
 4. ⏳ Auction engine (`open_timer`) + realtime
 5. ⏳ Auto-scrub + voting + results
 6. ⏳ Seed inicial (La Liga 25-26, Barça/Madrid/Villarreal històrics)
-7. ⏳ Polish UI (dark mode "no-IA", PWA install, anti-disconnect)
+7. ✅ Polish UI (dark mode "no-IA", PWA install, anti-disconnect)
 
 ## Decisions resoltes
 

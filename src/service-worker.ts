@@ -10,10 +10,7 @@ const CACHE = `subasta-${version}`;
 
 // Precache build artifacts (JS/CSS/fonts) and static files (icons, manifest).
 // Skip HTML — SvelteKit serves SSR pages, never cache them on disk.
-const PRECACHE: string[] = [
-	...build,
-	...files.filter((f) => !f.endsWith('.html'))
-];
+const PRECACHE: string[] = [...build, ...files.filter((f) => !f.endsWith('.html'))];
 
 sw.addEventListener('install', (event) => {
 	event.waitUntil(
@@ -67,6 +64,12 @@ sw.addEventListener('fetch', (event) => {
 			}
 		})()
 	);
+});
+
+sw.addEventListener('message', (event) => {
+	if (event.data?.type === 'SKIP_WAITING') {
+		sw.skipWaiting();
+	}
 });
 
 export {};
