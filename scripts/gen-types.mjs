@@ -7,10 +7,10 @@ import { writeFileSync } from 'node:fs';
 
 const PROJECT_ID = 'yblgzpmypipnqfhsmayu';
 
-const out = execSync(
-	`pnpm dlx supabase gen types typescript --project-id ${PROJECT_ID}`,
-	{ encoding: 'utf8', stdio: ['inherit', 'pipe', 'inherit'] }
-);
+const out = execSync(`pnpm dlx supabase gen types typescript --project-id ${PROJECT_ID}`, {
+	encoding: 'utf8',
+	stdio: ['inherit', 'pipe', 'inherit']
+});
 
 const cleaned = out
 	.split('\n')

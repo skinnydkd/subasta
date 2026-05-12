@@ -16,4 +16,11 @@ export function getEngine(type: AuctionType): AuctionEngine {
 	return engine;
 }
 
-export type { AuctionEngine, AuctionState, BidValidation, BidRejectReason, Bidder, RoomConfig } from './engine';
+export type {
+	AuctionEngine,
+	AuctionState,
+	BidValidation,
+	BidRejectReason,
+	Bidder,
+	RoomConfig
+} from './engine';

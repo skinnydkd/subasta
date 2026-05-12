@@ -26,7 +26,6 @@
 	const minIncrement = $derived(settings.min_bid_increment_cents ?? 100_000_000);
 
 	const myUserId = $derived(data.user?.id ?? null);
-	const myMember = $derived(members.find((m) => m.user_id === myUserId));
 	const isCurrentBidder = $derived(activeAuction?.current_bidder_id === myUserId);
 
 	// Countdown
@@ -42,7 +41,12 @@
 			{
 				id: activeAuction.id,
 				roomId: room.id,
-				status: activeAuction.status as 'pending' | 'active' | 'closed' | 'auto_assigned' | 'skipped',
+				status: activeAuction.status as
+					| 'pending'
+					| 'active'
+					| 'closed'
+					| 'auto_assigned'
+					| 'skipped',
 				currentBidCents: activeAuction.current_bid_cents,
 				currentBidderId: activeAuction.current_bidder_id,
 				endsAt: new Date(activeAuction.ends_at)
@@ -93,6 +97,7 @@
 
 	const podium = $derived.by(() => {
 		// Build full ranking including members with 0 points
+		// eslint-disable-next-line svelte/prefer-svelte-reactivity
 		const byUser = new Map<string, { points: number; received: number }>();
 		for (const t of tally) {
 			byUser.set(t.user_id, { points: t.total_points, received: t.votes_received });
@@ -208,11 +213,15 @@
 		try {
 			const key = 'subasta:recent_rooms';
 			const raw = localStorage.getItem(key);
-			const list = raw ? (JSON.parse(raw) as Array<{ code: string; visited_at: number; status?: string }>) : [];
+			const list = raw
+				? (JSON.parse(raw) as Array<{ code: string; visited_at: number; status?: string }>)
+				: [];
 			const filtered = list.filter((r) => r.code !== room.code);
 			filtered.unshift({ code: room.code, visited_at: Date.now(), status: room.status });
 			localStorage.setItem(key, JSON.stringify(filtered.slice(0, 8)));
-		} catch {}
+		} catch {
+			// storage unavailable — ignore
+		}
 
 		return () => document.removeEventListener('click', unlock);
 	});
@@ -266,7 +275,12 @@
 					)
 					.on(
 						'postgres_changes',
-						{ event: '*', schema: 'public', table: 'room_members', filter: `room_id=eq.${room.id}` },
+						{
+							event: '*',
+							schema: 'public',
+							table: 'room_members',
+							filter: `room_id=eq.${room.id}`
+						},
 						() => invalidateAll()
 					)
 					.on(
@@ -296,7 +310,9 @@
 
 				return [db, presence];
 			},
-			onResync: () => { invalidateAll(); },
+			onResync: () => {
+				invalidateAll();
+			},
 			isAuctionActive: () => activeAuction?.status === 'active'
 		});
 
@@ -329,7 +345,7 @@
 		<button
 			type="button"
 			onclick={copyCode}
-			class="rounded-[var(--radius)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-4 py-2 text-xl tnum tracking-[0.3em] transition-colors hover:bg-[color:var(--color-surface)]"
+			class="tnum rounded-[var(--radius)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-4 py-2 text-xl tracking-[0.3em] transition-colors hover:bg-[color:var(--color-surface)]"
 			style="font-family: var(--font-mono);"
 			title="Toca per copiar"
 		>
@@ -340,17 +356,21 @@
 				<ConnectionPill status={keepalive.status} />
 			{/if}
 			{#if isReadOnly}
-				<span class="rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-2 py-0.5 text-[10px] uppercase tracking-wider text-[color:var(--color-text-muted)]">
+				<span
+					class="rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-2 py-0.5 text-[10px] tracking-wider text-[color:var(--color-text-muted)] uppercase"
+				>
 					Espectador
 				</span>
 			{/if}
 			{#if room.theme}
-				<span class="text-right text-xs text-[color:var(--color-text-muted)]">{room.theme.display_name}</span>
+				<span class="text-right text-xs text-[color:var(--color-text-muted)]"
+					>{room.theme.display_name}</span
+				>
 			{/if}
 			<button
 				type="button"
 				onclick={toggleMute}
-				class="min-h-[36px] rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-xs uppercase tracking-wider transition-colors hover:bg-[color:var(--color-elevated)]"
+				class="min-h-[36px] rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-xs tracking-wider uppercase transition-colors hover:bg-[color:var(--color-elevated)]"
 				class:text-[color:var(--color-text-muted)]={isMutedState}
 				class:text-[color:var(--color-text)]={!isMutedState}
 				class:line-through={isMutedState}
@@ -364,7 +384,7 @@
 
 	<!-- Members + budgets -->
 	<section class="flex flex-col gap-2">
-		{#each members as member}
+		{#each members as member (member.user_id)}
 			<div
 				class="flex items-center justify-between rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
 			>
@@ -377,29 +397,53 @@
 					></span>
 					<span>{member.profile?.display_name ?? 'Convidat'}</span>
 					{#if member.user_id === room.host_id}
-						<span class="rounded-full bg-[color:var(--color-accent-muted)] px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-[color:var(--color-on-accent)]">host</span>
+						<span
+							class="rounded-full bg-[color:var(--color-accent-muted)] px-1.5 py-0.5 text-[10px] tracking-wider text-[color:var(--color-on-accent)] uppercase"
+							>host</span
+						>
 					{/if}
 				</div>
 				<div class="flex items-center gap-2">
-					<span class="tnum text-[color:var(--color-text-muted)]">{formatCents(member.budget_remaining_cents)}</span>
+					<span class="tnum text-[color:var(--color-text-muted)]"
+						>{formatCents(member.budget_remaining_cents)}</span
+					>
 					{#if isHost && !isReadOnly && member.user_id !== myUserId && room.status !== 'finished'}
 						<details class="relative">
-							<summary class="cursor-pointer list-none rounded px-1.5 py-0.5 text-[color:var(--color-text-faint)] hover:text-[color:var(--color-text)]" aria-label="Accions">⋯</summary>
-							<div class="absolute right-0 top-full z-10 mt-1 flex flex-col rounded-[var(--radius-sm)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] py-1 text-xs shadow">
-								<form method="POST" action="?/transferHost" use:enhance={({ cancel }) => {
-									if (!confirm('Transferir el rol de host a aquest jugador?')) cancel();
-								}}>
+							<summary
+								class="cursor-pointer list-none rounded px-1.5 py-0.5 text-[color:var(--color-text-faint)] hover:text-[color:var(--color-text)]"
+								aria-label="Accions">⋯</summary
+							>
+							<div
+								class="absolute top-full right-0 z-10 mt-1 flex flex-col rounded-[var(--radius-sm)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] py-1 text-xs shadow"
+							>
+								<form
+									method="POST"
+									action="?/transferHost"
+									use:enhance={({ cancel }) => {
+										if (!confirm('Transferir el rol de host a aquest jugador?')) cancel();
+									}}
+								>
 									<input type="hidden" name="user_id" value={member.user_id} />
-									<button type="submit" class="w-full whitespace-nowrap px-3 py-1.5 text-left hover:bg-[color:var(--color-surface)]">
+									<button
+										type="submit"
+										class="w-full px-3 py-1.5 text-left whitespace-nowrap hover:bg-[color:var(--color-surface)]"
+									>
 										Fer host
 									</button>
 								</form>
 								{#if room.status === 'lobby'}
-									<form method="POST" action="?/kickMember" use:enhance={({ cancel }) => {
-										if (!confirm('Fer fora aquest jugador?')) cancel();
-									}}>
+									<form
+										method="POST"
+										action="?/kickMember"
+										use:enhance={({ cancel }) => {
+											if (!confirm('Fer fora aquest jugador?')) cancel();
+										}}
+									>
 										<input type="hidden" name="user_id" value={member.user_id} />
-										<button type="submit" class="w-full whitespace-nowrap px-3 py-1.5 text-left text-[color:var(--color-accent)] hover:bg-[color:var(--color-surface)]">
+										<button
+											type="submit"
+											class="w-full px-3 py-1.5 text-left whitespace-nowrap text-[color:var(--color-accent)] hover:bg-[color:var(--color-surface)]"
+										>
 											Fer fora
 										</button>
 									</form>
@@ -413,7 +457,9 @@
 	</section>
 
 	{#if room.status === 'lobby'}
-		<section class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-6 text-center">
+		<section
+			class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-6 text-center"
+		>
 			<p class="text-sm text-[color:var(--color-text-muted)]">
 				{members.length} jugador{members.length === 1 ? '' : 's'} a la sala. Mínim 2 per a començar.
 			</p>
@@ -442,8 +488,12 @@
 					<p class="mt-2 text-sm text-[color:var(--color-accent)]">{form.startRoom.error}</p>
 				{/if}
 
-				<details class="mt-3 rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-left">
-					<summary class="cursor-pointer text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
+				<details
+					class="mt-3 rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-left"
+				>
+					<summary
+						class="cursor-pointer text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase"
+					>
 						Editar configuració
 					</summary>
 					<form
@@ -452,8 +502,10 @@
 						class="mt-3 flex flex-col gap-2"
 						use:enhance
 					>
-						<label class="flex items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]">
-							<span class="uppercase tracking-wider">Formació</span>
+						<label
+							class="flex items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]"
+						>
+							<span class="tracking-wider uppercase">Formació</span>
 							<select
 								name="formation"
 								class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
@@ -465,8 +517,10 @@
 								<option value="5-3-2">5-3-2</option>
 							</select>
 						</label>
-						<label class="flex items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]">
-							<span class="uppercase tracking-wider">Timer</span>
+						<label
+							class="flex items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]"
+						>
+							<span class="tracking-wider uppercase">Timer</span>
 							<select
 								name="timer"
 								class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
@@ -480,7 +534,7 @@
 						</label>
 						<div class="grid grid-cols-2 gap-2">
 							<label class="flex flex-col gap-1 text-xs text-[color:var(--color-text-muted)]">
-								<span class="uppercase tracking-wider">Jugadors</span>
+								<span class="tracking-wider uppercase">Jugadors</span>
 								<input
 									type="number"
 									name="max_members"
@@ -491,7 +545,7 @@
 								/>
 							</label>
 							<label class="flex flex-col gap-1 text-xs text-[color:var(--color-text-muted)]">
-								<span class="uppercase tracking-wider">Extres</span>
+								<span class="tracking-wider uppercase">Extres</span>
 								<input
 									type="number"
 									name="extras"
@@ -547,7 +601,9 @@
 		</section>
 	{:else if room.status === 'drafting' && activeAuction && activePlayer}
 		<!-- Active auction card -->
-		<section class="rounded-[var(--radius-lg)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] p-5">
+		<section
+			class="rounded-[var(--radius-lg)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] p-5"
+		>
 			<div class="flex items-baseline justify-between gap-3">
 				{#key activeAuction.id}
 					<div in:fly={{ y: 8, duration: 250 }} class="flex items-center gap-3">
@@ -568,17 +624,21 @@
 							</div>
 						{/if}
 						<div>
-							<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">
+							<p class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
 								{activePlayer.primary_position} · #{activeAuction.sequence_number}
 							</p>
-							<h2 class="mt-1 text-xl leading-tight" style="font-family: var(--font-display);">{activePlayer.name}</h2>
+							<h2 class="mt-1 text-xl leading-tight" style="font-family: var(--font-display);">
+								{activePlayer.name}
+							</h2>
 						</div>
 					</div>
 				{/key}
 				<div class="text-right">
-					<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">temps</p>
+					<p class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
+						temps
+					</p>
 					<p
-						class="text-3xl tnum transition-colors"
+						class="tnum text-3xl transition-colors"
 						class:text-[color:var(--color-accent)]={timerLow}
 						class:animate-pulse={timerLow}
 						style="font-family: var(--font-mono);"
@@ -588,19 +648,24 @@
 				</div>
 			</div>
 
-			<div class="mt-4 flex items-baseline justify-between border-t border-[color:var(--color-border)] pt-4">
+			<div
+				class="mt-4 flex items-baseline justify-between border-t border-[color:var(--color-border)] pt-4"
+			>
 				<div>
-					<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">puja actual</p>
+					<p class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
+						puja actual
+					</p>
 					{#if activeAuction.current_bid_cents}
 						<p
-							class="mt-1 text-2xl tnum transition-all duration-300"
+							class="tnum mt-1 text-2xl transition-all duration-300"
 							class:scale-110={bidJustChanged}
 							class:text-[color:var(--color-accent)]={bidJustChanged}
 						>
 							{formatCents(activeAuction.current_bid_cents)}
 						</p>
 						<p class="text-xs text-[color:var(--color-text-muted)]">
-							per {members.find((m) => m.user_id === activeAuction.current_bidder_id)?.profile?.display_name ?? '—'}
+							per {members.find((m) => m.user_id === activeAuction.current_bidder_id)?.profile
+								?.display_name ?? '—'}
 						</p>
 					{:else}
 						<p class="mt-1 text-base text-[color:var(--color-text-muted)]">sense pujades</p>
@@ -608,8 +673,10 @@
 				</div>
 				{#if activePlayer.market_value_cents}
 					<div class="text-right">
-						<p class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">valor</p>
-						<p class="mt-1 text-sm tnum text-[color:var(--color-text-muted)]">
+						<p class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
+							valor
+						</p>
+						<p class="tnum mt-1 text-sm text-[color:var(--color-text-muted)]">
 							{formatCents(activePlayer.market_value_cents)}
 						</p>
 					</div>
@@ -619,66 +686,68 @@
 
 		<!-- Bid form (members only) -->
 		{#if !isReadOnly}
-		<form
-			method="POST"
-			action="?/placeBid"
-			class="flex flex-col gap-3"
-			use:enhance={() => {
-				bidSubmitting = true;
-				return async ({ update }) => {
-					await update();
-					bidSubmitting = false;
-					bidInput = '';
-				};
-			}}
-		>
-			<input type="hidden" name="auction_id" value={activeAuction.id} />
-			<div class="flex gap-2">
-				<button
-					type="button"
-					onclick={() => setBidPreset(minNextBid)}
-					class="flex-1 rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] py-2 text-sm transition-colors hover:bg-[color:var(--color-elevated)]"
-				>
-					Mín ({formatCents(minNextBid)})
-				</button>
-				{#each [5_000_000_00, 10_000_000_00] as bump}
+			<form
+				method="POST"
+				action="?/placeBid"
+				class="flex flex-col gap-3"
+				use:enhance={() => {
+					bidSubmitting = true;
+					return async ({ update }) => {
+						await update();
+						bidSubmitting = false;
+						bidInput = '';
+					};
+				}}
+			>
+				<input type="hidden" name="auction_id" value={activeAuction.id} />
+				<div class="flex gap-2">
 					<button
 						type="button"
-						onclick={() => setBidPreset(minNextBid + bump)}
+						onclick={() => setBidPreset(minNextBid)}
 						class="flex-1 rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] py-2 text-sm transition-colors hover:bg-[color:var(--color-elevated)]"
 					>
-						+{formatCents(bump)}
+						Mín ({formatCents(minNextBid)})
 					</button>
-				{/each}
-			</div>
-			<div class="flex gap-2">
-				<input
-					name="amount"
-					bind:value={bidInput}
-					type="text"
-					inputmode="decimal"
-					placeholder={`mín ${formatCents(minNextBid)}`}
-					class="flex-1 rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-lg outline-none focus:border-[color:var(--color-accent)]"
-					style="font-family: var(--font-mono);"
-				/>
-				<button
-					type="submit"
-					disabled={bidSubmitting || isCurrentBidder}
-					class="rounded-[var(--radius)] bg-[color:var(--color-accent)] px-6 py-3 text-base font-medium text-[color:var(--color-on-accent)] transition-colors hover:bg-[color:var(--color-accent-hover)] disabled:opacity-50"
-				>
-					{bidSubmitting ? '…' : 'Pujar'}
-				</button>
-			</div>
-			{#if form && 'bid' in form && form.bid && 'error' in form.bid}
-				<p class="text-sm text-[color:var(--color-accent)]">{form.bid.error}</p>
-			{/if}
-		</form>
+					{#each [5_000_000_00, 10_000_000_00] as bump (bump)}
+						<button
+							type="button"
+							onclick={() => setBidPreset(minNextBid + bump)}
+							class="flex-1 rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] py-2 text-sm transition-colors hover:bg-[color:var(--color-elevated)]"
+						>
+							+{formatCents(bump)}
+						</button>
+					{/each}
+				</div>
+				<div class="flex gap-2">
+					<input
+						name="amount"
+						bind:value={bidInput}
+						type="text"
+						inputmode="decimal"
+						placeholder={`mín ${formatCents(minNextBid)}`}
+						class="flex-1 rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-lg outline-none focus:border-[color:var(--color-accent)]"
+						style="font-family: var(--font-mono);"
+					/>
+					<button
+						type="submit"
+						disabled={bidSubmitting || isCurrentBidder}
+						class="rounded-[var(--radius)] bg-[color:var(--color-accent)] px-6 py-3 text-base font-medium text-[color:var(--color-on-accent)] transition-colors hover:bg-[color:var(--color-accent-hover)] disabled:opacity-50"
+					>
+						{bidSubmitting ? '…' : 'Pujar'}
+					</button>
+				</div>
+				{#if form && 'bid' in form && form.bid && 'error' in form.bid}
+					<p class="text-sm text-[color:var(--color-accent)]">{form.bid.error}</p>
+				{/if}
+			</form>
 		{/if}
 
 		<!-- Recent bids -->
 		{#if recentBids.length > 0}
 			<section class="flex flex-col gap-1">
-				<h3 class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">historial</h3>
+				<h3 class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
+					historial
+				</h3>
 				<ul class="flex flex-col gap-1">
 					{#each recentBids as bid (bid.id)}
 						<li
@@ -696,12 +765,18 @@
 		<!-- Next up -->
 		{#if upcomingAuctions.length > 0}
 			<section class="flex flex-col gap-1">
-				<h3 class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">següents</h3>
+				<h3 class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
+					següents
+				</h3>
 				<ul class="flex flex-col gap-1">
-					{#each upcomingAuctions as up}
-						<li class="flex justify-between rounded-[var(--radius-sm)] border border-[color:var(--color-border)] px-3 py-1.5 text-sm text-[color:var(--color-text-muted)]">
+					{#each upcomingAuctions as up (up.sequence_number)}
+						<li
+							class="flex justify-between rounded-[var(--radius-sm)] border border-[color:var(--color-border)] px-3 py-1.5 text-sm text-[color:var(--color-text-muted)]"
+						>
 							<span>
-								<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-faint)]">{up.position_slot}</span>
+								<span class="text-xs tracking-wider text-[color:var(--color-text-faint)] uppercase"
+									>{up.position_slot}</span
+								>
 								<span class="ml-2">{up.player_name}</span>
 							</span>
 							<span class="tnum text-xs">#{up.sequence_number}</span>
@@ -737,14 +812,11 @@
 					{/if}
 				</form>
 
-				<form
-					method="POST"
-					action="?/updateSettings"
-					class="flex items-center gap-2"
-					use:enhance
-				>
-					<label class="flex flex-1 items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]">
-						<span class="uppercase tracking-wider">Timer següent</span>
+				<form method="POST" action="?/updateSettings" class="flex items-center gap-2" use:enhance>
+					<label
+						class="flex flex-1 items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]"
+					>
+						<span class="tracking-wider uppercase">Timer següent</span>
 						<select
 							name="timer"
 							value={String(settings.timer_seconds ?? 60)}
@@ -764,7 +836,9 @@
 			</div>
 		{/if}
 	{:else if room.status === 'drafting'}
-		<section class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-6 text-center">
+		<section
+			class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-6 text-center"
+		>
 			<p class="text-sm text-[color:var(--color-text-muted)]">Carregant subhasta…</p>
 		</section>
 	{:else if room.status === 'voting'}
@@ -778,20 +852,27 @@
 
 			<!-- Other members' teams -->
 			<div class="flex flex-col gap-3">
-				{#each otherMembers as member}
+				{#each otherMembers as member (member.user_id)}
 					{@const team = teamsByUser[member.user_id] ?? []}
-					<details class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]">
+					<details
+						class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]"
+					>
 						<summary class="flex cursor-pointer items-center justify-between px-4 py-3 text-sm">
 							<span class="font-medium">{member.profile?.display_name ?? 'Convidat'}</span>
 							<span class="tnum text-[color:var(--color-text-muted)]">
 								{team.length} jug. · {formatCents(teamSpentCents(member.user_id))}
 							</span>
 						</summary>
-						<ul class="flex flex-col gap-1 border-t border-[color:var(--color-border)] px-4 py-3 text-sm">
-							{#each team as p}
+						<ul
+							class="flex flex-col gap-1 border-t border-[color:var(--color-border)] px-4 py-3 text-sm"
+						>
+							{#each team as p (p.auction_id)}
 								<li class="flex items-baseline justify-between gap-3">
 									<span>
-										<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-faint)]">{p.position_slot}</span>
+										<span
+											class="text-xs tracking-wider text-[color:var(--color-text-faint)] uppercase"
+											>{p.position_slot}</span
+										>
 										<span class="ml-2">{p.player_name}</span>
 									</span>
 									<span class="tnum text-xs text-[color:var(--color-text-muted)]">
@@ -806,16 +887,32 @@
 
 			<!-- Vote form (members only) -->
 			{#if isReadOnly}
-				<p class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 text-center text-sm text-[color:var(--color-text-muted)]">
+				<p
+					class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4 text-center text-sm text-[color:var(--color-text-muted)]"
+				>
 					Espectador — esperant que els jugadors votin.
 				</p>
 			{:else if myVote && !editingVote}
-				<div class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4">
+				<div
+					class="rounded-[var(--radius-lg)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] p-4"
+				>
 					<p class="text-sm text-[color:var(--color-text-muted)]">El teu vot:</p>
 					<ol class="mt-2 flex flex-col gap-1 text-sm">
-						<li><span class="tnum">1.</span> {memberName(myVote.rank_1_user_id)} <span class="text-[color:var(--color-text-faint)]">(3 pts)</span></li>
-						{#if myVote.rank_2_user_id}<li><span class="tnum">2.</span> {memberName(myVote.rank_2_user_id)} <span class="text-[color:var(--color-text-faint)]">(2 pts)</span></li>{/if}
-						{#if myVote.rank_3_user_id}<li><span class="tnum">3.</span> {memberName(myVote.rank_3_user_id)} <span class="text-[color:var(--color-text-faint)]">(1 pt)</span></li>{/if}
+						<li>
+							<span class="tnum">1.</span>
+							{memberName(myVote.rank_1_user_id)}
+							<span class="text-[color:var(--color-text-faint)]">(3 pts)</span>
+						</li>
+						{#if myVote.rank_2_user_id}<li>
+								<span class="tnum">2.</span>
+								{memberName(myVote.rank_2_user_id)}
+								<span class="text-[color:var(--color-text-faint)]">(2 pts)</span>
+							</li>{/if}
+						{#if myVote.rank_3_user_id}<li>
+								<span class="tnum">3.</span>
+								{memberName(myVote.rank_3_user_id)}
+								<span class="text-[color:var(--color-text-faint)]">(1 pt)</span>
+							</li>{/if}
 					</ol>
 					<button
 						type="button"
@@ -843,7 +940,9 @@
 					}}
 				>
 					<label class="flex flex-col gap-1">
-						<span class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">Top 1 — 3 pts (obligatori)</span>
+						<span class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase"
+							>Top 1 — 3 pts (obligatori)</span
+						>
 						<select
 							name="rank_1"
 							required
@@ -851,28 +950,32 @@
 							class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
 						>
 							<option value="">— tria —</option>
-							{#each rankOptions(rank1) as m}
+							{#each rankOptions(rank1) as m (m.user_id)}
 								<option value={m.user_id}>{m.profile?.display_name ?? 'Convidat'}</option>
 							{/each}
 						</select>
 					</label>
 
 					<label class="flex flex-col gap-1">
-						<span class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">Top 2 — 2 pts</span>
+						<span class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase"
+							>Top 2 — 2 pts</span
+						>
 						<select
 							name="rank_2"
 							bind:value={rank2}
 							class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
 						>
 							<option value="">— cap —</option>
-							{#each rankOptions(rank2) as m}
+							{#each rankOptions(rank2) as m (m.user_id)}
 								<option value={m.user_id}>{m.profile?.display_name ?? 'Convidat'}</option>
 							{/each}
 						</select>
 					</label>
 
 					<label class="flex flex-col gap-1">
-						<span class="text-xs uppercase tracking-widest text-[color:var(--color-text-faint)]">Top 3 — 1 pt</span>
+						<span class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase"
+							>Top 3 — 1 pt</span
+						>
 						<select
 							name="rank_3"
 							bind:value={rank3}
@@ -880,7 +983,7 @@
 							class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm disabled:opacity-50"
 						>
 							<option value="">— cap —</option>
-							{#each rankOptions(rank3) as m}
+							{#each rankOptions(rank3) as m (m.user_id)}
 								<option value={m.user_id}>{m.profile?.display_name ?? 'Convidat'}</option>
 							{/each}
 						</select>
@@ -930,37 +1033,54 @@
 			</header>
 
 			<ol class="flex flex-col gap-2">
-				{#each podium as row, i}
+				{#each podium as row, i (row.user_id)}
 					<li
 						class="flex items-baseline justify-between rounded-[var(--radius-lg)] border bg-[color:var(--color-surface)] px-4 py-3"
 						class:border-[color:var(--color-accent)]={i === 0}
 						class:border-[color:var(--color-border-strong)]={i !== 0}
 					>
 						<div class="flex items-baseline gap-3">
-							<span class="text-2xl tnum text-[color:var(--color-text-muted)]" style="font-family: var(--font-display);">{i + 1}</span>
+							<span
+								class="tnum text-2xl text-[color:var(--color-text-muted)]"
+								style="font-family: var(--font-display);">{i + 1}</span
+							>
 							<span class="text-lg">{row.display_name}</span>
 						</div>
 						<div class="text-right">
-							<p class="text-xl tnum">{row.points} <span class="text-sm text-[color:var(--color-text-muted)]">pts</span></p>
-							<p class="text-xs text-[color:var(--color-text-faint)]">{row.received} vot{row.received === 1 ? '' : 's'}</p>
+							<p class="tnum text-xl">
+								{row.points} <span class="text-sm text-[color:var(--color-text-muted)]">pts</span>
+							</p>
+							<p class="text-xs text-[color:var(--color-text-faint)]">
+								{row.received} vot{row.received === 1 ? '' : 's'}
+							</p>
 						</div>
 					</li>
 				{/each}
 			</ol>
 
 			<!-- Teams revealed -->
-			<details class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]">
+			<details
+				class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]"
+			>
 				<summary class="cursor-pointer px-4 py-3 text-sm">Veure tots els equips</summary>
 				<div class="flex flex-col gap-4 border-t border-[color:var(--color-border)] px-4 py-3">
-					{#each members as member}
+					{#each members as member (member.user_id)}
 						{@const team = teamsByUser[member.user_id] ?? []}
 						<div>
-							<p class="font-medium">{member.profile?.display_name ?? 'Convidat'} <span class="text-xs text-[color:var(--color-text-faint)]">— {formatCents(teamSpentCents(member.user_id))}</span></p>
+							<p class="font-medium">
+								{member.profile?.display_name ?? 'Convidat'}
+								<span class="text-xs text-[color:var(--color-text-faint)]"
+									>— {formatCents(teamSpentCents(member.user_id))}</span
+								>
+							</p>
 							<ul class="mt-1 flex flex-col gap-0.5 text-sm">
-								{#each team as p}
+								{#each team as p (p.auction_id)}
 									<li class="flex justify-between gap-2">
 										<span>
-											<span class="text-xs uppercase tracking-wider text-[color:var(--color-text-faint)]">{p.position_slot}</span>
+											<span
+												class="text-xs tracking-wider text-[color:var(--color-text-faint)] uppercase"
+												>{p.position_slot}</span
+											>
 											<span class="ml-2">{p.player_name}</span>
 										</span>
 										<span class="tnum text-xs text-[color:var(--color-text-muted)]">
@@ -976,7 +1096,10 @@
 		</section>
 	{/if}
 
-	<a href="/" class="text-center text-sm text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)]">
+	<a
+		href="/"
+		class="text-center text-sm text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)]"
+	>
 		← Tornar al lobby
 	</a>
 </main>

@@ -3,7 +3,13 @@ import type { Actions, PageServerLoad } from './$types';
 import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
 import { advanceAuction, placeBid, startRoom } from '$lib/server/auctionRpc';
 import { castVote, finishVoting } from '$lib/server/votingRpc';
-import { deleteRoom, kickMember, leaveRoom, transferHost, updateRoomSettings } from '$lib/server/rooms';
+import {
+	deleteRoom,
+	kickMember,
+	leaveRoom,
+	transferHost,
+	updateRoomSettings
+} from '$lib/server/rooms';
 import { FORMATION_PRESETS, type FormationPreset } from '$lib/auction/settings';
 import { parseAmountToCents } from '$lib/utils/currency';
 

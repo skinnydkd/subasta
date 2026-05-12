@@ -24,7 +24,7 @@ Make the app feel like a real installed PWA on mobile, and survive the realistic
    - tab hidden then visible
    - network `offline` → `online`
    - realtime channel emits `CHANNEL_ERROR` / `TIMED_OUT`
-   the page re-invalidates data, re-tracks presence, and re-subscribes channels. A small "Reconnectant…" pill shows in the header while any channel is not in `SUBSCRIBED`.
+     the page re-invalidates data, re-tracks presence, and re-subscribes channels. A small "Reconnectant…" pill shows in the header while any channel is not in `SUBSCRIBED`.
 5. While `activeAuction.status === 'active'`, a wake lock is held (silent no-op where unsupported).
 6. No regression: existing `tests/e2e/smoke.test.ts` keeps passing.
 
@@ -57,18 +57,19 @@ A small helper that the room page uses to encapsulate connection lifecycle. Publ
 
 ```ts
 export function createRealtimeKeepalive(opts: {
-  client: SupabaseClient;
-  channels: () => RealtimeChannel[]; // factory; called again on full reset
-  onResync: () => void | Promise<void>; // e.g. invalidateAll
-  isAuctionActive: () => boolean; // for wake lock
+	client: SupabaseClient;
+	channels: () => RealtimeChannel[]; // factory; called again on full reset
+	onResync: () => void | Promise<void>; // e.g. invalidateAll
+	isAuctionActive: () => boolean; // for wake lock
 }): {
-  status: 'connecting' | 'live' | 'reconnecting' | 'offline';
-  start(): void;
-  stop(): void;
+	status: 'connecting' | 'live' | 'reconnecting' | 'offline';
+	start(): void;
+	stop(): void;
 };
 ```
 
 Behavior:
+
 - Holds the channel array. `start()` calls `channels()` once and subscribes all.
 - Listens `window.addEventListener('online' | 'offline' | 'visibilitychange')`.
   - `offline` → status `'offline'`.
@@ -124,6 +125,7 @@ E2E is **not** included for this phase; manual verification on real mobile (iOS 
 ## File changes
 
 New:
+
 - `src/lib/pwa/installPrompt.svelte.ts`
 - `src/lib/pwa/swUpdate.svelte.ts`
 - `src/lib/components/InstallPrompt.svelte`
@@ -134,6 +136,7 @@ New:
 - `src/lib/realtime/keepalive.test.ts`
 
 Edited:
+
 - `src/service-worker.ts` (+ `SKIP_WAITING` handler)
 - `src/routes/+layout.svelte` (+ `UpdateToast`)
 - `src/routes/+page.svelte` (+ `InstallPrompt`)

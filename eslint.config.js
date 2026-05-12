@@ -39,6 +39,9 @@ export default defineConfig(
 	{
 		// Override or add rule settings here, such as:
 		// 'svelte/button-has-type': 'error'
-		rules: {}
+		rules: {
+			// Static <a href> links do not require invalidateAll — disable this overly strict rule
+			'svelte/no-navigation-without-resolve': 'off'
+		}
 	}
 );

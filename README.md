@@ -7,19 +7,19 @@
 ## Com es juga
 
 1. **Crea una sala** o uneix-te amb un codi de 6 caràcters.
-2. **El host configura la partida**: tema (p.ex. *La Liga 25-26* o *Barça històric*), formació (4-3-3, 4-4-2…), jugadors per posició disponibles a la subhasta, tipus de subhasta i durada del timer.
+2. **El host configura la partida**: tema (p.ex. _La Liga 25-26_ o _Barça històric_), formació (4-3-3, 4-4-2…), jugadors per posició disponibles a la subhasta, tipus de subhasta i durada del timer.
 3. **Subhasta lliure amb timer**: es presenta un jugador. Tothom pot pujar; cada puja reinicia el timer (1 min per defecte). Si no hi ha pujes durant el timer, s'adjudica al darrer postor. Si no n'hi ha hagut cap, queda sense adjudicar i passa a la pool de buits.
-4. **Acaparament permès**: pots gastar tot el pressupost en més d'un jugador d'una mateixa posició. Avís: si et quedes sense un porter, l'app te n'assigna automàticament un d'**ofici dolent** de la *scrub pool* del tema.
+4. **Acaparament permès**: pots gastar tot el pressupost en més d'un jugador d'una mateixa posició. Avís: si et quedes sense un porter, l'app te n'assigna automàticament un d'**ofici dolent** de la _scrub pool_ del tema.
 5. **Votació final**: cadascú fa un ranking top-3 dels equips dels altres (3 pts al millor, 2 al segon, 1 al tercer). No pots votar el teu propi equip. Qui més punts sumi guanya.
 
 ## Stack
 
-| Capa     | Tecnologia                                       |
-|----------|--------------------------------------------------|
-| Frontend | SvelteKit 2 (Svelte 5 runes), TS, Tailwind v4    |
-| Backend  | Supabase (Postgres + Realtime + Auth + Storage)  |
-| Deploy   | Cloudflare Pages (`@sveltejs/adapter-cloudflare`)|
-| Tests    | Vitest (unit), Playwright (e2e)                  |
+| Capa     | Tecnologia                                        |
+| -------- | ------------------------------------------------- |
+| Frontend | SvelteKit 2 (Svelte 5 runes), TS, Tailwind v4     |
+| Backend  | Supabase (Postgres + Realtime + Auth + Storage)   |
+| Deploy   | Cloudflare Pages (`@sveltejs/adapter-cloudflare`) |
+| Tests    | Vitest (unit), Playwright (e2e)                   |
 
 ## Setup local
 
@@ -78,15 +78,15 @@ subasta/
 
 ## Roadmap MVP
 
-| Fase | Què                                                                  | Estat |
-|------|----------------------------------------------------------------------|-------|
-| 1    | Scaffolding, schema SQL, CLAUDE.md, README                           | ✅    |
-| 2    | Init SvelteKit + Supabase local + auth + types generats              | ⏳    |
-| 3    | Lobby, room creation, codi de sala, configuració de partida          | ⏳    |
-| 4    | Auction engine `open_timer` + Realtime sync + auto-scrub             | ⏳    |
-| 5    | Votació + resultats + share                                          | ⏳    |
-| 6    | Seed: La Liga 25-26 + Barça/Madrid/Villarreal històrics              | ⏳    |
-| 7    | Polish UI dark mode "no-IA", PWA install, anti-disconnect            | ⏳    |
+| Fase | Què                                                         | Estat |
+| ---- | ----------------------------------------------------------- | ----- |
+| 1    | Scaffolding, schema SQL, CLAUDE.md, README                  | ✅    |
+| 2    | Init SvelteKit + Supabase local + auth + types generats     | ⏳    |
+| 3    | Lobby, room creation, codi de sala, configuració de partida | ⏳    |
+| 4    | Auction engine `open_timer` + Realtime sync + auto-scrub    | ⏳    |
+| 5    | Votació + resultats + share                                 | ⏳    |
+| 6    | Seed: La Liga 25-26 + Barça/Madrid/Villarreal històrics     | ⏳    |
+| 7    | Polish UI dark mode "no-IA", PWA install, anti-disconnect   | ⏳    |
 
 ### v2 (post-MVP)
 

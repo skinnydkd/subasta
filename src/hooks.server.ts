@@ -21,7 +21,8 @@ const supabase: Handle = async ({ event, resolve }) => {
 	};
 
 	return resolve(event, {
-		filterSerializedResponseHeaders: (name) => name === 'content-range' || name === 'x-supabase-api-version'
+		filterSerializedResponseHeaders: (name) =>
+			name === 'content-range' || name === 'x-supabase-api-version'
 	});
 };
 

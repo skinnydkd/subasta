@@ -41,7 +41,10 @@ for (const [name, title] of Object.entries(OVERRIDES)) {
 	const summary = await fetchSummary(title);
 	const url = summary?.thumbnail?.source ?? null;
 	if (url) {
-		const r = await c.query(`update players set photo_url = $1 where name = $2 and photo_url is null`, [url, name]);
+		const r = await c.query(
+			`update players set photo_url = $1 where name = $2 and photo_url is null`,
+			[url, name]
+		);
 		console.log(`  ✓ ${name} → ${title} (${r.rowCount})`);
 		updated += r.rowCount ?? 0;
 	} else {

@@ -62,7 +62,9 @@ function createStore() {
 		dismissed = true;
 		try {
 			localStorage.setItem(DISMISS_KEY, new Date().toISOString());
-		} catch {}
+		} catch {
+			// storage unavailable — ignore
+		}
 	}
 
 	return {

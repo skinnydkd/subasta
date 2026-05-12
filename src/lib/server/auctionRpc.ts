@@ -8,7 +8,10 @@ import type { Database } from '$lib/types/db';
  * away in favour of typed `Database['public']['Functions']` entries.
  */
 
-type RpcAny = (fn: string, args: unknown) => Promise<{ data: unknown; error: { message: string } | null }>;
+type RpcAny = (
+	fn: string,
+	args: unknown
+) => Promise<{ data: unknown; error: { message: string } | null }>;
 
 function rawRpc(supabase: SupabaseClient<Database>): RpcAny {
 	return (supabase.rpc as unknown as RpcAny).bind(supabase);
