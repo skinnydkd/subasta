@@ -1,0 +1,1854 @@
+{
+  "bar1011": {
+    "clubKey": "bar",
+    "clubLabel": "FC Barcelona",
+    "seasonKey": "bar1011",
+    "seasonLabel": "2010-11",
+    "dispTeam": "FC Barcelona 2010-11",
+    "page": "2010–11 FC Barcelona season",
+    "squad": [
+      {
+        "name": "Víctor Valdés",
+        "wiki_title": "Víctor Valdés",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Víctor Valdés Arribas is a Spanish football coach and former professional player who played as a goalkeeper."
+      },
+      {
+        "name": "Dani Alves",
+        "wiki_title": "Dani Alves",
+        "number": 2,
+        "pos_raw": "RB",
+        "mapped": "RB",
+        "refinement": "",
+        "extract": "Daniel Alves da Silva is a Brazilian former professional footballer who played as a right-back. Widely regarded as one of the best full-backs of all time, he is also one of the most decorated players "
+      },
+      {
+        "name": "Gerard Piqué",
+        "wiki_title": "Gerard Piqué",
+        "number": 3,
+        "pos_raw": "CB",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Gerard Piqué Bernabeu is a Spanish former professional footballer who played as a centre-back. He is considered to be one of the greatest defenders of his generation and is one of the most decorated p"
+      },
+      {
+        "name": "Carles Puyol",
+        "wiki_title": "Carles Puyol",
+        "number": 5,
+        "pos_raw": "CB",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Carles Puyol Saforcada is a Spanish former professional footballer who played his entire career for Barcelona. Considered one of the best defenders ever and one of the sport's greatest captains, he ma"
+      },
+      {
+        "name": "Xavi",
+        "wiki_title": "Xavi (footballer, born 1980)",
+        "number": 6,
+        "pos_raw": "CM",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Xavier Hernández Creus, commonly known as Xavi Hernández or simply Xavi, is a Spanish professional football manager and former player who most recently managed La Liga club Barcelona. Widely regarded "
+      },
+      {
+        "name": "David Villa",
+        "wiki_title": "David Villa",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "",
+        "extract": "David Villa Sánchez is a Spanish former professional footballer who played as a striker. Regarded as one of the best strikers of his generation, Villa is the all-time top goalscorer of the Spain natio"
+      },
+      {
+        "name": "Andrés Iniesta",
+        "wiki_title": "Andrés Iniesta",
+        "number": 8,
+        "pos_raw": "CM",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Andrés Iniesta Luján is a Spanish former professional footballer who played as a midfielder and spent most of his career at La Liga club Barcelona. Widely regarded as one of the greatest midfielders o"
+      },
+      {
+        "name": "Bojan",
+        "wiki_title": "Bojan Krkić",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Bojan Krkić Pérez, also known as simply Bojan, is a Spanish former professional footballer who played as a forward or winger."
+      },
+      {
+        "name": "Lionel Messi",
+        "wiki_title": "Lionel Messi",
+        "number": 10,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "forward for",
+        "extract": "Lionel Andrés \"Leo\" Messi is an Argentine professional footballer who plays as a forward for and captains both the Major League Soccer club Inter Miami and the Argentina national team. Widely regarded"
+      },
+      {
+        "name": "Jeffrén",
+        "wiki_title": "Jeffrén Suárez",
+        "number": 11,
+        "pos_raw": "RW",
+        "mapped": "RW",
+        "refinement": "",
+        "extract": "Jeffrén Isaac Suárez Bermúdez, known simply as Jeffrén, is a Venezuelan former professional footballer who played as a forward or a winger."
+      },
+      {
+        "name": "José Manuel Pinto",
+        "wiki_title": "José Manuel Pinto",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "José Manuel Pinto Colorado is a Spanish former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "Javier Mascherano",
+        "wiki_title": "Javier Mascherano",
+        "number": 14,
+        "pos_raw": "DM",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Javier Alejandro Mascherano is an Argentine football manager and former player who was most recently the head coach of Major League Soccer club Inter Miami. As a player, he played as a centre-back or "
+      },
+      {
+        "name": "Seydou Keita",
+        "wiki_title": "Seydou Keita",
+        "number": 15,
+        "pos_raw": "CM",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Seydou Keïta is a Malian former professional footballer. A versatile midfielder, he operated as both a central or defensive midfielder. He is both the record appearance holder and scorer of the Mali n"
+      },
+      {
+        "name": "Sergio Busquets",
+        "wiki_title": "Sergio Busquets",
+        "number": 16,
+        "pos_raw": "DM",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Sergio Busquets Burgos is a Spanish former professional footballer who played as a defensive midfielder and spent most of his career at La Liga club Barcelona. A deep-lying playmaker known for his pas"
+      },
+      {
+        "name": "Pedro",
+        "wiki_title": "Pedro (footballer, born July 1987)",
+        "number": 17,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Serie A club Lazio",
+        "extract": "Pedro Eliezer Rodríguez Ledesma, known as Pedro, is a Spanish professional footballer who plays as a winger for Serie A club Lazio."
+      },
+      {
+        "name": "Gabriel Milito",
+        "wiki_title": "Gabriel Milito",
+        "number": 18,
+        "pos_raw": "CB",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Gabriel Alejandro Milito is an Argentine professional football coach and former player who played as a centre-back. He is currently head coach of Liga MX club Guadalajara."
+      },
+      {
+        "name": "Maxwell",
+        "wiki_title": "Maxwell (footballer, born 1981)",
+        "number": 19,
+        "pos_raw": "LB",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Maxwell Scherrer Cabelino Andrade, known as Maxwell, is a Brazilian former professional footballer who played as a left-back. He is currently employed by Paris Saint-Germain as assistant sporting dire"
+      },
+      {
+        "name": "Ibrahim Afellay",
+        "wiki_title": "Ibrahim Afellay",
+        "number": 20,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Ibrahim Afellay is a Dutch former professional footballer who played as an attacking midfielder or winger. He currently works for Dutch broadcaster NOS as a football pundit."
+      },
+      {
+        "name": "Adriano",
+        "wiki_title": "Adriano (footballer, born 1984)",
+        "number": 21,
+        "pos_raw": "FB",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Adriano Correia Claro, known simply as Adriano, is a Brazilian former professional footballer. One of few players in professional football who are genuinely ambidextrous, he was capable of playing as "
+      },
+      {
+        "name": "Eric Abidal",
+        "wiki_title": "Eric Abidal",
+        "number": 22,
+        "pos_raw": "LB",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Eric Sylvain Abidal is a French former professional footballer who played as a left-back or centre-back."
+      }
+    ]
+  },
+  "bar1415": {
+    "clubKey": "bar",
+    "clubLabel": "FC Barcelona",
+    "seasonKey": "bar1415",
+    "seasonLabel": "2014-15",
+    "dispTeam": "FC Barcelona 2014-15",
+    "page": "2014–15 FC Barcelona season",
+    "squad": [
+      {
+        "name": "Sergi Samper",
+        "wiki_title": "Sergi Samper",
+        "number": 26,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Sergi Samper Montaña is a Spanish professional footballer who plays as a defensive midfielder for Ekstraklasa club Motor Lublin."
+      },
+      {
+        "name": "Adama Traoré",
+        "wiki_title": "Adama Traoré (footballer, born 1996)",
+        "number": 27,
+        "pos_raw": "MF",
+        "mapped": "RW",
+        "refinement": "right winger",
+        "extract": "Adama Traoré Diarra is a Spanish professional footballer who plays as a right winger for Premier League club West Ham United. He has represented Spain internationally at both youth and senior levels, "
+      },
+      {
+        "name": "Álex Grimaldo",
+        "wiki_title": "Álex Grimaldo",
+        "number": 28,
+        "pos_raw": "DF",
+        "mapped": "LW",
+        "refinement": "left wing-back",
+        "extract": "Alejandro \"Álex\" Grimaldo García is a Spanish professional footballer who plays as a left wing-back for Bundesliga club Bayer Leverkusen and the Spain national team."
+      },
+      {
+        "name": "Sandro",
+        "wiki_title": "Sandro Ramírez",
+        "number": 29,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Sandro Ramírez Castillo, known simply as Sandro, is a Spanish professional footballer who plays as a forward for Segunda División club Las Palmas."
+      },
+      {
+        "name": "Alen Halilović",
+        "wiki_title": "Alen Halilović",
+        "number": 30,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Alen Halilović is a Croatian professional footballer who plays as an attacking midfielder for Dutch Eredivisie club Fortuna Sittard."
+      },
+      {
+        "name": "Munir",
+        "wiki_title": "Munir El Haddadi",
+        "number": 31,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "forward or right winger for Esteghlal",
+        "extract": "Munir El Haddadi Mohamed, known simply as Munir, is a professional footballer who plays as a forward or right winger for Esteghlal. Born in Spain, he played for Spain and Morocco at senior internation"
+      },
+      {
+        "name": "Edgar Ié",
+        "wiki_title": "Edgar Ié",
+        "number": 32,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Edgar Miguel Ié is a Bissau-Guinean professional footballer who plays primarily as a central defender but also as a right-back for Liga Portugal 2 club Feirense."
+      },
+      {
+        "name": "Diawandou Diagne",
+        "wiki_title": "Diawandou Diagne",
+        "number": 33,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defensive midfielder",
+        "extract": "Diawandou Diagne Niang is a Senegalese footballer who plays as a defensive midfielder."
+      },
+      {
+        "name": "Fabrice Ondoa",
+        "wiki_title": "Fabrice Ondoa",
+        "number": 34,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Joseph Fabrice Ondoa Ebogo is a Cameroonian professional footballer who plays as a goalkeeper for Macedonian First League club Rabotnički and the Cameroon national team."
+      },
+      {
+        "name": "Gerard Gumbau",
+        "wiki_title": "Gerard Gumbau",
+        "number": 35,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive or central midfielder",
+        "extract": "Gerard Gumbau Garriga is a Spanish professional footballer who plays as a defensive or central midfielder for Rayo Vallecano, on loan from Granada CF."
+      },
+      {
+        "name": "Marc-André ter Stegen",
+        "wiki_title": "Marc-André ter Stegen",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for La Liga club Girona",
+        "extract": "Marc-André ter Stegen is a German professional footballer who plays as a goalkeeper for La Liga club Girona, on loan from Barcelona, and the Germany national team. He is known for his reflexes, passin"
+      },
+      {
+        "name": "Claudio Bravo",
+        "wiki_title": "Claudio Bravo",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Claudio Andrés Bravo Muñoz is a Chilean former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "Jordi Masip",
+        "wiki_title": "Jordi Masip",
+        "number": 25,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Jordi Masip López is a Spanish former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "Martín Montoya",
+        "wiki_title": "Martín Montoya",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back",
+        "extract": "Martín Montoya Torralbo is a Spanish professional footballer who plays as a right-back."
+      },
+      {
+        "name": "Gerard Piqué",
+        "wiki_title": "Gerard Piqué",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Gerard Piqué Bernabeu is a Spanish former professional footballer who played as a centre-back. He is considered to be one of the greatest defenders of his generation and is one of the most decorated p"
+      },
+      {
+        "name": "Javier Mascherano",
+        "wiki_title": "Javier Mascherano",
+        "number": 14,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Javier Alejandro Mascherano is an Argentine football manager and former player who was most recently the head coach of Major League Soccer club Inter Miami. As a player, he played as a centre-back or "
+      },
+      {
+        "name": "Marc Bartra",
+        "wiki_title": "Marc Bartra",
+        "number": 15,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for La Liga club Real Betis",
+        "extract": "Marc Bartra Aregall is a Spanish professional footballer who plays as a centre-back for La Liga club Real Betis."
+      },
+      {
+        "name": "Douglas",
+        "wiki_title": "Douglas (footballer, born August 1990)",
+        "number": 16,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Douglas Pereira dos Santos, simply known as Douglas, is a Brazilian former professional footballer who played as a right-back."
+      },
+      {
+        "name": "Jordi Alba",
+        "wiki_title": "Jordi Alba",
+        "number": 18,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Jordi Alba Ramos is a Spanish former professional footballer who played as a left-back. He is often regarded as one of the best full-backs of his generation."
+      },
+      {
+        "name": "Sergi Roberto",
+        "wiki_title": "Sergi Roberto",
+        "number": 20,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Sergi Roberto Carnicer is a Spanish professional footballer who plays for Serie A club Como. Mainly a central midfielder, he can also operate as a defensive midfielder, full-back or winger."
+      },
+      {
+        "name": "Adriano",
+        "wiki_title": "Adriano (footballer, born 1984)",
+        "number": 21,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Adriano Correia Claro, known simply as Adriano, is a Brazilian former professional footballer. One of few players in professional football who are genuinely ambidextrous, he was capable of playing as "
+      },
+      {
+        "name": "Dani Alves",
+        "wiki_title": "Dani Alves",
+        "number": 22,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Daniel Alves da Silva is a Brazilian former professional footballer who played as a right-back. Widely regarded as one of the best full-backs of all time, he is also one of the most decorated players "
+      },
+      {
+        "name": "Thomas Vermaelen",
+        "wiki_title": "Thomas Vermaelen",
+        "number": 23,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Thomas Vermaelen is a Belgian former professional footballer who played as a defender. Being left-footed, he usually played as a left-sided centre-back and could play at left-back as well. His key att"
+      },
+      {
+        "name": "Jérémy Mathieu",
+        "wiki_title": "Jérémy Mathieu",
+        "number": 24,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Jérémy Mathieu is a French former professional footballer who played as a centre-back or a left-back."
+      },
+      {
+        "name": "Ivan Rakitić",
+        "wiki_title": "Ivan Rakitić",
+        "number": 4,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Ivan Rakitić is a former professional footballer who played as a midfielder. He is currently the technical director of Hajduk Split, the club with whom he ended his playing career."
+      },
+      {
+        "name": "Sergio Busquets",
+        "wiki_title": "Sergio Busquets",
+        "number": 5,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Sergio Busquets Burgos is a Spanish former professional footballer who played as a defensive midfielder and spent most of his career at La Liga club Barcelona. A deep-lying playmaker known for his pas"
+      },
+      {
+        "name": "Xavi",
+        "wiki_title": "Xavi (footballer, born 1980)",
+        "number": 6,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Xavier Hernández Creus, commonly known as Xavi Hernández or simply Xavi, is a Spanish professional football manager and former player who most recently managed La Liga club Barcelona. Widely regarded "
+      },
+      {
+        "name": "Andrés Iniesta",
+        "wiki_title": "Andrés Iniesta",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Andrés Iniesta Luján is a Spanish former professional footballer who played as a midfielder and spent most of his career at La Liga club Barcelona. Widely regarded as one of the greatest midfielders o"
+      },
+      {
+        "name": "Rafinha",
+        "wiki_title": "Rafinha (footballer, born February 1993)",
+        "number": 12,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Rafael Alcântara do Nascimento, commonly known as Rafinha, is a Brazilian former professional footballer who played as a midfielder."
+      },
+      {
+        "name": "Pedro",
+        "wiki_title": "Pedro (footballer, born 1987)",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Serie A club Lazio",
+        "extract": "Pedro Eliezer Rodríguez Ledesma, known as Pedro, is a Spanish professional footballer who plays as a winger for Serie A club Lazio."
+      },
+      {
+        "name": "Luis Suárez",
+        "wiki_title": "Luis Suárez",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Major League Soccer club",
+        "extract": "Luis Alberto Suárez Díaz is a Uruguayan professional footballer who plays as a striker for Major League Soccer club Inter Miami. He is regarded as one of the best players of his generation and one of "
+      },
+      {
+        "name": "Lionel Messi",
+        "wiki_title": "Lionel Messi",
+        "number": 10,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "forward for",
+        "extract": "Lionel Andrés \"Leo\" Messi is an Argentine professional footballer who plays as a forward for and captains both the Major League Soccer club Inter Miami and the Argentina national team. Widely regarded"
+      },
+      {
+        "name": "Neymar",
+        "wiki_title": "Neymar",
+        "number": 11,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "attacking midfielder or a forward",
+        "extract": "Neymar da Silva Santos Júnior, simply known as Neymar Júnior or mononymously as Neymar, is a Brazilian professional footballer who plays as an attacking midfielder or a forward for Campeonato Brasilei"
+      }
+    ]
+  },
+  "rm1314": {
+    "clubKey": "rm",
+    "clubLabel": "Real Madrid",
+    "seasonKey": "rm1314",
+    "seasonLabel": "2013-14",
+    "dispTeam": "Real Madrid 2013-14",
+    "page": "2013–14 Real Madrid CF season",
+    "squad": [
+      {
+        "name": "Iker Casillas",
+        "wiki_title": "Iker Casillas",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Iker Casillas Fernández is a Spanish former professional footballer who played as a goalkeeper and currently works as a football commentator. Dubbed \"San Iker\", he is considered to be one of the great"
+      },
+      {
+        "name": "Raphaël Varane",
+        "wiki_title": "Raphaël Varane",
+        "number": 2,
+        "pos_raw": "CB",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Raphaël Xavier Varane is a French former professional footballer who played as a centre-back."
+      },
+      {
+        "name": "Pepe",
+        "wiki_title": "Pepe (footballer, born 1983)",
+        "number": 3,
+        "pos_raw": "CB",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Kepler Laveran de Lima Ferreira OM, known as Pepe, is a former professional footballer who played as a centre-back. Born in Brazil, he played for the Portugal national team. He is widely regarded as o"
+      },
+      {
+        "name": "Sergio Ramos",
+        "wiki_title": "Sergio Ramos",
+        "number": 4,
+        "pos_raw": "CB",
+        "mapped": "CB",
+        "refinement": "centre-back or right-back",
+        "extract": "Sergio Ramos García is a Spanish professional footballer who plays as a centre-back or right-back. Widely regarded as one of the greatest defenders of all time, he is known for his aerial abilities, p"
+      },
+      {
+        "name": "Fábio Coentrão",
+        "wiki_title": "Fábio Coentrão",
+        "number": 5,
+        "pos_raw": "LB",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Fábio Alexandre da Silva Coentrão is a Portuguese former professional footballer. Mainly a left-back, he also operated as a winger and occasionally as a defensive midfielder."
+      },
+      {
+        "name": "Sami Khedira",
+        "wiki_title": "Sami Khedira",
+        "number": 6,
+        "pos_raw": "DM",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Sami Khedira is a German former professional footballer who played as a central midfielder."
+      },
+      {
+        "name": "Cristiano Ronaldo",
+        "wiki_title": "Cristiano Ronaldo",
+        "number": 7,
+        "pos_raw": "LW",
+        "mapped": "LW",
+        "refinement": "forward for",
+        "extract": "Cristiano Ronaldo dos Santos Aveiro, nicknamed CR7, is a Portuguese professional footballer who plays as a forward for and captains both Saudi Pro League club Al-Nassr and the Portugal national team. "
+      },
+      {
+        "name": "Karim Benzema",
+        "wiki_title": "Karim Benzema",
+        "number": 9,
+        "pos_raw": "ST",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Karim Mostafa Benzema is a French professional footballer who plays as a striker for Saudi Pro League club Al-Hilal. Regarded as one of the greatest strikers of all time, Benzema is a creative forward"
+      },
+      {
+        "name": "Gareth Bale",
+        "wiki_title": "Gareth Bale",
+        "number": 11,
+        "pos_raw": "RW",
+        "mapped": "RW",
+        "refinement": "",
+        "extract": "Gareth Frank Bale is a Welsh former professional footballer who played as a right winger, most notably for Tottenham Hotspur, Real Madrid, and the Wales national team. He is widely regarded as one of "
+      },
+      {
+        "name": "Marcelo",
+        "wiki_title": "Marcelo (footballer, born 1988)",
+        "number": 12,
+        "pos_raw": "LB",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Marcelo Vieira da Silva Júnior, known as Marcelo, is a Brazilian former professional footballer who played as a left-back. Widely regarded as one of the greatest left-backs of all time, he is known fo"
+      },
+      {
+        "name": "Jesús",
+        "wiki_title": "Jesús Fernández Collado",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Jesús Fernández Collado is a Spanish professional footballer who plays as a goalkeeper."
+      },
+      {
+        "name": "Xabi Alonso",
+        "wiki_title": "Xabi Alonso",
+        "number": 14,
+        "pos_raw": "CM",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Xabier Alonso Olano is a Spanish professional football manager and former player who was most recently the head coach of La Liga club Real Madrid. Widely regarded as one of the greatest midfielders of"
+      },
+      {
+        "name": "Dani Carvajal",
+        "wiki_title": "Dani Carvajal",
+        "number": 15,
+        "pos_raw": "RB",
+        "mapped": "RB",
+        "refinement": "right-back for La Liga club Real Madrid",
+        "extract": "Daniel Carvajal Ramos is a Spanish professional footballer who plays as a right-back for La Liga club Real Madrid, which he captains, and the Spain national team."
+      },
+      {
+        "name": "Casemiro",
+        "wiki_title": "Casemiro",
+        "number": 16,
+        "pos_raw": "CM",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Carlos Henrique Casimiro, also known mononymously as Casemiro, is a Brazilian professional footballer who plays as a defensive midfielder for Premier League club Manchester United and the Brazil natio"
+      },
+      {
+        "name": "Álvaro Arbeloa",
+        "wiki_title": "Álvaro Arbeloa",
+        "number": 17,
+        "pos_raw": "RB",
+        "mapped": "RB",
+        "refinement": "",
+        "extract": "Álvaro Arbeloa Coca is a Spanish professional football manager and former footballer who is the head coach of La Liga club Real Madrid. He predominantly played as a right-back, and occasionally on the"
+      },
+      {
+        "name": "Nacho Fernandez",
+        "wiki_title": "Nacho Fernandez",
+        "number": 18,
+        "pos_raw": "CB",
+        "mapped": "CB",
+        "refinement": "defender",
+        "extract": "José Ignacio Fernández Iglesias, known as Nacho or Nacho Fernández, is a Spanish professional footballer who plays as a defender for Saudi Pro League club Al-Qadsiah. Mainly a centre-back, he has also"
+      },
+      {
+        "name": "Luka Modrić",
+        "wiki_title": "Luka Modrić",
+        "number": 19,
+        "pos_raw": "CM",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Luka Modrić is a Croatian professional footballer who plays as a central midfielder for Serie A club AC Milan and captains the Croatia national team. He is widely regarded as one of the greatest midfi"
+      },
+      {
+        "name": "Jesé",
+        "wiki_title": "Jesé",
+        "number": 20,
+        "pos_raw": "LW",
+        "mapped": "LW",
+        "refinement": "",
+        "extract": "Jesé Rodríguez Ruiz is a Spanish professional footballer who plays as winger or forward for Segunda División club Las Palmas."
+      },
+      {
+        "name": "Álvaro Morata",
+        "wiki_title": "Álvaro Morata",
+        "number": 21,
+        "pos_raw": "ST",
+        "mapped": "ST",
+        "refinement": "forward for Serie A club Como",
+        "extract": "Álvaro Borja Morata Martín is a Spanish professional footballer who plays as a forward for Serie A club Como, on loan from AC Milan. He also captains the Spain national team."
+      },
+      {
+        "name": "Ángel Di María",
+        "wiki_title": "Ángel Di María",
+        "number": 22,
+        "pos_raw": "RW",
+        "mapped": "RW",
+        "refinement": "right winger",
+        "extract": "Ángel Fabián Di María is an Argentine professional footballer who plays as a right winger for Argentine Primera División club Rosario Central. Widely regarded as one of the greatest Argentine players "
+      },
+      {
+        "name": "Isco",
+        "wiki_title": "Isco",
+        "number": 23,
+        "pos_raw": "AM",
+        "mapped": "LW",
+        "refinement": "attacking midfielder or left winger",
+        "extract": "Francisco Román Alarcón Suárez, commonly known as Isco, is a Spanish professional footballer who plays as an attacking midfielder or left winger for La Liga club Real Betis, which he captains and the "
+      },
+      {
+        "name": "Asier Illarramendi",
+        "wiki_title": "Asier Illarramendi",
+        "number": 24,
+        "pos_raw": "CM",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Asier Illarramendi \"Illarra\" Andonegi  is a Spanish professional footballer who plays as a defensive midfielder for Hong Kong Premier League club Kitchee."
+      },
+      {
+        "name": "Diego López",
+        "wiki_title": "Diego López Rodríguez",
+        "number": 25,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Diego López Rodríguez is a Spanish former professional footballer who played as a goalkeeper."
+      }
+    ]
+  },
+  "rm1617": {
+    "clubKey": "rm",
+    "clubLabel": "Real Madrid",
+    "seasonKey": "rm1617",
+    "seasonLabel": "2016-17",
+    "dispTeam": "Real Madrid 2016-17",
+    "page": "2016–17 Real Madrid CF season",
+    "squad": [
+      {
+        "name": "Keylor Navas",
+        "wiki_title": "Keylor Navas",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for",
+        "extract": "Keilor Antonio Navas Gamboa, known as Keylor Navas, is a Costa Rican professional footballer who plays as a goalkeeper for and captains Liga MX club UNAM and the Costa Rica national team. He is regard"
+      },
+      {
+        "name": "Dani Carvajal",
+        "wiki_title": "Dani Carvajal",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back for La Liga club Real Madrid",
+        "extract": "Daniel Carvajal Ramos is a Spanish professional footballer who plays as a right-back for La Liga club Real Madrid, which he captains, and the Spain national team."
+      },
+      {
+        "name": "Sergio Ramos",
+        "wiki_title": "Sergio Ramos",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back or right-back",
+        "extract": "Sergio Ramos García is a Spanish professional footballer who plays as a centre-back or right-back. Widely regarded as one of the greatest defenders of all time, he is known for his aerial abilities, p"
+      },
+      {
+        "name": "Raphaël Varane",
+        "wiki_title": "Raphaël Varane",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Raphaël Xavier Varane is a French former professional footballer who played as a centre-back."
+      },
+      {
+        "name": "Nacho",
+        "wiki_title": "Nacho (footballer, born 1990)",
+        "number": 6,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender",
+        "extract": "José Ignacio Fernández Iglesias, known as Nacho or Nacho Fernández, is a Spanish professional footballer who plays as a defender for Saudi Pro League club Al-Qadsiah. Mainly a centre-back, he has also"
+      },
+      {
+        "name": "Marcelo",
+        "wiki_title": "Marcelo (footballer, born 1988)",
+        "number": 12,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Marcelo Vieira da Silva Júnior, known as Marcelo, is a Brazilian former professional footballer who played as a left-back. Widely regarded as one of the greatest left-backs of all time, he is known fo"
+      },
+      {
+        "name": "Toni Kroos",
+        "wiki_title": "Toni Kroos",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Toni Kroos is a German former professional footballer who played as a midfielder. Regarded as one of the greatest midfielders of his generation, he was known for his vision and pinpoint precision pass"
+      },
+      {
+        "name": "Casemiro",
+        "wiki_title": "Casemiro",
+        "number": 14,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Carlos Henrique Casimiro, also known mononymously as Casemiro, is a Brazilian professional footballer who plays as a defensive midfielder for Premier League club Manchester United and the Brazil natio"
+      },
+      {
+        "name": "Luka Modrić",
+        "wiki_title": "Luka Modrić",
+        "number": 19,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Luka Modrić is a Croatian professional footballer who plays as a central midfielder for Serie A club AC Milan and captains the Croatia national team. He is widely regarded as one of the greatest midfi"
+      },
+      {
+        "name": "Cristiano Ronaldo",
+        "wiki_title": "Cristiano Ronaldo",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "forward for",
+        "extract": "Cristiano Ronaldo dos Santos Aveiro, nicknamed CR7, is a Portuguese professional footballer who plays as a forward for and captains both Saudi Pro League club Al-Nassr and the Portugal national team. "
+      },
+      {
+        "name": "Karim Benzema",
+        "wiki_title": "Karim Benzema",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Karim Mostafa Benzema is a French professional footballer who plays as a striker for Saudi Pro League club Al-Hilal. Regarded as one of the greatest strikers of all time, Benzema is a creative forward"
+      },
+      {
+        "name": "Kiko Casilla",
+        "wiki_title": "Kiko Casilla",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Francisco \"Kiko\" Casilla Cortés is a Spanish former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "Mateo Kovačić",
+        "wiki_title": "Mateo Kovačić",
+        "number": 16,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Mateo Kovačić is a professional footballer who plays as a central midfielder for Premier League club Manchester City and the Croatia national team."
+      },
+      {
+        "name": "Isco",
+        "wiki_title": "Isco",
+        "number": 22,
+        "pos_raw": "MF",
+        "mapped": "LW",
+        "refinement": "attacking midfielder or left winger",
+        "extract": "Francisco Román Alarcón Suárez, commonly known as Isco, is a Spanish professional footballer who plays as an attacking midfielder or left winger for La Liga club Real Betis, which he captains and the "
+      },
+      {
+        "name": "Gareth Bale",
+        "wiki_title": "Gareth Bale",
+        "number": 11,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "",
+        "extract": "Gareth Frank Bale is a Welsh former professional footballer who played as a right winger, most notably for Tottenham Hotspur, Real Madrid, and the Wales national team. He is widely regarded as one of "
+      },
+      {
+        "name": "Danilo",
+        "wiki_title": "Danilo (footballer, born July 1991)",
+        "number": 23,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "centre-back or right-back",
+        "extract": "Danilo Luiz da Silva, known as Danilo, is a Brazilian professional footballer who plays as a centre-back or right-back for Campeonato Brasileiro Série A club Flamengo and the Brazil national team."
+      },
+      {
+        "name": "Álvaro Morata",
+        "wiki_title": "Álvaro Morata",
+        "number": 21,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward for Serie A club Como",
+        "extract": "Álvaro Borja Morata Martín is a Spanish professional footballer who plays as a forward for Serie A club Como, on loan from AC Milan. He also captains the Spain national team."
+      },
+      {
+        "name": "Pepe",
+        "wiki_title": "Pepe (footballer, born 1983)",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Kepler Laveran de Lima Ferreira OM, known as Pepe, is a former professional footballer who played as a centre-back. Born in Brazil, he played for the Portugal national team. He is widely regarded as o"
+      },
+      {
+        "name": "James Rodríguez",
+        "wiki_title": "James Rodríguez",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder or winger",
+        "extract": "James David Rodríguez Rubio is a Colombian professional footballer who plays as an attacking midfielder or winger for Major League Soccer club Minnesota United and captains the Colombia national team."
+      },
+      {
+        "name": "Lucas Vázquez",
+        "wiki_title": "Lucas Vázquez",
+        "number": 17,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "right-back or winger",
+        "extract": "Lucas Vázquez Iglesias is a Spanish professional footballer who plays as a right-back or winger for Bundesliga club Bayer Leverkusen."
+      },
+      {
+        "name": "Marco Asensio",
+        "wiki_title": "Marco Asensio",
+        "number": 20,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger or attacking midfielder",
+        "extract": "Marco Asensio Willemsen is a Spanish professional footballer who plays as a winger or attacking midfielder for Süper Lig club Fenerbahçe."
+      },
+      {
+        "name": "Fábio Coentrão",
+        "wiki_title": "Fábio Coentrão",
+        "number": 15,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Fábio Alexandre da Silva Coentrão is a Portuguese former professional footballer. Mainly a left-back, he also operated as a winger and occasionally as a defensive midfielder."
+      },
+      {
+        "name": "Mariano",
+        "wiki_title": "Mariano Díaz",
+        "number": 18,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Mariano Díaz Mejía, better known as Mariano, is a professional footballer who plays as a forward for La Liga club Deportivo Alavés. Born in Spain, he plays for the Dominican Republic national team."
+      },
+      {
+        "name": "Álvaro Tejero",
+        "wiki_title": "Álvaro Tejero",
+        "number": 27,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "full back",
+        "extract": "Álvaro Tejero Sacristán is a Spanish professional footballer who plays as a full back for Super League Greece club Aris."
+      },
+      {
+        "name": "Rubén Yáñez",
+        "wiki_title": "Rubén Yáñez",
+        "number": 25,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Orlando Rubén Yáñez Alabart, known as Rubén Yáñez, is a Spanish professional footballer who plays as a goalkeeper for Sporting de Gijón."
+      },
+      {
+        "name": "Martin Ødegaard",
+        "wiki_title": "Martin Ødegaard",
+        "number": 26,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for",
+        "extract": "Martin Ødegaard is a Norwegian professional footballer who plays as a midfielder for and captains both Premier League club Arsenal and the Norway national team."
+      },
+      {
+        "name": "Enzo Fernández",
+        "wiki_title": "Enzo Zidane",
+        "number": 29,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Enzo Alan Zidane Fernández, known simply as Enzo, is a French former professional footballer who played as a midfielder."
+      }
+    ]
+  },
+  "vil0506": {
+    "clubKey": "vil",
+    "clubLabel": "Villarreal CF",
+    "seasonKey": "vil0506",
+    "seasonLabel": "2005-06",
+    "dispTeam": "Villarreal CF 2005-06",
+    "page": "2005–06 Villarreal CF season",
+    "squad": [
+      {
+        "name": "Javier López Vallejo",
+        "wiki_title": "Javier López Vallejo",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Javier López Vallejo is a Spanish former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "Gonzalo Rodríguez",
+        "wiki_title": "Gonzalo Javier Rodríguez",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Gonzalo Javier Rodríguez Prado is an Argentine former professional footballer who played as a central defender."
+      },
+      {
+        "name": "Rodolfo Arruabarrena",
+        "wiki_title": "Rodolfo Arruabarrena",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Rodolfo Martín Arruabarrena is an Argentine professional football manager and former player, who was recently the manager of the Saudi Pro League club Al-Taawoun. A left-back, he spent most of his car"
+      },
+      {
+        "name": "César Arzo Amposta",
+        "wiki_title": "César Arzo Amposta",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "César Arzo Amposta is a Spanish retired footballer who played as a central defender."
+      },
+      {
+        "name": "Diego Forlán",
+        "wiki_title": "Diego Forlán",
+        "number": 5,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Diego Forlán Corazo is a Uruguayan football manager and a former player, who played as a forward, and last served as head coach for Uruguayan Segunda División club Club Atlético Atenas. Widely regarde"
+      },
+      {
+        "name": "Josico",
+        "wiki_title": "Josico",
+        "number": 6,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "José Joaquín Moreno Verdú, known as Josico, is a Spanish former footballer who played as a defensive midfielder, currently a manager."
+      },
+      {
+        "name": "Antonio Guayre",
+        "wiki_title": "Antonio Guayre",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Antonio Guayre Betancor Perdomo, known as Guayre, is a Spanish former professional footballer. Comfortable in various attacking positions – mainly winger – his professional career was constantly hinde"
+      },
+      {
+        "name": "Juan Román Riquelme",
+        "wiki_title": "Juan Román Riquelme",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Juan Román Riquelme is an Argentine former professional footballer and current president of Boca Juniors. Known for his elegant playing style, passing, vision, creativity, free-kick technique, and bal"
+      },
+      {
+        "name": "Guillermo Franco",
+        "wiki_title": "Guillermo Franco",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Guillermo \"Guille\" Luis Franco Farquarson is a former professional footballer who played as a striker. Born and raised in Argentina, he played for the Mexico national team."
+      },
+      {
+        "name": "Roger",
+        "wiki_title": "Roger García Junyent",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Roger García Junyent, known simply as Roger, is a Spanish former footballer who played mostly as a left midfielder. He possessed a strong shot, and was known for his passing ability."
+      },
+      {
+        "name": "Javier Calleja",
+        "wiki_title": "Javier Calleja",
+        "number": 11,
+        "pos_raw": "MF",
+        "mapped": "RW",
+        "refinement": "",
+        "extract": "Javier Calleja Revilla is a Spanish former professional footballer who played mainly as a left midfielder. He is a current manager."
+      },
+      {
+        "name": "Juan Pablo Sorín",
+        "wiki_title": "Juan Pablo Sorín",
+        "number": 12,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Juan Pablo Sorín is an Argentine former footballer and current sports broadcaster, who played as a left-back or left midfielder. He had a successful club career in his native Argentina with River Plat"
+      },
+      {
+        "name": "Sebastián Viera",
+        "wiki_title": "Sebastián Viera",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Mario Sebastián Viera Galaín is a Uruguayan former professional footballer who played as a goalkeeper, currently a manager."
+      },
+      {
+        "name": "Héctor Font",
+        "wiki_title": "Héctor Font",
+        "number": 14,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Héctor Font Romero is a Spanish former professional footballer who played as an attacking midfielder."
+      },
+      {
+        "name": "Quique Álvarez",
+        "wiki_title": "Quique Álvarez",
+        "number": 16,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Enrique \"Quique\" Álvarez Sanjuán is a Spanish retired footballer who played as a central defender, currently manager of Girona FC B."
+      },
+      {
+        "name": "Javi Venta",
+        "wiki_title": "Javi Venta",
+        "number": 17,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Javier 'Javi' Rodríguez Venta is a Spanish former professional footballer who played as a right-back."
+      },
+      {
+        "name": "Alessio Tacchinardi",
+        "wiki_title": "Alessio Tacchinardi",
+        "number": 18,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Alessio Tacchinardi is an Italian football manager and former footballer who played as a defensive midfielder, last in charge as head coach of Lecco."
+      },
+      {
+        "name": "Marcos Senna",
+        "wiki_title": "Marcos Senna",
+        "number": 19,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Marcos Antônio Senna da Silva, known as Marcos Senna, is a former professional footballer who played as a defensive midfielder. He was known for his passing range and long-range shooting and was also "
+      },
+      {
+        "name": "Santi Cazorla",
+        "wiki_title": "Santi Cazorla",
+        "number": 21,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "winger",
+        "extract": "Santiago Cazorla González is a Spanish professional footballer who plays for and captains La Liga club Oviedo. A former Spanish international, Cazorla operates primarily as an attacking midfielder, bu"
+      },
+      {
+        "name": "Juan Manuel Peña",
+        "wiki_title": "Juan Manuel Peña",
+        "number": 22,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Juan Manuel Peña Montaño is a Bolivian former professional footballer who played as a centre-back."
+      },
+      {
+        "name": "José Mari",
+        "wiki_title": "José Mari (footballer, born 1978)",
+        "number": 23,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "José María Romero Poyón, known as José Mari, is a Spanish former professional footballer who played as a forward."
+      },
+      {
+        "name": "Josemi",
+        "wiki_title": "Josemi",
+        "number": 24,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "José Miguel González Rey, known as Josemi, is a Spanish former footballer. Mainly a right back, he also played as a central defender."
+      },
+      {
+        "name": "Mariano Barbosa",
+        "wiki_title": "Mariano Barbosa",
+        "number": 25,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Mariano Damián Barbosa is an Argentine former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "Xisco Nadal",
+        "wiki_title": "Xisco Nadal",
+        "number": 26,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Francisco Sebastián Nadal Martorell, commonly known as Xisco Nadal, is a Spanish former professional footballer who played mainly as a forward."
+      },
+      {
+        "name": "Jony",
+        "wiki_title": "Jony",
+        "number": 29,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Jony is a masculine given name or nickname and a surname. Notable people with the name include:Jony (real name — Jahid Afrail oglu Huseynli, Azerbaijani-born Russian singer and songwriter\nJony Fragnol"
+      },
+      {
+        "name": "Carlos Alcántara",
+        "wiki_title": "Carlos Alcántara (footballer)",
+        "number": 30,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Carlos Alcántara Cuevas is a Spanish footballer who plays for CAP Ciudad de Murcia as a left-back."
+      },
+      {
+        "name": "Juan Carlos",
+        "wiki_title": "Juan Carlos Sánchez Martínez",
+        "number": 31,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Juan Carlos Sánchez Martínez, known as Juan Carlos, is a Spanish professional footballer who plays as a goalkeeper."
+      },
+      {
+        "name": "Javi Rubio",
+        "wiki_title": "Javi Rubio (footballer, born 1984)",
+        "number": 32,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "José Javier 'Javi' Rubio Gómez is a Spanish former footballer who played as a midfielder."
+      },
+      {
+        "name": "Nino",
+        "wiki_title": "Nino (footballer, born 1983)",
+        "number": 35,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Constantino Ibarra Navarro, commonly known as Nino, is a Spanish retired footballer who played as a central defender, and is the technical secretary of CD Ciudad de Baza."
+      },
+      {
+        "name": "Óscar López",
+        "wiki_title": "Óscar López (footballer, born 1984)",
+        "number": 36,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Óscar López Martínez is a Spanish former footballer who played as a central defender."
+      },
+      {
+        "name": "Marquitos",
+        "wiki_title": "Marcos García Barreno",
+        "number": 44,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Marcos García Barreno, known as Marquitos, is a Spanish professional footballer who plays for Ibiza Islas Pitiusas as a midfielder."
+      },
+      {
+        "name": "David Fuster",
+        "wiki_title": "David Fuster",
+        "number": 46,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "David Fuster Torrijos is a Spanish former professional footballer who played as an attacking midfielder."
+      },
+      {
+        "name": "Luciano Figueroa",
+        "wiki_title": "Luciano Figueroa",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Luciano Gabriel \"Lucho\" Figueroa Herrera is an Argentine former professional footballer who played as a striker."
+      },
+      {
+        "name": "Jan Kromkamp",
+        "wiki_title": "Jan Kromkamp",
+        "number": 15,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Jan Kromkamp is a Dutch former professional footballer who played as a right-back. He manages CSV Apeldoorn."
+      },
+      {
+        "name": "Luis Antonio Valencia",
+        "wiki_title": "Luis Antonio Valencia",
+        "number": 20,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Luis Antonio Valencia Mosquera, known as Antonio Valencia, is an Ecuadorian former professional footballer who played primarily as a right-sided player throughout his career, initially as a right wing"
+      }
+    ]
+  },
+  "vil0708": {
+    "clubKey": "vil",
+    "clubLabel": "Villarreal CF",
+    "seasonKey": "vil0708",
+    "seasonLabel": "2007-08",
+    "dispTeam": "Villarreal CF 2007-08",
+    "page": "2007–08 Villarreal CF season",
+    "squad": [
+      {
+        "name": "Sebastián Viera",
+        "wiki_title": "Sebastián Viera",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Mario Sebastián Viera Galaín is a Uruguayan former professional footballer who played as a goalkeeper, currently a manager."
+      },
+      {
+        "name": "Gonzalo Rodríguez",
+        "wiki_title": "Gonzalo Javier Rodríguez",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Gonzalo Javier Rodríguez Prado is an Argentine former professional footballer who played as a central defender."
+      },
+      {
+        "name": "Josemi",
+        "wiki_title": "Josemi",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "José Miguel González Rey, known as Josemi, is a Spanish former footballer. Mainly a right back, he also played as a central defender."
+      },
+      {
+        "name": "Diego Godín",
+        "wiki_title": "Diego Godín",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Diego Roberto Godín Leal is a Uruguayan former professional footballer who played as a centre-back."
+      },
+      {
+        "name": "Joan Capdevila",
+        "wiki_title": "Joan Capdevila",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Joan Capdevila Méndez is a Spanish former professional footballer who played as a left-back."
+      },
+      {
+        "name": "Josico",
+        "wiki_title": "Josico",
+        "number": 6,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "José Joaquín Moreno Verdú, known as Josico, is a Spanish former footballer who played as a defensive midfielder, currently a manager."
+      },
+      {
+        "name": "Robert Pires",
+        "wiki_title": "Robert Pires",
+        "number": 7,
+        "pos_raw": "MF",
+        "mapped": "LW",
+        "refinement": "",
+        "extract": "Robert Emmanuel Pires is a French former professional footballer. He is widely regarded as one of Arsenal's greatest ever players and considered by some to be one of the best wingers in the history of"
+      },
+      {
+        "name": "Santi Cazorla",
+        "wiki_title": "Santi Cazorla",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "winger",
+        "extract": "Santiago Cazorla González is a Spanish professional footballer who plays for and captains La Liga club Oviedo. A former Spanish international, Cazorla operates primarily as an attacking midfielder, bu"
+      },
+      {
+        "name": "Guillermo Franco",
+        "wiki_title": "Guillermo Franco",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Guillermo \"Guille\" Luis Franco Farquarson is a former professional footballer who played as a striker. Born and raised in Argentina, he played for the Mexico national team."
+      },
+      {
+        "name": "Cani",
+        "wiki_title": "Rubén Gracia",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Rubén Gracia Calmache, known as Cani, is a Spanish former professional footballer. Usually a right midfielder, he also played on the left."
+      },
+      {
+        "name": "Jon Dahl Tomasson",
+        "wiki_title": "Jon Dahl Tomasson",
+        "number": 11,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Jon Dahl Tomasson is a Danish football manager and former player. He was most recently manager of the Sweden national team."
+      },
+      {
+        "name": "Pascal Cygan",
+        "wiki_title": "Pascal Cygan",
+        "number": 12,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back",
+        "extract": "Pascal Édouard Cygan is a French former professional footballer. His favoured position was central defender, but he could also play as a left-back."
+      },
+      {
+        "name": "Diego López",
+        "wiki_title": "Diego López Rodríguez",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Diego López Rodríguez is a Spanish former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "Matías Fernández",
+        "wiki_title": "Matías Fernández (footballer, born 1986)",
+        "number": 14,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Matías Ariel Fernández Fernández is a Chilean former professional footballer who played as an attacking midfielder. He was known for his dribbling skills, also being a free kick specialist."
+      },
+      {
+        "name": "Nihat Kahveci",
+        "wiki_title": "Nihat Kahveci",
+        "number": 15,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Nihat Kahveci, better known mononymously as Nihat, is a Turkish former professional footballer who played as a forward and right winger for Beşiktaş, Real Sociedad and Villarreal. He works as a footba"
+      },
+      {
+        "name": "Javi Venta",
+        "wiki_title": "Javi Venta",
+        "number": 17,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Javier 'Javi' Rodríguez Venta is a Spanish former professional footballer who played as a right-back."
+      },
+      {
+        "name": "Ángel",
+        "wiki_title": "Ángel López (footballer, born 1981)",
+        "number": 18,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "right midfielder",
+        "extract": "Ángel Domingo López Ruano, known simply as Ángel, is a Spanish former professional footballer. An attacking right-back, he could also play as a right midfielder."
+      },
+      {
+        "name": "Marcos Senna",
+        "wiki_title": "Marcos Senna",
+        "number": 19,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Marcos Antônio Senna da Silva, known as Marcos Senna, is a former professional footballer who played as a defensive midfielder. He was known for his passing range and long-range shooting and was also "
+      },
+      {
+        "name": "Fabricio Fuentes",
+        "wiki_title": "Fabricio Fuentes",
+        "number": 20,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Fabricio Fabio Fuentes is an Argentine retired footballer who played as a central defender."
+      },
+      {
+        "name": "Bruno",
+        "wiki_title": "Bruno Soriano",
+        "number": 21,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Bruno Soriano Llido is a Spanish former professional footballer who played as a defensive midfielder."
+      },
+      {
+        "name": "Giuseppe Rossi",
+        "wiki_title": "Giuseppe Rossi",
+        "number": 22,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Giuseppe Rossi is a former professional footballer who played as a forward. Born in the United States, he represented the Italy national team. He is the current Head of Soccer and Vice Chairman of USL"
+      },
+      {
+        "name": "Sebastián Eguren",
+        "wiki_title": "Sebastián Eguren",
+        "number": 23,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Sebastián Eguren Ledesma is a Uruguayan football manager and former player who played mainly as a defensive midfielder."
+      },
+      {
+        "name": "Juan Carlos",
+        "wiki_title": "Juan Carlos Sánchez Martínez",
+        "number": 26,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Juan Carlos Sánchez Martínez, known as Juan Carlos, is a Spanish professional footballer who plays as a goalkeeper."
+      },
+      {
+        "name": "Alberto de la Bella",
+        "wiki_title": "Alberto de la Bella",
+        "number": 27,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Alberto de la Bella Madueño is a Spanish former professional footballer who played as a left-back."
+      },
+      {
+        "name": "Kiko",
+        "wiki_title": "Francisco José Olivas",
+        "number": 28,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "central defender",
+        "extract": "Francisco José Olivas Alba, known as Kiko, is a Spanish professional footballer who plays as a central defender."
+      },
+      {
+        "name": "Rocha",
+        "wiki_title": "Rocha",
+        "number": 38,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": ""
+      },
+      {
+        "name": "Feliciano Condesso",
+        "wiki_title": "Feliciano Condesso",
+        "number": 44,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": ""
+      },
+      {
+        "name": "Rubén",
+        "wiki_title": "Rubén",
+        "number": 45,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Reuben or Reuven is a Biblical male first name from Hebrew רְאוּבֵן (Re'uven), meaning \"behold, a son\". In the Bible, Reuben was the firstborn son of Jacob."
+      },
+      {
+        "name": "Juan Román Riquelme",
+        "wiki_title": "Juan Román Riquelme",
+        "number": 16,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Juan Román Riquelme is an Argentine former professional footballer and current president of Boca Juniors. Known for his elegant playing style, passing, vision, creativity, free-kick technique, and bal"
+      },
+      {
+        "name": "José Mari",
+        "wiki_title": "José Mari (footballer, born 1978)",
+        "number": 23,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "José María Romero Poyón, known as José Mari, is a Spanish former professional footballer who played as a forward."
+      },
+      {
+        "name": "Rio Mavuba",
+        "wiki_title": "Rio Mavuba",
+        "number": 24,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Rio Antonio Zoba Mavuba is a French manager and former player who is manager of Championnat National 2 club Bordeaux."
+      },
+      {
+        "name": "Xisco Nadal",
+        "wiki_title": "Xisco Nadal",
+        "number": 30,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Francisco Sebastián Nadal Martorell, commonly known as Xisco Nadal, is a Spanish former professional footballer who played mainly as a forward."
+      }
+    ]
+  },
+  "vil1011": {
+    "clubKey": "vil",
+    "clubLabel": "Villarreal CF",
+    "seasonKey": "vil1011",
+    "seasonLabel": "2010-11",
+    "dispTeam": "Villarreal CF 2010-11",
+    "page": "2010–11 Villarreal CF season",
+    "squad": [
+      {
+        "name": "Xavi Oliva",
+        "wiki_title": "Javier Oliva González",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Javier \"Xavi\" Oliva González is a Spanish retired footballer who played as a goalkeeper who works as an assistant manager for MC Oran."
+      },
+      {
+        "name": "Gonzalo Rodríguez",
+        "wiki_title": "Gonzalo Javier Rodríguez",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Gonzalo Javier Rodríguez Prado is an Argentine former professional footballer who played as a central defender."
+      },
+      {
+        "name": "Joan Oriol",
+        "wiki_title": "Joan Oriol",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Joan Oriol Gràcia is a Spanish former professional footballer who played as a left-back. He is the manager of the Juvenil A squad of Gimnàstic de Tarragona."
+      },
+      {
+        "name": "Mateo Musacchio",
+        "wiki_title": "Mateo Musacchio",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Mateo Pablo Musacchio is an Argentine former professional footballer who played as a central defender."
+      },
+      {
+        "name": "Carlos Marchena",
+        "wiki_title": "Carlos Marchena",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Carlos Marchena López is a Spanish former professional footballer. Mainly a central defender with an aggressive approach, he also played as a defensive midfielder."
+      },
+      {
+        "name": "Ángel López",
+        "wiki_title": "Ángel López (footballer, born 1981)",
+        "number": 6,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "right midfielder",
+        "extract": "Ángel Domingo López Ruano, known simply as Ángel, is a Spanish former professional footballer. An attacking right-back, he could also play as a right midfielder."
+      },
+      {
+        "name": "Nilmar",
+        "wiki_title": "Nilmar Honorato da Silva",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Nilmar Honorato da Silva, commonly known as Nilmar, is a Brazilian former professional footballer who played as a striker."
+      },
+      {
+        "name": "Santi Cazorla",
+        "wiki_title": "Santi Cazorla",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "winger",
+        "extract": "Santiago Cazorla González is a Spanish professional footballer who plays for and captains La Liga club Oviedo. A former Spanish international, Cazorla operates primarily as an attacking midfielder, bu"
+      },
+      {
+        "name": "Marco Ruben",
+        "wiki_title": "Marco Ruben",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Marco Gastón Ruben Rodríguez is an Argentine professional footballer who plays for Rosario Central as a striker."
+      },
+      {
+        "name": "Cani",
+        "wiki_title": "Rubén Gracia",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Rubén Gracia Calmache, known as Cani, is a Spanish former professional footballer. Usually a right midfielder, he also played on the left."
+      },
+      {
+        "name": "Joan Capdevila",
+        "wiki_title": "Joan Capdevila",
+        "number": 11,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Joan Capdevila Méndez is a Spanish former professional footballer who played as a left-back."
+      },
+      {
+        "name": "Diego López",
+        "wiki_title": "Diego López Rodríguez",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Diego López Rodríguez is a Spanish former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "José Catalá",
+        "wiki_title": "José Catalá",
+        "number": 15,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "José Manuel Catalá Mazuecos is a Spanish former professional footballer who played as a central defender or a left-back."
+      },
+      {
+        "name": "Javier Matilla",
+        "wiki_title": "Javier Matilla",
+        "number": 17,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Javier Magro Matilla is a Spanish professional footballer who plays as a central midfielder for Super League Greece 2 club Athens Kallithea."
+      },
+      {
+        "name": "Marcos Senna",
+        "wiki_title": "Marcos Senna",
+        "number": 19,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Marcos Antônio Senna da Silva, known as Marcos Senna, is a former professional footballer who played as a defensive midfielder. He was known for his passing range and long-range shooting and was also "
+      },
+      {
+        "name": "Borja Valero",
+        "wiki_title": "Borja Valero",
+        "number": 20,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Borja Valero Iglesias is a Spanish former professional footballer who played as a midfielder."
+      },
+      {
+        "name": "Bruno Soriano",
+        "wiki_title": "Bruno Soriano",
+        "number": 21,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Bruno Soriano Llido is a Spanish former professional footballer who played as a defensive midfielder."
+      },
+      {
+        "name": "Giuseppe Rossi",
+        "wiki_title": "Giuseppe Rossi",
+        "number": 22,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Giuseppe Rossi is a former professional footballer who played as a forward. Born in the United States, he represented the Italy national team. He is the current Head of Soccer and Vice Chairman of USL"
+      },
+      {
+        "name": "Cicinho",
+        "wiki_title": "Cicinho",
+        "number": 24,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Cícero João de Cézare, nicknamed Cicinho, is a Brazilian retired professional footballer who played as a right back."
+      },
+      {
+        "name": "Juan Carlos",
+        "wiki_title": "Juan Carlos Sánchez Martínez",
+        "number": 25,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Juan Carlos Sánchez Martínez, known as Juan Carlos, is a Spanish professional footballer who plays as a goalkeeper."
+      },
+      {
+        "name": "Kiko",
+        "wiki_title": "Francisco José Olivas",
+        "number": 26,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "central defender",
+        "extract": "Francisco José Olivas Alba, known as Kiko, is a Spanish professional footballer who plays as a central defender."
+      },
+      {
+        "name": "Mario Gaspar",
+        "wiki_title": "Mario Gaspar Pérez",
+        "number": 27,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back",
+        "extract": "Mario Gaspar Pérez Martínez is a Spanish professional footballer who plays as a right-back."
+      },
+      {
+        "name": "Marcos Gullón",
+        "wiki_title": "Marcos Gullón",
+        "number": 32,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Marcos Gullón Ferrera is a Spanish former professional footballer who played as a midfielder."
+      },
+      {
+        "name": "Diego Mariño",
+        "wiki_title": "Diego Mariño",
+        "number": 35,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Diego Mariño Villar is a Spanish professional footballer who plays as a goalkeeper for Albacete Balompié."
+      },
+      {
+        "name": "Iago Falqué",
+        "wiki_title": "Iago Falqué Silva",
+        "number": 37,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Iago Falque Silva is a Spanish professional footballer who plays as a forward."
+      },
+      {
+        "name": "Nicki Bille Nielsen",
+        "wiki_title": "Nicki Bille Nielsen",
+        "number": 42,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Nicki Niels Bille Nielsen is a Danish former professional footballer who played as a forward."
+      },
+      {
+        "name": "Wakaso Mubarak",
+        "wiki_title": "Wakaso Mubarak",
+        "number": 43,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Mubarak Wakaso is a Ghanaian former professional footballer who played as a midfielder."
+      },
+      {
+        "name": "Cristóbal Márquez",
+        "wiki_title": "Cristóbal Márquez Crespo",
+        "number": null,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Cristóbal Márquez Crespo, known simply as Cristóbal, is a Spanish professional footballer who plays as a midfielder."
+      }
+    ]
+  }
+}
