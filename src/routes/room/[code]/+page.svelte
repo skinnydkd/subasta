@@ -774,6 +774,58 @@
 			</form>
 		{/if}
 
+		<!-- My team so far (during drafting). Helps decide whether to bid. -->
+		{#if !isReadOnly && myUserId}
+			{@const myTeam = teamsByUser[myUserId] ?? []}
+			{@const myByPos = teamByPosition(myTeam)}
+			<details
+				class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]"
+			>
+				<summary class="flex cursor-pointer items-baseline justify-between px-4 py-2 text-sm">
+					<span class="font-medium">El meu equip</span>
+					<span class="tnum text-xs text-[color:var(--color-text-muted)]">
+						{myTeam.length} jug · {formatCents(teamSpentCents(myUserId))}
+					</span>
+				</summary>
+				{#if myTeam.length === 0}
+					<p class="border-t border-[color:var(--color-border)] px-4 py-3 text-xs text-[color:var(--color-text-muted)]">
+						Encara no has guanyat cap subhasta.
+					</p>
+				{:else}
+					<div class="border-t border-[color:var(--color-border)] px-4 py-3 text-sm">
+						{#each FORMATION_ROWS as row (row.label)}
+							{@const playersInRow = row.positions.flatMap((pos) => myByPos[pos] ?? [])}
+							{#if playersInRow.length > 0}
+								<div class="mb-2 last:mb-0">
+									<p
+										class="mb-1 text-[10px] tracking-widest text-[color:var(--color-text-faint)] uppercase"
+									>
+										{row.label}
+									</p>
+									<ul class="flex flex-col gap-0.5">
+										{#each playersInRow as p (p.auction_id)}
+											<li class="flex justify-between gap-2">
+												<span>
+													<span
+														class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-[10px] font-semibold tracking-wider text-[color:var(--color-on-accent)] uppercase"
+														>{p.position_slot}</span
+													>
+													<span class="ml-2">{p.player_name}</span>
+												</span>
+												<span class="tnum text-xs text-[color:var(--color-text-muted)]">
+													{p.final_price_cents ? formatCents(p.final_price_cents) : 'auto'}
+												</span>
+											</li>
+										{/each}
+									</ul>
+								</div>
+							{/if}
+						{/each}
+					</div>
+				{/if}
+			</details>
+		{/if}
+
 		<!-- Recent bids -->
 		{#if recentBids.length > 0}
 			<section class="flex flex-col gap-1">
