@@ -17,7 +17,7 @@
 		"test:e2e": "playwright install && playwright test",
 		"db:push": "supabase db push",
 		"db:types": "node scripts/gen-types.mjs",
-		"db:seed": "node scripts/run-sql.mjs supabase/seed/01_dev_theme.sql supabase/seed/02_dev_players.sql supabase/seed/03_dev_scrubs.sql supabase/seed/04_real_laliga_25_26.sql supabase/seed/05_real_barca_0809.sql supabase/seed/06_real_madrid_0203.sql supabase/seed/07_real_barca_historic.sql supabase/seed/08_real_madrid_historic.sql supabase/seed/09_real_villarreal_historic.sql supabase/seed/10_historic_themes.sql"
+		"db:seed": "node scripts/run-sql.mjs supabase/seed/01_dev_theme.sql supabase/seed/02_dev_players.sql supabase/seed/03_dev_scrubs.sql supabase/seed/04_real_laliga_25_26.sql supabase/seed/05_real_barca_0809.sql supabase/seed/06_real_madrid_0203.sql supabase/seed/07_real_barca_historic.sql supabase/seed/08_real_madrid_historic.sql supabase/seed/09_real_villarreal_historic.sql supabase/seed/10_historic_themes.sql supabase/seed/11_real_ucl_2526.sql supabase/seed/12_real_ucl_historic.sql supabase/seed/13_ucl_themes.sql"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^2.0.4",

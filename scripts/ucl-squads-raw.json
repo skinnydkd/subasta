@@ -1,0 +1,3947 @@
+{
+  "mancity2526": {
+    "key": "mancity2526",
+    "label": "Manchester City 2025-26",
+    "page": "Manchester City F.C.",
+    "team": "Manchester City 2025-26",
+    "tagSlug": "mancity-25-26",
+    "era": "current",
+    "squad": [
+      {
+        "name": "James Trafford",
+        "wiki_title": "James Trafford",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "James Harrington Trafford is an English professional footballer who plays as a goalkeeper for Premier League club Manchester City and the England national team."
+      },
+      {
+        "name": "Rúben Dias",
+        "wiki_title": "Rúben Dias",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Rúben dos Santos Gato Alves Dias is a Portuguese professional footballer who plays as a centre-back for Premier League club Manchester City and the Portugal national team. He is re"
+      },
+      {
+        "name": "Tijjani Reijnders",
+        "wiki_title": "Tijjani Reijnders",
+        "number": 4,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Tijjani Martinus Jan Reijnders  is a Dutch professional footballer who plays as a midfielder for Premier League club Manchester City and the Netherlands national team."
+      },
+      {
+        "name": "John Stones",
+        "wiki_title": "John Stones",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back or defensive midfielder",
+        "extract": "John Stones is an English professional footballer who plays as a centre-back or defensive midfielder for Premier League club Manchester City and the England national team. He is kn"
+      },
+      {
+        "name": "Nathan Aké",
+        "wiki_title": "Nathan Aké",
+        "number": 6,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "centre-back or left-back",
+        "extract": "Nathan Benjamin Aké is a Dutch professional footballer who plays as a centre-back or left-back for Premier League club Manchester City and the Netherlands national team."
+      },
+      {
+        "name": "Omar Marmoush",
+        "wiki_title": "Omar Marmoush",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Omar Khaled Mohamed Abdelsalam Marmoush is an Egyptian professional footballer who plays as a forward for Premier League club Manchester City and the Egypt national team."
+      },
+      {
+        "name": "Mateo Kovačić",
+        "wiki_title": "Mateo Kovačić",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Mateo Kovačić is a professional footballer who plays as a central midfielder for Premier League club Manchester City and the Croatia national team."
+      },
+      {
+        "name": "Erling Haaland",
+        "wiki_title": "Erling Haaland",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Erling Braut Haaland is a Norwegian professional footballer who plays as a striker for Premier League club Manchester City and the Norway national team. Considered one of the best "
+      },
+      {
+        "name": "Rayan Cherki",
+        "wiki_title": "Rayan Cherki",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder or winger",
+        "extract": "Mathis Rayan Cherki is a French professional footballer who plays as an attacking midfielder or winger for Premier League club Manchester City and the France national team."
+      },
+      {
+        "name": "Jérémy Doku",
+        "wiki_title": "Jérémy Doku",
+        "number": 11,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "winger",
+        "extract": "Jérémy Baffour Doku is a Belgian professional footballer who plays as a winger for Premier League club Manchester City and the Belgium national team. He is most known for his speed"
+      },
+      {
+        "name": "Marcus Bettinelli",
+        "wiki_title": "Marcus Bettinelli",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Marcus Bettinelli is an English professional footballer who plays as a goalkeeper for Premier League club Manchester City."
+      },
+      {
+        "name": "Nico González",
+        "wiki_title": "Nico González (footballer, born 2002)",
+        "number": 14,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Nicolás González Iglesias, sometimes known mononymously as Nico, is a Spanish professional footballer who plays as a defensive midfielder for Premier League club Manchester City."
+      },
+      {
+        "name": "Marc Guéhi",
+        "wiki_title": "Marc Guéhi",
+        "number": 15,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Addji Keaninkin Marc-Israel Guéhi is a professional footballer who plays as a centre-back for Premier League club Manchester City and the England national team."
+      },
+      {
+        "name": "Rodri",
+        "wiki_title": "Rodri (footballer, born 1996)",
+        "number": 16,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Rodrigo Hernández Cascante, known as Rodri or Rodrigo, is a Spanish professional footballer who plays as a defensive midfielder for Premier League club Manchester City and the Spai"
+      },
+      {
+        "name": "Bernardo Silva",
+        "wiki_title": "Bernardo Silva",
+        "number": 20,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Bernardo Mota Veiga de Carvalho e Silva is a Portuguese professional footballer who plays as a midfielder for Premier League club Manchester City, which he captains, and the Portug"
+      },
+      {
+        "name": "Rayan Aït-Nouri",
+        "wiki_title": "Rayan Aït-Nouri",
+        "number": 21,
+        "pos_raw": "DF",
+        "mapped": "LW",
+        "refinement": "left-back or a left wing-back",
+        "extract": "Rayan Aït-Nouri is a professional footballer who plays as a left-back or a left wing-back for Premier League club Manchester City. Born in France, he plays for the Algeria national"
+      },
+      {
+        "name": "Joško Gvardiol",
+        "wiki_title": "Joško Gvardiol",
+        "number": 24,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "centre-back or left-back",
+        "extract": "Joško Gvardiol is a Croatian professional footballer who plays as a centre-back or left-back for Premier League club Manchester City and the Croatia national team. Gvardiol is know"
+      },
+      {
+        "name": "Gianluigi Donnarumma",
+        "wiki_title": "Gianluigi Donnarumma",
+        "number": 25,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Gianluigi Donnarumma is an Italian professional footballer, who plays as a goalkeeper for Premier League club Manchester City and captains the Italy national team. He is widely reg"
+      },
+      {
+        "name": "Savinho",
+        "wiki_title": "Savinho",
+        "number": 26,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "winger",
+        "extract": "Sávio Moreira de Oliveira, known as Savinho or simply Sávio, is a Brazilian professional footballer who plays as a winger for Premier League club Manchester City and the Brazil nat"
+      },
+      {
+        "name": "Matheus Nunes",
+        "wiki_title": "Matheus Nunes",
+        "number": 27,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "right-back or central midfielder",
+        "extract": "Matheus Luiz Nunes is a professional footballer who plays as a right-back or central midfielder for Premier League club Manchester City and the Portugal national team. Initially a "
+      },
+      {
+        "name": "Nico O'Reilly",
+        "wiki_title": "Nico O'Reilly",
+        "number": 33,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "left-back or midfielder",
+        "extract": "Nico O'Reilly is an English professional footballer who plays as a left-back or midfielder for Premier League club Manchester City and the England national team."
+      },
+      {
+        "name": "Sverre Nypan",
+        "wiki_title": "Sverre Nypan",
+        "number": 41,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Sverre Halseth Nypan is a Norwegian professional footballer who plays as a central midfielder for Premier League club Manchester City, and the Norway national team."
+      },
+      {
+        "name": "Antoine Semenyo",
+        "wiki_title": "Antoine Semenyo",
+        "number": 42,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "winger or wide midfielder",
+        "extract": "Antoine Selorm Semenyo is a professional footballer who plays as a winger or wide midfielder for Premier League club Manchester City. Born in England, he plays for the Ghana nation"
+      },
+      {
+        "name": "Abdukodir Khusanov",
+        "wiki_title": "Abdukodir Khusanov",
+        "number": 45,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "centre-back and right-back",
+        "extract": "Abdukodir Khikmatzhon ugli Khusanov is an Uzbek professional footballer who plays as a centre-back and right-back for Premier League club Manchester City and the Uzbekistan nationa"
+      },
+      {
+        "name": "Phil Foden",
+        "wiki_title": "Phil Foden",
+        "number": 47,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Philip Walter Foden is an English professional footballer who plays as a midfielder for Premier League club Manchester City and the England national team."
+      },
+      {
+        "name": "Rico Lewis",
+        "wiki_title": "Rico Lewis",
+        "number": 82,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "full-back or defensive midfielder",
+        "extract": "Rico Mark Lewis is an English professional footballer who plays as a full-back or defensive midfielder for Premier League club Manchester City and the England national team."
+      },
+      {
+        "name": "Ryan McAidoo",
+        "wiki_title": "Ryan McAidoo",
+        "number": 56,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Manchester City",
+        "extract": "Ryan McAidoo is an English professional footballer who plays as a winger for Manchester City."
+      },
+      {
+        "name": "Charlie Gray",
+        "wiki_title": "Charlie Gray (footballer)",
+        "number": 59,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Charlie George Gray is an English professional footballer who plays as a defensive midfielder for Premier League club Manchester City."
+      },
+      {
+        "name": "Kaden Braithwaite",
+        "wiki_title": "Kaden Braithwaite",
+        "number": 61,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Manchester City",
+        "extract": "Kaden Elliot Braithwaite is an English professional footballer who plays as a defender for Manchester City."
+      },
+      {
+        "name": "Max Alleyne",
+        "wiki_title": "Max Alleyne",
+        "number": 68,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Max Lewis Rowe Alleyne is an English professional footballer who plays as a centre-back for Premier League club Manchester City."
+      },
+      {
+        "name": "Luke Mbete",
+        "wiki_title": "Luke Mbete",
+        "number": 79,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back or centre-back",
+        "extract": "Luke Mbete-Tabu is an English professional footballer who plays as a left-back or centre-back for Premier League club Manchester City."
+      },
+      {
+        "name": "Spike Brits",
+        "wiki_title": "Spike Brits",
+        "number": 80,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Thorsten Spike Brits is an English footballer who plays for Manchester City's youth team and England youth level as a goalkeeper."
+      },
+      {
+        "name": "Vitor Reis",
+        "wiki_title": "Vitor Reis",
+        "number": 22,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for La Liga club Girona",
+        "extract": "Vitor de Oliveira Nunes dos Reis is a Brazilian professional footballer who plays as a centre-back for La Liga club Girona, on loan from Premier League club Manchester City."
+      },
+      {
+        "name": "Claudio Echeverri",
+        "wiki_title": "Claudio Echeverri",
+        "number": 30,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder or winger",
+        "extract": "Claudio Jeremías Echeverri is an Argentine professional footballer who plays as an attacking midfielder or winger for La Liga club Girona, on loan from Premier League club Manchest"
+      },
+      {
+        "name": "Kalvin Phillips",
+        "wiki_title": "Kalvin Phillips",
+        "number": 44,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Kalvin Mark Phillips is an English professional footballer who plays as a defensive midfielder for EFL Championship club Sheffield United, on loan from Premier League club Manchest"
+      },
+      {
+        "name": "Jahmai Simpson-Pusey",
+        "wiki_title": "Jahmai Simpson-Pusey",
+        "number": 66,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Jahmai Simpson-Pusey is an English professional footballer who plays as a centre-back for Bundesliga club 1. FC Köln, on loan from Premier League club Manchester City."
+      },
+      {
+        "name": "Issa Kaboré",
+        "wiki_title": "Issa Kaboré",
+        "number": 78,
+        "pos_raw": "DF",
+        "mapped": "RW",
+        "refinement": "right-back or right wing-back",
+        "extract": "Issa Kaboré is a Burkinabé professional footballer who plays as a right-back or right wing-back for EFL Championship club Wrexham, on loan from Premier League club Manchester City,"
+      },
+      {
+        "name": "Stephen Mfuni",
+        "wiki_title": "Stephen Mfuni",
+        "number": 91,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "centre-back or left-back",
+        "extract": "Stephen-Nevin Mutanda Mfuni is an English professional footballer who plays as a centre-back or left-back for Watford on loan from Manchester City."
+      },
+      {
+        "name": "Finley Burns",
+        "wiki_title": "Finley Burns",
+        "number": 94,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Finley Jack Burns is an English professional footballer who plays as a centre-back for EFL League One club Reading, on loan from Premier League club Manchester City."
+      },
+      {
+        "name": "Josh Wilson-Esbrand",
+        "wiki_title": "Josh Wilson-Esbrand",
+        "number": 97,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back",
+        "extract": "Joshua Darius Kamani Wilson-Esbrand is an English professional footballer who plays as a left-back for Ekstraklasa club Radomiak Radom, on loan from Premier League club Manchester "
+      },
+      {
+        "name": "Manuel Akanji",
+        "wiki_title": "Manuel Akanji",
+        "number": null,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Serie A club Inter Milan",
+        "extract": "Manuel Obafemi Akanji is a Swiss professional footballer who plays as a defender for Serie A club Inter Milan, on loan from Premier League club Manchester City, and the Switzerland"
+      },
+      {
+        "name": "Juma Bah",
+        "wiki_title": "Juma Bah",
+        "number": null,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Abdulai Juma Bah is a Sierra Leonean professional footballer who plays as a centre-back for Ligue 1 club Nice, on loan from Premier League club Manchester City, and the Sierra Leon"
+      },
+      {
+        "name": "Jack Grealish",
+        "wiki_title": "Jack Grealish",
+        "number": null,
+        "pos_raw": "MF",
+        "mapped": "LW",
+        "refinement": "left winger or attacking midfielder",
+        "extract": "Jack Peter Grealish is an English professional footballer who plays as a left winger or attacking midfielder for Premier League club Everton, on loan from Manchester City."
+      }
+    ]
+  },
+  "arsenal2526": {
+    "key": "arsenal2526",
+    "label": "Arsenal 2025-26",
+    "page": "Arsenal F.C.",
+    "team": "Arsenal 2025-26",
+    "tagSlug": "arsenal-25-26",
+    "era": "current",
+    "squad": [
+      {
+        "name": "David Raya",
+        "wiki_title": "David Raya",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "David Raya Martín is a Spanish professional footballer who plays as a goalkeeper for Premier League club Arsenal and the Spain national team. Known for his consistency, distributio"
+      },
+      {
+        "name": "William Saliba",
+        "wiki_title": "William Saliba",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "William Alain André Gabriel Saliba is a French professional footballer who plays as a centre-back for Premier League club Arsenal and the France national team. Regarded as one of t"
+      },
+      {
+        "name": "Cristhian Mosquera",
+        "wiki_title": "Cristhian Mosquera",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Cristhian Andrey Mosquera Ibargüen is a Spanish professional footballer who plays mainly as a centre-back for Premier League club Arsenal and the Spain national team."
+      },
+      {
+        "name": "Ben White",
+        "wiki_title": "Ben White (footballer)",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Premier League club Arsenal",
+        "extract": "Benjamin William White is an English professional footballer who plays as a defender for Premier League club Arsenal and the England national team. White is a versatile defender wh"
+      },
+      {
+        "name": "Piero Hincapié",
+        "wiki_title": "Piero Hincapié",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "centre-back or left-back",
+        "extract": "Piero Martín Hincapié Reyna is an Ecuadorian professional footballer who plays as a centre-back or left-back for Premier League club Arsenal, on loan from Bundesliga club Bayer Lev"
+      },
+      {
+        "name": "Gabriel Magalhães",
+        "wiki_title": "Gabriel Magalhães",
+        "number": 6,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Gabriel dos Santos Magalhães, also simply known as Gabriel, is a Brazilian professional footballer who plays as centre-back for Premier League club Arsenal and the Brazil national "
+      },
+      {
+        "name": "Bukayo Saka",
+        "wiki_title": "Bukayo Saka",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "right winger",
+        "extract": "Bukayo Ayoyinka Temidayo Moses Saka is an English professional footballer who plays as a right winger for Premier League club Arsenal and the England national team."
+      },
+      {
+        "name": "Martin Ødegaard",
+        "wiki_title": "Martin Ødegaard",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for",
+        "extract": "Martin Ødegaard is a Norwegian professional footballer who plays as a midfielder for and captains both Premier League club Arsenal and the Norway national team."
+      },
+      {
+        "name": "Gabriel Jesus",
+        "wiki_title": "Gabriel Jesus",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward for Premier League club Arsenal",
+        "extract": "Gabriel Fernando de Jesus is a Brazilian professional footballer who plays as a forward for Premier League club Arsenal and the Brazil national team."
+      },
+      {
+        "name": "Eberechi Eze",
+        "wiki_title": "Eberechi Eze",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Eberechi \"Ebere\" Oluchi Eze is an English professional footballer who plays as an attacking midfielder for Premier League club Arsenal and the England national team."
+      },
+      {
+        "name": "Gabriel Martinelli",
+        "wiki_title": "Gabriel Martinelli",
+        "number": 11,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "forward or left winger",
+        "extract": "Gabriel Teodoro Martinelli Silva is a Brazilian professional footballer who plays as a forward or left winger for Premier League club Arsenal and the Brazil national team."
+      },
+      {
+        "name": "Jurriën Timber",
+        "wiki_title": "Jurriën Timber",
+        "number": 12,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Premier League club Arsenal",
+        "extract": "Jurriën David Norman Timber is a Dutch professional footballer who plays as a defender for Premier League club Arsenal and the Netherlands national team. Considered one of the best"
+      },
+      {
+        "name": "Kepa Arrizabalaga",
+        "wiki_title": "Kepa Arrizabalaga",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Kepa Arrizabalaga Revuelta, often referred to simply as Kepa, is a Spanish professional footballer who plays as a goalkeeper for Premier League club Arsenal."
+      },
+      {
+        "name": "Viktor Gyökeres",
+        "wiki_title": "Viktor Gyökeres",
+        "number": 14,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Premier League club Arsenal",
+        "extract": "Viktor Einar Gyökeres is a Swedish professional footballer who plays as a striker for Premier League club Arsenal and the Sweden national team."
+      },
+      {
+        "name": "Christian Nørgaard",
+        "wiki_title": "Christian Nørgaard",
+        "number": 16,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder or centre back",
+        "extract": "Christian Thers Barsøe Nørgaard is a Danish professional footballer who plays as a defensive midfielder or centre back for Premier League club Arsenal."
+      },
+      {
+        "name": "Leandro Trossard",
+        "wiki_title": "Leandro Trossard",
+        "number": 19,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "forward or left winger",
+        "extract": "Leandro Trossard is a Belgian professional footballer who plays as a forward or left winger for Premier League club Arsenal and the Belgium national team."
+      },
+      {
+        "name": "Noni Madueke",
+        "wiki_title": "Noni Madueke",
+        "number": 20,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Premier League club Arsenal",
+        "extract": "Chukwunonso Azuka Tristan \"Noni\" Madueke is an English professional footballer who plays as a winger for Premier League club Arsenal and the England national team."
+      },
+      {
+        "name": "Mikel Merino",
+        "wiki_title": "Mikel Merino",
+        "number": 23,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder or striker",
+        "extract": "Mikel Merino Zazón is a Spanish professional footballer who plays as a midfielder or striker for Premier League club Arsenal and the Spain national team."
+      },
+      {
+        "name": "Kai Havertz",
+        "wiki_title": "Kai Havertz",
+        "number": 29,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward or attacking midfielder",
+        "extract": "Kai Lukas Havertz is a German professional footballer who plays as a forward or attacking midfielder for Premier League club Arsenal and the Germany national team."
+      },
+      {
+        "name": "Riccardo Calafiori",
+        "wiki_title": "Riccardo Calafiori",
+        "number": 33,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Premier League club Arsenal",
+        "extract": "Riccardo Calafiori is an Italian professional footballer who plays as a defender for Premier League club Arsenal and the Italy national team."
+      },
+      {
+        "name": "Tommy Setford",
+        "wiki_title": "Tommy Setford",
+        "number": 35,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Tommy Hogan Setford is a professional footballer who plays as a goalkeeper for Premier League club Arsenal. Born in the Netherlands, he represents England at youth international le"
+      },
+      {
+        "name": "Martín Zubimendi",
+        "wiki_title": "Martín Zubimendi",
+        "number": 36,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Martín Zubimendi Ibáñez is a Spanish professional footballer who plays as a defensive midfielder for Premier League club Arsenal and the Spain national team."
+      },
+      {
+        "name": "Declan Rice",
+        "wiki_title": "Declan Rice",
+        "number": 41,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Declan Rice is an English professional footballer who plays as a defensive midfielder for Premier League club Arsenal and the England national team. Known for his versatility, stam"
+      },
+      {
+        "name": "Myles Lewis-Skelly",
+        "wiki_title": "Myles Lewis-Skelly",
+        "number": 49,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back or midfielder",
+        "extract": "Myles Anthony Lewis-Skelly is an English professional footballer who plays as a left-back or midfielder for Premier League club Arsenal and the England national team."
+      },
+      {
+        "name": "Jakub Kiwior",
+        "wiki_title": "Jakub Kiwior",
+        "number": 15,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Primeira Liga club Porto",
+        "extract": "Jakub Piotr Kiwior is a Polish professional footballer who plays as a defender for Primeira Liga club Porto, on loan from Premier League club Arsenal, and the Poland national team."
+      },
+      {
+        "name": "Fábio Vieira",
+        "wiki_title": "Fábio Vieira (footballer, born 2000)",
+        "number": 21,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Fábio Daniel Ferreira Vieira is a Portuguese professional footballer who plays as an attacking midfielder for Bundesliga club Hamburger SV, on loan from Premier League club Arsenal"
+      },
+      {
+        "name": "Ethan Nwaneri",
+        "wiki_title": "Ethan Nwaneri",
+        "number": 22,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder or winger",
+        "extract": "Ethan Chidiebere Nwaneri is an English professional footballer who plays as an attacking midfielder or winger for Ligue 1 club Marseille, on loan from Premier League club Arsenal, "
+      },
+      {
+        "name": "Reiss Nelson",
+        "wiki_title": "Reiss Nelson",
+        "number": 24,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Premier League club Brentford",
+        "extract": "Reiss Luke Nelson is an English professional footballer who plays as a winger for Premier League club Brentford, on loan from Arsenal."
+      },
+      {
+        "name": "Karl Hein",
+        "wiki_title": "Karl Hein (footballer)",
+        "number": 31,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Karl Jakob Hein is an Estonian professional footballer who plays as a goalkeeper for Bundesliga club Werder Bremen, on loan from Premier League club Arsenal, and the Estonia nation"
+      },
+      {
+        "name": "Josh Nichols",
+        "wiki_title": "Josh Nichols",
+        "number": 48,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Premier League club Arsenal",
+        "extract": "Joshua Joel Ayobami Nichols is an English professional footballer who plays as a defender for Premier League club Arsenal."
+      },
+      {
+        "name": "Jaden Dixon",
+        "wiki_title": "Jaden Dixon",
+        "number": 52,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "centre-back or right-back",
+        "extract": "Jaden Benjamin James Dixon is an English professional footballer who plays as a centre-back or right-back for Premier League club Arsenal."
+      },
+      {
+        "name": "Max Dowman",
+        "wiki_title": "Max Dowman",
+        "number": 56,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "attacking midfielder or a winger",
+        "extract": "Max Dowman is an English footballer who plays as an attacking midfielder or a winger for Premier League club Arsenal."
+      },
+      {
+        "name": "Andre Harriman-Annous",
+        "wiki_title": "Andre Harriman-Annous",
+        "number": 71,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Premier League club Arsenal",
+        "extract": "Andre Ryan Harriman-Annous is an English professional footballer who plays as a striker for Premier League club Arsenal."
+      },
+      {
+        "name": "Ife Ibrahim",
+        "wiki_title": "Ife Ibrahim",
+        "number": 72,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Ifeoluwa David Ibrahim is an English professional footballer who plays as a midfielder for Premier League club Arsenal."
+      },
+      {
+        "name": "Jack Porter",
+        "wiki_title": "Jack Porter (footballer)",
+        "number": 78,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Jack Kenny Porter is an English professional footballer who plays as a goalkeeper for Premier League club Arsenal."
+      },
+      {
+        "name": "Brando Bailey-Joseph",
+        "wiki_title": "Brando Bailey-Joseph",
+        "number": 81,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Premier League club Arsenal",
+        "extract": "Brando Nyle Bailey-Joseph is an English professional footballer who plays as a winger for Premier League club Arsenal."
+      },
+      {
+        "name": "Marli Salmon",
+        "wiki_title": "Marli Salmon",
+        "number": 89,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "centre-back or a right-back",
+        "extract": "Marli Salmon is an English footballer who plays as a centre-back or a right-back for Premier League club Arsenal."
+      },
+      {
+        "name": "Charles Sagoe Jr",
+        "wiki_title": "Charles Sagoe Jr",
+        "number": 53,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "left winger for Allsvenskan club Kalmar",
+        "extract": "Charles Kwame Sagoe Junior is an English professional footballer who plays as a left winger for Allsvenskan club Kalmar, on loan from Arsenal."
+      }
+    ]
+  },
+  "liverpool2526": {
+    "key": "liverpool2526",
+    "label": "Liverpool 2025-26",
+    "page": "2025–26 Liverpool F.C. season",
+    "team": "Liverpool 2025-26",
+    "tagSlug": "liverpool-25-26",
+    "era": "current",
+    "squad": [
+      {
+        "name": "Alisson",
+        "wiki_title": "Alisson Becker",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Álisson Ramsés Becker, better known as Alisson Becker or simply Alisson, is a Brazilian professional footballer who plays as a goalkeeper for Premier League club Liverpool and the "
+      },
+      {
+        "name": "Joe Gomez",
+        "wiki_title": "Joe Gomez",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender",
+        "extract": "Joseph Dave Gomez is an English professional footballer who plays as a defender for Premier League club Liverpool and the England national team. He is Liverpool’s longest-serving p"
+      },
+      {
+        "name": "Wataru Endo",
+        "wiki_title": "Wataru Endo",
+        "number": 3,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Wataru Endo  is a Japanese professional footballer who plays as a defensive midfielder for Premier League club Liverpool and captains the Japan national team."
+      },
+      {
+        "name": "Virgil van Dijk",
+        "wiki_title": "Virgil van Dijk",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for",
+        "extract": "Virgil van Dijk is a Dutch professional footballer who plays as a centre-back for and captains both Premier League club Liverpool and the Netherlands national team. Widely regarded"
+      },
+      {
+        "name": "Ibrahima Konaté",
+        "wiki_title": "Ibrahima Konaté",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Ibrahima Konaté is a French professional footballer who plays as a centre-back for Premier League club Liverpool and the France national team."
+      },
+      {
+        "name": "Milos Kerkez",
+        "wiki_title": "Milos Kerkez",
+        "number": 6,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back",
+        "extract": "Miloš Kerkez is a professional footballer who plays as a left-back for Premier League club Liverpool. Born in Serbia, he plays for the Hungary national team."
+      },
+      {
+        "name": "Florian Wirtz",
+        "wiki_title": "Florian Wirtz",
+        "number": 7,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder or left midfielder",
+        "extract": "Florian Richard Wirtz is a German professional footballer who plays as an attacking midfielder or left midfielder for Premier League club Liverpool and the Germany national team. H"
+      },
+      {
+        "name": "Dominik Szoboszlai",
+        "wiki_title": "Dominik Szoboszlai",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Dominik Szoboszlai is a Hungarian professional footballer who plays for Premier League club Liverpool and captains the Hungary national team. A versatile player, Szoboszlai can be "
+      },
+      {
+        "name": "Alexander Isak",
+        "wiki_title": "Alexander Isak",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Alexander Isak is a Swedish professional footballer who plays as a striker for Premier League club Liverpool and the Sweden national team."
+      },
+      {
+        "name": "Alexis Mac Allister",
+        "wiki_title": "Alexis Mac Allister",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Alexis Mac Allister is an Argentine professional footballer who plays as a midfielder for Premier League club Liverpool and the Argentina national team. He is known for his passing"
+      },
+      {
+        "name": "Mohamed Salah",
+        "wiki_title": "Mohamed Salah",
+        "number": 11,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "right winger or right midfielder",
+        "extract": "Mohamed Salah Hamed Mahrous Ghaly is an Egyptian professional footballer who plays as a right winger or right midfielder for Premier League club Liverpool and captains the Egypt na"
+      },
+      {
+        "name": "Conor Bradley",
+        "wiki_title": "Conor Bradley",
+        "number": 12,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back",
+        "extract": "Conor Bradley is a Northern Irish professional footballer who plays as a right-back for Premier League club Liverpool and captains the Northern Ireland national team."
+      },
+      {
+        "name": "Federico Chiesa",
+        "wiki_title": "Federico Chiesa",
+        "number": 14,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "forward and winger",
+        "extract": "Federico Chiesa is an Italian professional footballer who plays as a forward and winger for Premier League club Liverpool and the Italy national team."
+      },
+      {
+        "name": "Giovanni Leoni",
+        "wiki_title": "Giovanni Leoni",
+        "number": 15,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Giovanni Leoni is an Italian professional footballer who plays as a centre-back for Premier League club Liverpool."
+      },
+      {
+        "name": "Curtis Jones",
+        "wiki_title": "Curtis Jones (footballer, born 2001)",
+        "number": 17,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Curtis Julian Jones is an English professional footballer who plays as a midfielder for Premier League club Liverpool and the England national team."
+      },
+      {
+        "name": "Cody Gakpo",
+        "wiki_title": "Cody Gakpo",
+        "number": 18,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "left winger or centre forward",
+        "extract": "Cody Mathès Gakpo is a Dutch professional footballer who plays as a left winger or centre forward for Premier League club Liverpool and the Netherlands national team."
+      },
+      {
+        "name": "Hugo Ekitike",
+        "wiki_title": "Hugo Ekitike",
+        "number": 22,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Hugo Timothée Ekitike is a French professional footballer who plays as a forward for Premier League club Liverpool and the France national team."
+      },
+      {
+        "name": "Giorgi Mamardashvili",
+        "wiki_title": "Giorgi Mamardashvili",
+        "number": 25,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Giorgi Mamardashvili is a Georgian professional footballer who plays as a goalkeeper for Premier League club Liverpool and the Georgia national team."
+      },
+      {
+        "name": "Andy Robertson",
+        "wiki_title": "Andy Robertson",
+        "number": 26,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back",
+        "extract": "Andrew Henry Robertson is a Scottish professional footballer who plays as a left-back for Premier League club Liverpool and captains the Scotland national team. He is also the vice"
+      },
+      {
+        "name": "Freddie Woodman",
+        "wiki_title": "Freddie Woodman",
+        "number": 28,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Frederick John Woodman is an English professional footballer who plays as a goalkeeper for Premier League club Liverpool."
+      },
+      {
+        "name": "Jeremie Frimpong",
+        "wiki_title": "Jeremie Frimpong",
+        "number": 30,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back or right midfielder",
+        "extract": "Jeremie Agyekum Frimpong is a Dutch professional footballer who plays as a right-back or right midfielder for Premier League club Liverpool and the Netherlands national team."
+      },
+      {
+        "name": "Ryan Gravenberch",
+        "wiki_title": "Ryan Gravenberch",
+        "number": 38,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Ryan Jiro Gravenberch is a Dutch professional footballer who plays as a midfielder for Premier League club Liverpool and the Netherlands national team."
+      },
+      {
+        "name": "Trey Nyoni",
+        "wiki_title": "Trey Nyoni",
+        "number": 42,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Liverpool",
+        "extract": "Treymaurice Nyoni is an English professional footballer who plays as a midfielder for Liverpool."
+      },
+      {
+        "name": "Calvin Ramsay",
+        "wiki_title": "Calvin Ramsay",
+        "number": 47,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back",
+        "extract": "Calvin William Ramsay is a Scottish professional footballer who plays as a right-back for Premier League club Liverpool."
+      },
+      {
+        "name": "Kaide Gordon",
+        "wiki_title": "Kaide Gordon",
+        "number": 49,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger or attacking midfielder",
+        "extract": "Kaide Gordon is an English professional footballer who plays as a winger or attacking midfielder for Premier League club Liverpool."
+      },
+      {
+        "name": "Amara Nallo",
+        "wiki_title": "Amara Nallo",
+        "number": 65,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "central defender",
+        "extract": "Amara Nallo is an English professional footballer who plays as a central defender for Premier League club Liverpool."
+      },
+      {
+        "name": "Kieran Morrison",
+        "wiki_title": "Kieran Morrison (footballer)",
+        "number": 68,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Kieran Yusuf Morrison is a professional footballer who plays as a midfielder for Premier League club Liverpool. Born in England, he is a youth international for Northern Ireland."
+      },
+      {
+        "name": "Rio Ngumoha",
+        "wiki_title": "Rio Ngumoha",
+        "number": 73,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "left winger or attacking midfielder",
+        "extract": "Rio Chima Ngumoha is an English professional footballer who plays as a left winger or attacking midfielder for Premier League club Liverpool."
+      },
+      {
+        "name": "Jayden Danns",
+        "wiki_title": "Jayden Danns",
+        "number": 76,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Jayden Alexander Danns is an English professional footballer who plays as a forward for Premier League club Liverpool."
+      },
+      {
+        "name": "Wellity Lucky",
+        "wiki_title": "Wellity Lucky",
+        "number": 92,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Wellity Lucky Omoruyi is a professional footballer who plays as a centre-back for Premier League club Liverpool. Born in Spain, he has represented England internationally."
+      },
+      {
+        "name": "Harvey Elliott",
+        "wiki_title": "Harvey Elliott",
+        "number": 19,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Harvey Daniel James Elliott is an English professional footballer who plays as an attacking midfielder for Premier League club Aston Villa, on loan from Liverpool."
+      },
+      {
+        "name": "Trent Kone-Doherty",
+        "wiki_title": "Trent Kone-Doherty",
+        "number": 51,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward for Eliteserien club Molde",
+        "extract": "Trent Toure Koné-Doherty is a professional footballer who plays as a forward for Eliteserien club Molde. Born in Northern Ireland, he represents the Republic of Ireland at youth le"
+      }
+    ]
+  },
+  "psg2526": {
+    "key": "psg2526",
+    "label": "PSG 2025-26",
+    "page": "2025–26 Paris Saint-Germain FC season",
+    "team": "PSG 2025-26",
+    "tagSlug": "psg-25-26",
+    "era": "current",
+    "squad": [
+      {
+        "name": "Lucas Chevalier",
+        "wiki_title": "Lucas Chevalier",
+        "number": 30,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Lucas Eugène Chevalier is a French professional footballer who plays as a goalkeeper for Ligue 1 club Paris Saint-Germain and the France national team."
+      },
+      {
+        "name": "Matvey Safonov",
+        "wiki_title": "Matvey Safonov",
+        "number": 39,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Matvey Yevgenyevich Safonov is a Russian professional footballer who plays as a goalkeeper for Ligue 1 club Paris Saint-Germain and the Russia national team."
+      },
+      {
+        "name": "Renato Marin",
+        "wiki_title": "Renato Marin",
+        "number": 89,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Renato Bellucci Marin is a professional footballer who plays as a goalkeeper for Ligue 1 club Paris Saint-Germain. Born in Brazil, he represents Italy at the youth international le"
+      },
+      {
+        "name": "Achraf Hakimi",
+        "wiki_title": "Achraf Hakimi",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back",
+        "extract": "Achraf Hakimi Mouh is a professional footballer who plays as a right-back for Ligue 1 club Paris Saint-Germain and captains the Morocco national team. He is widely regarded as one "
+      },
+      {
+        "name": "Lucas Beraldo",
+        "wiki_title": "Lucas Beraldo",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "centre-back or left-back",
+        "extract": "Lucas Lopes Beraldo is a Brazilian professional footballer who plays as a centre-back or left-back for Ligue 1 club Paris Saint-Germain and the Brazil national team."
+      },
+      {
+        "name": "Marquinhos",
+        "wiki_title": "Marquinhos",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Marcos Aoás Corrêa, better known as Marquinhos, is a Brazilian professional footballer who plays as a centre-back and captains both Ligue 1 club Paris Saint-Germain and the Brazil "
+      },
+      {
+        "name": "Illia Zabarnyi",
+        "wiki_title": "Illia Zabarnyi",
+        "number": 6,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Illia Borysovych Zabarnyi is a Ukrainian professional footballer who plays as a centre-back for Ligue 1 club Paris Saint-Germain and the Ukraine national team."
+      },
+      {
+        "name": "Lucas Hernandez",
+        "wiki_title": "Lucas Hernandez",
+        "number": 21,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "centre-back or left-back",
+        "extract": "Lucas François Bernard Hernandez is a French professional footballer who plays as a centre-back or left-back for Ligue 1 club Paris Saint-Germain and the France national team. He i"
+      },
+      {
+        "name": "Nuno Mendes",
+        "wiki_title": "Nuno Mendes (footballer, born 2002)",
+        "number": 25,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back",
+        "extract": "Nuno Alexandre Tavares Mendes is a Portuguese professional footballer who plays as a left-back for Ligue 1 club Paris Saint-Germain and the Portugal national team. He is widely reg"
+      },
+      {
+        "name": "David Boly",
+        "wiki_title": "David Boly",
+        "number": 42,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back",
+        "extract": "David Boly is a French professional footballer who plays as a right-back for Ligue 1 club Paris Saint-Germain."
+      },
+      {
+        "name": "Willian Pacho",
+        "wiki_title": "Willian Pacho",
+        "number": 51,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Willian Joel Pacho Tenorio is an Ecuadorian professional footballer who plays as a centre-back for Ligue 1 club Paris Saint-Germain and the Ecuador national team."
+      },
+      {
+        "name": "Fabián Ruiz",
+        "wiki_title": "Fabián Ruiz",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Fabián Ruiz Peña, also known simply as Fabián, is a Spanish professional footballer who plays as a central midfielder for Ligue 1 club Paris Saint-Germain and the Spain national te"
+      },
+      {
+        "name": "Vitinha",
+        "wiki_title": "Vitinha (footballer, born February 2000)",
+        "number": 17,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Vítor Machado Ferreira, known as Vitinha, is a Portuguese professional footballer who plays as a defensive midfielder for Ligue 1 club Paris Saint-Germain and the Portugal national"
+      },
+      {
+        "name": "Lee Kang-in",
+        "wiki_title": "Lee Kang-in",
+        "number": 19,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder or winger",
+        "extract": "Lee Kang-in is a South Korean professional footballer who plays as an attacking midfielder or winger for Ligue 1 club Paris Saint-Germain and the South Korea national team."
+      },
+      {
+        "name": "Senny Mayulu",
+        "wiki_title": "Senny Mayulu",
+        "number": 24,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Senny Nsona Mayulu is a French professional footballer who plays as a midfielder for Ligue 1 club Paris Saint-Germain."
+      },
+      {
+        "name": "Dro Fernández",
+        "wiki_title": "Dro Fernández",
+        "number": 27,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Pedro Fernández Sarmiento, known as Dro Fernández or simply Dro, is a Spanish professional footballer who plays as attacking midfielder or left winger for Ligue 1 club Paris Saint-"
+      },
+      {
+        "name": "Warren Zaïre-Emery",
+        "wiki_title": "Warren Zaïre-Emery",
+        "number": 33,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Warren Marie Jean-Pierre Zaïre-Emery is a French professional footballer who plays as a midfielder for Ligue 1 club Paris Saint-Germain and the France national team."
+      },
+      {
+        "name": "Mathis Jangeal",
+        "wiki_title": "Mathis Jangeal",
+        "number": 41,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Mathis Jangeal is a French professional footballer who plays as an attacking midfielder for Ligue 1 club Paris Saint-Germain."
+      },
+      {
+        "name": "Noah Nsoki",
+        "wiki_title": "Noah Nsoki",
+        "number": 45,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder and winger",
+        "extract": "Noah Nsoki is a French professional footballer who plays as an attacking midfielder and winger for Ligue 1 club Paris Saint-Germain."
+      },
+      {
+        "name": "João Neves",
+        "wiki_title": "João Neves",
+        "number": 87,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "João Pedro Gonçalves Neves is a Portuguese professional footballer who plays as a midfielder for Ligue 1 club Paris Saint-Germain and the Portugal national team. Primarily a centra"
+      },
+      {
+        "name": "Khvicha Kvaratskhelia",
+        "wiki_title": "Khvicha Kvaratskhelia",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "left winger",
+        "extract": "Khvicha Kvaratskhelia is a Georgian professional footballer who plays as a left winger for Ligue 1 club Paris Saint-Germain and captains the Georgia national team. Regarded as one "
+      },
+      {
+        "name": "Gonçalo Ramos",
+        "wiki_title": "Gonçalo Ramos",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Gonçalo Matias Ramos is a Portuguese professional footballer who plays as a striker for Ligue 1 club Paris Saint-Germain and the Portugal national team."
+      },
+      {
+        "name": "Ousmane Dembélé",
+        "wiki_title": "Ousmane Dembélé",
+        "number": 10,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "forward or right winger",
+        "extract": "Masour Ousmane Dembélé is a French professional footballer who plays as a forward or right winger for Ligue 1 club Paris Saint-Germain and the France national team. Considered one "
+      },
+      {
+        "name": "Désiré Doué",
+        "wiki_title": "Désiré Doué",
+        "number": 14,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "attacking midfielder or winger",
+        "extract": "Désiré Nonka-Maho Doué is a French professional footballer who plays as an attacking midfielder or winger for Ligue 1 club Paris Saint-Germain and the France national team. Known f"
+      },
+      {
+        "name": "Bradley Barcola",
+        "wiki_title": "Bradley Barcola",
+        "number": 29,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Bradley Jean-Manuel Essolisam Addo Barcola is a French professional footballer who plays as a forward for Ligue 1 club Paris Saint-Germain and the France national team. He is known"
+      },
+      {
+        "name": "Quentin Ndjantou",
+        "wiki_title": "Quentin Ndjantou",
+        "number": 47,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Quentin Ndjantou Mbitcha is a French professional footballer who plays as a forward, left winger, and attacking midfielder for Ligue 1 club Paris Saint-Germain."
+      },
+      {
+        "name": "Ibrahim Mbaye",
+        "wiki_title": "Ibrahim Mbaye",
+        "number": 49,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Ibrahim Mbaye is a professional footballer who plays as a forward for Ligue 1 club Paris Saint-Germain. Born in France, he plays for the Senegal national team."
+      },
+      {
+        "name": "Pierre Mounguengue",
+        "wiki_title": "Pierre Mounguengue",
+        "number": 57,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Pierre Messie Mounguengue is a French professional footballer who plays as a forward for Ligue 1 club Paris Saint-Germain."
+      },
+      {
+        "name": "Noham Kamara",
+        "wiki_title": "Noham Kamara",
+        "number": 43,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Noham Fadjigui Kamara is a French professional footballer who plays as a centre-back for Ligue 1 club Lyon, on loan from Paris Saint-Germain."
+      }
+    ]
+  },
+  "bayern2526": {
+    "key": "bayern2526",
+    "label": "Bayern Munich 2025-26",
+    "page": "2025–26 FC Bayern Munich season",
+    "team": "Bayern Munich 2025-26",
+    "tagSlug": "bayern-25-26",
+    "era": "current",
+    "squad": [
+      {
+        "name": "Manuel Neuer",
+        "wiki_title": "Manuel Neuer",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Manuel Peter Neuer is a German professional footballer who plays as a goalkeeper and is the captain of Bundesliga club Bayern Munich. Considered one of the greatest and most influe"
+      },
+      {
+        "name": "Dayot Upamecano",
+        "wiki_title": "Dayot Upamecano",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Dayotchanculle Oswald Upamecano is a French professional footballer who plays as a centre-back for Bundesliga club Bayern Munich and the France national team."
+      },
+      {
+        "name": "Kim Min-jae",
+        "wiki_title": "Kim Min-jae (footballer)",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Kim Min-jae is a South Korean professional footballer who plays as a centre-back for Bundesliga club Bayern Munich and the South Korea national team."
+      },
+      {
+        "name": "Jonathan Tah",
+        "wiki_title": "Jonathan Tah",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Jonathan Glao Tah is a German professional footballer who plays as a centre-back for Bundesliga club Bayern Munich and the Germany national team."
+      },
+      {
+        "name": "Joshua Kimmich",
+        "wiki_title": "Joshua Kimmich",
+        "number": 6,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder or right-back",
+        "extract": "Joshua Walter Kimmich is a German professional footballer who plays as a defensive midfielder or right-back for Bundesliga club Bayern Munich and captains the Germany national team"
+      },
+      {
+        "name": "Serge Gnabry",
+        "wiki_title": "Serge Gnabry",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "forward",
+        "extract": "Serge David Gnabry is a German professional footballer who plays as a forward, winger and attacking midfielder for Bundesliga club Bayern Munich and the Germany national team."
+      },
+      {
+        "name": "Leon Goretzka",
+        "wiki_title": "Leon Goretzka",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Leon Christoph Goretzka is a German professional footballer who plays as a midfielder for Bundesliga club Bayern Munich and the Germany national team."
+      },
+      {
+        "name": "Harry Kane",
+        "wiki_title": "Harry Kane",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Harry Edward Kane is an English professional footballer who plays as a striker for Bundesliga club Bayern Munich and captains the England national team. Regarded as one of the best"
+      },
+      {
+        "name": "Jamal Musiala",
+        "wiki_title": "Jamal Musiala",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Jamal Musiala is a German professional footballer who plays as an attacking midfielder for Bundesliga club Bayern Munich and the Germany national team. Widely regarded as one of th"
+      },
+      {
+        "name": "Nicolas Jackson",
+        "wiki_title": "Nicolas Jackson",
+        "number": 11,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "striker and winger",
+        "extract": "Nicolas Jackson is a Senegalese professional footballer who plays as a striker and winger for Bundesliga club Bayern Munich, on loan from Premier League club Chelsea. He also plays"
+      },
+      {
+        "name": "Luis Díaz",
+        "wiki_title": "Luis Díaz (footballer, born 1997)",
+        "number": 14,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "left winger or left midfielder",
+        "extract": "Luis Fernando Díaz Marulanda is a Colombian professional footballer who plays as a left winger or left midfielder for Bundesliga club Bayern Munich and the Colombia national team. "
+      },
+      {
+        "name": "Michael Olise",
+        "wiki_title": "Michael Olise",
+        "number": 17,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger and attacking midfielder",
+        "extract": "Michael Akpovie Olise is a professional footballer who plays as a winger and attacking midfielder for Bundesliga club Bayern Munich. Born in England, he plays for the France nation"
+      },
+      {
+        "name": "Alphonso Davies",
+        "wiki_title": "Alphonso Davies",
+        "number": 19,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back",
+        "extract": "Alphonso Boyle Davies is a professional soccer player who plays as a left-back, winger, or wing-back for Bundesliga club Bayern Munich and captains the Canada national team. Regard"
+      },
+      {
+        "name": "Tom Bischof",
+        "wiki_title": "Tom Bischof",
+        "number": 20,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder or full-back",
+        "extract": "Tom Bischof is a German professional footballer who plays as a midfielder or full-back for Bundesliga club Bayern Munich and the Germany national team."
+      },
+      {
+        "name": "Hiroki Ito",
+        "wiki_title": "Hiroki Ito (footballer, born 1999)",
+        "number": 21,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Hiroki Ito  is a Japanese professional footballer who plays as a centre-back, left-back and defensive midfielder for Bundesliga club Bayern Munich and the Japan national team."
+      },
+      {
+        "name": "Raphaël Guerreiro",
+        "wiki_title": "Raphaël Guerreiro",
+        "number": 22,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back and midfielder",
+        "extract": "Raphaël Adelino José Guerreiro is a professional footballer who plays as a left-back and midfielder for Bundesliga club Bayern Munich."
+      },
+      {
+        "name": "Sven Ulreich",
+        "wiki_title": "Sven Ulreich",
+        "number": 26,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Sven Ulreich is a German professional footballer who plays as a goalkeeper for Bundesliga club Bayern Munich."
+      },
+      {
+        "name": "Konrad Laimer",
+        "wiki_title": "Konrad Laimer",
+        "number": 27,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "right-back",
+        "extract": "Konrad Laimer is an Austrian professional footballer who plays as a right-back, left-back or midfielder for Bundesliga club Bayern Munich and the Austria national team. He previous"
+      },
+      {
+        "name": "Cassiano Kiala",
+        "wiki_title": "Cassiano Kiala",
+        "number": 30,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender",
+        "extract": "Cassiano Tomas Kiala is a German professional footballer who plays as a defender for Bundesliga club Bayern Munich. He is a German youth international."
+      },
+      {
+        "name": "Guido Della Rovere",
+        "wiki_title": "Guido Della Rovere",
+        "number": 31,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Guido Della Rovere is an Italian professional footballer who plays as a midfielder for Regionalliga Bayern club Bayern Munich II."
+      },
+      {
+        "name": "Bastian Assomo",
+        "wiki_title": "Bastian Assomo",
+        "number": 33,
+        "pos_raw": "",
+        "mapped": null,
+        "refinement": "striker",
+        "extract": "Bastian Friedrich Assomo is a German professional footballer who plays as a striker for Regionalliga Bayern club Bayern Munich II. He is a German youth international."
+      },
+      {
+        "name": "Deniz Ofli",
+        "wiki_title": "Deniz Ofli",
+        "number": 34,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back",
+        "extract": "Deniz Emre Ofli is a professional footballer who plays as a left-back, left midfielder and left wing-back for Bundesliga club Bayern Munich. Born in Germany, he is a Turkish youth "
+      },
+      {
+        "name": "Jannis Bärtl",
+        "wiki_title": "Jannis Bärtl",
+        "number": 35,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Jannis Gerhard Bärtl is a German professional footballer who plays as a goalkeeper for Regionalliga Bayern club Bayern Munich II."
+      },
+      {
+        "name": "Wisdom Mike",
+        "wiki_title": "Wisdom Mike",
+        "number": 36,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Bundesliga club Bayern Munich",
+        "extract": "Wisdom Okpako Mike is a German professional footballer who plays as a winger for Bundesliga club Bayern Munich. He is a German youth international."
+      },
+      {
+        "name": "Leonard Prescott",
+        "wiki_title": "Leonard Prescott",
+        "number": 37,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Leonard Prescott is a footballer who plays as a goalkeeper for the under-19 team of Bundesliga club Bayern Munich. Born in the United States, he is a German youth international."
+      },
+      {
+        "name": "Erblin Osmani",
+        "wiki_title": "Erblin Osmani",
+        "number": 38,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Erblin Osmani is a German professional footballer who plays as a midfielder for Bundesliga club Bayern Munich. He is a German youth international."
+      },
+      {
+        "name": "Bara Ndiaye",
+        "wiki_title": "Bara Sapoko Ndiaye",
+        "number": 39,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Bara Joseph Sapoko Ndiaye is a Senegalese professional footballer who plays as a midfielder for Bundesliga club Bayern Munich, on loan from Gambian club Gambinos Stars Africa."
+      },
+      {
+        "name": "Jonas Urbig",
+        "wiki_title": "Jonas Urbig",
+        "number": 40,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Jonas Kurt Urbig is a German professional footballer who plays as a goalkeeper for Bundesliga club Bayern Munich."
+      },
+      {
+        "name": "Vincent Manuba",
+        "wiki_title": "Vincent Manuba",
+        "number": 41,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "full-back",
+        "extract": "Vincent Ugo Manuba is a German professional footballer who plays as a full-back, winger, wide midfielder and wing-back for Regionalliga Bayern club Bayern Munich II. He is a former"
+      },
+      {
+        "name": "Lennart Karl",
+        "wiki_title": "Lennart Karl",
+        "number": 42,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder or winger",
+        "extract": "Lennart Karl is a German professional footballer who plays as an attacking midfielder or winger for Bundesliga club Bayern Munich and the Germany national team."
+      },
+      {
+        "name": "Filip Pavić",
+        "wiki_title": "Filip Pavić",
+        "number": 43,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Filip Pavić is a Croatian professional footballer who plays as a centre-back, right-back and defensive midfielder for Bundesliga club Bayern Munich. He was a German youth internati"
+      },
+      {
+        "name": "Josip Stanišić",
+        "wiki_title": "Josip Stanišić",
+        "number": 44,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender",
+        "extract": "Josip Stanišić is a professional footballer who plays as a defender for Bundesliga club Bayern Munich. Born in Germany, he plays for the Croatia national team. Stanišić has feature"
+      },
+      {
+        "name": "Aleksandar Pavlović",
+        "wiki_title": "Aleksandar Pavlović (footballer)",
+        "number": 45,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Aleksandar Pavlović is a German professional footballer who plays as a defensive midfielder for Bundesliga club Bayern Munich and the Germany national team."
+      },
+      {
+        "name": "David Santos Daiber",
+        "wiki_title": "David Santos Daiber",
+        "number": 47,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "David Michael Santos Daiber is a professional footballer who plays as a midfielder for Bundesliga club Bayern Munich. Born in Luxembourg, he is a Portugal youth international."
+      },
+      {
+        "name": "Leon Klanac",
+        "wiki_title": "Leon Klanac",
+        "number": 48,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Leon Klanac is a German professional footballer who plays as a goalkeeper for Bundesliga club Bayern Munich. He is a German youth international."
+      },
+      {
+        "name": "Maycon Cardozo",
+        "wiki_title": "Maycon Cardozo",
+        "number": 49,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Bundesliga club Bayern Munich",
+        "extract": "Maycon Douglas Normanha Cardozo is a Brazilian professional footballer who plays as a winger for Bundesliga club Bayern Munich."
+      },
+      {
+        "name": "Sacha Boey",
+        "wiki_title": "Sacha Boey",
+        "number": 23,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back and wing-back",
+        "extract": "Sacha Boey is a French professional footballer who plays as a right-back and wing-back for Süper Lig club Galatasaray, on loan from Bundesliga club Bayern Munich."
+      },
+      {
+        "name": "Felipe Chávez",
+        "wiki_title": "Felipe Chávez",
+        "number": 38,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder and winger",
+        "extract": "Felipe Marlon Chávez Somocursio is a professional footballer who plays as a midfielder and winger for Bundesliga club 1. FC Köln, on loan from Bayern Munich. Born in Germany, he pl"
+      },
+      {
+        "name": "Jonah Kusi-Asare",
+        "wiki_title": "Jonah Kusi-Asare",
+        "number": 41,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward for Premier League club Fulham",
+        "extract": "Jonah Daniel Kusi-Asare is a Swedish professional footballer who plays as a forward for Premier League club Fulham, on loan from Bundesliga club Bayern Munich. He is a Sweden youth"
+      }
+    ]
+  },
+  "inter2526": {
+    "key": "inter2526",
+    "label": "Inter Milan 2025-26",
+    "page": "2025–26 Inter Milan season",
+    "team": "Inter Milan 2025-26",
+    "tagSlug": "inter-25-26",
+    "era": "current",
+    "squad": [
+      {
+        "name": "Yann Sommer",
+        "wiki_title": "Yann Sommer",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for Serie A club Inter Milan",
+        "extract": "Yann Sommer is a Swiss professional footballer who plays as a goalkeeper for Serie A club Inter Milan. He is known for his exceptional reflexes and high agility."
+      },
+      {
+        "name": "Raffaele Di Gennaro",
+        "wiki_title": "Raffaele Di Gennaro",
+        "number": 12,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for Serie A club Inter Milan",
+        "extract": "Raffaele Di Gennaro is an Italian professional footballer who plays as a goalkeeper for Serie A club Inter Milan."
+      },
+      {
+        "name": "Josep Martínez",
+        "wiki_title": "Josep Martínez",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for Serie A club Inter Milan",
+        "extract": "Josep Martínez Riera is a Spanish professional footballer who plays as a goalkeeper for Serie A club Inter Milan. He made one appearance for the Spain national team in 2021."
+      },
+      {
+        "name": "Denzel Dumfries",
+        "wiki_title": "Denzel Dumfries",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "RW",
+        "refinement": "right-back or right wing-back",
+        "extract": "Denzel Justus Morris Dumfries is a Dutch professional footballer who plays as a right-back or right wing-back for Serie A club Inter Milan and the Netherlands national team."
+      },
+      {
+        "name": "Stefan de Vrij",
+        "wiki_title": "Stefan de Vrij",
+        "number": 6,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for Serie A club Inter Milan",
+        "extract": "Stefan de Vrij is a Dutch professional footballer who plays as a centre-back for Serie A club Inter Milan and the Netherlands national team."
+      },
+      {
+        "name": "Francesco Acerbi",
+        "wiki_title": "Francesco Acerbi",
+        "number": 15,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Francesco Acerbi is an Italian professional footballer who plays primarily as a centre-back for Serie A club Inter Milan and the Italy national team. He is known for his strength, "
+      },
+      {
+        "name": "Manuel Akanji",
+        "wiki_title": "Manuel Akanji",
+        "number": 25,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Serie A club Inter Milan",
+        "extract": "Manuel Obafemi Akanji is a Swiss professional footballer who plays as a defender for Serie A club Inter Milan, on loan from Premier League club Manchester City, and the Switzerland"
+      },
+      {
+        "name": "Carlos Augusto",
+        "wiki_title": "Carlos Augusto (footballer)",
+        "number": 30,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back or left midfielder",
+        "extract": "Carlos Augusto Zopolato Neves, known as Carlos Augusto, is a Brazilian professional footballer who plays as a left-back or left midfielder for Serie A club Inter Milan and the Braz"
+      },
+      {
+        "name": "Yann Aurel Bisseck",
+        "wiki_title": "Yann Aurel Bisseck",
+        "number": 31,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for Serie A club Inter Milan",
+        "extract": "Yann Aurel Ludger Bisseck is a German professional footballer who plays as a centre-back for Serie A club Inter Milan and the Germany national team."
+      },
+      {
+        "name": "Federico Dimarco",
+        "wiki_title": "Federico Dimarco",
+        "number": 32,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left wing-back for Serie A club",
+        "extract": "Federico Dimarco is an Italian professional footballer who plays as a left wing-back for Serie A club Inter Milan and the Italy national team. He is known for his pace, crossing, a"
+      },
+      {
+        "name": "Matteo Darmian",
+        "wiki_title": "Matteo Darmian",
+        "number": 36,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "wide midfielder or defender",
+        "extract": "Matteo Darmian is an Italian professional footballer who plays as a wide midfielder or defender for Serie A club Inter Milan."
+      },
+      {
+        "name": "Matteo Cocchi",
+        "wiki_title": "Matteo Cocchi",
+        "number": 43,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Serie A club Inter Milan",
+        "extract": "Matteo Cocchi is an Italian professional footballer who plays as a defender for Serie A club Inter Milan."
+      },
+      {
+        "name": "Alessandro Bastoni",
+        "wiki_title": "Alessandro Bastoni",
+        "number": 95,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Alessandro Bastoni is an Italian professional footballer who plays primarily as a centre-back for Serie A club Inter Milan and the Italy national team. Regarded as one of the best "
+      },
+      {
+        "name": "Piotr Zieliński",
+        "wiki_title": "Piotr Zieliński",
+        "number": 7,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Serie A club Inter Milan",
+        "extract": "Piotr Sebastian Zieliński is a Polish professional footballer who plays as a midfielder for Serie A club Inter Milan and the Poland national team. Known for his versatility, precis"
+      },
+      {
+        "name": "Petar Sučić",
+        "wiki_title": "Petar Sučić",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder for Serie A club",
+        "extract": "Petar Sučić is a professional footballer who plays as a central midfielder for Serie A club Inter Milan. Born in Bosnia and Herzegovina, he plays for the Croatia national team."
+      },
+      {
+        "name": "Luis Henrique",
+        "wiki_title": "Luis Henrique (footballer, born 2001)",
+        "number": 11,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "wide midfielder or winger",
+        "extract": "Luis Henrique Tomaz de Lima, commonly known as Luis Henrique, is a Brazilian professional footballer who plays as a wide midfielder or winger for Serie A club Inter Milan."
+      },
+      {
+        "name": "Davide Frattesi",
+        "wiki_title": "Davide Frattesi",
+        "number": 16,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder for Serie A club",
+        "extract": "Davide Frattesi is an Italian professional footballer who plays as a central midfielder for Serie A club Inter Milan and the Italy national team."
+      },
+      {
+        "name": "Andy Diouf",
+        "wiki_title": "Andy Diouf",
+        "number": 17,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Serie A club Inter Milan",
+        "extract": "Andy Alune Diouf is a French professional footballer who plays as a midfielder for Serie A club Inter Milan."
+      },
+      {
+        "name": "Hakan Çalhanoğlu",
+        "wiki_title": "Hakan Çalhanoğlu",
+        "number": 20,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Serie A club Inter Milan",
+        "extract": "Hakan Çalhanoğlu is a professional footballer who plays as a midfielder for Serie A club Inter Milan. Born in Germany, he plays for and captains the Turkey national team."
+      },
+      {
+        "name": "Henrikh Mkhitaryan",
+        "wiki_title": "Henrikh Mkhitaryan",
+        "number": 22,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Serie A club Inter Milan",
+        "extract": "Henrikh Mkhitaryan is an Armenian professional footballer who plays as a midfielder for Serie A club Inter Milan. He is the all time top goalscorer for the Armenia national team."
+      },
+      {
+        "name": "Nicolò Barella",
+        "wiki_title": "Nicolò Barella",
+        "number": 23,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder for Serie A club",
+        "extract": "Nicolò Barella is an Italian professional footballer who plays as a central midfielder for Serie A club Inter Milan and the Italy national team. Known for his technical ability, wo"
+      },
+      {
+        "name": "Issiaka Kamate",
+        "wiki_title": "Issiaka Kamate",
+        "number": 41,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Serie C Group A club",
+        "extract": "Issiaka Kamate is a French footballer who plays as a midfielder for Serie C Group A club Inter Milan U23."
+      },
+      {
+        "name": "Leonardo Bovo",
+        "wiki_title": "Leonardo Bovo",
+        "number": 45,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Inter",
+        "extract": "Leonardo Bovo is an Italian professional footballer who plays as a midfielder for Inter."
+      },
+      {
+        "name": "Marcus Thuram",
+        "wiki_title": "Marcus Thuram",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward for Serie A club Inter Milan",
+        "extract": "Marcus Lilian Thuram-Ulien is a French professional footballer who plays as a forward for Serie A club Inter Milan and the France national team."
+      },
+      {
+        "name": "Lautaro Martínez",
+        "wiki_title": "Lautaro Martínez",
+        "number": 10,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "centre-forward for",
+        "extract": "Lautaro Javier Martínez is an Argentine professional footballer who plays as a centre-forward for and captains Serie A club Inter Milan, and the Argentina national team."
+      },
+      {
+        "name": "Ange-Yoan Bonny",
+        "wiki_title": "Ange-Yoan Bonny",
+        "number": 14,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward for Serie A club Inter Milan",
+        "extract": "Ange-Yoan Bonny is a professional footballer who plays as a forward for Serie A club Inter Milan. Born in France, he chose to represent Ivory Coast internationally."
+      },
+      {
+        "name": "Matteo Spinaccè",
+        "wiki_title": "Matteo Spinaccè",
+        "number": 47,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Serie C club",
+        "extract": "Matteo Spinaccè is an Italian professional footballer who plays as a striker for Serie C club Inter Milan Under-23."
+      },
+      {
+        "name": "Mattia Mosconi",
+        "wiki_title": "Mattia Mosconi",
+        "number": 48,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward for",
+        "extract": "Mattia Mosconi is an Italian professional footballer who plays as a forward for Inter Milan U23."
+      },
+      {
+        "name": "Matteo Lavelli",
+        "wiki_title": "Matteo Lavelli",
+        "number": 53,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Serie A club Inter Milan",
+        "extract": "Matteo \"Pocho\" Lavelli is an Italian professional footballer who plays as a striker for Serie A club Inter Milan."
+      },
+      {
+        "name": "Pio Esposito",
+        "wiki_title": "Pio Esposito",
+        "number": 94,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Serie A club Inter Milan",
+        "extract": "Francesco Pio Esposito is an Italian professional footballer who plays as a striker for Serie A club Inter Milan and the Italy national team."
+      },
+      {
+        "name": "Benjamin Pavard",
+        "wiki_title": "Benjamin Pavard",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender",
+        "extract": "Benjamin Jacques Marcel Pavard is a French professional footballer who plays as a defender for Ligue 1 club Marseille, on loan from Serie A club Inter Milan, and the France nationa"
+      },
+      {
+        "name": "Tomás Palacios",
+        "wiki_title": "Tomás Palacios (footballer)",
+        "number": 42,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for Estudiantes",
+        "extract": "Tiago Tomás Palacios is an Argentine professional footballer who plays as a centre-back for Estudiantes, on loan from Serie A club Inter Milan."
+      }
+    ]
+  },
+  "napoli2526": {
+    "key": "napoli2526",
+    "label": "Napoli 2025-26",
+    "page": "2025–26 SSC Napoli season",
+    "team": "Napoli 2025-26",
+    "tagSlug": "napoli-25-26",
+    "era": "current",
+    "squad": [
+      {
+        "name": "Alex Meret",
+        "wiki_title": "Alex Meret",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for Serie A club Napoli",
+        "extract": "Alex Meret is an Italian professional footballer who plays as a goalkeeper for Serie A club Napoli and the Italy national team."
+      },
+      {
+        "name": "Miguel Gutiérrez",
+        "wiki_title": "Miguel Gutiérrez (footballer, born 2001)",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "LW",
+        "refinement": "left-back or left wing-back",
+        "extract": "Miguel Gutiérrez Ortega is a Spanish professional footballer who plays as a left-back or left wing-back for Serie A club Napoli."
+      },
+      {
+        "name": "Alessandro Buongiorno",
+        "wiki_title": "Alessandro Buongiorno",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for Serie A club Napoli",
+        "extract": "Alessandro Buongiorno is an Italian professional footballer who plays as a centre-back for Serie A club Napoli and the Italy national team."
+      },
+      {
+        "name": "Juan Jesus",
+        "wiki_title": "Juan Jesus",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Serie A club Napoli",
+        "extract": "Juan Guilherme Nunes Jesus, usually known as Juan Jesus or simply Juan or Juje, is a Brazilian professional footballer who plays as a defender for Serie A club Napoli. Mainly a cen"
+      },
+      {
+        "name": "Billy Gilmour",
+        "wiki_title": "Billy Gilmour",
+        "number": 6,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Billy Clifford Gilmour is a Scottish professional footballer who plays as a defensive midfielder for Serie A club Napoli and the Scotland national team. He is considered one of Sco"
+      },
+      {
+        "name": "David Neres",
+        "wiki_title": "David Neres",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Serie A club Napoli",
+        "extract": "David Neres Campos is a Brazilian professional footballer who plays as a winger for Serie A club Napoli."
+      },
+      {
+        "name": "Scott McTominay",
+        "wiki_title": "Scott McTominay",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Serie A club Napoli",
+        "extract": "Scott Francis McTominay is a professional footballer who plays as a midfielder for Serie A club Napoli and the Scotland national team."
+      },
+      {
+        "name": "Romelu Lukaku",
+        "wiki_title": "Romelu Lukaku",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Serie A club Napoli",
+        "extract": "Romelu Lukaku Bolingoli is a Belgian professional footballer who plays as a striker for Serie A club Napoli and the Belgium national team. Lukaku ranks second for the all-time Euro"
+      },
+      {
+        "name": "Kevin De Bruyne",
+        "wiki_title": "Kevin De Bruyne",
+        "number": 11,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Serie A club Napoli",
+        "extract": "Kevin De Bruyne is a Belgian professional footballer who plays as a midfielder for Serie A club Napoli and the Belgium national team. Widely regarded as one of the best players of "
+      },
+      {
+        "name": "Amir Rrahmani",
+        "wiki_title": "Amir Rrahmani",
+        "number": 13,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for Serie A club Napoli",
+        "extract": "Amir Kadri Rrahmani is a Kosovar professional footballer who plays as a centre-back for Serie A club Napoli and captains the Kosovo national team."
+      },
+      {
+        "name": "Nikita Contini",
+        "wiki_title": "Nikita Contini",
+        "number": 14,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for Serie A club Napoli",
+        "extract": "Nikita Contini-Baranovsky is a Ukrainian professional footballer who plays as a goalkeeper for Serie A club Napoli."
+      },
+      {
+        "name": "Mathías Olivera",
+        "wiki_title": "Mathías Olivera",
+        "number": 17,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back or centre-back",
+        "extract": "Mathías Olivera Miramontes is a Uruguayan professional footballer who plays as a left-back or centre-back for Serie A club Napoli and the Uruguay national team."
+      },
+      {
+        "name": "Rasmus Højlund",
+        "wiki_title": "Rasmus Højlund",
+        "number": 19,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Serie A club Napoli",
+        "extract": "Rasmus Winther Højlund is a Danish professional footballer who plays as a striker for Serie A club Napoli, on loan from Premier League club Manchester United, and the Denmark natio"
+      },
+      {
+        "name": "Eljif Elmas",
+        "wiki_title": "Eljif Elmas",
+        "number": 20,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Eljif Elmas is a Macedonian professional footballer who plays for Serie A club Napoli, on loan from Bundesliga club RB Leipzig, and the North Macedonia national team. A versatile f"
+      },
+      {
+        "name": "Matteo Politano",
+        "wiki_title": "Matteo Politano",
+        "number": 21,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "right winger for Serie A club Napoli",
+        "extract": "Matteo Politano is an Italian professional footballer who plays as a right winger for Serie A club Napoli and the Italy national team."
+      },
+      {
+        "name": "Giovanni Di Lorenzo",
+        "wiki_title": "Giovanni Di Lorenzo",
+        "number": 22,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back for Serie A club Napoli",
+        "extract": "Giovanni Di Lorenzo is an Italian professional footballer who plays as a right-back for Serie A club Napoli, which he captains, and the Italy national team."
+      },
+      {
+        "name": "Giovane",
+        "wiki_title": "Giovane (footballer, born 2003)",
+        "number": 23,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Italian Serie A club Napoli",
+        "extract": "Giovane Santana do Nascimento, simply known as Giovane, is a Brazilian professional footballer who plays as a striker for Italian Serie A club Napoli."
+      },
+      {
+        "name": "Antonio Vergara",
+        "wiki_title": "Antonio Vergara",
+        "number": 26,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Serie A club Napoli",
+        "extract": "Antonio Vergara is an Italian professional footballer who plays as a midfielder for Serie A club Napoli."
+      },
+      {
+        "name": "Alisson Santos",
+        "wiki_title": "Alisson Santos",
+        "number": 27,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Serie A club Napoli",
+        "extract": "Alisson de Almeida Santos, known as Alisson Santos or just Alisson, is a Brazilian professional footballer who plays as a winger for Serie A club Napoli, on loan from Sporting CP."
+      },
+      {
+        "name": "Pasquale Mazzocchi",
+        "wiki_title": "Pasquale Mazzocchi",
+        "number": 30,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "wing-back or full-back",
+        "extract": "Pasquale Mazzocchi is an Italian professional footballer who plays as a wing-back or full-back for Serie A club Napoli."
+      },
+      {
+        "name": "Sam Beukema",
+        "wiki_title": "Sam Beukema",
+        "number": 31,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for Serie A club Napoli",
+        "extract": "Sam Beukema is a Dutch professional footballer who plays as a centre-back for Serie A club Napoli."
+      },
+      {
+        "name": "Vanja Milinković-Savić",
+        "wiki_title": "Vanja Milinković-Savić",
+        "number": 32,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for Serie A club Napoli",
+        "extract": "Vanja Milinković-Savić is a Serbian professional footballer who plays as a goalkeeper for Serie A club Napoli, on loan from Torino, and the Serbia national team."
+      },
+      {
+        "name": "Leonardo Spinazzola",
+        "wiki_title": "Leonardo Spinazzola",
+        "number": 37,
+        "pos_raw": "DF",
+        "mapped": "LW",
+        "refinement": "left wing-back for Serie A club Napoli",
+        "extract": "Leonardo Spinazzola is an Italian professional footballer who plays as a left wing-back for Serie A club Napoli and the Italy national team."
+      },
+      {
+        "name": "Stanislav Lobotka",
+        "wiki_title": "Stanislav Lobotka",
+        "number": 68,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Stanislav Lobotka is a Slovak professional footballer who plays as a defensive midfielder for Serie A club Napoli and the Slovakia national team."
+      },
+      {
+        "name": "André-Frank Zambo Anguissa",
+        "wiki_title": "Frank Anguissa",
+        "number": 99,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "André-Frank Zambo Anguissa, commonly known as Frank Anguissa, is a Cameroonian professional footballer who plays as a central midfielder for Serie A club Napoli and the Cameroon na"
+      },
+      {
+        "name": "Luca Marianucci",
+        "wiki_title": "Luca Marianucci",
+        "number": null,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for Serie A club Torino",
+        "extract": "Luca Marianucci is an Italian professional footballer who plays as a centre-back for Serie A club Torino, on loan from Napoli."
+      },
+      {
+        "name": "Rafa Marín",
+        "wiki_title": "Rafa Marín",
+        "number": null,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for La Liga club Villarreal",
+        "extract": "Rafael Marín Zamora is a Spanish professional footballer who plays as a centre-back for La Liga club Villarreal, on loan from Serie A club Napoli."
+      },
+      {
+        "name": "Alessandro Zanoli",
+        "wiki_title": "Alessandro Zanoli",
+        "number": null,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back for Serie A club Udinese",
+        "extract": "Alessandro Zanoli is an Italian professional footballer who plays as a right-back for Serie A club Udinese, on loan from Napoli."
+      },
+      {
+        "name": "Jens Cajuste",
+        "wiki_title": "Jens Cajuste",
+        "number": null,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Jens-Lys Michel Cajuste is a Swedish professional footballer who plays as a central midfielder for English EFL Championship club Ipswich Town on loan from Serie A club Napoli, and "
+      },
+      {
+        "name": "Michael Folorunsho",
+        "wiki_title": "Michael Folorunsho",
+        "number": null,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Serie A club Cagliari",
+        "extract": "Michael Ijemuan Folorunsho is an Italian professional footballer who plays as a midfielder for Serie A club Cagliari, on loan from Napoli. He also plays for the Italy national team"
+      },
+      {
+        "name": "Coli Saco",
+        "wiki_title": "Coli Saco",
+        "number": null,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Coli Saco is a professional footballer who plays as a central midfielder for Italian Serie C Group C club Casertana on loan from Napoli. Born in France, Saco represents Mali at und"
+      },
+      {
+        "name": "Giuseppe Ambrosino",
+        "wiki_title": "Giuseppe Ambrosino",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Giuseppe Ambrosino Di Bruttopilo is an Italian professional footballer who plays as a forward for Serie B club Modena on loan from Serie A club Napoli."
+      },
+      {
+        "name": "Walid Cheddira",
+        "wiki_title": "Walid Cheddira",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Walid Cheddira is a professional footballer who plays as a forward for Serie A club Lecce on loan from Napoli. Born in Italy, he plays for the Morocco national team."
+      },
+      {
+        "name": "Antonio Cioffi",
+        "wiki_title": "Antonio Cioffi",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Antonio Cioffi is an Italian professional football player who plays as a forward for Serie C Group C club Latina on loan from Napoli."
+      },
+      {
+        "name": "Luis Hasa",
+        "wiki_title": "Luis Hasa",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "attacking midfielder",
+        "extract": "Luis Hasa is a professional footballer who plays as an attacking midfielder for Serie B club Carrarese, on loan from Serie A club Napoli. Born in Italy, he represents the Albania n"
+      },
+      {
+        "name": "Noa Lang",
+        "wiki_title": "Noa Lang",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "left winger or left midfielder",
+        "extract": "Noa Noëll Lang is a Dutch professional footballer who plays as a left winger or left midfielder for Süper Lig club Galatasaray, on loan from Serie A club Napoli, and the Netherland"
+      },
+      {
+        "name": "Jesper Lindstrøm",
+        "wiki_title": "Jesper Lindstrøm",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Bundesliga club VfL Wolfsburg",
+        "extract": "Jesper Grænge Lindstrøm is a Danish professional footballer who plays as a winger for Bundesliga club VfL Wolfsburg, on loan from Serie A club Napoli. He also plays for the Denmark"
+      },
+      {
+        "name": "Lorenzo Lucca",
+        "wiki_title": "Lorenzo Lucca",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Lorenzo Lucca is an Italian professional footballer who plays as a striker for Premier League club Nottingham Forest, on loan from Serie A club Napoli, and the Italy national team."
+      },
+      {
+        "name": "Cyril Ngonge",
+        "wiki_title": "Cyril Ngonge",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "attacking midfielder",
+        "extract": "Cyril Ngonge is a Belgian professional footballer who plays as an attacking midfielder, winger, or forward for Spanish La Liga club Espanyol on loan from Italian club Napoli, and t"
+      },
+      {
+        "name": "Emanuele Rao",
+        "wiki_title": "Emanuele Rao",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger for Serie B club Bari",
+        "extract": "Emanuele Rao is an Italian professional footballer who plays as a winger for Serie B club Bari, on loan from Napoli."
+      },
+      {
+        "name": "Lorenzo Sgarbi",
+        "wiki_title": "Lorenzo Sgarbi",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Lorenzo Sgarbi is an Italian footballer who plays as a striker for Serie B club Avellino on loan from Napoli."
+      },
+      {
+        "name": "Giovanni Simeone",
+        "wiki_title": "Giovanni Simeone",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Serie A club Torino",
+        "extract": "Giovanni Pablo Simeone Baldini, also known as Gio Simeone or \"El Cholito\", is an Argentine professional footballer who plays as a striker for Serie A club Torino, on loan from Napo"
+      },
+      {
+        "name": "Alessio Zerbin",
+        "wiki_title": "Alessio Zerbin",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger",
+        "extract": "Alessio Zerbin is an Italian professional footballer who plays as a winger for Serie A club Cremonese on loan from Napoli. He also plays for the Italy national team."
+      }
+    ]
+  },
+  "inter0910": {
+    "key": "inter0910",
+    "label": "Inter Milan 2009-10 (UCL winner)",
+    "page": "2009–10 Inter Milan season",
+    "team": "Inter Milan 2009-10",
+    "tagSlug": "inter-2009-10",
+    "era": "historic",
+    "squad": [
+      {
+        "name": "Julio Cesar",
+        "wiki_title": "Júlio César (football goalkeeper, born 1979)",
+        "number": 12,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Júlio César Soares de Espíndola, known as Júlio César, is a Brazilian former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "Maicon",
+        "wiki_title": "Maicon (footballer, born 1981)",
+        "number": 13,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "",
+        "extract": "Maicon Douglas Sisenando, also known as Maicon Douglas or simply Maicon, is a Brazilian former professional footballer who played as a right-back."
+      },
+      {
+        "name": "Lúcio",
+        "wiki_title": "Lúcio",
+        "number": 6,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Lucimar Ferreira da Silva, commonly known as Lúcio, is a Brazilian former professional footballer who played as a centre-back. A tall and physically strong defender who excelled in"
+      },
+      {
+        "name": "Walter Samuel",
+        "wiki_title": "Walter Samuel",
+        "number": 25,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Walter Adrián Samuel is an Argentine former professional footballer. Samuel has been regarded as one of the best centre-backs of his generation, and as one of football's toughest d"
+      },
+      {
+        "name": "Christian Chivu",
+        "wiki_title": "Christian Chivu",
+        "number": 26,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Cristian Eugen Chivu is a Romanian professional football coach and former player who is the head coach of Serie A club Inter Milan."
+      },
+      {
+        "name": "Javier Zanetti",
+        "wiki_title": "Javier Zanetti",
+        "number": 4,
+        "pos_raw": "MF",
+        "mapped": "RB",
+        "refinement": "",
+        "extract": "Javier Adelmar Zanetti is an Argentine former professional footballer. Spending nearly all his career at Inter Milan, Zanetti was known for his versatility and adeptness, often pla"
+      },
+      {
+        "name": "Esteban Cambiasso",
+        "wiki_title": "Esteban Cambiasso",
+        "number": 19,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Esteban Matías Cambiasso Deleau, nicknamed \"Cuchu\", is an Argentine former professional footballer who played as a midfielder."
+      },
+      {
+        "name": "Wesley Sneijder",
+        "wiki_title": "Wesley Sneijder",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Wesley Sneijder is a Dutch former professional footballer. Noted for his playmaking ability, he was considered one of the best midfielders in the world during his prime."
+      },
+      {
+        "name": "Dejan Stankovic",
+        "wiki_title": "Dejan Stankovic",
+        "number": 5,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Dejan Stanković is a Serbian professional football manager and former player. He captained the Serbia national team from 2007 until 2011, when he announced his retirement from inte"
+      },
+      {
+        "name": "Diego Milito",
+        "wiki_title": "Diego Milito",
+        "number": 22,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Diego Alberto Milito is an Argentine former professional footballer who played as a striker. He was nicknamed El Principe because of his physical resemblance with former Uruguayan "
+      },
+      {
+        "name": "Samuel Eto'o",
+        "wiki_title": "Samuel Eto'o",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "",
+        "extract": "Samuel Eto'o Fils is a Cameroonian football administrator and former player who is the current president of the Cameroonian Football Federation. He is often regarded as one of the "
+      },
+      {
+        "name": "Francesco Toldo",
+        "wiki_title": "Francesco Toldo",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Francesco Toldo is an Italian retired footballer who played as a goalkeeper. He is regarded by some pundits as one of the greatest goalkeepers of his generation."
+      },
+      {
+        "name": "Thiago Motta",
+        "wiki_title": "Thiago Motta",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Thiago Motta is a professional football manager and former player who was most recently the head coach of Serie A club Juventus."
+      },
+      {
+        "name": "Sulley Ali Muntari",
+        "wiki_title": "Sulley Ali Muntari",
+        "number": 11,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Suleyman Ali \"Sulley\" Muntari is a Ghanaian former professional footballer who played as a midfielder. He spent most of his career in Italy, playing for clubs such as Udinese, Inte"
+      },
+      {
+        "name": "Ivan Cordoba",
+        "wiki_title": "Ivan Cordoba",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Iván Ramiro Córdoba Sepúlveda is a Colombian former professional footballer who played as a defender. He began his career in Colombia with Deportivo Rionegro and Atlético Nacional,"
+      },
+      {
+        "name": "Mario Balotelli",
+        "wiki_title": "Mario Balotelli",
+        "number": 45,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Mario Balotelli Barwuah is an Italian professional footballer who plays as a striker for UAE First Division club Al-Ittifaq."
+      },
+      {
+        "name": "Goran Pandev",
+        "wiki_title": "Goran Pandev",
+        "number": 27,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Goran Pandev is a Macedonian former professional footballer who played as a forward. He is regarded as one of the best Macedonian footballers of all time."
+      },
+      {
+        "name": "Davide Santon",
+        "wiki_title": "Davide Santon",
+        "number": 39,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Davide Santon is an Italian former professional footballer who played as a left wing-back."
+      },
+      {
+        "name": "Marco Materazzi",
+        "wiki_title": "Marco Materazzi",
+        "number": 23,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Marco Materazzi is an Italian former professional football player and manager. A controversial and provocative figure in football, he was known for his very physical and aggressive"
+      },
+      {
+        "name": "Patrick Vieira",
+        "wiki_title": "Patrick Vieira",
+        "number": 14,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Patrick Paul Vieira is a professional football manager and former player who was most recently the head coach of Serie A club Genoa. Widely regarded as among the best players of hi"
+      },
+      {
+        "name": "Ricardo Quaresma",
+        "wiki_title": "Ricardo Quaresma",
+        "number": 7,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Ricardo Andrade Quaresma Bernardo is a Portuguese former professional footballer who played as a winger."
+      },
+      {
+        "name": "McDonald Mariga",
+        "wiki_title": "McDonald Mariga",
+        "number": 17,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "McDonald Mariga Wanyama is a Kenyan politician and former professional footballer who played as a defensive midfielder. In 2010, he became the first Kenyan footballer to play in an"
+      },
+      {
+        "name": "Rene Krhin",
+        "wiki_title": "Rene Krhin",
+        "number": 15,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Rene Krhin is a Slovenian retired footballer who played as a central midfielder. He earned a total of 48 caps for the Slovenia national team."
+      },
+      {
+        "name": "Paolo Orlandoni",
+        "wiki_title": "Paolo Orlandoni",
+        "number": 21,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Paolo Orlandoni is an Italian former professional footballer who played as a goalkeeper. He is the current goalkeeper coach for Inter Milan."
+      },
+      {
+        "name": "Giulio Donati",
+        "wiki_title": "Giulio Donati",
+        "number": 29,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back",
+        "extract": "Giulio Donati is an Italian professional footballer who plays as a right-back for Serie C Group B club Ravenna."
+      },
+      {
+        "name": "Alen Stevanovic",
+        "wiki_title": "Alen Stevanovic",
+        "number": 28,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "winger",
+        "extract": "Alen Stevanović is a professional footballer who plays as a winger. Born in Switzerland, he represented Serbia at international level."
+      },
+      {
+        "name": "Amantino Mancini",
+        "wiki_title": "Amantino Mancini",
+        "number": 30,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Alessandro Faiolhe Amantino, more commonly known as Mancini, is a Brazilian football coach and former player."
+      },
+      {
+        "name": "David Suazo",
+        "wiki_title": "David Suazo",
+        "number": 18,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Óscar David Suazo Velázquez “La pantera” or “El Rey David” is a Honduran retired professional footballer turned coach who played as a striker. Suazo played more than 300 league gam"
+      },
+      {
+        "name": "Marko Arnautovic",
+        "wiki_title": "Marko Arnautovic",
+        "number": 89,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Marko Arnautović is an Austrian professional footballer who plays as a striker for Serbian SuperLiga club Red Star Belgrade and is the all time top goalscorer for the Austria natio"
+      },
+      {
+        "name": "Lorenzo Crisetig",
+        "wiki_title": "Lorenzo Crisetig",
+        "number": null,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Serie B club Padova",
+        "extract": "Lorenzo Crisetig is an Italian professional footballer who plays as a midfielder for Serie B club Padova."
+      },
+      {
+        "name": "Denis Alibec",
+        "wiki_title": "Denis Alibec",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Denis Alibec is a Romanian professional footballer who plays as a forward for Liga I club Farul Constanța."
+      },
+      {
+        "name": "Sebastian Carlsen",
+        "wiki_title": "Sebastian Carlsen",
+        "number": null,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Sebastian Carlsén is a Swedish professional footballer who plays as a midfielder."
+      }
+    ]
+  },
+  "chelsea1112": {
+    "key": "chelsea1112",
+    "label": "Chelsea 2011-12 (UCL winner)",
+    "page": "2011–12 Chelsea F.C. season",
+    "team": "Chelsea 2011-12",
+    "tagSlug": "chelsea-2011-12",
+    "era": "historic",
+    "squad": [
+      {
+        "name": "Petr Čech",
+        "wiki_title": "Petr Čech",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Petr Čech is a Czech former professional football goalkeeper and current ice hockey goaltender who plays for the Haringey Huskies of the NIHL Division 2 South. He has been describe"
+      },
+      {
+        "name": "Branislav Ivanović",
+        "wiki_title": "Branislav Ivanović",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Branislav Ivanović is a Serbian former professional footballer. A versatile defender, he operated mainly as a right-back."
+      },
+      {
+        "name": "Ashley Cole",
+        "wiki_title": "Ashley Cole",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Ashley Cole is an English football coach and former player, who is currently the head coach of Serie B club Cesena. As a player, he played as a left-back, most notably for Arsenal "
+      },
+      {
+        "name": "David Luiz",
+        "wiki_title": "David Luiz",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender",
+        "extract": "David Luiz Moreira Marinho is a Brazilian professional footballer who plays as a defender for Cypriot First Division club Pafos. He is primarily a centre-back, but has also been de"
+      },
+      {
+        "name": "Michael Essien",
+        "wiki_title": "Michael Essien",
+        "number": 5,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Michael Essien is a Ghanaian football coach and former player who is currently an assistant coach at Danish Superliga club Nordsjælland."
+      },
+      {
+        "name": "Oriol Romeu",
+        "wiki_title": "Oriol Romeu",
+        "number": 6,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Oriol Romeu Vidal is a Spanish professional footballer who plays as a defensive midfielder for EFL Championship club Southampton."
+      },
+      {
+        "name": "Ramires",
+        "wiki_title": "Ramires",
+        "number": 7,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Ramires Santos do Nascimento, known as Ramires, is a Brazilian former professional footballer. A midfielder, he was comfortable playing in either the centre or right midfielder pos"
+      },
+      {
+        "name": "Frank Lampard",
+        "wiki_title": "Frank Lampard",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Frank James Lampard is an English football manager and former midfielder who is the manager of EFL Championship club Coventry City. Widely regarded as one of the greatest midfielde"
+      },
+      {
+        "name": "Fernando Torres",
+        "wiki_title": "Fernando Torres",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Fernando José Torres Sanz is a Spanish football manager and former player who played as a striker. He is the current manager of Atlético Madrid B. Due to his consistent goalscoring"
+      },
+      {
+        "name": "Juan Mata",
+        "wiki_title": "Juan Mata",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Juan Manuel Mata García is a Spanish professional footballer who plays as a midfielder for A-League Men club Melbourne Victory. He primarily plays as an attacking midfielder, but c"
+      },
+      {
+        "name": "Didier Drogba",
+        "wiki_title": "Didier Drogba",
+        "number": 11,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Didier Yves Drogba Tébily (French pronunciation: [didje iv dʁɔɡba tebili]; born 11 March 1978) is an Ivorian former professional footballer who played as a striker. He is the all-t"
+      },
+      {
+        "name": "Mikel John Obi",
+        "wiki_title": "Mikel John Obi",
+        "number": 12,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Mikel John Obi, also known as John Obi Mikel, is a Nigerian former professional footballer who played as a defensive midfielder."
+      },
+      {
+        "name": "Florent Malouda",
+        "wiki_title": "Florent Malouda",
+        "number": 15,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Florent Johan Malouda is a French football coach and former professional player who played as a left winger. Born in French Guiana, he represented both France and French Guiana at "
+      },
+      {
+        "name": "Raul Meireles",
+        "wiki_title": "Raul Meireles",
+        "number": 16,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Raul José Trindade Meireles is a Portuguese former professional footballer who played as a midfielder."
+      },
+      {
+        "name": "José Bosingwa",
+        "wiki_title": "José Bosingwa",
+        "number": 17,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "José Bosingwa da Silva is a former professional footballer who played as a right-back. Born in Zaire, he represented the Portugal national team."
+      },
+      {
+        "name": "Romelu Lukaku",
+        "wiki_title": "Romelu Lukaku",
+        "number": 18,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for Serie A club Napoli",
+        "extract": "Romelu Lukaku Bolingoli is a Belgian professional footballer who plays as a striker for Serie A club Napoli and the Belgium national team. Lukaku ranks second for the all-time Euro"
+      },
+      {
+        "name": "Paulo Ferreira",
+        "wiki_title": "Paulo Ferreira",
+        "number": 19,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Paulo Renato Rebocho Ferreira is a Portuguese former professional footballer who played as a full-back."
+      },
+      {
+        "name": "Josh McEachran",
+        "wiki_title": "Josh McEachran",
+        "number": 20,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Joshua Mark McEachran is an English professional footballer who plays as a midfielder for EFL League Two club Bristol Rovers."
+      },
+      {
+        "name": "Salomon Kalou",
+        "wiki_title": "Salomon Kalou",
+        "number": 21,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Salomon Armand Magloire Kalou is an Ivorian former professional footballer who played as a forward or winger."
+      },
+      {
+        "name": "Ross Turnbull",
+        "wiki_title": "Ross Turnbull",
+        "number": 22,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Ross Turnbull is an English former professional footballer who played as a goalkeeper. Between 2002 and 2015 he made 148 league appearances, mostly for Middlesbrough, Chelsea, Crew"
+      },
+      {
+        "name": "Daniel Sturridge",
+        "wiki_title": "Daniel Sturridge",
+        "number": 23,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Daniel Andre Sturridge is an English former professional footballer who played as a striker. Since 2023, he has worked as a television pundit for Sky Sports."
+      },
+      {
+        "name": "Gary Cahill",
+        "wiki_title": "Gary Cahill",
+        "number": 24,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Gary James Cahill is an English former professional footballer who played as a centre-back."
+      },
+      {
+        "name": "John Terry",
+        "wiki_title": "John Terry",
+        "number": 26,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "John George Terry is an English professional football coach and former player who played as a centre-back. He was previously captain of Chelsea, the England national team and Aston"
+      },
+      {
+        "name": "Sam Hutchinson",
+        "wiki_title": "Sam Hutchinson",
+        "number": 27,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back or defensive midfielder",
+        "extract": "Samuel Edward Hutchinson is an English professional footballer who plays as a centre-back or defensive midfielder for AFC Wimbledon. He will become a free agent on 30 June 2026."
+      },
+      {
+        "name": "Ryan Bertrand",
+        "wiki_title": "Ryan Bertrand",
+        "number": 34,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Ryan Dominic Bertrand is an English former professional footballer who played as a left-back."
+      },
+      {
+        "name": "Lucas Piazon",
+        "wiki_title": "Lucas Piazon",
+        "number": 35,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Lucas Domingues Piazon is a Brazilian professional footballer who plays for I liga club Wieczysta Kraków. A versatile player, he can be deployed as a winger, attacking midfielder, "
+      },
+      {
+        "name": "Henrique Hilário",
+        "wiki_title": "Henrique Hilário",
+        "number": 40,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Henrique Hilário Meireles Alves Sampaio, known as Hilário, is a Portuguese football coach and former player who played as a goalkeeper. He is the goalkeeping coach of the England n"
+      },
+      {
+        "name": "Nathaniel Chalobah",
+        "wiki_title": "Nathaniel Chalobah",
+        "number": 45,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defensive midfielder",
+        "extract": "Nathaniel Nyakie Chalobah is a professional footballer who plays as a defensive midfielder for EFL Championship club Sheffield Wednesday. Born in Sierra Leone, he represented the E"
+      },
+      {
+        "name": "Jamal Blackman",
+        "wiki_title": "Jamal Blackman",
+        "number": 46,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Jamal Clint-Ross Blackman is an English professional footballer who plays as a goalkeeper for National League club Morecambe."
+      },
+      {
+        "name": "Billy Clifford",
+        "wiki_title": "Billy Clifford (footballer)",
+        "number": 47,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "midfielder",
+        "extract": "Billy Clifford is an English footballer who plays as a midfielder for Southern League Premier Division South side Farnham Town. He played in the Football League for Colchester Unit"
+      },
+      {
+        "name": "Conor Clifford",
+        "wiki_title": "Conor Clifford",
+        "number": 48,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for Lucan United",
+        "extract": "Conor Paul Clifford is an Irish professional footballer who plays as a midfielder for Lucan United. He is a former Republic of Ireland youth international and has represented them "
+      },
+      {
+        "name": "Aziz Deen-Conteh",
+        "wiki_title": "Aziz Deen-Conteh",
+        "number": 49,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Abdul Aziz Deen-Conteh is a Sierra Leonean former professional footballer who played as a left-back."
+      },
+      {
+        "name": "Rohan Ince",
+        "wiki_title": "Rohan Ince",
+        "number": 51,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "holding midfielder",
+        "extract": "Rohan Greg Ince is a professional footballer who plays as a holding midfielder for National League South club Hampton & Richmond Borough. Ince can also play as a central defender.\n"
+      },
+      {
+        "name": "Marko Mitrović",
+        "wiki_title": "Marko Mitrović (footballer, born 1992)",
+        "number": 53,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Marko Mitrović is a Swedish entrepreneur and former professional football player. Mitrović is the founder and CEO of Arktis, a health technology company integrating biotechnology, "
+      },
+      {
+        "name": "Todd Kane",
+        "wiki_title": "Todd Kane",
+        "number": 54,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Todd Arthur Lucien Kane is an English former professional footballer who played primarily as a right back. Kane is currently an academy coach at EFL League One side Peterborough Un"
+      },
+      {
+        "name": "George Saville",
+        "wiki_title": "George Saville (footballer)",
+        "number": 56,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "George Alan Saville is a professional footballer who plays as a midfielder for EFL League One club Luton Town and the Northern Ireland national team."
+      },
+      {
+        "name": "Daniel Pappoe",
+        "wiki_title": "Daniel Pappoe",
+        "number": 58,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender for Roffey",
+        "extract": "Daniel Mills Pappoe is a Ghanaian professional footballer who plays as a defender for Roffey. He previously played for Crawley Town, Brighton & Hove Albion, Chelsea and Colchester "
+      },
+      {
+        "name": "Adam Phillip",
+        "wiki_title": "Adam Phillip",
+        "number": null,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Adam Julian Coombes is an English footballer who plays as a striker for Isthmian League Premier Division club Cray Valley Paper Mills."
+      },
+      {
+        "name": "James Ashton <sup>B</sup>",
+        "wiki_title": "James Ashton <sup>B</sup>",
+        "number": 55,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": ""
+      },
+      {
+        "name": "Archange Nkumu",
+        "wiki_title": "Archange Nkumu",
+        "number": 57,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender or midfielder",
+        "extract": "Archange Nkumu is an English professional footballer who plays as a defender or midfielder."
+      },
+      {
+        "name": "Rhys Taylor",
+        "wiki_title": "Rhys Taylor",
+        "number": 60,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Rhys Francis Taylor is a Welsh former professional footballer who has played as a goalkeeper for Bradford. He has played for Wales up to under-21 level."
+      },
+      {
+        "name": "Yossi Benayoun",
+        "wiki_title": "Yossi Benayoun",
+        "number": 30,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Yossi Shai Benayoun is an Israeli former professional footballer who played as a midfielder. He spent most of his career in Israel and England and captained the Israel national tea"
+      },
+      {
+        "name": "Alex",
+        "wiki_title": "Alex (footballer, born June 1982)",
+        "number": 33,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Alex Rodrigo Dias da Costa, known as Alex, is a Brazilian former professional footballer who played as a centre-back. He was known for his physical strength and the power of his sh"
+      },
+      {
+        "name": "Nicolas Anelka",
+        "wiki_title": "Nicolas Anelka",
+        "number": 39,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Nicolas Sébastien Anelka is a French professional football manager and former player who played as a forward. As a player, he regularly featured in his country's national team, oft"
+      }
+    ]
+  },
+  "madrid1516": {
+    "key": "madrid1516",
+    "label": "Real Madrid 2015-16 (UCL winner)",
+    "page": "2015–16 Real Madrid CF season",
+    "team": "Real Madrid 2015-16",
+    "tagSlug": "madrid-2015-16",
+    "era": "historic",
+    "squad": [
+      {
+        "name": "Keylor Navas",
+        "wiki_title": "Keylor Navas",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for",
+        "extract": "Keilor Antonio Navas Gamboa, known as Keylor Navas, is a Costa Rican professional footballer who plays as a goalkeeper for and captains Liga MX club UNAM and the Costa Rica nationa"
+      },
+      {
+        "name": "Danilo",
+        "wiki_title": "Danilo (footballer, born July 1991)",
+        "number": 23,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "centre-back or right-back",
+        "extract": "Danilo Luiz da Silva, known as Danilo, is a Brazilian professional footballer who plays as a centre-back or right-back for Campeonato Brasileiro Série A club Flamengo and the Brazi"
+      },
+      {
+        "name": "Sergio Ramos",
+        "wiki_title": "Sergio Ramos",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back or right-back",
+        "extract": "Sergio Ramos García is a Spanish professional footballer who plays as a centre-back or right-back. Widely regarded as one of the greatest defenders of all time, he is known for his"
+      },
+      {
+        "name": "Raphaël Varane",
+        "wiki_title": "Raphaël Varane",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Raphaël Xavier Varane is a French former professional footballer who played as a centre-back."
+      },
+      {
+        "name": "Marcelo",
+        "wiki_title": "Marcelo (footballer, born 1988)",
+        "number": 12,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Marcelo Vieira da Silva Júnior, known as Marcelo, is a Brazilian former professional footballer who played as a left-back. Widely regarded as one of the greatest left-backs of all "
+      },
+      {
+        "name": "Luka Modrić",
+        "wiki_title": "Luka Modrić",
+        "number": 19,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Luka Modrić is a Croatian professional footballer who plays as a central midfielder for Serie A club AC Milan and captains the Croatia national team. He is widely regarded as one o"
+      },
+      {
+        "name": "Toni Kroos",
+        "wiki_title": "Toni Kroos",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Toni Kroos is a German former professional footballer who played as a midfielder. Regarded as one of the greatest midfielders of his generation, he was known for his vision and pin"
+      },
+      {
+        "name": "Isco",
+        "wiki_title": "Isco",
+        "number": 22,
+        "pos_raw": "MF",
+        "mapped": "LW",
+        "refinement": "attacking midfielder or left winger",
+        "extract": "Francisco Román Alarcón Suárez, commonly known as Isco, is a Spanish professional footballer who plays as an attacking midfielder or left winger for La Liga club Real Betis, which "
+      },
+      {
+        "name": "Cristiano Ronaldo",
+        "wiki_title": "Cristiano Ronaldo",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "forward for",
+        "extract": "Cristiano Ronaldo dos Santos Aveiro, nicknamed CR7, is a Portuguese professional footballer who plays as a forward for and captains both Saudi Pro League club Al-Nassr and the Port"
+      },
+      {
+        "name": "Karim Benzema",
+        "wiki_title": "Karim Benzema",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Karim Mostafa Benzema is a French professional footballer who plays as a striker for Saudi Pro League club Al-Hilal. Regarded as one of the greatest strikers of all time, Benzema i"
+      },
+      {
+        "name": "Gareth Bale",
+        "wiki_title": "Gareth Bale",
+        "number": 11,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "",
+        "extract": "Gareth Frank Bale is a Welsh former professional footballer who played as a right winger, most notably for Tottenham Hotspur, Real Madrid, and the Wales national team. He is widely"
+      },
+      {
+        "name": "Kiko Casilla",
+        "wiki_title": "Kiko Casilla",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Francisco \"Kiko\" Casilla Cortés is a Spanish former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "Pepe",
+        "wiki_title": "Pepe (footballer, born 1983)",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Kepler Laveran de Lima Ferreira OM, known as Pepe, is a former professional footballer who played as a centre-back. Born in Brazil, he played for the Portugal national team. He is "
+      },
+      {
+        "name": "Dani Carvajal",
+        "wiki_title": "Dani Carvajal",
+        "number": 15,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back for La Liga club Real Madrid",
+        "extract": "Daniel Carvajal Ramos is a Spanish professional footballer who plays as a right-back for La Liga club Real Madrid, which he captains, and the Spain national team."
+      },
+      {
+        "name": "James Rodríguez",
+        "wiki_title": "James Rodríguez",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder or winger",
+        "extract": "James David Rodríguez Rubio is a Colombian professional footballer who plays as an attacking midfielder or winger for Major League Soccer club Minnesota United and captains the Col"
+      },
+      {
+        "name": "Casemiro",
+        "wiki_title": "Casemiro",
+        "number": 14,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Carlos Henrique Casimiro, also known mononymously as Casemiro, is a Brazilian professional footballer who plays as a defensive midfielder for Premier League club Manchester United "
+      },
+      {
+        "name": "Nacho",
+        "wiki_title": "Nacho (footballer, born 1990)",
+        "number": 6,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender",
+        "extract": "José Ignacio Fernández Iglesias, known as Nacho or Nacho Fernández, is a Spanish professional footballer who plays as a defender for Saudi Pro League club Al-Qadsiah. Mainly a cent"
+      },
+      {
+        "name": "Lucas Vázquez",
+        "wiki_title": "Lucas Vázquez",
+        "number": 18,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "right-back or winger",
+        "extract": "Lucas Vázquez Iglesias is a Spanish professional footballer who plays as a right-back or winger for Bundesliga club Bayer Leverkusen."
+      },
+      {
+        "name": "Mateo Kovačić",
+        "wiki_title": "Mateo Kovačić",
+        "number": 16,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Mateo Kovačić is a professional footballer who plays as a central midfielder for Premier League club Manchester City and the Croatia national team."
+      },
+      {
+        "name": "Jesé",
+        "wiki_title": "Jesé",
+        "number": 20,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "",
+        "extract": "Jesé Rodríguez Ruiz is a Spanish professional footballer who plays as winger or forward for Segunda División club Las Palmas."
+      },
+      {
+        "name": "Borja Mayoral",
+        "wiki_title": "Borja Mayoral",
+        "number": 29,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for La Liga club Getafe",
+        "extract": "Borja Mayoral Moya is a Spanish professional footballer who plays as a striker for La Liga club Getafe."
+      },
+      {
+        "name": "Álvaro Arbeloa",
+        "wiki_title": "Álvaro Arbeloa",
+        "number": 17,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Álvaro Arbeloa Coca is a Spanish professional football manager and former footballer who is the head coach of La Liga club Real Madrid. He predominantly played as a right-back, and"
+      },
+      {
+        "name": "Denis Cheryshev",
+        "wiki_title": "Denis Cheryshev",
+        "number": 21,
+        "pos_raw": "MF",
+        "mapped": "LW",
+        "refinement": "left winger",
+        "extract": "Denis Dmitriyevich Cheryshev is a Russian professional footballer who plays as a left winger for Cypriot First Division club Krasava ENY Ypsonas."
+      },
+      {
+        "name": "Marcos Llorente",
+        "wiki_title": "Marcos Llorente",
+        "number": 28,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder or right-back",
+        "extract": "Marcos Llorente Moreno is a Spanish professional footballer who plays as a midfielder or right-back for La Liga club Atlético Madrid and the Spain national team."
+      },
+      {
+        "name": "Rubén Yáñez",
+        "wiki_title": "Rubén Yáñez",
+        "number": 31,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Orlando Rubén Yáñez Alabart, known as Rubén Yáñez, is a Spanish professional footballer who plays as a goalkeeper for Sporting de Gijón."
+      },
+      {
+        "name": "Philipp Lienhart",
+        "wiki_title": "Philipp Lienhart",
+        "number": 32,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Philipp Lienhart is an Austrian professional footballer who plays as a centre-back for Bundesliga club SC Freiburg and the Austria national team."
+      },
+      {
+        "name": "Álvaro Tejero",
+        "wiki_title": "Álvaro Tejero",
+        "number": 34,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "full back",
+        "extract": "Álvaro Tejero Sacristán is a Spanish professional footballer who plays as a full back for Super League Greece club Aris."
+      }
+    ]
+  },
+  "madrid1718": {
+    "key": "madrid1718",
+    "label": "Real Madrid 2017-18 (UCL winner)",
+    "page": "2017–18 Real Madrid CF season",
+    "team": "Real Madrid 2017-18",
+    "tagSlug": "madrid-2017-18",
+    "era": "historic",
+    "squad": [
+      {
+        "name": "Keylor Navas",
+        "wiki_title": "Keylor Navas",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for",
+        "extract": "Keilor Antonio Navas Gamboa, known as Keylor Navas, is a Costa Rican professional footballer who plays as a goalkeeper for and captains Liga MX club UNAM and the Costa Rica nationa"
+      },
+      {
+        "name": "Dani Carvajal",
+        "wiki_title": "Dani Carvajal",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back for La Liga club Real Madrid",
+        "extract": "Daniel Carvajal Ramos is a Spanish professional footballer who plays as a right-back for La Liga club Real Madrid, which he captains, and the Spain national team."
+      },
+      {
+        "name": "Sergio Ramos",
+        "wiki_title": "Sergio Ramos",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back or right-back",
+        "extract": "Sergio Ramos García is a Spanish professional footballer who plays as a centre-back or right-back. Widely regarded as one of the greatest defenders of all time, he is known for his"
+      },
+      {
+        "name": "Raphaël Varane",
+        "wiki_title": "Raphaël Varane",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Raphaël Xavier Varane is a French former professional footballer who played as a centre-back."
+      },
+      {
+        "name": "Marcelo",
+        "wiki_title": "Marcelo (footballer, born 1988)",
+        "number": 12,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "",
+        "extract": "Marcelo Vieira da Silva Júnior, known as Marcelo, is a Brazilian former professional footballer who played as a left-back. Widely regarded as one of the greatest left-backs of all "
+      },
+      {
+        "name": "Toni Kroos",
+        "wiki_title": "Toni Kroos",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Toni Kroos is a German former professional footballer who played as a midfielder. Regarded as one of the greatest midfielders of his generation, he was known for his vision and pin"
+      },
+      {
+        "name": "Luka Modrić",
+        "wiki_title": "Luka Modrić",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Luka Modrić is a Croatian professional footballer who plays as a central midfielder for Serie A club AC Milan and captains the Croatia national team. He is widely regarded as one o"
+      },
+      {
+        "name": "Casemiro",
+        "wiki_title": "Casemiro",
+        "number": 14,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder",
+        "extract": "Carlos Henrique Casimiro, also known mononymously as Casemiro, is a Brazilian professional footballer who plays as a defensive midfielder for Premier League club Manchester United "
+      },
+      {
+        "name": "Cristiano Ronaldo",
+        "wiki_title": "Cristiano Ronaldo",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "forward for",
+        "extract": "Cristiano Ronaldo dos Santos Aveiro, nicknamed CR7, is a Portuguese professional footballer who plays as a forward for and captains both Saudi Pro League club Al-Nassr and the Port"
+      },
+      {
+        "name": "Karim Benzema",
+        "wiki_title": "Karim Benzema",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker",
+        "extract": "Karim Mostafa Benzema is a French professional footballer who plays as a striker for Saudi Pro League club Al-Hilal. Regarded as one of the greatest strikers of all time, Benzema i"
+      },
+      {
+        "name": "Gareth Bale",
+        "wiki_title": "Gareth Bale",
+        "number": 11,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "",
+        "extract": "Gareth Frank Bale is a Welsh former professional footballer who played as a right winger, most notably for Tottenham Hotspur, Real Madrid, and the Wales national team. He is widely"
+      },
+      {
+        "name": "Kiko Casilla",
+        "wiki_title": "Kiko Casilla",
+        "number": 13,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "",
+        "extract": "Francisco \"Kiko\" Casilla Cortés is a Spanish former professional footballer who played as a goalkeeper."
+      },
+      {
+        "name": "Nacho",
+        "wiki_title": "Nacho (footballer, born 1990)",
+        "number": 6,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender",
+        "extract": "José Ignacio Fernández Iglesias, known as Nacho or Nacho Fernández, is a Spanish professional footballer who plays as a defender for Saudi Pro League club Al-Qadsiah. Mainly a cent"
+      },
+      {
+        "name": "Isco",
+        "wiki_title": "Isco",
+        "number": 22,
+        "pos_raw": "MF",
+        "mapped": "LW",
+        "refinement": "attacking midfielder or left winger",
+        "extract": "Francisco Román Alarcón Suárez, commonly known as Isco, is a Spanish professional footballer who plays as an attacking midfielder or left winger for La Liga club Real Betis, which "
+      },
+      {
+        "name": "Marco Asensio",
+        "wiki_title": "Marco Asensio",
+        "number": 20,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "winger or attacking midfielder",
+        "extract": "Marco Asensio Willemsen is a Spanish professional footballer who plays as a winger or attacking midfielder for Süper Lig club Fenerbahçe."
+      },
+      {
+        "name": "Lucas Vázquez",
+        "wiki_title": "Lucas Vázquez",
+        "number": 17,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "right-back or winger",
+        "extract": "Lucas Vázquez Iglesias is a Spanish professional footballer who plays as a right-back or winger for Bundesliga club Bayer Leverkusen."
+      },
+      {
+        "name": "Mateo Kovačić",
+        "wiki_title": "Mateo Kovačić",
+        "number": 23,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Mateo Kovačić is a professional footballer who plays as a central midfielder for Premier League club Manchester City and the Croatia national team."
+      },
+      {
+        "name": "Théo Hernandez",
+        "wiki_title": "Théo Hernandez",
+        "number": 15,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Théo Bernard François Hernandez is a French professional footballer who plays primarily as a left-back for Saudi Pro League club Al Hilal and the France national team. He is known "
+      },
+      {
+        "name": "Achraf Hakimi",
+        "wiki_title": "Achraf Hakimi",
+        "number": 19,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back",
+        "extract": "Achraf Hakimi Mouh is a professional footballer who plays as a right-back for Ligue 1 club Paris Saint-Germain and captains the Morocco national team. He is widely regarded as one "
+      },
+      {
+        "name": "Jesús Vallejo",
+        "wiki_title": "Jesús Vallejo",
+        "number": 3,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Jesús Vallejo Lázaro is a Spanish professional footballer who plays as a centre-back for Segunda División club Albacete."
+      },
+      {
+        "name": "Marcos Llorente",
+        "wiki_title": "Marcos Llorente",
+        "number": 18,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder or right-back",
+        "extract": "Marcos Llorente Moreno is a Spanish professional footballer who plays as a midfielder or right-back for La Liga club Atlético Madrid and the Spain national team."
+      },
+      {
+        "name": "Dani Ceballos",
+        "wiki_title": "Dani Ceballos",
+        "number": 24,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Daniel Ceballos Fernández is a Spanish professional footballer who plays as a central midfielder for La Liga club Real Madrid and the Spain national team."
+      },
+      {
+        "name": "Borja Mayoral",
+        "wiki_title": "Borja Mayoral",
+        "number": 21,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for La Liga club Getafe",
+        "extract": "Borja Mayoral Moya is a Spanish professional footballer who plays as a striker for La Liga club Getafe."
+      },
+      {
+        "name": "Luca Zidane",
+        "wiki_title": "Luca Zidane",
+        "number": 30,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Luca Zinedine Zidane is a professional footballer who plays as a goalkeeper for Segunda División club Granada. Born in France, he plays for the Algeria national team."
+      },
+      {
+        "name": "Álvaro Tejero",
+        "wiki_title": "Álvaro Tejero",
+        "number": 27,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "full back",
+        "extract": "Álvaro Tejero Sacristán is a Spanish professional footballer who plays as a full back for Super League Greece club Aris."
+      },
+      {
+        "name": "Francisco Feuillassier",
+        "wiki_title": "Francisco Feuillassier",
+        "number": 29,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder or winger for",
+        "extract": "Francisco Feuillassier Abalo, commonly known as Franchu, is an Argentinian professional footballer who plays as an attacking midfielder or winger for Indian Super League club Keral"
+      },
+      {
+        "name": "Luismi Quezada",
+        "wiki_title": "Luismi Quezada",
+        "number": 31,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Luis Miguel \"Luismi\" Quezada Sánchez is a professional footballer who plays as either a left-back or a left winger for Liga DF club Cibao. Born in Spain, he plays for the Dominican"
+      },
+      {
+        "name": "Óscar Rodríguez",
+        "wiki_title": "Óscar Rodríguez (footballer, born 1998)",
+        "number": 32,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Óscar Rodríguez Arnaiz, known as Óscar Rodríguez or simply Óscar, is a Spanish professional footballer who plays as an attacking midfielder for Saudi First Division League club Al-"
+      },
+      {
+        "name": "Jaime Seoane",
+        "wiki_title": "Jaime Seoane",
+        "number": 38,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder for SD Huesca",
+        "extract": "Jaime Seoane Valenciano is a Spanish professional footballer who plays as a midfielder for SD Huesca."
+      }
+    ]
+  },
+  "bayern1920": {
+    "key": "bayern1920",
+    "label": "Bayern Munich 2019-20 (UCL winner)",
+    "page": "2019–20 FC Bayern Munich season",
+    "team": "Bayern Munich 2019-20",
+    "tagSlug": "bayern-2019-20",
+    "era": "historic",
+    "squad": [
+      {
+        "name": "Manuel Neuer",
+        "wiki_title": "Manuel Neuer",
+        "number": 1,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Manuel Peter Neuer is a German professional footballer who plays as a goalkeeper and is the captain of Bundesliga club Bayern Munich. Considered one of the greatest and most influe"
+      },
+      {
+        "name": "Álvaro Odriozola",
+        "wiki_title": "Álvaro Odriozola",
+        "number": 2,
+        "pos_raw": "DF",
+        "mapped": "RB",
+        "refinement": "right-back",
+        "extract": "Álvaro Odriozola Arzallus is a Spanish professional footballer who plays as a right-back for La Liga club Real Sociedad."
+      },
+      {
+        "name": "Niklas Süle",
+        "wiki_title": "Niklas Süle",
+        "number": 4,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Niklas Süle is a German professional footballer who plays as either a centre-back or right-back for Borussia Dortmund. He will retire at the end of the 2025–26 Bundesliga season."
+      },
+      {
+        "name": "Benjamin Pavard",
+        "wiki_title": "Benjamin Pavard",
+        "number": 5,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "defender",
+        "extract": "Benjamin Jacques Marcel Pavard is a French professional footballer who plays as a defender for Ligue 1 club Marseille, on loan from Serie A club Inter Milan, and the France nationa"
+      },
+      {
+        "name": "Thiago",
+        "wiki_title": "Thiago Alcântara",
+        "number": 6,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "",
+        "extract": "Thiago Alcântara do Nascimento, known as Thiago Alcântara or mononymously as Thiago, is a former professional footballer who played as a midfielder. He is currently the assistant m"
+      },
+      {
+        "name": "Serge Gnabry",
+        "wiki_title": "Serge Gnabry",
+        "number": 7,
+        "pos_raw": "FW",
+        "mapped": "RW",
+        "refinement": "forward",
+        "extract": "Serge David Gnabry is a German professional footballer who plays as a forward, winger and attacking midfielder for Bundesliga club Bayern Munich and the Germany national team."
+      },
+      {
+        "name": "Javi Martínez",
+        "wiki_title": "Javi Martínez",
+        "number": 8,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder or centre-back",
+        "extract": "Javier \"Javi\" Martínez Aginaga is a Spanish professional footballer who plays as a defensive midfielder or centre-back for Qatari Second Division club Al Bidda."
+      },
+      {
+        "name": "Robert Lewandowski",
+        "wiki_title": "Robert Lewandowski",
+        "number": 9,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "striker for La Liga club Barcelona",
+        "extract": "Robert Lewandowski is a Polish professional footballer who plays as a striker for La Liga club Barcelona and captains the Poland national team. Widely regarded as one of the greate"
+      },
+      {
+        "name": "Philippe Coutinho",
+        "wiki_title": "Philippe Coutinho",
+        "number": 10,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Philippe Coutinho Correia is a Brazilian professional footballer who plays as an attacking midfielder. He is currently a free agent after playing for Campeonato Brasileiro Série A "
+      },
+      {
+        "name": "Kingsley Coman",
+        "wiki_title": "Kingsley Coman",
+        "number": 11,
+        "pos_raw": "FW",
+        "mapped": "LW",
+        "refinement": "winger",
+        "extract": "Kingsley Junior Coman is a French professional footballer who plays as a winger for Saudi Pro League club Al-Nassr and the France national team."
+      },
+      {
+        "name": "Ivan Perišić",
+        "wiki_title": "Ivan Perišić",
+        "number": 14,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "winger for Eredivisie club PSV",
+        "extract": "Ivan Perišić is a Croatian professional footballer who plays as a winger for Eredivisie club PSV and the Croatia national team. Usually deployed as a left winger, he has also featu"
+      },
+      {
+        "name": "Jérôme Boateng",
+        "wiki_title": "Jérôme Boateng",
+        "number": 17,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "",
+        "extract": "Jérôme Agyenim Boateng is a German former professional footballer who played as a centre-back."
+      },
+      {
+        "name": "Leon Goretzka",
+        "wiki_title": "Leon Goretzka",
+        "number": 18,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Leon Christoph Goretzka is a German professional footballer who plays as a midfielder for Bundesliga club Bayern Munich and the Germany national team."
+      },
+      {
+        "name": "Alphonso Davies",
+        "wiki_title": "Alphonso Davies",
+        "number": 19,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "left-back",
+        "extract": "Alphonso Boyle Davies is a professional soccer player who plays as a left-back, winger, or wing-back for Bundesliga club Bayern Munich and captains the Canada national team. Regard"
+      },
+      {
+        "name": "Lucas Hernandez",
+        "wiki_title": "Lucas Hernandez",
+        "number": 21,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "centre-back or left-back",
+        "extract": "Lucas François Bernard Hernandez is a French professional footballer who plays as a centre-back or left-back for Ligue 1 club Paris Saint-Germain and the France national team. He i"
+      },
+      {
+        "name": "Corentin Tolisso",
+        "wiki_title": "Corentin Tolisso",
+        "number": 24,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder for",
+        "extract": "Corentin Tolisso is a French professional footballer who plays as a central midfielder for and captains Ligue 1 club Lyon."
+      },
+      {
+        "name": "Thomas Müller",
+        "wiki_title": "Thomas Müller",
+        "number": 25,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward or attacking midfielder",
+        "extract": "Thomas Müller is a German professional footballer who plays as a forward or attacking midfielder for Major League Soccer club Vancouver Whitecaps. He is widely regarded as one of t"
+      },
+      {
+        "name": "Sven Ulreich",
+        "wiki_title": "Sven Ulreich",
+        "number": 26,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Sven Ulreich is a German professional footballer who plays as a goalkeeper for Bundesliga club Bayern Munich."
+      },
+      {
+        "name": "David Alaba",
+        "wiki_title": "David Alaba",
+        "number": 27,
+        "pos_raw": "DF",
+        "mapped": "LB",
+        "refinement": "centre-back for La Liga club Real Madrid",
+        "extract": "David Alaba is an Austrian professional footballer who plays as a centre-back for La Liga club Real Madrid and captains the Austria national team. He was previously primarily a lef"
+      },
+      {
+        "name": "Joshua Kimmich",
+        "wiki_title": "Joshua Kimmich",
+        "number": 32,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "defensive midfielder or right-back",
+        "extract": "Joshua Walter Kimmich is a German professional footballer who plays as a defensive midfielder or right-back for Bundesliga club Bayern Munich and captains the Germany national team"
+      },
+      {
+        "name": "Joshua Zirkzee",
+        "wiki_title": "Joshua Zirkzee",
+        "number": 35,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Joshua Orobosa Zirkzee is a Dutch professional footballer who plays as a forward for Premier League club Manchester United and the Netherlands national team."
+      },
+      {
+        "name": "Chris Richards",
+        "wiki_title": "Chris Richards (soccer)",
+        "number": 41,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "center-back",
+        "extract": "Christopher Jeffrey Richards is an American professional soccer player who plays as a center-back for Premier League club Crystal Palace and the United States national team."
+      },
+      {
+        "name": "Jamal Musiala",
+        "wiki_title": "Jamal Musiala",
+        "number": 42,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Jamal Musiala is a German professional footballer who plays as an attacking midfielder for Bundesliga club Bayern Munich and the Germany national team. Widely regarded as one of th"
+      },
+      {
+        "name": "Christian Früchtl",
+        "wiki_title": "Christian Früchtl",
+        "number": 36,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper for Serie A club Lecce",
+        "extract": "Christian Martin Früchtl is a German professional footballer who plays as a goalkeeper for Serie A club Lecce. Früchtl has represented Germany at various youth levels international"
+      },
+      {
+        "name": "Ron-Thorben Hoffmann",
+        "wiki_title": "Ron-Thorben Hoffmann",
+        "number": 39,
+        "pos_raw": "GK",
+        "mapped": "GK",
+        "refinement": "goalkeeper",
+        "extract": "Ron-Thorben Hoffmann is a German professional footballer who plays as a goalkeeper for 2. Bundesliga club Eintracht Braunschweig."
+      },
+      {
+        "name": "Lars Lukas Mai",
+        "wiki_title": "Lars Lukas Mai",
+        "number": 33,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back",
+        "extract": "Lars Lukas Mai is a German professional footballer who plays as a centre-back for Swiss Super League club Lugano. He has represented Germany at various youth levels internationally"
+      },
+      {
+        "name": "Bright Arrey-Mbi",
+        "wiki_title": "Bright Arrey-Mbi",
+        "number": 43,
+        "pos_raw": "DF",
+        "mapped": "CB",
+        "refinement": "centre-back for Primeira Liga club Braga",
+        "extract": "Bright Akwo Arrey-Mbi  is a professional footballer who plays as a centre-back for Primeira Liga club Braga. Born in Cameroon, he has represented England and Germany at youth level"
+      },
+      {
+        "name": "Michaël Cuisance",
+        "wiki_title": "Michaël Cuisance",
+        "number": 11,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "central midfielder",
+        "extract": "Michaël Bruno Dominique Cuisance is a French professional footballer who plays as a central midfielder for 2. Bundesliga club Hertha BSC. He has also represented France up to the u"
+      },
+      {
+        "name": "Leon Dajaku",
+        "wiki_title": "Leon Dajaku",
+        "number": 16,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "winger and forward",
+        "extract": "Leon Dajaku is a German professional footballer who plays as a winger and forward for 3. Liga club SSV Ulm."
+      },
+      {
+        "name": "Sarpreet Singh",
+        "wiki_title": "Sarpreet Singh",
+        "number": 28,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Sarpreet Singh is a New Zealand professional footballer who plays as an attacking midfielder for A-League Men club Wellington Phoenix, on loan from Serbian SuperLiga club TSC and t"
+      },
+      {
+        "name": "Oliver Batista Meier",
+        "wiki_title": "Oliver Batista Meier",
+        "number": 34,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "winger",
+        "extract": "Oliver Batista Meier is a German professional footballer who plays as a winger for 2. Bundesliga club Preußen Münster."
+      },
+      {
+        "name": "Paul Will",
+        "wiki_title": "Paul Will",
+        "number": 37,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Paul Will is a German professional footballer who plays as a midfielder for 2. Bundesliga club Greuther Fürth on loan from Darmstadt 98."
+      },
+      {
+        "name": "Malik Tillman",
+        "wiki_title": "Malik Tillman",
+        "number": 40,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "attacking midfielder",
+        "extract": "Malik Leon Tillman is a professional soccer player who plays as an attacking midfielder for Bundesliga club Bayer Leverkusen. Born in Germany, he represents the United States natio"
+      },
+      {
+        "name": "Jann-Fiete Arp",
+        "wiki_title": "Jann-Fiete Arp",
+        "number": 15,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward for Danish Superliga club OB",
+        "extract": "Jann-Fiete Arp is a German professional footballer who plays as a forward for Danish Superliga club OB."
+      },
+      {
+        "name": "Jeong Woo-yeong",
+        "wiki_title": "Jeong Woo-yeong",
+        "number": 30,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "attacking midfielder or forward",
+        "extract": "Jeong Woo-yeong is a South Korean professional footballer who plays as a attacking midfielder or forward for German Bundesliga club Union Berlin and the South Korea national team."
+      },
+      {
+        "name": "Renato Sanches",
+        "wiki_title": "Renato Sanches",
+        "number": 35,
+        "pos_raw": "MF",
+        "mapped": "CM",
+        "refinement": "midfielder",
+        "extract": "Renato Júnior Luz Sanches is a Portuguese professional footballer who plays as a midfielder for Greek Super League club Panathinaikos, on loan from Ligue 1 club Paris Saint-Germain"
+      },
+      {
+        "name": "Kwasi Okyere Wriedt",
+        "wiki_title": "Kwasi Okyere Wriedt",
+        "number": 38,
+        "pos_raw": "FW",
+        "mapped": "ST",
+        "refinement": "forward",
+        "extract": "Kwasi Okyere Wriedt is a professional footballer who plays as a forward for German 3. Liga club Alemannia Aachen. Born in Germany, he plays for the Ghana national team."
+      }
+    ]
+  }
+}
