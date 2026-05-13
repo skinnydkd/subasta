@@ -45,6 +45,13 @@ sw.addEventListener('fetch', (event) => {
 	if (event.request.mode === 'navigate') return;
 	if (event.request.headers.get('accept')?.includes('text/html')) return;
 
+	// CRITICAL: only cache hash-named build artifacts under /_app/immutable/.
+	// Everything else (SvelteKit's __data.json invalidation payloads, API
+	// routes, dynamic JSON, etc.) MUST come fresh — caching them turns the
+	// auction into a stuck frame showing the first player forever.
+	const isImmutableBuild = url.pathname.startsWith('/_app/immutable/');
+	if (!isImmutableBuild) return; // network-only
+
 	event.respondWith(
 		(async () => {
 			const cache = await caches.open(CACHE);

@@ -116,6 +116,30 @@
 		return (teamsByUser[userId] ?? []).reduce((sum, p) => sum + (p.final_price_cents ?? 0), 0);
 	}
 
+	// Formation rendering order: top → bottom of pitch.
+	const FORMATION_ROWS: { label: string; positions: string[] }[] = [
+		{ label: 'Davanters', positions: ['LW', 'ST', 'RW'] },
+		{ label: 'Migcampistes', positions: ['CM'] },
+		{ label: 'Defenses', positions: ['LB', 'CB', 'RB'] },
+		{ label: 'Porter', positions: ['GK'] }
+	];
+
+	type TeamPlayer = {
+		auction_id: string;
+		position_slot: string;
+		final_price_cents: number | null;
+		auction_status: string;
+		player_id: string;
+		player_name: string;
+		player_position: string;
+	};
+
+	function teamByPosition(team: TeamPlayer[]): Record<string, TeamPlayer[]> {
+		const out: Record<string, TeamPlayer[]> = {};
+		for (const p of team) (out[p.position_slot] ||= []).push(p);
+		return out;
+	}
+
 	function memberName(userId: string | null | undefined): string {
 		if (!userId) return '—';
 		return members.find((m) => m.user_id === userId)?.profile?.display_name ?? '—';
@@ -624,10 +648,12 @@
 							</div>
 						{/if}
 						<div>
-							<p class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
+							<span
+								class="inline-block rounded-[var(--radius-sm)] bg-[color:var(--color-accent-muted)] px-2 py-0.5 text-xs font-semibold tracking-wider text-[color:var(--color-on-accent)] uppercase"
+							>
 								{activePlayer.primary_position}
-							</p>
-							<h2 class="mt-1 text-xl leading-tight" style="font-family: var(--font-display);">
+							</span>
+							<h2 class="mt-1.5 text-xl leading-tight" style="font-family: var(--font-display);">
 								{activePlayer.name}
 							</h2>
 							{#if activePlayer.metadata && typeof activePlayer.metadata.team === 'string'}
@@ -821,10 +847,11 @@
 				</p>
 			</header>
 
-			<!-- Other members' teams -->
+			<!-- Other members' teams, grouped as a formation -->
 			<div class="flex flex-col gap-3">
 				{#each otherMembers as member (member.user_id)}
 					{@const team = teamsByUser[member.user_id] ?? []}
+					{@const byPos = teamByPosition(team)}
 					<details
 						class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]"
 					>
@@ -834,24 +861,45 @@
 								{team.length} jug. · {formatCents(teamSpentCents(member.user_id))}
 							</span>
 						</summary>
-						<ul
-							class="flex flex-col gap-1 border-t border-[color:var(--color-border)] px-4 py-3 text-sm"
-						>
-							{#each team as p (p.auction_id)}
-								<li class="flex items-baseline justify-between gap-3">
-									<span>
-										<span
-											class="text-xs tracking-wider text-[color:var(--color-text-faint)] uppercase"
-											>{p.position_slot}</span
+						<div class="border-t border-[color:var(--color-border)] px-4 py-3 text-sm">
+							{#each FORMATION_ROWS as row (row.label)}
+								{@const playersInRow = row.positions.flatMap((pos) => byPos[pos] ?? [])}
+								{#if playersInRow.length > 0}
+									<div class="mb-2 last:mb-0">
+										<p
+											class="mb-1 text-[10px] tracking-widest text-[color:var(--color-text-faint)] uppercase"
 										>
-										<span class="ml-2">{p.player_name}</span>
-									</span>
-									<span class="tnum text-xs text-[color:var(--color-text-muted)]">
-										{p.final_price_cents ? formatCents(p.final_price_cents) : 'auto'}
-									</span>
-								</li>
+											{row.label}
+										</p>
+										<ul class="flex flex-col gap-0.5">
+											{#each playersInRow as p (p.auction_id)}
+												{@const isAuto = p.auction_status === 'auto_assigned'}
+												<li class="flex items-baseline justify-between gap-2">
+													<span>
+														<span
+															class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-[10px] font-semibold tracking-wider text-[color:var(--color-on-accent)] uppercase"
+															>{p.position_slot}</span
+														>
+														<span
+															class="ml-2"
+															class:text-[color:var(--color-text-faint)]={isAuto}
+															class:italic={isAuto}
+														>
+															{isAuto ? '(auto-assignat)' : p.player_name}
+														</span>
+													</span>
+													<span class="tnum text-xs text-[color:var(--color-text-muted)]">
+														{p.final_price_cents
+															? formatCents(p.final_price_cents)
+															: 'auto'}
+													</span>
+												</li>
+											{/each}
+										</ul>
+									</div>
+								{/if}
 							{/each}
-						</ul>
+						</div>
 					</details>
 				{/each}
 			</div>
@@ -1029,41 +1077,55 @@
 				{/each}
 			</ol>
 
-			<!-- Teams revealed -->
-			<details
-				class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]"
-			>
-				<summary class="cursor-pointer px-4 py-3 text-sm">Veure tots els equips</summary>
-				<div class="flex flex-col gap-4 border-t border-[color:var(--color-border)] px-4 py-3">
-					{#each members as member (member.user_id)}
-						{@const team = teamsByUser[member.user_id] ?? []}
-						<div>
-							<p class="font-medium">
-								{member.profile?.display_name ?? 'Convidat'}
-								<span class="text-xs text-[color:var(--color-text-faint)]"
-									>— {formatCents(teamSpentCents(member.user_id))}</span
-								>
-							</p>
-							<ul class="mt-1 flex flex-col gap-0.5 text-sm">
-								{#each team as p (p.auction_id)}
-									<li class="flex justify-between gap-2">
-										<span>
-											<span
-												class="text-xs tracking-wider text-[color:var(--color-text-faint)] uppercase"
-												>{p.position_slot}</span
-											>
-											<span class="ml-2">{p.player_name}</span>
-										</span>
-										<span class="tnum text-xs text-[color:var(--color-text-muted)]">
-											{p.final_price_cents ? formatCents(p.final_price_cents) : 'auto'}
-										</span>
-									</li>
-								{/each}
-							</ul>
+			<!-- Teams revealed in formation order -->
+			<div class="flex flex-col gap-4">
+				{#each members as member (member.user_id)}
+					{@const team = teamsByUser[member.user_id] ?? []}
+					{@const byPos = teamByPosition(team)}
+					<details
+						class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]"
+					>
+						<summary class="flex cursor-pointer items-baseline justify-between px-4 py-3">
+							<span class="font-medium">{member.profile?.display_name ?? 'Convidat'}</span>
+							<span class="tnum text-xs text-[color:var(--color-text-muted)]">
+								{team.length} jug · {formatCents(teamSpentCents(member.user_id))}
+							</span>
+						</summary>
+						<div class="border-t border-[color:var(--color-border)] px-4 py-3 text-sm">
+							{#each FORMATION_ROWS as row (row.label)}
+								{@const playersInRow = row.positions.flatMap((pos) => byPos[pos] ?? [])}
+								{#if playersInRow.length > 0}
+									<div class="mb-2 last:mb-0">
+										<p
+											class="mb-1 text-[10px] tracking-widest text-[color:var(--color-text-faint)] uppercase"
+										>
+											{row.label}
+										</p>
+										<ul class="flex flex-col gap-0.5">
+											{#each playersInRow as p (p.auction_id)}
+												<li class="flex justify-between gap-2">
+													<span>
+														<span
+															class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-[10px] font-semibold tracking-wider text-[color:var(--color-on-accent)] uppercase"
+															>{p.position_slot}</span
+														>
+														<span class="ml-2">{p.player_name}</span>
+													</span>
+													<span class="tnum text-xs text-[color:var(--color-text-muted)]">
+														{p.final_price_cents
+															? formatCents(p.final_price_cents)
+															: 'auto'}
+													</span>
+												</li>
+											{/each}
+										</ul>
+									</div>
+								{/if}
+							{/each}
 						</div>
-					{/each}
-				</div>
-			</details>
+					</details>
+				{/each}
+			</div>
 		</section>
 	{/if}
 
