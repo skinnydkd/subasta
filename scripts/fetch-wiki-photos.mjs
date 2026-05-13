@@ -6,7 +6,9 @@
 import 'dotenv/config';
 import pg from 'pg';
 
-const REAL_PREFIXES = ['rm-', 'bar-', 'atm-', 'ath-', 'rso-', 'bar0809-', 'rm0203-'];
+// Target any non-scrub player with a dev_seed_id. Covers every historic and
+// UCL prefix we've added without having to maintain an allow-list.
+const REAL_PREFIXES = null;
 const WIKI_REST = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
 const WIKI_SEARCH =
 	'https://en.wikipedia.org/w/api.php?action=opensearch&format=json&limit=3&search=';
@@ -75,10 +77,10 @@ const { rows } = await c.query(
 	select id, name, metadata
 	from players
 	where photo_url is null
-		and (${REAL_PREFIXES.map((_, i) => `metadata ->> 'dev_seed_id' like $${i + 1}`).join(' or ')})
+		and is_scrub = false
+		and metadata ->> 'dev_seed_id' is not null
 	order by name
-`,
-	REAL_PREFIXES.map((p) => `${p}%`)
+`
 );
 
 console.log(`Found ${rows.length} players without photos.`);
