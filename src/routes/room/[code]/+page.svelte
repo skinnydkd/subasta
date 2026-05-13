@@ -625,7 +625,7 @@
 						{/if}
 						<div>
 							<p class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
-								{activePlayer.primary_position} · #{activeAuction.sequence_number}
+								{activePlayer.primary_position}
 							</p>
 							<h2 class="mt-1 text-xl leading-tight" style="font-family: var(--font-display);">
 								{activePlayer.name}
@@ -676,16 +676,6 @@
 						<p class="mt-1 text-base text-[color:var(--color-text-muted)]">sense pujades</p>
 					{/if}
 				</div>
-				{#if activePlayer.market_value_cents}
-					<div class="text-right">
-						<p class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
-							valor
-						</p>
-						<p class="tnum mt-1 text-sm text-[color:var(--color-text-muted)]">
-							{formatCents(activePlayer.market_value_cents)}
-						</p>
-					</div>
-				{/if}
 			</div>
 		</section>
 
@@ -761,35 +751,6 @@
 						>
 							<span>{bid.profile?.display_name ?? '—'}</span>
 							<span class="tnum">{formatCents(bid.amount_cents)}</span>
-						</li>
-					{/each}
-				</ul>
-			</section>
-		{/if}
-
-		<!-- Next up -->
-		{#if upcomingAuctions.length > 0}
-			<section class="flex flex-col gap-1">
-				<h3 class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
-					següents
-				</h3>
-				<ul class="flex flex-col gap-1">
-					{#each upcomingAuctions as up (up.sequence_number)}
-						<li
-							class="flex justify-between rounded-[var(--radius-sm)] border border-[color:var(--color-border)] px-3 py-1.5 text-sm text-[color:var(--color-text-muted)]"
-						>
-							<span>
-								<span class="text-xs tracking-wider text-[color:var(--color-text-faint)] uppercase"
-									>{up.position_slot}</span
-								>
-								<span class="ml-2">{up.player_name}</span>
-								{#if up.team}
-									<span class="ml-1.5 text-[10px] text-[color:var(--color-text-faint)]"
-										>· {up.team}</span
-									>
-								{/if}
-							</span>
-							<span class="tnum text-xs">#{up.sequence_number}</span>
 						</li>
 					{/each}
 				</ul>
