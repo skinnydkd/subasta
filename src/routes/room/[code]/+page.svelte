@@ -630,6 +630,11 @@
 							<h2 class="mt-1 text-xl leading-tight" style="font-family: var(--font-display);">
 								{activePlayer.name}
 							</h2>
+							{#if activePlayer.metadata && typeof activePlayer.metadata.team === 'string'}
+								<p class="mt-0.5 text-xs text-[color:var(--color-text-muted)]">
+									{activePlayer.metadata.team}
+								</p>
+							{/if}
 						</div>
 					</div>
 				{/key}
@@ -778,6 +783,11 @@
 									>{up.position_slot}</span
 								>
 								<span class="ml-2">{up.player_name}</span>
+								{#if up.team}
+									<span class="ml-1.5 text-[10px] text-[color:var(--color-text-faint)]"
+										>· {up.team}</span
+									>
+								{/if}
 							</span>
 							<span class="tnum text-xs">#{up.sequence_number}</span>
 						</li>
