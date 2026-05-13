@@ -343,7 +343,18 @@
 		ka.start();
 		keepalive = ka;
 
+		// Fallback polling: even with realtime, refresh every 3s while drafting
+		// or voting so the UI is never more than a beat behind. Cheap insurance
+		// when postgres_changes events fail to arrive (network, RLS, channel
+		// hiccup) — and stops on its own when the room finishes.
+		const pollId = setInterval(() => {
+			if (room.status === 'drafting' || room.status === 'voting') {
+				invalidateAll();
+			}
+		}, 3000);
+
 		return () => {
+			clearInterval(pollId);
 			ka.stop();
 			keepalive = null;
 		};
