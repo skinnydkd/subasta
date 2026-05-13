@@ -74,6 +74,7 @@ type RoomView = {
 		sequence_number: number;
 		position_slot: string;
 		player_name: string;
+		team: string | null;
 	}>;
 	teams: Record<string, TeamPlayer[]>;
 	tally: Array<{ user_id: string; total_points: number; votes_received: number }>;
