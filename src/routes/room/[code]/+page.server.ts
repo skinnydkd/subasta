@@ -76,6 +76,20 @@ type RoomView = {
 		player_name: string;
 		team: string | null;
 	}>;
+	last_closed_auction: null | {
+		id: string;
+		sequence_number: number;
+		status: 'closed' | 'auto_assigned' | 'skipped';
+		position_slot: string;
+		final_price_cents: number | null;
+		winner_id: string | null;
+		winner_name: string | null;
+		player_id: string;
+		player_name: string;
+		player_photo_url: string | null;
+		player_team: string | null;
+		ends_at: string;
+	};
 	teams: Record<string, TeamPlayer[]>;
 	tally: Array<{ user_id: string; total_points: number; votes_received: number }>;
 };
@@ -130,6 +144,7 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		activePlayer: view.active_player,
 		recentBids: view.recent_bids,
 		upcomingAuctions: view.upcoming_auctions,
+		lastClosedAuction: view.last_closed_auction,
 		teamsByUser: view.teams,
 		myVote,
 		tally: view.tally,

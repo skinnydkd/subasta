@@ -20,6 +20,7 @@
 	const activeAuction = $derived(data.activeAuction);
 	const activePlayer = $derived(data.activePlayer);
 	const recentBids = $derived(data.recentBids);
+	const lastClosedAuction = $derived(data.lastClosedAuction);
 
 	const settings = $derived(room.settings as Record<string, number>);
 	const minOpening = $derived(settings.min_opening_bid_cents ?? 100_000_000);
@@ -221,6 +222,24 @@
 			sounds.voting();
 		}
 		lastRoomStatus = room.status;
+	});
+
+	// "Adjudicat" celebration banner. Fires whenever last_closed_auction.id
+	// changes (i.e. an auction just resolved). Auto-hides after 3 seconds.
+	let adjudicatedShown = $state<typeof lastClosedAuction | null>(null);
+	let lastSeenClosedId = $state<string | null>(null);
+	$effect(() => {
+		if (!lastClosedAuction) return;
+		if (lastSeenClosedId === lastClosedAuction.id) return;
+		// First load: don't celebrate retroactively.
+		const isFirstSee = lastSeenClosedId === null;
+		lastSeenClosedId = lastClosedAuction.id;
+		if (isFirstSee) return;
+		adjudicatedShown = lastClosedAuction;
+		const t = setTimeout(() => {
+			adjudicatedShown = null;
+		}, 3000);
+		return () => clearTimeout(t);
 	});
 
 	// Mute toggle (persisted) + audio unlock on first user gesture.
@@ -635,6 +654,53 @@
 			{/if}
 		</section>
 	{:else if room.status === 'drafting' && activeAuction && activePlayer}
+		<!-- Adjudicat banner -->
+		{#if adjudicatedShown}
+			<div
+				in:fly={{ y: -8, duration: 200 }}
+				out:fly={{ y: -8, duration: 200 }}
+				class="fixed inset-x-0 top-3 z-50 mx-auto flex max-w-md items-center gap-3 rounded-[var(--radius)] border border-[color:var(--color-accent)] bg-[color:var(--color-elevated)] px-3 py-2 text-sm shadow-lg"
+				style="margin-left: max(0.75rem, env(safe-area-inset-left)); margin-right: max(0.75rem, env(safe-area-inset-right));"
+			>
+				{#if adjudicatedShown.player_photo_url}
+					<img
+						src={adjudicatedShown.player_photo_url}
+						alt={adjudicatedShown.player_name}
+						class="h-10 w-10 flex-shrink-0 rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg)] object-cover"
+					/>
+				{:else}
+					<div
+						class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg)] text-xs font-medium"
+						style="font-family: var(--font-display);"
+					>
+						{initials(adjudicatedShown.player_name)}
+					</div>
+				{/if}
+				<div class="flex min-w-0 flex-1 flex-col leading-tight">
+					{#if adjudicatedShown.winner_id}
+						<span class="text-[10px] tracking-widest text-[color:var(--color-accent)] uppercase"
+							>Adjudicat</span
+						>
+						<span class="truncate text-sm font-medium">
+							{adjudicatedShown.player_name} → {adjudicatedShown.winner_name ?? 'auto'}
+						</span>
+						<span class="tnum text-xs text-[color:var(--color-text-muted)]">
+							{adjudicatedShown.final_price_cents
+								? formatCents(adjudicatedShown.final_price_cents)
+								: 'auto'}
+						</span>
+					{:else}
+						<span class="text-[10px] tracking-widest text-[color:var(--color-text-muted)] uppercase"
+							>Sense pujades</span
+						>
+						<span class="truncate text-sm">
+							{adjudicatedShown.player_name}
+						</span>
+					{/if}
+				</div>
+			</div>
+		{/if}
+
 		<!-- Active auction card -->
 		<section
 			class="rounded-[var(--radius-lg)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] p-5"
