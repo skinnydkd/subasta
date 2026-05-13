@@ -363,18 +363,27 @@
 		ka.start();
 		keepalive = ka;
 
-		// Fallback polling: even with realtime, refresh every 3s while drafting
-		// or voting so the UI is never more than a beat behind. Cheap insurance
-		// when postgres_changes events fail to arrive (network, RLS, channel
-		// hiccup) — and stops on its own when the room finishes.
-		const pollId = setInterval(() => {
-			if (room.status === 'drafting' || room.status === 'voting') {
-				invalidateAll();
-			}
-		}, 3000);
+		// Fast fallback polling: bids need to feel instant for everyone. Poll
+		// every 1s while drafting (bids/auctions move fast), 3s during voting.
+		// Realtime via postgres_changes is still the primary path; this is the
+		// safety net when events drop on the floor (mobile network, RLS,
+		// channel hiccup). Uses self-rescheduling setTimeout so the interval
+		// can adjust as the room status changes.
+		let pollTimer: ReturnType<typeof setTimeout> | null = null;
+		const schedulePoll = () => {
+			const delay =
+				room.status === 'drafting' ? 1000 : room.status === 'voting' ? 3000 : 5000;
+			pollTimer = setTimeout(() => {
+				if (room.status === 'drafting' || room.status === 'voting') {
+					invalidateAll();
+				}
+				schedulePoll();
+			}, delay);
+		};
+		schedulePoll();
 
 		return () => {
-			clearInterval(pollId);
+			if (pollTimer) clearTimeout(pollTimer);
 			ka.stop();
 			keepalive = null;
 		};
