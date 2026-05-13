@@ -10,6 +10,7 @@
 	import type { ActionData, PageData } from './$types';
 	import { createRealtimeKeepalive } from '$lib/realtime/keepalive.svelte';
 	import ConnectionPill from '$lib/components/ConnectionPill.svelte';
+	import Pitch from '$lib/components/Pitch.svelte';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -388,6 +389,35 @@
 
 	function copyCode() {
 		navigator.clipboard.writeText(room.code).catch(() => {});
+	}
+
+	async function shareResults() {
+		const winner = podium[0];
+		const text =
+			`Resultats subhasta — ${room.theme.display_name}\n` +
+			`Guanyador: ${winner?.display_name ?? '—'} (${winner?.points ?? 0} pts)\n\n` +
+			members
+				.map(
+					(m) =>
+						`${m.profile?.display_name ?? 'Convidat'} — ${formatCents(teamSpentCents(m.user_id))}`
+				)
+				.join('\n');
+		const url = typeof window !== 'undefined' ? window.location.href : '';
+		const shareData = { title: 'subasta — resultats', text, url };
+		try {
+			if (typeof navigator !== 'undefined' && navigator.share && navigator.canShare?.(shareData)) {
+				await navigator.share(shareData);
+				return;
+			}
+		} catch {
+			// User cancelled or share failed — fall through to clipboard.
+		}
+		try {
+			await navigator.clipboard.writeText(`${text}\n${url}`);
+			alert('Resultats copiats al porta-retalls.');
+		} catch {
+			alert('No s\'ha pogut compartir.');
+		}
 	}
 </script>
 
@@ -1206,54 +1236,87 @@
 				{/each}
 			</ol>
 
-			<!-- Teams revealed in formation order -->
+			<!-- Pitch view per team -->
 			<div class="flex flex-col gap-4">
 				{#each members as member (member.user_id)}
 					{@const team = teamsByUser[member.user_id] ?? []}
-					{@const byPos = teamByPosition(team)}
-					<details
-						class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]"
-					>
-						<summary class="flex cursor-pointer items-baseline justify-between px-4 py-3">
-							<span class="font-medium">{member.profile?.display_name ?? 'Convidat'}</span>
-							<span class="tnum text-xs text-[color:var(--color-text-muted)]">
-								{team.length} jug · {formatCents(teamSpentCents(member.user_id))}
-							</span>
-						</summary>
-						<div class="border-t border-[color:var(--color-border)] px-4 py-3 text-sm">
-							{#each FORMATION_ROWS as row (row.label)}
-								{@const playersInRow = row.positions.flatMap((pos) => byPos[pos] ?? [])}
-								{#if playersInRow.length > 0}
-									<div class="mb-2 last:mb-0">
-										<p
-											class="mb-1 text-[10px] tracking-widest text-[color:var(--color-text-faint)] uppercase"
-										>
-											{row.label}
-										</p>
-										<ul class="flex flex-col gap-0.5">
-											{#each playersInRow as p (p.auction_id)}
-												<li class="flex justify-between gap-2">
-													<span>
-														<span
-															class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-[10px] font-semibold tracking-wider text-[color:var(--color-on-accent)] uppercase"
-															>{p.position_slot}</span
-														>
-														<span class="ml-2">{p.player_name}</span>
-													</span>
-													<span class="tnum text-xs text-[color:var(--color-text-muted)]">
-														{p.final_price_cents
-															? formatCents(p.final_price_cents)
-															: 'auto'}
-													</span>
-												</li>
-											{/each}
-										</ul>
-									</div>
-								{/if}
-							{/each}
-						</div>
-					</details>
+					<Pitch
+						team={team}
+						displayName={member.profile?.display_name ?? 'Convidat'}
+						spent={formatCents(teamSpentCents(member.user_id))}
+					/>
 				{/each}
+			</div>
+
+			<!-- Share + textual breakdown -->
+			<div class="flex flex-col gap-2">
+				<button
+					type="button"
+					onclick={shareResults}
+					class="rounded-[var(--radius)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-4 py-2 text-sm transition-colors hover:bg-[color:var(--color-surface)]"
+				>
+					Comparteix la sala
+				</button>
+				<details
+					class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)]"
+				>
+					<summary class="cursor-pointer px-4 py-3 text-sm">
+						Veure tots els equips en text
+					</summary>
+					<div class="flex flex-col gap-4 border-t border-[color:var(--color-border)] px-4 py-3">
+						{#each members as member (member.user_id)}
+							{@const team = teamsByUser[member.user_id] ?? []}
+							{@const byPos = teamByPosition(team)}
+							<div>
+								<p class="font-medium">
+									{member.profile?.display_name ?? 'Convidat'}
+									<span class="text-xs text-[color:var(--color-text-faint)]"
+										>— {formatCents(teamSpentCents(member.user_id))}</span
+									>
+								</p>
+								<div class="mt-1 text-sm">
+									{#each FORMATION_ROWS as row (row.label)}
+										{@const playersInRow = row.positions.flatMap((pos) => byPos[pos] ?? [])}
+										{#if playersInRow.length > 0}
+											<div class="mb-1.5 last:mb-0">
+												<p
+													class="text-[10px] tracking-widest text-[color:var(--color-text-faint)] uppercase"
+												>
+													{row.label}
+												</p>
+												<ul class="flex flex-col gap-0.5">
+													{#each playersInRow as p (p.auction_id)}
+														{@const isAuto = p.auction_status === 'auto_assigned'}
+														<li class="flex justify-between gap-2">
+															<span>
+																<span
+																	class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-[10px] font-semibold tracking-wider text-[color:var(--color-on-accent)] uppercase"
+																	>{p.position_slot}</span
+																>
+																<span
+																	class="ml-2"
+																	class:text-[color:var(--color-text-faint)]={isAuto}
+																	class:italic={isAuto}
+																>
+																	{p.player_name}{isAuto ? ' (auto)' : ''}
+																</span>
+															</span>
+															<span class="tnum text-xs text-[color:var(--color-text-muted)]">
+																{p.final_price_cents
+																	? formatCents(p.final_price_cents)
+																	: 'auto'}
+															</span>
+														</li>
+													{/each}
+												</ul>
+											</div>
+										{/if}
+									{/each}
+								</div>
+							</div>
+						{/each}
+					</div>
+				</details>
 			</div>
 		</section>
 	{/if}
