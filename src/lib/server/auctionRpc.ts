@@ -49,9 +49,13 @@ export type AdvanceResult = {
 
 export async function advanceAuction(
 	supabase: SupabaseClient<Database>,
-	roomId: string
+	roomId: string,
+	force = false
 ): Promise<RpcResult<AdvanceResult>> {
-	const { data, error } = await rawRpc(supabase)('advance_auction', { p_room_id: roomId });
+	const { data, error } = await rawRpc(supabase)('advance_auction', {
+		p_room_id: roomId,
+		p_force: force
+	});
 	if (error) return { ok: false, error: error.message };
 	return { ok: true, data: data as AdvanceResult };
 }

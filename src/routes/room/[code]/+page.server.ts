@@ -190,9 +190,11 @@ export const actions: Actions = {
 		return { bid: { ok: true } };
 	},
 
-	advanceAuction: async ({ params, locals }) => {
+	advanceAuction: async ({ request, params, locals }) => {
 		if (!locals.user) return fail(401, { advance: { error: 'No autenticat.' } });
 
+		const formData = await request.formData();
+		const force = formData.get('force') === 'true';
 		const code = normalizeRoomCode(params.code!);
 		const { data: room } = await locals.supabase
 			.from('rooms')
@@ -201,7 +203,7 @@ export const actions: Actions = {
 			.maybeSingle();
 		if (!room) return fail(404, { advance: { error: 'Sala no trobada.' } });
 
-		const result = await advanceAuction(locals.supabase, room.id);
+		const result = await advanceAuction(locals.supabase, room.id, force);
 		if (!result.ok) return fail(400, { advance: { error: result.error } });
 		return { advance: { ok: true, ...result.data } };
 	},
