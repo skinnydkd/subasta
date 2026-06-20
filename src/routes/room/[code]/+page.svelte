@@ -278,13 +278,15 @@
 	// pings the advance endpoint. The server is idempotent on terminal
 	// states and rate-limits expired auctions to one progression, so it's
 	// safe for several clients to race each other on the same tick.
-	let lastAutoAdvanceAuctionId = $state<string | null>(null);
+	let lastAutoAdvanceAt = 0;
 	$effect(() => {
 		if (!activeAuction) return;
 		if (secondsLeft > 0) return;
-		if (lastAutoAdvanceAuctionId === activeAuction.id) return;
-
-		lastAutoAdvanceAuctionId = activeAuction.id;
+		// Retry at most every 2s: a non-forced advance no-ops while the server
+		// still considers the auction live (clock skew), so we must re-try until
+		// it genuinely expires server-side, but without hammering the endpoint.
+		if (now - lastAutoAdvanceAt < 2000) return;
+		lastAutoAdvanceAt = now;
 		fetch('?/advanceAuction', { method: 'POST', body: new FormData() })
 			.then(() => invalidateAll())
 			.catch(() => {});
@@ -965,6 +967,7 @@
 						};
 					}}
 				>
+					<input type="hidden" name="force" value="true" />
 					<button
 						type="submit"
 						disabled={advancing}
