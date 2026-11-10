@@ -2,13 +2,12 @@
 	import { enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import { onMount } from 'svelte';
-	import { createClient } from '$lib/supabase/client';
 	import { formatCents } from '$lib/utils/currency';
 	import { OpenTimerEngine } from '$lib/auction/engines/openTimer';
 	import { enableAudio, isMuted, setMuted, sounds } from '$lib/utils/sounds';
 	import { fly } from 'svelte/transition';
 	import type { ActionData, PageData } from './$types';
-	import { createRealtimeKeepalive } from '$lib/realtime/keepalive.svelte';
+	import { createKeepalive } from '$lib/realtime/keepalive.svelte';
 	import ConnectionPill from '$lib/components/ConnectionPill.svelte';
 	import Pitch from '$lib/components/Pitch.svelte';
 
@@ -292,91 +291,36 @@
 			.catch(() => {});
 	});
 
-	// Presence: track which member ids are currently connected to this room.
-	let onlineUserIds = $state<Set<string>>(new Set());
+	// Presence: members seen by the server in the last few seconds.
+	const onlineUserIds = $derived(new Set(data.onlineUserIds));
 
-	// Realtime for members; polling for spectators (RLS hides events from
-	// non-members so postgres_changes wouldn't reach them).
-	// Keepalive handles visibility / online / offline reconnect + wake lock.
-	let keepalive = $state<ReturnType<typeof createRealtimeKeepalive> | null>(null);
+	// State arrives by polling the server load. Keepalive handles
+	// visibility / online / offline resync + wake lock.
+	let keepalive = $state<ReturnType<typeof createKeepalive> | null>(null);
 
 	onMount(() => {
-		if (isReadOnly) {
-			if (room.status === 'finished') return;
-			const id = setInterval(() => invalidateAll(), 3000);
-			return () => clearInterval(id);
-		}
+		if (room.status === 'finished') return;
 
-		const supabase = createClient();
-
-		const ka = createRealtimeKeepalive({
-			client: supabase,
-			channels: () => {
-				const db = supabase
-					.channel(`room:${room.id}`)
-					.on(
-						'postgres_changes',
-						{ event: '*', schema: 'public', table: 'auctions', filter: `room_id=eq.${room.id}` },
-						() => invalidateAll()
-					)
-					.on(
-						'postgres_changes',
-						{
-							event: '*',
-							schema: 'public',
-							table: 'room_members',
-							filter: `room_id=eq.${room.id}`
-						},
-						() => invalidateAll()
-					)
-					.on(
-						'postgres_changes',
-						{ event: 'UPDATE', schema: 'public', table: 'rooms', filter: `id=eq.${room.id}` },
-						() => invalidateAll()
-					);
-
-				const presence = supabase.channel(`room:${room.id}:presence`, {
-					config: { presence: { key: myUserId ?? 'anon' } }
-				});
-				presence.on('presence', { event: 'sync' }, () => {
-					const state = presence.presenceState();
-					onlineUserIds = new Set(Object.keys(state));
-				});
-
-				// Wrap subscribe so presence.track fires once the channel is up,
-				// while still letting keepalive observe the status callback.
-				const origSubscribe = presence.subscribe.bind(presence);
-				presence.subscribe = ((cb?: (status: string) => void) =>
-					origSubscribe(async (status: string) => {
-						cb?.(status);
-						if (status === 'SUBSCRIBED' && myUserId) {
-							await presence.track({ user_id: myUserId, online_at: Date.now() });
-						}
-					})) as typeof presence.subscribe;
-
-				return [db, presence];
-			},
+		const ka = createKeepalive({
 			onResync: () => {
 				invalidateAll();
 			},
 			isAuctionActive: () => activeAuction?.status === 'active'
 		});
+		if (!isReadOnly) {
+			ka.start();
+			keepalive = ka;
+		}
 
-		ka.start();
-		keepalive = ka;
-
-		// Fast fallback polling: bids need to feel instant for everyone. Poll
-		// every 1s while drafting (bids/auctions move fast), 3s during voting.
-		// Realtime via postgres_changes is still the primary path; this is the
-		// safety net when events drop on the floor (mobile network, RLS,
-		// channel hiccup). Uses self-rescheduling setTimeout so the interval
-		// can adjust as the room status changes.
+		// 1s while drafting (bids move fast), slower otherwise; spectators at 3s.
+		// Self-rescheduling setTimeout so the delay follows the room status.
+		// ponytail: every viewer polls the full room view; switch to a push
+		// channel (SSE / Durable Object) if 1s lag or request volume ever hurts.
 		let pollTimer: ReturnType<typeof setTimeout> | null = null;
 		const schedulePoll = () => {
-			const delay =
-				room.status === 'drafting' ? 1000 : room.status === 'voting' ? 3000 : 5000;
+			const delay = isReadOnly ? 3000 : room.status === 'drafting' ? 1000 : 2500;
 			pollTimer = setTimeout(() => {
-				if (room.status === 'drafting' || room.status === 'voting') {
+				if (room.status !== 'finished' && document.visibilityState === 'visible') {
 					invalidateAll();
 				}
 				schedulePoll();
@@ -427,7 +371,7 @@
 			await navigator.clipboard.writeText(`${text}\n${url}`);
 			alert('Resultats copiats al porta-retalls.');
 		} catch {
-			alert('No s\'ha pogut compartir.');
+			alert("No s'ha pogut compartir.");
 		}
 	}
 </script>
@@ -895,7 +839,9 @@
 					</span>
 				</summary>
 				{#if myTeam.length === 0}
-					<p class="border-t border-[color:var(--color-border)] px-4 py-3 text-xs text-[color:var(--color-text-muted)]">
+					<p
+						class="border-t border-[color:var(--color-border)] px-4 py-3 text-xs text-[color:var(--color-text-muted)]"
+					>
 						Encara no has guanyat cap subhasta.
 					</p>
 				{:else}
@@ -1060,9 +1006,7 @@
 														</span>
 													</span>
 													<span class="tnum text-xs text-[color:var(--color-text-muted)]">
-														{p.final_price_cents
-															? formatCents(p.final_price_cents)
-															: 'auto'}
+														{p.final_price_cents ? formatCents(p.final_price_cents) : 'auto'}
 													</span>
 												</li>
 											{/each}
@@ -1253,7 +1197,7 @@
 				{#each members as member (member.user_id)}
 					{@const team = teamsByUser[member.user_id] ?? []}
 					<Pitch
-						team={team}
+						{team}
 						displayName={member.profile?.display_name ?? 'Convidat'}
 						spent={formatCents(teamSpentCents(member.user_id))}
 					/>
@@ -1314,9 +1258,7 @@
 																</span>
 															</span>
 															<span class="tnum text-xs text-[color:var(--color-text-muted)]">
-																{p.final_price_cents
-																	? formatCents(p.final_price_cents)
-																	: 'auto'}
+																{p.final_price_cents ? formatCents(p.final_price_cents) : 'auto'}
 															</span>
 														</li>
 													{/each}

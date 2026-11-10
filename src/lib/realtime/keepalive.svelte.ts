@@ -1,51 +1,21 @@
-import type { RealtimeChannel, SupabaseClient } from '@supabase/supabase-js';
-
-export type KeepaliveStatus = 'connecting' | 'live' | 'reconnecting' | 'offline';
+export type KeepaliveStatus = 'live' | 'offline';
 
 export interface KeepaliveOpts {
-	client: SupabaseClient;
-	channels: () => RealtimeChannel[];
 	onResync: () => void | Promise<void>;
 	isAuctionActive: () => boolean;
 }
 
 const isBrowser = typeof window !== 'undefined';
 
-export function createRealtimeKeepalive(opts: KeepaliveOpts) {
-	let status = $state<KeepaliveStatus>('connecting');
-	let channels: RealtimeChannel[] = [];
+/**
+ * Keeps a room page honest while the tab comes and goes: resyncs when the tab
+ * becomes visible or the network returns, tracks online/offline, and holds a
+ * screen wake lock while an auction is live. State itself arrives by polling.
+ */
+export function createKeepalive(opts: KeepaliveOpts) {
+	let status = $state<KeepaliveStatus>('live');
 	let wakeLock: WakeLockSentinel | null = null;
 	let started = false;
-
-	function subscribeAll() {
-		let joined = 0;
-		for (const ch of channels) {
-			ch.subscribe((s) => {
-				if (s === 'SUBSCRIBED') {
-					joined++;
-					if (joined >= channels.length) status = 'live';
-				} else if (s === 'CHANNEL_ERROR' || s === 'TIMED_OUT' || s === 'CLOSED') {
-					status = 'reconnecting';
-				}
-			});
-		}
-	}
-
-	function buildChannels() {
-		channels = opts.channels();
-		subscribeAll();
-	}
-
-	function teardownChannels() {
-		for (const ch of channels) {
-			try {
-				opts.client.removeChannel(ch);
-			} catch {
-				// channel already removed — ignore
-			}
-		}
-		channels = [];
-	}
 
 	async function maybeAcquireWakeLock() {
 		if (!isBrowser) return;
@@ -79,14 +49,12 @@ export function createRealtimeKeepalive(opts: KeepaliveOpts) {
 			return;
 		}
 		void Promise.resolve(opts.onResync());
-		teardownChannels();
-		buildChannels();
 		void maybeAcquireWakeLock();
 	}
 
 	function handleOnline() {
-		status = 'connecting';
-		void handleVisibilityChange();
+		status = 'live';
+		handleVisibilityChange();
 	}
 
 	function handleOffline() {
@@ -97,7 +65,7 @@ export function createRealtimeKeepalive(opts: KeepaliveOpts) {
 	function start() {
 		if (started || !isBrowser) return;
 		started = true;
-		buildChannels();
+		if (!navigator.onLine) status = 'offline';
 		document.addEventListener('visibilitychange', handleVisibilityChange);
 		window.addEventListener('online', handleOnline);
 		window.addEventListener('offline', handleOffline);
@@ -110,7 +78,6 @@ export function createRealtimeKeepalive(opts: KeepaliveOpts) {
 		document.removeEventListener('visibilitychange', handleVisibilityChange);
 		window.removeEventListener('online', handleOnline);
 		window.removeEventListener('offline', handleOffline);
-		teardownChannels();
 		releaseWakeLock();
 	}
 

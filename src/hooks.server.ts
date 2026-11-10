@@ -1,36 +1,10 @@
-import { sequence } from '@sveltejs/kit/hooks';
 import type { Handle } from '@sveltejs/kit';
-import { createClient } from '$lib/supabase/server';
+import { env } from '$env/dynamic/private';
+import { SESSION_COOKIE, verifySession } from '$lib/server/session';
 
-const supabase: Handle = async ({ event, resolve }) => {
-	event.locals.supabase = createClient(event);
-
-	event.locals.safeGetSession = async () => {
-		const {
-			data: { session }
-		} = await event.locals.supabase.auth.getSession();
-		if (!session) return { session: null, user: null };
-
-		const {
-			data: { user },
-			error
-		} = await event.locals.supabase.auth.getUser();
-		if (error) return { session: null, user: null };
-
-		return { session, user };
-	};
-
-	return resolve(event, {
-		filterSerializedResponseHeaders: (name) =>
-			name === 'content-range' || name === 'x-supabase-api-version'
-	});
-};
-
-const auth: Handle = async ({ event, resolve }) => {
-	const { session, user } = await event.locals.safeGetSession();
-	event.locals.session = session;
-	event.locals.user = user;
+export const handle: Handle = async ({ event, resolve }) => {
+	if (!env.SESSION_SECRET) throw new Error('SESSION_SECRET is not set');
+	const id = await verifySession(event.cookies.get(SESSION_COOKIE), env.SESSION_SECRET);
+	event.locals.user = id ? { id } : null;
 	return resolve(event);
 };
-
-export const handle: Handle = sequence(supabase, auth);

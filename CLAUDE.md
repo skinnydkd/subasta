@@ -17,7 +17,7 @@ App PWA de subhasta de jugadors de futbol amb amics. 3-5 jugadors online sincron
 ## Stack
 
 - **Frontend**: SvelteKit 2 + Svelte 5 (runes), TypeScript estricte, Tailwind CSS v4
-- **Backend**: Supabase (Postgres + Realtime + Auth + Storage)
+- **Backend**: Postgres a Neon (`@neondatabase/serverless`, HTTP). Tota la lògica de joc en funcions SQL; el servidor de SvelteKit és l'únic que parla amb la BD (`src/lib/server/db.ts`)
 - **Deploy**: Cloudflare Pages (adaptador `@sveltejs/adapter-cloudflare`)
 - **PWA**: service worker manual (`src/service-worker.ts`)
 - **Tests**: Vitest (unit), Playwright (e2e)
@@ -33,9 +33,9 @@ pnpm test:unit        # vitest una passada
 pnpm test:e2e         # playwright
 pnpm lint             # eslint + prettier check
 pnpm format           # prettier write
-pnpm db:types         # genera src/lib/types/db.ts des de Supabase
-pnpm db:reset         # reset local + reaplica migrations + seed
-pnpm db:push          # push migrations a Supabase remote
+pnpm db:setup         # BD NOVA: compat + migracions + seeds (necessita DATABASE_URL)
+node scripts/run-sql.mjs <fitxer.sql>   # aplicar una migració nova
+node tests/test_*.mjs # tests SQL (transacció amb rollback)
 ```
 
 ## Domain model — conceptes clau
@@ -56,16 +56,17 @@ Hi haurà múltiples tipus de subhasta. **Sempre** afegir-los implementant la in
 
 Tots els imports en BD i lògica de negoci són **bigint en cèntims d'euro** (`bigint`, no `numeric`, no `int`). 1.000M€ = 100_000_000_000n. Format només a la capa de presentació (`src/lib/utils/currency.ts`).
 
-### Realtime: Postgres Changes vs Broadcast
+### Estat en viu: polling
 
-- **Postgres Changes**: per a estat persistent (auction status, current_bid, budget). Cada subscripció escolta canvis a una row específica.
-- **Broadcast**: per a esdeveniments efímers (countdown ticks, animacions de puja, "X està pujant..."). No es persisteix.
+No hi ha canal push. La pàgina de sala fa `invalidateAll()` cada 1 s en subhasta (2,5 s a lobby/votació, 3 s els espectadors) i el servidor torna `get_room_view`. La presència ix de `room_members.last_seen_at`.
 
-Regla: si l'estat ha de sobreviure a un refresh, va per Postgres Changes. Si no, Broadcast.
+### Identitat
+
+Galeta `uid` `httpOnly` signada amb HMAC (`src/lib/server/session.ts`). `db.query(userId, …)` fixa `app.user_id` dins la transacció i `auth.uid()` el llig (`db/00_supabase_compat.sql`). Sense comptes ni email.
 
 ### Anti-cheat / consistència
 
-Tota acció que muta estat de joc (puja, vot, tancar subhasta) **ha de** passar per Edge Functions o RPC de Postgres amb validació server-side. **Mai** confiar al client per al `current_bid` o el `budget_remaining`. RLS estricte per a totes les taules de joc.
+Tota acció que muta estat de joc (puja, vot, tancar subhasta) **ha de** passar per una funció SQL amb validació server-side. **Mai** confiar al client per al `current_bid` o el `budget_remaining`.
 
 ### Naming
 
@@ -77,7 +78,7 @@ Tota acció que muta estat de joc (puja, vot, tancar subhasta) **ha de** passar 
 ### Tests
 
 - **Unit obligatori** per a `src/lib/auction/*` (motor de subhasta) i `src/lib/utils/*` (currency, room codes, etc.).
-- **Integration** amb Supabase local per a flux complet de room → draft → voting.
+- **Integration**: `tests/*.mjs` contra `DATABASE_URL`.
 - **E2E** Playwright només per als happy paths principals.
 
 ### Commits (sobre el global)
@@ -87,8 +88,8 @@ Tota acció que muta estat de joc (puja, vot, tancar subhasta) **ha de** passar 
 
 ## Seguretat — atenció especial
 
-- **Claus Supabase**: només la `anon` al client. La `service_role` NOMÉS a Edge Functions o scripts locals (mai checked-in).
-- **RLS obligatori** a totes les taules. Cap taula sense policy.
+- `DATABASE_URL` i `SESSION_SECRET` només al servidor (`$env/dynamic/private`). El navegador no parla mai amb la BD.
+- Les migracions antigues encara creen polítiques RLS; no fan res perquè l'app connecta com a propietari. La seguretat és a les funcions SQL (`auth.uid()`).
 - **No** validar mai pertinença a una sala només al client.
 - **Rate limit** a les pujes (per RPC, p.ex. max 1 puja per usuari cada 200ms).
 
@@ -102,13 +103,13 @@ Fases 1-7 del MVP fetes (flux complet: lobby → subhasta `open_timer` → auto-
 
 - **Windows ARM64**: `workerd` no té build i peta en importar-lo; `svelte.config.js` se salta `adapter-cloudflare` en eixa plataforma. Dev, check i tests funcionen; el build de producció es fa als builders Linux de Cloudflare.
 - **pnpm** no està instal·lat globalment al PC de Pau: `npx pnpm@10 <ordre>`.
-- `src/lib/types/db.ts` és generat i no està al repo: `pnpm db:types` (o el MCP de Supabase) abans de `pnpm check`.
-- Projecte Supabase: `nhbhmrjkmwduygcxdvrq` (es pausa per inactivitat al pla gratuït).
+- Les migracions són a `supabase/migrations/` per història; ja no hi ha Supabase. `db/00_supabase_compat.sql` crea el que esperen (`auth.users`, `auth.uid()`, rols).
+- Pla de la migració: `documents/plans/2026-11-10-neon-migration.md`.
 
 ## Decisions resoltes
 
 - **Paleta dark mode**: warm blacks + warm greys + sport-bar red accent. NO blaus. Tokens a `src/app.css`.
-- **Auth**: anonymous sign-in (`supabase.auth.signInAnonymously()`) + nickname editable. Cap email/magic-link al MVP.
+- **Auth**: només nom + galeta signada. Cap email.
 - **Ordre dels jugadors a subhasta**: random per room.
 
 ## Decisions pendents abans de codi (revisar amb usuari)
@@ -119,6 +120,5 @@ Fases 1-7 del MVP fetes (flux complet: lobby → subhasta `open_timer` → auto-
 
 ## Referències ràpides
 
-- Supabase Realtime: <https://supabase.com/docs/guides/realtime>
-- SvelteKit + Supabase: <https://supabase.com/docs/guides/auth/server-side/sveltekit>
+- Driver Neon: <https://github.com/neondatabase/serverless>
 - adapter-cloudflare: <https://kit.svelte.dev/docs/adapter-cloudflare>

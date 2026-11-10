@@ -2,32 +2,47 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { createRoom, getUserStats, joinRoom } from '$lib/server/rooms';
 import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
+import { query } from '$lib/server/db';
+import { SESSION_COOKIE, SESSION_MAX_AGE, signSession } from '$lib/server/session';
+import { env } from '$env/dynamic/private';
 import { FORMATION_PRESETS, type FormationPreset } from '$lib/auction/settings';
 
-export const load: PageServerLoad = async ({ locals }) => {
-	if (!locals.user) {
-		return { user: null, profile: null, themes: [], stats: null };
-	}
+type Theme = {
+	id: string;
+	slug: string;
+	display_name: string;
+	description: string | null;
+	cover_image_url: string | null;
+};
 
-	const [{ data: profile }, { data: themes }, stats] = await Promise.all([
-		locals.supabase
-			.from('profiles')
-			.select('id, display_name')
-			.eq('id', locals.user.id)
-			.maybeSingle(),
-		locals.supabase
-			.from('themes')
-			.select('id, slug, display_name, description, cover_image_url')
-			.eq('is_published', true)
-			.order('display_name'),
-		getUserStats(locals.supabase, locals.user.id)
+export const load: PageServerLoad = async ({ locals }) => {
+	const none = { user: null, profile: null, themes: [], stats: null };
+	if (!locals.user) return none;
+	const uid = locals.user.id;
+
+	const [profiles, themes, stats] = await Promise.all([
+		query<{ id: string; display_name: string }>(
+			null,
+			'select id, display_name from public.profiles where id = $1',
+			[uid]
+		),
+		query<Theme>(
+			null,
+			`select id, slug, display_name, description, cover_image_url
+			 from public.themes where is_published order by display_name`
+		),
+		getUserStats(uid)
 	]);
 
-	return { user: locals.user, profile, themes: themes ?? [], stats };
+	// A valid cookie for a user that no longer exists (e.g. after a DB reset):
+	// treat as signed out so the name form shows again.
+	if (!profiles[0]) return none;
+
+	return { user: locals.user, profile: profiles[0], themes, stats };
 };
 
 export const actions: Actions = {
-	signIn: async ({ request, locals }) => {
+	signIn: async ({ request, cookies, url }) => {
 		const formData = await request.formData();
 		const displayName = String(formData.get('display_name') ?? '').trim();
 
@@ -38,33 +53,29 @@ export const actions: Actions = {
 			return fail(400, { signIn: { error: 'El nom és massa llarg (màx 30).' } });
 		}
 
-		const { error } = await locals.supabase.auth.signInAnonymously({
-			options: { data: { display_name: displayName } }
+		let id: string;
+		try {
+			const rows = await query<{ id: string }>(
+				null,
+				`insert into auth.users (raw_user_meta_data)
+				 values (jsonb_build_object('display_name', $1::text)) returning id`,
+				[displayName]
+			);
+			id = rows[0].id;
+		} catch (err) {
+			console.error('signIn failed', err);
+			return fail(500, { signIn: { error: "No s'ha pogut crear el jugador." } });
+		}
+
+		cookies.set(SESSION_COOKIE, await signSession(id, env.SESSION_SECRET!), {
+			path: '/',
+			httpOnly: true,
+			sameSite: 'lax',
+			secure: url.protocol === 'https:',
+			maxAge: SESSION_MAX_AGE
 		});
 
-		if (error) {
-			return fail(500, { signIn: { error: error.message } });
-		}
-
 		return { signIn: { ok: true } };
-	},
-
-	linkEmail: async ({ request, locals }) => {
-		if (!locals.user) return fail(401, { linkEmail: { error: 'No autenticat.' } });
-
-		const formData = await request.formData();
-		const email = String(formData.get('email') ?? '')
-			.trim()
-			.toLowerCase();
-		if (!email || !email.includes('@') || email.length > 254) {
-			return fail(400, { linkEmail: { error: 'Email invàlid.' } });
-		}
-
-		const { error } = await locals.supabase.auth.updateUser({ email });
-		if (error) {
-			return fail(400, { linkEmail: { error: error.message } });
-		}
-		return { linkEmail: { ok: true, email } };
 	},
 
 	createRoom: async ({ request, locals }) => {
@@ -94,7 +105,7 @@ export const actions: Actions = {
 			settings.extra_per_position = extras;
 		}
 
-		const result = await createRoom(locals.supabase, { themeId, settings });
+		const result = await createRoom(locals.user.id, { themeId, settings });
 
 		if (!result.ok) {
 			return fail(500, { create: { error: result.error } });
@@ -114,7 +125,7 @@ export const actions: Actions = {
 			return fail(400, { join: { error: 'Codi invàlid (6 caràcters).' } });
 		}
 
-		const result = await joinRoom(locals.supabase, code);
+		const result = await joinRoom(locals.user.id, code);
 		if (!result.ok) {
 			return fail(400, { join: { error: result.error } });
 		}

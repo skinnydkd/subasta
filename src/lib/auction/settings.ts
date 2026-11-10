@@ -1,7 +1,5 @@
-import type { Database } from '$lib/types/db';
-
-export type AuctionType = Database['public']['Enums']['auction_type'];
-export type PositionCode = Database['public']['Enums']['position_code'];
+export type AuctionType = 'open_timer' | 'sealed_first' | 'sealed_vickrey' | 'turn_based';
+export type PositionCode = 'GK' | 'LB' | 'RB' | 'CB' | 'CDM' | 'CM' | 'CAM' | 'LW' | 'RW' | 'ST';
 
 export type RoomSettings = {
 	formation: Partial<Record<PositionCode, number>>;

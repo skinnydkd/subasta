@@ -5,18 +5,22 @@ import { advanceAuction, placeBid, startRoom } from '$lib/server/auctionRpc';
 import { castVote, finishVoting } from '$lib/server/votingRpc';
 import {
 	deleteRoom,
+	roomByCode,
+	touchPresence,
 	kickMember,
 	leaveRoom,
 	transferHost,
 	updateRoomSettings
 } from '$lib/server/rooms';
+import { query, rpc } from '$lib/server/db';
 import { FORMATION_PRESETS, type FormationPreset } from '$lib/auction/settings';
 import { parseAmountToCents } from '$lib/utils/currency';
 
-type RpcAny = (
-	fn: string,
-	args: unknown
-) => Promise<{ data: unknown; error: { message: string } | null }>;
+type MyVote = {
+	rank_1_user_id: string;
+	rank_2_user_id: string | null;
+	rank_3_user_id: string | null;
+};
 
 type TeamPlayer = {
 	auction_id: string;
@@ -98,33 +102,32 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	const code = normalizeRoomCode(params.code);
 	if (!isValidRoomCode(code)) throw error(404, 'Sala no trobada.');
 
-	const rpc = (locals.supabase.rpc as unknown as RpcAny).bind(locals.supabase);
-	const { data: viewData } = await rpc('get_room_view', { p_code: code });
-	if (!viewData) throw error(404, 'Sala no trobada.');
-
-	const view = viewData as RoomView;
 	const userId = locals.user?.id ?? null;
+	const viewResult = await rpc<RoomView | null>(userId, 'get_room_view', { p_code: code });
+	if (!viewResult.ok || !viewResult.data) throw error(404, 'Sala no trobada.');
+
+	const view = viewResult.data;
 	const isMember = !!userId && view.members.some((m) => m.user_id === userId);
 	const readOnly = !isMember;
 
 	// Member-only extras: their existing vote (RLS allows the voter to read
 	// their own vote regardless of phase).
-	let myVote: {
-		rank_1_user_id: string;
-		rank_2_user_id: string | null;
-		rank_3_user_id: string | null;
-	} | null = null;
+	let myVote: MyVote | null = null;
 	if (isMember && (view.room.status === 'voting' || view.room.status === 'finished')) {
-		const { data } = await locals.supabase
-			.from('votes')
-			.select('rank_1_user_id, rank_2_user_id, rank_3_user_id')
-			.eq('room_id', view.room.id)
-			.eq('voter_id', userId!)
-			.maybeSingle();
-		myVote = data;
+		const rows = await query<MyVote>(
+			null,
+			`select rank_1_user_id, rank_2_user_id, rank_3_user_id
+			 from public.votes where room_id = $1 and voter_id = $2`,
+			[view.room.id, userId]
+		);
+		myVote = rows[0] ?? null;
 	}
 
+	const onlineUserIds =
+		isMember && view.room.status !== 'finished' ? await touchPresence(view.room.id, userId!) : [];
+
 	return {
+		onlineUserIds,
 		room: {
 			id: view.room.id,
 			code: view.room.code,
@@ -157,17 +160,13 @@ export const actions: Actions = {
 		if (!locals.user) return fail(401, { startRoom: { error: 'No autenticat.' } });
 
 		const code = normalizeRoomCode(params.code!);
-		const { data: room } = await locals.supabase
-			.from('rooms')
-			.select('id, host_id')
-			.eq('code', code)
-			.maybeSingle();
+		const room = await roomByCode(code);
 		if (!room) return fail(404, { startRoom: { error: 'Sala no trobada.' } });
 		if (room.host_id !== locals.user.id) {
 			return fail(403, { startRoom: { error: 'Només el host pot iniciar.' } });
 		}
 
-		const result = await startRoom(locals.supabase, room.id);
+		const result = await startRoom(locals.user.id, room.id);
 		if (!result.ok) return fail(400, { startRoom: { error: result.error } });
 		return { startRoom: { ok: true } };
 	},
@@ -185,7 +184,7 @@ export const actions: Actions = {
 		}
 		if (!auctionId) return fail(400, { bid: { error: 'Subhasta no especificada.' } });
 
-		const result = await placeBid(locals.supabase, auctionId, amount);
+		const result = await placeBid(locals.user.id, auctionId, amount);
 		if (!result.ok) return fail(400, { bid: { error: result.error } });
 		return { bid: { ok: true } };
 	},
@@ -196,14 +195,10 @@ export const actions: Actions = {
 		const formData = await request.formData();
 		const force = formData.get('force') === 'true';
 		const code = normalizeRoomCode(params.code!);
-		const { data: room } = await locals.supabase
-			.from('rooms')
-			.select('id')
-			.eq('code', code)
-			.maybeSingle();
+		const room = await roomByCode(code);
 		if (!room) return fail(404, { advance: { error: 'Sala no trobada.' } });
 
-		const result = await advanceAuction(locals.supabase, room.id, force);
+		const result = await advanceAuction(locals.user.id, room.id, force);
 		if (!result.ok) return fail(400, { advance: { error: result.error } });
 		return { advance: { ok: true, ...result.data } };
 	},
@@ -219,14 +214,10 @@ export const actions: Actions = {
 		if (!rank1) return fail(400, { vote: { error: 'Tria almenys el Top 1.' } });
 
 		const code = normalizeRoomCode(params.code!);
-		const { data: room } = await locals.supabase
-			.from('rooms')
-			.select('id')
-			.eq('code', code)
-			.maybeSingle();
+		const room = await roomByCode(code);
 		if (!room) return fail(404, { vote: { error: 'Sala no trobada.' } });
 
-		const result = await castVote(locals.supabase, room.id, {
+		const result = await castVote(locals.user.id, room.id, {
 			rank1,
 			rank2,
 			rank3
@@ -282,14 +273,10 @@ export const actions: Actions = {
 		}
 
 		const code = normalizeRoomCode(params.code!);
-		const { data: room } = await locals.supabase
-			.from('rooms')
-			.select('id')
-			.eq('code', code)
-			.maybeSingle();
+		const room = await roomByCode(code);
 		if (!room) return fail(404, { settings: { error: 'Sala no trobada.' } });
 
-		const result = await updateRoomSettings(locals.supabase, room.id, patch);
+		const result = await updateRoomSettings(locals.user.id, room.id, patch);
 		if (!result.ok) return fail(400, { settings: { error: result.error } });
 		return { settings: { ok: true } };
 	},
@@ -298,14 +285,10 @@ export const actions: Actions = {
 		if (!locals.user) return fail(401, { leave: { error: 'No autenticat.' } });
 
 		const code = normalizeRoomCode(params.code!);
-		const { data: room } = await locals.supabase
-			.from('rooms')
-			.select('id')
-			.eq('code', code)
-			.maybeSingle();
+		const room = await roomByCode(code);
 		if (!room) return fail(404, { leave: { error: 'Sala no trobada.' } });
 
-		const result = await leaveRoom(locals.supabase, room.id);
+		const result = await leaveRoom(locals.user.id, room.id);
 		if (!result.ok) return fail(400, { leave: { error: result.error } });
 		throw redirect(303, '/');
 	},
@@ -318,14 +301,10 @@ export const actions: Actions = {
 		if (!userIdToKick) return fail(400, { kick: { error: 'Falta user_id.' } });
 
 		const code = normalizeRoomCode(params.code!);
-		const { data: room } = await locals.supabase
-			.from('rooms')
-			.select('id')
-			.eq('code', code)
-			.maybeSingle();
+		const room = await roomByCode(code);
 		if (!room) return fail(404, { kick: { error: 'Sala no trobada.' } });
 
-		const result = await kickMember(locals.supabase, room.id, userIdToKick);
+		const result = await kickMember(locals.user.id, room.id, userIdToKick);
 		if (!result.ok) return fail(400, { kick: { error: result.error } });
 		return { kick: { ok: true } };
 	},
@@ -338,14 +317,10 @@ export const actions: Actions = {
 		if (!newHostId) return fail(400, { transfer: { error: 'Falta user_id.' } });
 
 		const code = normalizeRoomCode(params.code!);
-		const { data: room } = await locals.supabase
-			.from('rooms')
-			.select('id')
-			.eq('code', code)
-			.maybeSingle();
+		const room = await roomByCode(code);
 		if (!room) return fail(404, { transfer: { error: 'Sala no trobada.' } });
 
-		const result = await transferHost(locals.supabase, room.id, newHostId);
+		const result = await transferHost(locals.user.id, room.id, newHostId);
 		if (!result.ok) return fail(400, { transfer: { error: result.error } });
 		return { transfer: { ok: true } };
 	},
@@ -354,14 +329,10 @@ export const actions: Actions = {
 		if (!locals.user) return fail(401, { deleteRoom: { error: 'No autenticat.' } });
 
 		const code = normalizeRoomCode(params.code!);
-		const { data: room } = await locals.supabase
-			.from('rooms')
-			.select('id')
-			.eq('code', code)
-			.maybeSingle();
+		const room = await roomByCode(code);
 		if (!room) return fail(404, { deleteRoom: { error: 'Sala no trobada.' } });
 
-		const result = await deleteRoom(locals.supabase, room.id);
+		const result = await deleteRoom(locals.user.id, room.id);
 		if (!result.ok) return fail(400, { deleteRoom: { error: result.error } });
 		throw redirect(303, '/');
 	},
@@ -370,17 +341,13 @@ export const actions: Actions = {
 		if (!locals.user) return fail(401, { finishVoting: { error: 'No autenticat.' } });
 
 		const code = normalizeRoomCode(params.code!);
-		const { data: room } = await locals.supabase
-			.from('rooms')
-			.select('id, host_id')
-			.eq('code', code)
-			.maybeSingle();
+		const room = await roomByCode(code);
 		if (!room) return fail(404, { finishVoting: { error: 'Sala no trobada.' } });
 		if (room.host_id !== locals.user.id) {
 			return fail(403, { finishVoting: { error: 'Només el host.' } });
 		}
 
-		const result = await finishVoting(locals.supabase, room.id);
+		const result = await finishVoting(locals.user.id, room.id);
 		if (!result.ok) return fail(400, { finishVoting: { error: result.error } });
 		return { finishVoting: { ok: true } };
 	}

@@ -17,35 +17,22 @@
 | Capa     | Tecnologia                                        |
 | -------- | ------------------------------------------------- |
 | Frontend | SvelteKit 2 (Svelte 5 runes), TS, Tailwind v4     |
-| Backend  | Supabase (Postgres + Realtime + Auth + Storage)   |
+| Backend  | Postgres a Neon, lògica en funcions SQL           |
 | Deploy   | Cloudflare Pages (`@sveltejs/adapter-cloudflare`) |
 | Tests    | Vitest (unit), Playwright (e2e)                   |
 
 ## Setup local
 
-> Prerequisits: Node 20+, pnpm, Docker (per a Supabase local), Supabase CLI.
+> Prerequisits: Node 20+, pnpm, una base de dades Postgres (Neon).
 
 ```bash
-# 1. clona i instal·la
 pnpm install
-
-# 2. arrenca Supabase local
-supabase start          # imprimirà URL local + claus
-
-# 3. copia les claus al .env
-cp .env.example .env    # i edita amb les claus que t'ha donat 'supabase start'
-
-# 4. aplica migrations + seed
-supabase db reset       # reaplica tota la migració + seed
-
-# 5. genera types TypeScript des del schema
-pnpm db:types
-
-# 6. dev
+cp .env.example .env    # DATABASE_URL i SESSION_SECRET
+pnpm db:setup           # només en una BD nova: migracions + seeds
 pnpm dev
 ```
 
-L'app estarà a `http://localhost:5173`. El Supabase studio local a `http://localhost:54323`.
+L'app estarà a `http://localhost:5173`.
 
 ## Estructura
 

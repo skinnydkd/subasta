@@ -4,13 +4,13 @@
 
 **Idea:** el navegador només parlava amb Supabase per al temps real; totes les accions de joc ja passaven pel servidor de SvelteKit. Les migracions i els seeds s'aprofiten sense tocar-los.
 
-| Peça               | Abans (Supabase)                | Després (Neon)                                   |
-| ------------------ | ------------------------------- | ------------------------------------------------ |
-| Lògica de joc      | funcions SQL per RPC            | les mateixes, cridades amb SQL des del servidor  |
-| Identitat          | compte anònim de Supabase       | galeta `httpOnly` signada (HMAC) amb un uuid     |
-| Actualitzacions    | realtime + polling 1 s          | només polling 1 s                                |
-| Presència          | canal de presència              | `room_members.last_seen_at`                      |
-| Vincular email     | opció a la portada              | eliminat                                         |
+| Peça            | Abans (Supabase)          | Després (Neon)                                  |
+| --------------- | ------------------------- | ----------------------------------------------- |
+| Lògica de joc   | funcions SQL per RPC      | les mateixes, cridades amb SQL des del servidor |
+| Identitat       | compte anònim de Supabase | galeta `httpOnly` signada (HMAC) amb un uuid    |
+| Actualitzacions | realtime + polling 1 s    | només polling 1 s                               |
+| Presència       | canal de presència        | `room_members.last_seen_at`                     |
+| Vincular email  | opció a la portada        | eliminat                                        |
 
 ## Passos (un commit cadascun)
 

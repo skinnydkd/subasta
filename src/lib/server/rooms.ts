@@ -1,103 +1,78 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '$lib/types/db';
+import { query, rpc } from './db';
 
-export type CreateRoomResult =
-	| { ok: true; code: string; roomId: string }
-	| { ok: false; error: string };
+type Ok = { ok: true } | { ok: false; error: string };
+type RoomRef = { ok: true; code: string; roomId: string } | { ok: false; error: string };
 
-type RpcAny = (
-	fn: string,
-	args: unknown
-) => Promise<{ data: unknown; error: { message: string } | null }>;
+export type CreateRoomResult = RoomRef;
+export type JoinRoomResult = RoomRef;
 
-function rawRpc(supabase: SupabaseClient<Database>): RpcAny {
-	return (supabase.rpc as unknown as RpcAny).bind(supabase);
+async function roomRef(
+	result: ReturnType<typeof rpc<Array<{ room_id: string; code: string }>>>,
+	emptyMessage: string
+): Promise<RoomRef> {
+	const r = await result;
+	if (!r.ok) return r;
+	if (!r.data?.length) return { ok: false, error: emptyMessage };
+	return { ok: true, code: r.data[0].code, roomId: r.data[0].room_id };
 }
 
-export async function createRoom(
-	supabase: SupabaseClient<Database>,
+const ok = async (result: Promise<{ ok: boolean; error?: string }>): Promise<Ok> => {
+	const r = await result;
+	return r.ok ? { ok: true } : { ok: false, error: r.error ?? '' };
+};
+
+export function createRoom(
+	userId: string,
 	input: { themeId: string; settings?: Record<string, unknown> | null }
 ): Promise<CreateRoomResult> {
-	const { data, error } = await rawRpc(supabase)('create_room', {
-		p_theme_id: input.themeId,
-		p_settings: input.settings ?? null
-	});
-	if (error) return { ok: false, error: error.message };
-	const rows = data as Array<{ room_id: string; code: string }>;
-	if (!rows?.length) return { ok: false, error: "No s'ha pogut crear la sala." };
-	return { ok: true, code: rows[0].code, roomId: rows[0].room_id };
+	return roomRef(
+		rpc(
+			userId,
+			'create_room',
+			{
+				p_theme_id: input.themeId,
+				p_settings: input.settings ? JSON.stringify(input.settings) : null
+			},
+			'rows'
+		),
+		"No s'ha pogut crear la sala."
+	);
 }
 
-export async function updateRoomSettings(
-	supabase: SupabaseClient<Database>,
+export function joinRoom(userId: string, code: string): Promise<JoinRoomResult> {
+	return roomRef(
+		rpc(userId, 'join_room', { p_code: code }, 'rows'),
+		"No s'ha pogut unir a la sala."
+	);
+}
+
+export function updateRoomSettings(
+	userId: string,
 	roomId: string,
 	settings: Record<string, unknown>
-): Promise<{ ok: true } | { ok: false; error: string }> {
-	const { error } = await rawRpc(supabase)('update_room_settings', {
-		p_room_id: roomId,
-		p_settings: settings
-	});
-	if (error) return { ok: false, error: error.message };
-	return { ok: true };
+): Promise<Ok> {
+	return ok(
+		rpc(userId, 'update_room_settings', {
+			p_room_id: roomId,
+			p_settings: JSON.stringify(settings)
+		})
+	);
 }
 
-export type JoinRoomResult =
-	| { ok: true; code: string; roomId: string }
-	| { ok: false; error: string };
-
-export async function joinRoom(
-	supabase: SupabaseClient<Database>,
-	code: string
-): Promise<JoinRoomResult> {
-	const { data, error } = await rawRpc(supabase)('join_room', { p_code: code });
-	if (error) return { ok: false, error: error.message };
-	const rows = data as Array<{ room_id: string; code: string }>;
-	if (!rows?.length) return { ok: false, error: "No s'ha pogut unir a la sala." };
-	return { ok: true, code: rows[0].code, roomId: rows[0].room_id };
+export function leaveRoom(userId: string, roomId: string): Promise<Ok> {
+	return ok(rpc(userId, 'leave_room', { p_room_id: roomId }));
 }
 
-export async function leaveRoom(
-	supabase: SupabaseClient<Database>,
-	roomId: string
-): Promise<{ ok: true } | { ok: false; error: string }> {
-	const { error } = await rawRpc(supabase)('leave_room', { p_room_id: roomId });
-	if (error) return { ok: false, error: error.message };
-	return { ok: true };
+export function deleteRoom(userId: string, roomId: string): Promise<Ok> {
+	return ok(rpc(userId, 'delete_room', { p_room_id: roomId }));
 }
 
-export async function deleteRoom(
-	supabase: SupabaseClient<Database>,
-	roomId: string
-): Promise<{ ok: true } | { ok: false; error: string }> {
-	const { error } = await rawRpc(supabase)('delete_room', { p_room_id: roomId });
-	if (error) return { ok: false, error: error.message };
-	return { ok: true };
+export function kickMember(userId: string, roomId: string, targetId: string): Promise<Ok> {
+	return ok(rpc(userId, 'kick_member', { p_room_id: roomId, p_user_id: targetId }));
 }
 
-export async function kickMember(
-	supabase: SupabaseClient<Database>,
-	roomId: string,
-	userId: string
-): Promise<{ ok: true } | { ok: false; error: string }> {
-	const { error } = await rawRpc(supabase)('kick_member', {
-		p_room_id: roomId,
-		p_user_id: userId
-	});
-	if (error) return { ok: false, error: error.message };
-	return { ok: true };
-}
-
-export async function transferHost(
-	supabase: SupabaseClient<Database>,
-	roomId: string,
-	newHostUserId: string
-): Promise<{ ok: true } | { ok: false; error: string }> {
-	const { error } = await rawRpc(supabase)('transfer_host', {
-		p_room_id: roomId,
-		p_new_host_user_id: newHostUserId
-	});
-	if (error) return { ok: false, error: error.message };
-	return { ok: true };
+export function transferHost(userId: string, roomId: string, newHostId: string): Promise<Ok> {
+	return ok(rpc(userId, 'transfer_host', { p_room_id: roomId, p_new_host_user_id: newHostId }));
 }
 
 export type UserStats = {
@@ -111,11 +86,36 @@ export type UserStats = {
 	top_position_count: number;
 };
 
-export async function getUserStats(
-	supabase: SupabaseClient<Database>,
-	userId: string
-): Promise<UserStats | null> {
-	const { data, error } = await rawRpc(supabase)('get_user_stats', { p_user_id: userId });
-	if (error) return null;
-	return data as UserStats | null;
+export async function getUserStats(userId: string): Promise<UserStats | null> {
+	const r = await rpc<UserStats | null>(userId, 'get_user_stats', { p_user_id: userId });
+	return r.ok ? r.data : null;
+}
+
+/** Room id + host for a code, or null. Authorisation lives in the SQL functions. */
+export async function roomByCode(code: string): Promise<{ id: string; host_id: string } | null> {
+	const rows = await query<{ id: string; host_id: string }>(
+		null,
+		'select id, host_id from public.rooms where code = $1',
+		[code]
+	);
+	return rows[0] ?? null;
+}
+
+/**
+ * Marks `userId` as seen in the room and returns who has polled recently.
+ * ponytail: one row write per poll per player; fine for a handful of players,
+ * move to an in-memory/KV heartbeat if rooms ever get big.
+ */
+export async function touchPresence(roomId: string, userId: string): Promise<string[]> {
+	const rows = await query<{ user_id: string }>(
+		null,
+		`with touch as (
+			update public.room_members set last_seen_at = now()
+			where room_id = $1 and user_id = $2
+		)
+		select user_id from public.room_members
+		where room_id = $1 and (user_id = $2 or last_seen_at > now() - interval '10 seconds')`,
+		[roomId, userId]
+	);
+	return rows.map((r) => r.user_id);
 }
