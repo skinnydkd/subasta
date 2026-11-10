@@ -35,7 +35,7 @@
 				<span>{member.profile?.display_name ?? 'Convidat'}</span>
 				{#if member.user_id === room.host_id}
 					<span
-						class="rounded-full bg-[color:var(--color-accent-muted)] px-1.5 py-0.5 text-[10px] tracking-wider text-[color:var(--color-on-accent)] uppercase"
+						class="rounded-full bg-[color:var(--color-accent-muted)] px-1.5 py-0.5 text-xs text-[color:var(--color-on-accent)]"
 						>host</span
 					>
 				{/if}

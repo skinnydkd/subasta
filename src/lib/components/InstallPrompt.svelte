@@ -14,7 +14,7 @@
 			<button
 				type="button"
 				onclick={() => installPrompt.install()}
-				class="rounded-[var(--radius-sm)] bg-[color:var(--color-accent)] px-3 py-1 text-xs font-medium tracking-wider text-white uppercase hover:bg-[color:var(--color-accent-hover)]"
+				class="rounded-[var(--radius-sm)] bg-[color:var(--color-accent)] px-3 py-1 text-xs font-medium text-white hover:bg-[color:var(--color-accent-hover)]"
 			>
 				Instal·la
 			</button>

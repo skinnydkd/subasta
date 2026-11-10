@@ -5,14 +5,23 @@ import { expect, test, type Page } from '@playwright/test';
  * every screen change has to arrive through the room page's own polling.
  * lobby → 33 auctions (4-3-3, no extras) → vote → results.
  */
+// Viewport for the screenshots; run with VW=1440 VH=900 to see the desktop layout.
+const VW = Number(process.env.VW ?? 375);
+const VH = Number(process.env.VH ?? 844);
+
 test('three players play a full game', async ({ browser }) => {
 	test.setTimeout(300_000);
+
+	// The first request builds the in-memory database from every seed: give it time.
+	const warm = await (await browser.newContext()).newPage();
+	await warm.goto('/', { waitUntil: 'networkidle', timeout: 120_000 });
+	await warm.close();
 
 	const names = ['Anna', 'Bernat', 'Carla'];
 	const pages: Page[] = [];
 	for (const name of names) {
 		const page = await (
-			await browser.newContext({ viewport: { width: 375, height: 844 } })
+			await browser.newContext({ viewport: { width: VW, height: VH } })
 		).newPage();
 		// Wait for hydration: a fill before it is wiped when bind:value takes over.
 		await page.goto('/', { waitUntil: 'networkidle' });
@@ -58,7 +67,10 @@ test('three players play a full game', async ({ browser }) => {
 		if (auctions === 0) {
 			// The host's bid reaches another player through polling alone.
 			await expect(guests[0].getByText('sense pujades')).toBeHidden();
-			await guests[0].screenshot({ path: 'test-results/shots/1-subhasta.png', fullPage: true });
+			await guests[0].screenshot({
+				path: `test-results/shots/${VW}-1-subhasta.png`,
+				fullPage: true
+			});
 		}
 		await host.getByRole('button', { name: /Següent|Tancar i següent/ }).click();
 		await expect
@@ -72,7 +84,10 @@ test('three players play a full game', async ({ browser }) => {
 	console.log(`auctions played: ${auctions}`);
 
 	await expect(guests[1].getByRole('heading', { name: 'Vota' })).toBeVisible();
-	await guests[1].screenshot({ path: 'test-results/shots/2-votacio.png', fullPage: true });
+	await guests[1].screenshot({
+		path: `test-results/shots/${VW}-2-votacio.png`,
+		fullPage: true
+	});
 	for (const page of pages) {
 		await expect(page.getByRole('heading', { name: 'Vota' })).toBeVisible();
 		await page.locator('select[name="rank_1"]').selectOption({ index: 1 });
@@ -85,5 +100,8 @@ test('three players play a full game', async ({ browser }) => {
 	for (const page of pages) {
 		await expect(page.getByRole('heading', { name: 'Resultats' })).toBeVisible();
 	}
-	await guests[0].screenshot({ path: 'test-results/shots/3-resultats.png', fullPage: true });
+	await guests[0].screenshot({
+		path: `test-results/shots/${VW}-3-resultats.png`,
+		fullPage: true
+	});
 });

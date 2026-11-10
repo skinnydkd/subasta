@@ -121,7 +121,7 @@
 </script>
 
 <main
-	class="mx-auto flex min-h-dvh max-w-md flex-col gap-6 px-4 py-6"
+	class="mx-auto flex min-h-dvh max-w-md flex-col gap-6 px-4 py-6 lg:max-w-5xl"
 	style="padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); padding-top: max(1.5rem, env(safe-area-inset-top));"
 >
 	<header class="flex items-center justify-between gap-3">
@@ -140,7 +140,7 @@
 			{/if}
 			{#if isReadOnly}
 				<span
-					class="rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-2 py-0.5 text-[10px] tracking-wider text-[color:var(--color-text-muted)] uppercase"
+					class="rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-2 py-0.5 text-xs text-[color:var(--color-text-muted)]"
 				>
 					Espectador
 				</span>
@@ -153,7 +153,7 @@
 			<button
 				type="button"
 				onclick={toggleMute}
-				class="min-h-[36px] rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-xs tracking-wider uppercase transition-colors hover:bg-[color:var(--color-elevated)]"
+				class="min-h-[36px] rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-xs transition-colors hover:bg-[color:var(--color-elevated)]"
 				class:text-[color:var(--color-text-muted)]={isMutedState}
 				class:text-[color:var(--color-text)]={!isMutedState}
 				class:line-through={isMutedState}
@@ -165,17 +165,23 @@
 		</div>
 	</header>
 
-	<MemberList {room} {members} {isHost} {isReadOnly} {myUserId} {onlineUserIds} />
+	<div
+		class="flex flex-col gap-6 lg:grid lg:grid-cols-[18rem_minmax(0,1fr)] lg:items-start lg:gap-8"
+	>
+		<MemberList {room} {members} {isHost} {isReadOnly} {myUserId} {onlineUserIds} />
 
-	{#if room.status === 'lobby'}
-		<LobbyPanel {data} {form} />
-	{:else if room.status === 'drafting'}
-		<DraftPanel {data} {form} />
-	{:else if room.status === 'voting'}
-		<VotingPanel {data} {form} />
-	{:else}
-		<ResultsPanel {data} />
-	{/if}
+		<div class="flex min-w-0 flex-col gap-6">
+			{#if room.status === 'lobby'}
+				<LobbyPanel {data} {form} />
+			{:else if room.status === 'drafting'}
+				<DraftPanel {data} {form} />
+			{:else if room.status === 'voting'}
+				<VotingPanel {data} {form} />
+			{:else}
+				<ResultsPanel {data} />
+			{/if}
+		</div>
+	</div>
 
 	<a
 		href="/"

@@ -71,9 +71,7 @@
 						{@const playersInRow = row.positions.flatMap((pos) => byPos[pos] ?? [])}
 						{#if playersInRow.length > 0}
 							<div class="mb-2 last:mb-0">
-								<p
-									class="mb-1 text-[10px] tracking-widest text-[color:var(--color-text-faint)] uppercase"
-								>
+								<p class="mb-1 text-xs text-[color:var(--color-text-faint)]">
 									{row.label}
 								</p>
 								<ul class="flex flex-col gap-0.5">
@@ -82,7 +80,7 @@
 										<li class="flex items-baseline justify-between gap-2">
 											<span>
 												<span
-													class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-[10px] font-semibold tracking-wider text-[color:var(--color-on-accent)] uppercase"
+													class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-xs font-semibold text-[color:var(--color-on-accent)]"
 													>{p.position_slot}</span
 												>
 												<span
@@ -162,9 +160,7 @@
 			}}
 		>
 			<label class="flex flex-col gap-1">
-				<span class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase"
-					>Top 1 — 3 pts (obligatori)</span
-				>
+				<span class="text-xs text-[color:var(--color-text-faint)]">Top 1 — 3 pts (obligatori)</span>
 				<select
 					name="rank_1"
 					required
@@ -179,9 +175,7 @@
 			</label>
 
 			<label class="flex flex-col gap-1">
-				<span class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase"
-					>Top 2 — 2 pts</span
-				>
+				<span class="text-xs text-[color:var(--color-text-faint)]">Top 2 — 2 pts</span>
 				<select
 					name="rank_2"
 					bind:value={rank2}
@@ -195,9 +189,7 @@
 			</label>
 
 			<label class="flex flex-col gap-1">
-				<span class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase"
-					>Top 3 — 1 pt</span
-				>
+				<span class="text-xs text-[color:var(--color-text-faint)]">Top 3 — 1 pt</span>
 				<select
 					name="rank_3"
 					bind:value={rank3}

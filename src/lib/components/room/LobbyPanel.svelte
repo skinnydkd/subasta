@@ -47,16 +47,14 @@
 		<details
 			class="mt-3 rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-left"
 		>
-			<summary
-				class="cursor-pointer text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase"
-			>
+			<summary class="cursor-pointer text-xs text-[color:var(--color-text-faint)]">
 				Editar configuració
 			</summary>
 			<form method="POST" action="?/updateSettings" class="mt-3 flex flex-col gap-2" use:enhance>
 				<label
 					class="flex items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]"
 				>
-					<span class="tracking-wider uppercase">Formació</span>
+					<span class="">Formació</span>
 					<select
 						name="formation"
 						class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
@@ -71,7 +69,7 @@
 				<label
 					class="flex items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]"
 				>
-					<span class="tracking-wider uppercase">Timer</span>
+					<span class="">Timer</span>
 					<select
 						name="timer"
 						class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
@@ -85,7 +83,7 @@
 				</label>
 				<div class="grid grid-cols-2 gap-2">
 					<label class="flex flex-col gap-1 text-xs text-[color:var(--color-text-muted)]">
-						<span class="tracking-wider uppercase">Jugadors</span>
+						<span class="">Jugadors</span>
 						<input
 							type="number"
 							name="max_members"
@@ -96,7 +94,7 @@
 						/>
 					</label>
 					<label class="flex flex-col gap-1 text-xs text-[color:var(--color-text-muted)]">
-						<span class="tracking-wider uppercase">Extres</span>
+						<span class="">Extres</span>
 						<input
 							type="number"
 							name="extras"

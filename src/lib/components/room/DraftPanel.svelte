@@ -1,4 +1,5 @@
 <script lang="ts">
+	import PlayerAvatar from '$lib/components/PlayerAvatar.svelte';
 	import { enhance } from '$app/forms';
 	import { invalidateAll } from '$app/navigation';
 	import { fly } from 'svelte/transition';
@@ -64,18 +65,13 @@
 	let bidSubmitting = $state(false);
 	let advancing = $state(false);
 
-	function initials(fullName: string): string {
-		const parts = fullName.trim().split(/\s+/).filter(Boolean);
-		if (parts.length === 0) return '?';
-		if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
-		return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
-	}
-
 	function setBidPreset(amountCents: number) {
 		bidInput = `${amountCents / 1_000_000_00}M`;
 	}
 
 	// Timer styling: red+pulse under 10s, normal otherwise.
+	// Total length of the current timer, for the progress bar (a bid can extend it).
+	const timerTotal = $derived(Math.max(1, Number(settings.timer_seconds ?? 60)));
 	const timerLow = $derived(secondsLeft > 0 && secondsLeft <= 10);
 
 	// Flash when current_bid_cents changes — track previous value.
@@ -176,25 +172,15 @@
 			class="fixed inset-x-0 top-3 z-50 mx-auto flex max-w-md items-center gap-3 rounded-[var(--radius)] border border-[color:var(--color-accent)] bg-[color:var(--color-elevated)] px-3 py-2 text-sm shadow-lg"
 			style="margin-left: max(0.75rem, env(safe-area-inset-left)); margin-right: max(0.75rem, env(safe-area-inset-right));"
 		>
-			{#if adjudicatedShown.player_photo_url}
-				<img
-					src={adjudicatedShown.player_photo_url}
-					alt={adjudicatedShown.player_name}
-					class="h-10 w-10 flex-shrink-0 rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg)] object-cover"
-				/>
-			{:else}
-				<div
-					class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg)] text-xs font-medium"
-					style="font-family: var(--font-display);"
-				>
-					{initials(adjudicatedShown.player_name)}
-				</div>
-			{/if}
+			<PlayerAvatar
+				name={adjudicatedShown.player_name}
+				team={adjudicatedShown.player_team}
+				photoUrl={adjudicatedShown.player_photo_url}
+				size={40}
+			/>
 			<div class="flex min-w-0 flex-1 flex-col leading-tight">
 				{#if adjudicatedShown.winner_id}
-					<span class="text-[10px] tracking-widest text-[color:var(--color-accent)] uppercase"
-						>Adjudicat</span
-					>
+					<span class="text-xs text-[color:var(--color-accent)]">Adjudicat</span>
 					<span class="truncate text-sm font-medium">
 						{adjudicatedShown.player_name} → {adjudicatedShown.winner_name ?? 'auto'}
 					</span>
@@ -204,9 +190,7 @@
 							: 'auto'}
 					</span>
 				{:else}
-					<span class="text-[10px] tracking-widest text-[color:var(--color-text-muted)] uppercase"
-						>Sense pujades</span
-					>
+					<span class="text-xs text-[color:var(--color-text-muted)]">Sense pujades</span>
 					<span class="truncate text-sm">
 						{adjudicatedShown.player_name}
 					</span>
@@ -222,25 +206,17 @@
 		<div class="flex items-baseline justify-between gap-3">
 			{#key activeAuction.id}
 				<div in:fly={{ y: 8, duration: 250 }} class="flex items-center gap-3">
-					{#if activePlayer.photo_url}
-						<img
-							src={activePlayer.photo_url}
-							alt={activePlayer.name}
-							loading="eager"
-							class="h-14 w-14 flex-shrink-0 rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg)] object-cover"
-						/>
-					{:else}
-						<div
-							class="flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-bg)] text-xl font-medium tracking-wide"
-							style="font-family: var(--font-display);"
-							aria-hidden="true"
-						>
-							{initials(activePlayer.name)}
-						</div>
-					{/if}
+					<PlayerAvatar
+						name={activePlayer.name}
+						team={typeof activePlayer.metadata?.team === 'string'
+							? activePlayer.metadata.team
+							: null}
+						photoUrl={activePlayer.photo_url}
+						size={64}
+					/>
 					<div>
 						<span
-							class="inline-block rounded-[var(--radius-sm)] bg-[color:var(--color-accent-muted)] px-2 py-0.5 text-xs font-semibold tracking-wider text-[color:var(--color-on-accent)] uppercase"
+							class="inline-block rounded-[var(--radius-sm)] bg-[color:var(--color-accent-muted)] px-2 py-0.5 text-xs font-semibold text-[color:var(--color-on-accent)]"
 						>
 							{activePlayer.primary_position}
 						</span>
@@ -256,7 +232,7 @@
 				</div>
 			{/key}
 			<div class="text-right">
-				<p class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">temps</p>
+				<p class="text-xs text-[color:var(--color-text-faint)]">temps</p>
 				<p
 					class="tnum text-3xl transition-colors"
 					class:text-[color:var(--color-accent)]={timerLow}
@@ -269,12 +245,26 @@
 		</div>
 
 		<div
+			class="mt-4 h-1 overflow-hidden rounded-full bg-[color:var(--color-border)]"
+			role="progressbar"
+			aria-label="Temps restant"
+			aria-valuenow={secondsLeft}
+			aria-valuemin="0"
+			aria-valuemax={timerTotal}
+		>
+			<div
+				class="h-full rounded-full transition-[width] duration-1000 ease-linear"
+				class:bg-[color:var(--color-accent)]={timerLow}
+				class:bg-[color:var(--color-text-muted)]={!timerLow}
+				style="width: {Math.min(100, (secondsLeft / timerTotal) * 100)}%"
+			></div>
+		</div>
+
+		<div
 			class="mt-4 flex items-baseline justify-between border-t border-[color:var(--color-border)] pt-4"
 		>
 			<div>
-				<p class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
-					puja actual
-				</p>
+				<p class="text-xs text-[color:var(--color-text-faint)]">puja actual</p>
 				{#if activeAuction.current_bid_cents}
 					<p
 						class="tnum mt-1 text-2xl transition-all duration-300"
@@ -377,9 +367,7 @@
 						{@const playersInRow = row.positions.flatMap((pos) => myByPos[pos] ?? [])}
 						{#if playersInRow.length > 0}
 							<div class="mb-2 last:mb-0">
-								<p
-									class="mb-1 text-[10px] tracking-widest text-[color:var(--color-text-faint)] uppercase"
-								>
+								<p class="mb-1 text-xs text-[color:var(--color-text-faint)]">
 									{row.label}
 								</p>
 								<ul class="flex flex-col gap-0.5">
@@ -387,7 +375,7 @@
 										<li class="flex justify-between gap-2">
 											<span>
 												<span
-													class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-[10px] font-semibold tracking-wider text-[color:var(--color-on-accent)] uppercase"
+													class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-xs font-semibold text-[color:var(--color-on-accent)]"
 													>{p.position_slot}</span
 												>
 												<span class="ml-2">{p.player_name}</span>
@@ -409,9 +397,7 @@
 	<!-- Recent bids -->
 	{#if recentBids.length > 0}
 		<section class="flex flex-col gap-1">
-			<h3 class="text-xs tracking-widest text-[color:var(--color-text-faint)] uppercase">
-				historial
-			</h3>
+			<h3 class="text-xs text-[color:var(--color-text-faint)]">historial</h3>
 			<ul class="flex flex-col gap-1">
 				{#each recentBids as bid (bid.id)}
 					<li
@@ -457,7 +443,7 @@
 				<label
 					class="flex flex-1 items-center justify-between gap-2 text-xs text-[color:var(--color-text-muted)]"
 				>
-					<span class="tracking-wider uppercase">Timer següent</span>
+					<span class="">Timer següent</span>
 					<select
 						name="timer"
 						value={String(settings.timer_seconds ?? 60)}

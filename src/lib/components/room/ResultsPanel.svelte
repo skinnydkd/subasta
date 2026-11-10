@@ -92,7 +92,7 @@
 	</ol>
 
 	<!-- Pitch view per team -->
-	<div class="flex flex-col gap-4">
+	<div class="grid gap-4 sm:grid-cols-2">
 		{#each members as member (member.user_id)}
 			{@const team = teamsByUser[member.user_id] ?? []}
 			<Pitch
@@ -133,9 +133,7 @@
 								{@const playersInRow = row.positions.flatMap((pos) => byPos[pos] ?? [])}
 								{#if playersInRow.length > 0}
 									<div class="mb-1.5 last:mb-0">
-										<p
-											class="text-[10px] tracking-widest text-[color:var(--color-text-faint)] uppercase"
-										>
+										<p class="text-xs text-[color:var(--color-text-faint)]">
 											{row.label}
 										</p>
 										<ul class="flex flex-col gap-0.5">
@@ -144,7 +142,7 @@
 												<li class="flex justify-between gap-2">
 													<span>
 														<span
-															class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-[10px] font-semibold tracking-wider text-[color:var(--color-on-accent)] uppercase"
+															class="inline-block min-w-[28px] rounded-[2px] bg-[color:var(--color-accent-muted)] px-1 py-0.5 text-center text-xs font-semibold text-[color:var(--color-on-accent)]"
 															>{p.position_slot}</span
 														>
 														<span

@@ -25,7 +25,7 @@
 {#if status !== 'live'}
 	<span
 		role="status"
-		class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-2 py-0.5 text-[10px] tracking-wider uppercase"
+		class="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] px-2 py-0.5 text-xs"
 		style="color: {color};"
 	>
 		<span class="inline-block h-1.5 w-1.5 animate-pulse rounded-full" style="background: {color};"
