@@ -31,6 +31,8 @@ const KITS: [RegExp, Omit<Kit, 'ink'>][] = [
 	[/psg|paris/, k('#0b2a5b', '#da291c')],
 	[/bayern/, k('#dc052d', '#0b4ea2')],
 	[/dortmund/, k('#fde100', '#1a1a1a')],
+	[/leipzig/, k('#dd0741', '#f4f1ea')],
+	[/marseille/, k('#f4f1ea', '#2faee0')],
 	[/leverkusen/, k('#e32221', '#1a1a1a')],
 	[/inter/, k('#0b5fa8', '#111111', 'stripes')],
 	[/milan/, k('#c8102e', '#111111', 'stripes')],
