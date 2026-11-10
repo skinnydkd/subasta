@@ -1,4 +1,5 @@
 import { neon, type NeonQueryFunction } from '@neondatabase/serverless';
+import { dev } from '$app/environment';
 import { env } from '$env/dynamic/private';
 
 let sql: NeonQueryFunction<false, false> | null = null;
@@ -18,6 +19,9 @@ export async function query<T = Record<string, unknown>>(
 	text: string,
 	params: unknown[] = []
 ): Promise<T[]> {
+	if (dev && !env.DATABASE_URL) {
+		return (await import('./db.local')).query<T>(userId, text, params);
+	}
 	const db = client();
 	const [, rows] = await db.transaction([
 		db`select set_config('app.user_id', ${userId ?? ''}, true)`,

@@ -104,6 +104,7 @@ Fases 1-7 del MVP fetes (flux complet: lobby → subhasta `open_timer` → auto-
 - **Windows ARM64**: `workerd` no té build i peta en importar-lo; `svelte.config.js` se salta `adapter-cloudflare` en eixa plataforma. Dev, check i tests funcionen; el build de producció es fa als builders Linux de Cloudflare.
 - **pnpm** no està instal·lat globalment al PC de Pau: `npx pnpm@10 <ordre>`.
 - Les migracions són a `supabase/migrations/` per història; ja no hi ha Supabase. `db/00_supabase_compat.sql` crea el que esperen (`auth.users`, `auth.uid()`, rols).
+- **Sense `DATABASE_URL`**, `pnpm dev` usa un Postgres en memòria (PGlite, `src/lib/server/db.local.ts`) muntat amb els mateixos SQL; es buida en reiniciar. Els e2e (`npx playwright test`) corren així, contra `vite dev` al port 5174.
 - Pla de la migració: `documents/plans/2026-11-10-neon-migration.md`.
 
 ## Decisions resoltes

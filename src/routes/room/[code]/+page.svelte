@@ -808,7 +808,7 @@
 						type="text"
 						inputmode="decimal"
 						placeholder={`mín ${formatCents(minNextBid)}`}
-						class="flex-1 rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-lg outline-none focus:border-[color:var(--color-accent)]"
+						class="min-w-0 flex-1 rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-lg outline-none focus:border-[color:var(--color-accent)]"
 						style="font-family: var(--font-mono);"
 					/>
 					<button
