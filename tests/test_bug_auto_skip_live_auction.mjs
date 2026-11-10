@@ -19,9 +19,9 @@
 import 'dotenv/config';
 import pg from 'pg';
 
-const url = process.env.SUPABASE_DB_URL;
+const url = process.env.DATABASE_URL;
 if (!url) {
-	console.error('SUPABASE_DB_URL not set');
+	console.error('DATABASE_URL not set');
 	process.exit(1);
 }
 

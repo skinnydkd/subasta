@@ -1,4 +1,4 @@
-// Apply one or more SQL files to SUPABASE_DB_URL.
+// Apply one or more SQL files to DATABASE_URL.
 // Usage: node scripts/run-sql.mjs <file1.sql> [file2.sql] ...
 //
 // Each file runs as a single query (multiple statements OK). Errors abort.
@@ -8,9 +8,9 @@ import { readFileSync, statSync } from 'node:fs';
 import { resolve } from 'node:path';
 import pg from 'pg';
 
-const url = process.env.SUPABASE_DB_URL;
+const url = process.env.DATABASE_URL;
 if (!url) {
-	console.error('SUPABASE_DB_URL not set in .env');
+	console.error('DATABASE_URL not set in .env');
 	process.exit(1);
 }
 
