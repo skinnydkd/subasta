@@ -19,7 +19,7 @@ App PWA de subhasta de jugadors de futbol amb amics. 3-5 jugadors online sincron
 - **Frontend**: SvelteKit 2 + Svelte 5 (runes), TypeScript estricte, Tailwind CSS v4
 - **Backend**: Supabase (Postgres + Realtime + Auth + Storage)
 - **Deploy**: Cloudflare Pages (adaptador `@sveltejs/adapter-cloudflare`)
-- **PWA**: vite-pwa o manual (decidir a fase 1)
+- **PWA**: service worker manual (`src/service-worker.ts`)
 - **Tests**: Vitest (unit), Playwright (e2e)
 
 ## Comandes
@@ -37,8 +37,6 @@ pnpm db:types         # genera src/lib/types/db.ts des de Supabase
 pnpm db:reset         # reset local + reaplica migrations + seed
 pnpm db:push          # push migrations a Supabase remote
 ```
-
-(Comandes definitives: revisar `package.json` quan estiga inicialitzat.)
 
 ## Domain model — conceptes clau
 
@@ -98,13 +96,14 @@ Tota acció que muta estat de joc (puja, vot, tancar subhasta) **ha de** passar 
 
 Veure `README.md` secció "Roadmap MVP". Fases:
 
-1. ✅ Scaffold + schema + CLAUDE.md (aquest commit)
-2. ⏳ Init SvelteKit + Supabase local + auth bàsica + types generats
-3. ⏳ Lobby + room creation + room code join
-4. ⏳ Auction engine (`open_timer`) + realtime
-5. ⏳ Auto-scrub + voting + results
-6. ⏳ Seed inicial (La Liga 25-26, Barça/Madrid/Villarreal històrics)
-7. ✅ Polish UI (dark mode "no-IA", PWA install, anti-disconnect)
+Fases 1-7 del MVP fetes (flux complet: lobby → subhasta `open_timer` → auto-scrub → votació → resultats, seeds reals, PWA). Represa el 2026-11-10: fase 0 (tornar a arrancar), fase 1 (acabar: decisions pendents, partir `room/[code]/+page.svelte`), fase 2 (disseny + v2).
+
+## Gotchas
+
+- **Windows ARM64**: `workerd` no té build i peta en importar-lo; `svelte.config.js` se salta `adapter-cloudflare` en eixa plataforma. Dev, check i tests funcionen; el build de producció es fa als builders Linux de Cloudflare.
+- **pnpm** no està instal·lat globalment al PC de Pau: `npx pnpm@10 <ordre>`.
+- `src/lib/types/db.ts` és generat i no està al repo: `pnpm db:types` (o el MCP de Supabase) abans de `pnpm check`.
+- Projecte Supabase: `nhbhmrjkmwduygcxdvrq` (es pausa per inactivitat al pla gratuït).
 
 ## Decisions resoltes
 

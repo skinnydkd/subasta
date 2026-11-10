@@ -5,7 +5,7 @@
 import { execSync } from 'node:child_process';
 import { writeFileSync } from 'node:fs';
 
-const PROJECT_ID = 'yblgzpmypipnqfhsmayu';
+const PROJECT_ID = 'nhbhmrjkmwduygcxdvrq';
 
 const out = execSync(`pnpm dlx supabase gen types typescript --project-id ${PROJECT_ID}`, {
 	encoding: 'utf8',

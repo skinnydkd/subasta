@@ -2,7 +2,7 @@
 
 **App PWA per a subhastes de jugadors de futbol amb amics.** 3-5 jugadors online, 1.000M€ inicials, temes configurables, votació final. Pensada per a partides amb amics on cadascú està al seu mòbil.
 
-> Estat: **scaffolding inicial**. Vegeu [Roadmap](#roadmap-mvp).
+> Estat: **MVP jugable** (fases 1-7 fetes). Vegeu [Roadmap](#roadmap-mvp).
 
 ## Com es juga
 
@@ -81,12 +81,12 @@ subasta/
 | Fase | Què                                                         | Estat |
 | ---- | ----------------------------------------------------------- | ----- |
 | 1    | Scaffolding, schema SQL, CLAUDE.md, README                  | ✅    |
-| 2    | Init SvelteKit + Supabase local + auth + types generats     | ⏳    |
-| 3    | Lobby, room creation, codi de sala, configuració de partida | ⏳    |
-| 4    | Auction engine `open_timer` + Realtime sync + auto-scrub    | ⏳    |
-| 5    | Votació + resultats + share                                 | ⏳    |
-| 6    | Seed: La Liga 25-26 + Barça/Madrid/Villarreal històrics     | ⏳    |
-| 7    | Polish UI dark mode "no-IA", PWA install, anti-disconnect   | ⏳    |
+| 2    | Init SvelteKit + Supabase local + auth + types generats     | ✅    |
+| 3    | Lobby, room creation, codi de sala, configuració de partida | ✅    |
+| 4    | Auction engine `open_timer` + Realtime sync + auto-scrub    | ✅    |
+| 5    | Votació + resultats + share                                 | ✅    |
+| 6    | Seed: La Liga 25-26 + Barça/Madrid/Villarreal històrics     | ✅    |
+| 7    | Polish UI dark mode "no-IA", PWA install, anti-disconnect   | ✅    |
 
 ### v2 (post-MVP)
 
