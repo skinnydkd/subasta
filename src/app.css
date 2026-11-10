@@ -1,34 +1,13 @@
 /* ============================================================================
  * subasta — design tokens
  * Direction: warm blacks + warm greys + sport-bar red accent.
- * Display: Tobias (serif). Body: Geist Sans. Numerics/codes: Geist Mono.
+ * Display: Newsreader (serif). Body: Geist Sans. Numerics/codes: Geist Mono.
  * ========================================================================== */
 
 @import 'tailwindcss';
-
-@font-face {
-	font-family: 'Tobias';
-	src: url('/fonts/Tobias-Regular.woff2') format('woff2');
-	font-weight: 400;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Tobias';
-	src: url('/fonts/Tobias-Medium.woff2') format('woff2');
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: 'Tobias';
-	src: url('/fonts/Tobias-Semibold.woff2') format('woff2');
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
+@import '@fontsource-variable/newsreader';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
 
 @theme {
 	--color-bg: oklch(15% 0.005 60);
@@ -51,9 +30,9 @@
 	--color-warning: oklch(78% 0.15 80);
 	--color-danger: var(--color-accent);
 
-	--font-display: 'Tobias', 'Charter', 'Iowan Old Style', 'Georgia', serif;
-	--font-sans: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-	--font-mono: 'Geist Mono', ui-monospace, 'JetBrains Mono', 'SF Mono', monospace;
+	--font-display: 'Newsreader Variable', 'Charter', 'Iowan Old Style', 'Georgia', serif;
+	--font-sans: 'Geist Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--font-mono: 'Geist Mono Variable', ui-monospace, 'JetBrains Mono', 'SF Mono', monospace;
 
 	--radius-sm: 0.25rem;
 	--radius: 0.5rem;

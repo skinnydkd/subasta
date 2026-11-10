@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { DEFAULT_FORMATION, type RoomSettings } from '$lib/auction/settings';
+
 	type TeamPlayer = {
 		auction_id: string;
 		position_slot: string;
@@ -12,43 +14,50 @@
 	let {
 		team,
 		displayName,
-		spent
-	}: { team: TeamPlayer[]; displayName: string; spent: string } = $props();
+		spent,
+		formation = DEFAULT_FORMATION
+	}: {
+		team: TeamPlayer[];
+		displayName: string;
+		spent: string;
+		formation?: RoomSettings['formation'];
+	} = $props();
 
-	// 4-3-3 layout in portrait orientation (viewBox 100×140).
-	// Attack at the top, GK at the bottom.
-	const SLOTS: { pos: string; x: number; y: number }[] = [
-		{ pos: 'LW', x: 18, y: 28 },
-		{ pos: 'ST', x: 50, y: 22 },
-		{ pos: 'RW', x: 82, y: 28 },
-		{ pos: 'CM', x: 26, y: 58 },
-		{ pos: 'CM', x: 50, y: 60 },
-		{ pos: 'CM', x: 74, y: 58 },
-		{ pos: 'LB', x: 14, y: 92 },
-		{ pos: 'CB', x: 36, y: 95 },
-		{ pos: 'CB', x: 64, y: 95 },
-		{ pos: 'RB', x: 86, y: 92 },
-		{ pos: 'GK', x: 50, y: 122 }
+	// Rows from attack (top) to goal (bottom) in a portrait viewBox 100x140.
+	// Within a row the left-to-right order follows ROW_ORDER, spread evenly.
+	const ROWS: { y: number; order: string[] }[] = [
+		{ y: 24, order: ['LW', 'ST', 'RW'] },
+		{ y: 58, order: ['CAM', 'CM', 'CDM'] },
+		{ y: 93, order: ['LB', 'CB', 'RB'] },
+		{ y: 122, order: ['GK'] }
 	];
 
-	type Slot = (typeof SLOTS)[number] & {
-		player?: TeamPlayer;
-	};
+	type Slot = { pos: string; x: number; y: number; player?: TeamPlayer };
 
-	// Assign each team player to a free slot of the matching position.
-	const filledSlots = $derived.by(() => {
-		const slots: Slot[] = SLOTS.map((s) => ({ ...s }));
-		const taken = new Set<number>();
-		for (const p of team) {
-			const idx = slots.findIndex(
-				(s, i) => !taken.has(i) && s.pos === p.position_slot && !s.player
+	const slots = $derived.by(() => {
+		const out: Slot[] = [];
+		for (const row of ROWS) {
+			const pos = row.order.flatMap((p) =>
+				Array<string>(formation[p as keyof typeof formation] ?? 0).fill(p)
 			);
-			if (idx >= 0) {
-				slots[idx].player = p;
-				taken.add(idx);
-			}
+			pos.forEach((p, i) => {
+				// Wide rows keep a margin so labels stay inside the touchline.
+				out.push({ pos: p, x: (100 * (i + 1)) / (pos.length + 1), y: row.y });
+			});
 		}
-		return slots;
+		return out;
+	});
+
+	// Give each player a free slot of the same position; the rest go to the bench.
+	const placed = $derived.by(() => {
+		const filled = slots.map((s) => ({ ...s }));
+		const bench: TeamPlayer[] = [];
+		for (const p of team) {
+			const slot = filled.find((s) => s.pos === p.position_slot && !s.player);
+			if (slot) slot.player = p;
+			else bench.push(p);
+		}
+		return { filled, bench };
 	});
 
 	function shortName(name: string): string {
@@ -126,24 +135,16 @@
 		/>
 
 		<!-- Players -->
-		{#each filledSlots as slot, i (i)}
+		{#each placed.filled as slot, i (i)}
 			{@const p = slot.player}
 			{@const isAuto = p?.auction_status === 'auto_assigned'}
-			{@const labelText = p
-				? isAuto
-					? '(auto)'
-					: shortName(p.player_name)
-				: slot.pos}
+			{@const labelText = p ? (isAuto ? '(auto)' : shortName(p.player_name)) : slot.pos}
 			<g>
 				<circle
 					cx={slot.x}
 					cy={slot.y}
 					r="3.5"
-					fill={p
-						? isAuto
-							? 'oklch(35% 0.010 60)'
-							: 'oklch(60% 0.22 25)'
-						: 'rgba(0,0,0,0.35)'}
+					fill={p ? (isAuto ? 'oklch(35% 0.010 60)' : 'oklch(60% 0.22 25)') : 'rgba(0,0,0,0.35)'}
 					stroke="rgba(255,255,255,0.7)"
 					stroke-width="0.35"
 				/>
@@ -171,4 +172,11 @@
 			</g>
 		{/each}
 	</svg>
+
+	{#if placed.bench.length > 0}
+		<p class="mt-2 text-xs text-[color:var(--color-text-muted)]">
+			<span class="text-[color:var(--color-text-faint)]">Banqueta:</span>
+			{placed.bench.map((p) => `${shortName(p.player_name)} (${p.position_slot})`).join(', ')}
+		</p>
+	{/if}
 </div>

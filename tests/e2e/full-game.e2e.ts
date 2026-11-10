@@ -12,7 +12,7 @@ test('three players play a full game', async ({ browser }) => {
 	const pages: Page[] = [];
 	for (const name of names) {
 		const page = await (
-			await browser.newContext({ viewport: { width: 390, height: 844 } })
+			await browser.newContext({ viewport: { width: 375, height: 844 } })
 		).newPage();
 		// Wait for hydration: a fill before it is wiped when bind:value takes over.
 		await page.goto('/', { waitUntil: 'networkidle' });
@@ -25,6 +25,7 @@ test('three players play a full game', async ({ browser }) => {
 
 	await host.locator('select[name="theme_id"]').selectOption({ label: 'La Liga 2025-26' });
 	await host.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
+	await host.locator('select[name="formation"]').selectOption('3-5-2');
 	await host.locator('input[name="max_members"]').fill('3');
 	await host.locator('input[name="extras"]').fill('0');
 	await host.getByRole('button', { name: 'Crear sala' }).click();

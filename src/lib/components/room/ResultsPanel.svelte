@@ -3,6 +3,7 @@
 	import Pitch from '$lib/components/Pitch.svelte';
 	import { FORMATION_ROWS, teamByPosition, teamSpentCents } from './shared';
 	import type { RoomData } from './shared';
+	import type { RoomSettings } from '$lib/auction/settings';
 
 	let { data }: { data: RoomData } = $props();
 
@@ -96,6 +97,7 @@
 			{@const team = teamsByUser[member.user_id] ?? []}
 			<Pitch
 				{team}
+				formation={room.settings.formation as RoomSettings['formation'] | undefined}
 				displayName={member.profile?.display_name ?? 'Convidat'}
 				spent={formatCents(teamSpentCents(teamsByUser, member.user_id))}
 			/>
