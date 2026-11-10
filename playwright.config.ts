@@ -9,5 +9,8 @@ export default defineConfig({
 		reuseExistingServer: true
 	},
 	use: { baseURL: 'http://localhost:5174', actionTimeout: 10_000 },
+	globalSetup: './tests/e2e/global-setup.ts',
+	// One shared in-memory database: tests run one after another.
+	workers: 1,
 	testMatch: '**/*.e2e.{ts,js}'
 });

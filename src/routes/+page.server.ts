@@ -1,6 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
-import { createRoom, getUserStats, joinRoom } from '$lib/server/rooms';
+import { createRoom, getUserStats, joinRoom, themeMaxMembers } from '$lib/server/rooms';
 import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
 import { query } from '$lib/server/db';
 import { SESSION_COOKIE, SESSION_MAX_AGE, signSession } from '$lib/server/session';
@@ -13,6 +13,7 @@ type Theme = {
 	display_name: string;
 	description: string | null;
 	cover_image_url: string | null;
+	max_members: number | null;
 };
 
 export const load: PageServerLoad = async ({ locals }) => {
@@ -28,7 +29,8 @@ export const load: PageServerLoad = async ({ locals }) => {
 		),
 		query<Theme>(
 			null,
-			`select id, slug, display_name, description, cover_image_url
+			`select id, slug, display_name, description, cover_image_url,
+				(filter_config->>'max_members')::int as max_members
 			 from public.themes where is_published order by display_name`
 		),
 		getUserStats(uid)
@@ -98,8 +100,10 @@ export const actions: Actions = {
 		if (Number.isFinite(timer) && timer >= 10 && timer <= 600) {
 			settings.timer_seconds = timer;
 		}
+		// Thin themes cap the room size so the draft never runs out of players.
+		const cap = (await themeMaxMembers({ themeId })) ?? 8;
 		if (Number.isFinite(maxMembers) && maxMembers >= 2 && maxMembers <= 8) {
-			settings.max_members = maxMembers;
+			settings.max_members = Math.min(maxMembers, cap);
 		}
 		if (Number.isFinite(extras) && extras >= 0 && extras <= 3) {
 			settings.extra_per_position = extras;

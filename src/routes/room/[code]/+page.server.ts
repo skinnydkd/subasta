@@ -10,6 +10,7 @@ import {
 	kickMember,
 	leaveRoom,
 	transferHost,
+	themeMaxMembers,
 	updateRoomSettings
 } from '$lib/server/rooms';
 import { query, rpc } from '$lib/server/db';
@@ -275,6 +276,11 @@ export const actions: Actions = {
 		const code = normalizeRoomCode(params.code!);
 		const room = await roomByCode(code);
 		if (!room) return fail(404, { settings: { error: 'Sala no trobada.' } });
+
+		const cap = await themeMaxMembers({ roomId: room.id });
+		if (cap && typeof patch.max_members === 'number' && patch.max_members > cap) {
+			return fail(400, { settings: { error: `Aquest tema només dona per a ${cap} jugadors.` } });
+		}
 
 		const result = await updateRoomSettings(locals.user.id, room.id, patch);
 		if (!result.ok) return fail(400, { settings: { error: result.error } });

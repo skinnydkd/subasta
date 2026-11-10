@@ -119,7 +119,11 @@
 							class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-3 text-base outline-none focus:border-[color:var(--color-accent)]"
 						>
 							{#each data.themes as theme (theme.id)}
-								<option value={theme.id}>{theme.display_name}</option>
+								<option value={theme.id}
+									>{theme.display_name}{theme.max_members
+										? ` (màx. ${theme.max_members} jugadors)`
+										: ''}</option
+								>
 							{/each}
 						</select>
 					</label>
@@ -127,16 +131,12 @@
 					<details
 						class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-4 py-2"
 					>
-						<summary
-							class="cursor-pointer text-xs text-[color:var(--color-text-faint)]"
-						>
+						<summary class="cursor-pointer text-xs text-[color:var(--color-text-faint)]">
 							Configuració avançada
 						</summary>
 						<div class="mt-3 flex flex-col gap-3">
 							<label class="flex flex-col gap-1">
-								<span class="text-xs text-[color:var(--color-text-muted)]"
-									>Formació</span
-								>
+								<span class="text-xs text-[color:var(--color-text-muted)]">Formació</span>
 								<select
 									name="formation"
 									class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-sm"
@@ -149,9 +149,7 @@
 							</label>
 
 							<label class="flex flex-col gap-1">
-								<span class="text-xs text-[color:var(--color-text-muted)]"
-									>Timer per puja (s)</span
-								>
+								<span class="text-xs text-[color:var(--color-text-muted)]">Timer per puja (s)</span>
 								<select
 									name="timer"
 									class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-sm"
@@ -165,10 +163,7 @@
 
 							<div class="grid grid-cols-2 gap-3">
 								<label class="flex flex-col gap-1">
-									<span
-										class="text-xs text-[color:var(--color-text-muted)]"
-										>Jugadors</span
-									>
+									<span class="text-xs text-[color:var(--color-text-muted)]">Jugadors</span>
 									<input
 										type="number"
 										name="max_members"
@@ -179,10 +174,7 @@
 									/>
 								</label>
 								<label class="flex flex-col gap-1">
-									<span
-										class="text-xs text-[color:var(--color-text-muted)]"
-										>Extres/posició</span
-									>
+									<span class="text-xs text-[color:var(--color-text-muted)]">Extres/posició</span>
 									<input
 										type="number"
 										name="extras"
@@ -258,33 +250,25 @@
 
 	{#if data.stats && data.stats.rooms_played > 0}
 		<section class="flex flex-col gap-2">
-			<h2 class="text-xs text-[color:var(--color-text-faint)]">
-				Les meves estadístiques
-			</h2>
+			<h2 class="text-xs text-[color:var(--color-text-faint)]">Les meves estadístiques</h2>
 			<div class="grid grid-cols-3 gap-2">
 				<div
 					class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center"
 				>
 					<p class="tnum text-2xl">{data.stats.rooms_played}</p>
-					<p class="text-xs text-[color:var(--color-text-faint)]">
-						sales
-					</p>
+					<p class="text-xs text-[color:var(--color-text-faint)]">sales</p>
 				</div>
 				<div
 					class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center"
 				>
 					<p class="tnum text-2xl">{data.stats.first_places}</p>
-					<p class="text-xs text-[color:var(--color-text-faint)]">
-						1rs llocs
-					</p>
+					<p class="text-xs text-[color:var(--color-text-faint)]">1rs llocs</p>
 				</div>
 				<div
 					class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-center"
 				>
 					<p class="tnum text-2xl">{data.stats.players_won}</p>
-					<p class="text-xs text-[color:var(--color-text-faint)]">
-						jugadors
-					</p>
+					<p class="text-xs text-[color:var(--color-text-faint)]">jugadors</p>
 				</div>
 			</div>
 			{#if data.stats.total_spent_cents > 0 || data.stats.top_position}
@@ -313,9 +297,7 @@
 	{#if recentRooms.length > 0}
 		<section class="flex flex-col gap-2">
 			<div class="flex items-baseline justify-between">
-				<h2 class="text-xs text-[color:var(--color-text-faint)]">
-					Sales recents
-				</h2>
+				<h2 class="text-xs text-[color:var(--color-text-faint)]">Sales recents</h2>
 				<button
 					type="button"
 					onclick={clearRecent}

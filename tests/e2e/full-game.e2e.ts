@@ -12,11 +12,6 @@ const VH = Number(process.env.VH ?? 844);
 test('three players play a full game', async ({ browser }) => {
 	test.setTimeout(300_000);
 
-	// The first request builds the in-memory database from every seed: give it time.
-	const warm = await (await browser.newContext()).newPage();
-	await warm.goto('/', { waitUntil: 'networkidle', timeout: 120_000 });
-	await warm.close();
-
 	const names = ['Anna', 'Bernat', 'Carla'];
 	const pages: Page[] = [];
 	for (const name of names) {
@@ -32,7 +27,7 @@ test('three players play a full game', async ({ browser }) => {
 	}
 	const [host, ...guests] = pages;
 
-	await host.locator('select[name="theme_id"]').selectOption({ label: 'La Liga 2025-26' });
+	await host.locator('select[name="theme_id"]').selectOption({ label: 'Premier League 2025-26' });
 	await host.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
 	await host.locator('select[name="formation"]').selectOption('3-5-2');
 	await host.locator('input[name="max_members"]').fill('3');

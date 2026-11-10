@@ -105,6 +105,7 @@ Fases 1-7 del MVP fetes (flux complet: lobby → subhasta `open_timer` → auto-
 - **pnpm** no està instal·lat globalment al PC de Pau: `npx pnpm@10 <ordre>`.
 - Les migracions són a `supabase/migrations/` per història; ja no hi ha Supabase. `db/00_supabase_compat.sql` crea el que esperen (`auth.users`, `auth.uid()`, rols).
 - **Sense `DATABASE_URL`**, `pnpm dev` usa un Postgres en memòria (PGlite, `src/lib/server/db.local.ts`) muntat amb els mateixos SQL; es buida en reiniciar. Els e2e (`npx playwright test`) corren així, contra `vite dev` al port 5174.
+- Un tema prim limita la sala: `themes.filter_config.max_members` (seed `22_theme_player_caps.sql`); el servidor retalla `max_members` en crear i rebutja pujar-lo. `node scripts/check-seeds.mjs` valida piscines.
 - Pla de la migració: `documents/plans/2026-11-10-neon-migration.md`.
 
 ## Decisions resoltes

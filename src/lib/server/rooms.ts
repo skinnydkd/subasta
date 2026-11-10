@@ -119,3 +119,23 @@ export async function touchPresence(roomId: string, userId: string): Promise<str
 	);
 	return rows.map((r) => r.user_id);
 }
+
+/** Most players a theme's pool can support (themes.filter_config.max_members), or null if unlimited. */
+export async function themeMaxMembers(
+	where: { themeId: string } | { roomId: string }
+): Promise<number | null> {
+	const rows =
+		'themeId' in where
+			? await query<{ cap: number | null }>(
+					null,
+					`select (filter_config->>'max_members')::int as cap from public.themes where id = $1`,
+					[where.themeId]
+				)
+			: await query<{ cap: number | null }>(
+					null,
+					`select (t.filter_config->>'max_members')::int as cap
+					 from public.rooms r join public.themes t on t.id = r.theme_id where r.id = $1`,
+					[where.roomId]
+				);
+	return rows[0]?.cap ?? null;
+}
