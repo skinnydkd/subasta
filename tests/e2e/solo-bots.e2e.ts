@@ -68,4 +68,13 @@ test('solo game against the machine ends with a tournament', async ({ page }) =>
 	// With no extras, bots must not buy beyond their formation: no bench anywhere.
 	await expect(page.getByText('Banqueta:')).toHaveCount(0);
 	await page.screenshot({ path: 'test-results/shots/solo-torneig.png', fullPage: true });
+
+	// The 7-0 challenge: play the first legendary rival and see a final score and verdict.
+	await expect(page.getByRole('heading', { name: 'Repte 7-0' })).toBeVisible();
+	await page.getByRole('button', { name: 'Jugar' }).first().click();
+	await expect(page.getByText(/Repte superat|Golejada|Victòria|Sense medalla/)).toBeVisible({
+		timeout: 15_000
+	});
+	await expect(page.getByText('Com ho han fet els altres').first()).toBeVisible();
+	await page.screenshot({ path: 'test-results/shots/solo-repte.png', fullPage: true });
 });

@@ -17,6 +17,7 @@ import { query, rpc } from '$lib/server/db';
 import { FORMATION_PRESETS, type FormationPreset } from '$lib/auction/settings';
 import { parseAmountToCents } from '$lib/utils/currency';
 import { addBots, botTick } from '$lib/server/bots';
+import { playChallenge, type Challenge } from '$lib/server/legends';
 import { isBot } from '$lib/bots/roster';
 import { simulateTournament, type SimTeam, type TournamentResult } from '$lib/sim';
 
@@ -139,7 +140,8 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 	// Simulated tournament: deterministic from the room id, so it is recomputed
 	// on every load instead of stored.
 	let tournament: TournamentResult | null = null;
-	if (view.room.status === 'finished' && view.room.settings.result_mode === 'simulation') {
+	let challenge: Challenge | null = null;
+	if (view.room.status === 'finished') {
 		const ids = Object.values(view.teams).flatMap((t) => t.map((p) => p.player_id));
 		const values = await query<{ id: string; mv: string | null }>(
 			null,
@@ -157,13 +159,18 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 				auto: p.auction_status === 'auto_assigned'
 			}))
 		}));
-		tournament = simulateTournament(teams, view.room.id);
+		if (view.room.settings.result_mode === 'simulation') {
+			tournament = simulateTournament(teams, view.room.id);
+		}
+		// The 7-0 challenge against legendary sides, for every team in the room.
+		challenge = await playChallenge(view.room.id, teams);
 	}
 
 	return {
 		onlineUserIds,
 		botIds,
 		tournament,
+		challenge,
 		room: {
 			id: view.room.id,
 			code: view.room.code,

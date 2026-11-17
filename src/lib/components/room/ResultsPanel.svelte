@@ -2,6 +2,7 @@
 	import { formatCents } from '$lib/utils/currency';
 	import Pitch from '$lib/components/Pitch.svelte';
 	import TournamentPanel from './TournamentPanel.svelte';
+	import ChallengePanel from './ChallengePanel.svelte';
 	import { FORMATION_ROWS, teamByPosition, teamSpentCents } from './shared';
 	import type { RoomData } from './shared';
 	import type { RoomSettings } from '$lib/auction/settings';
@@ -95,6 +96,8 @@
 			{/each}
 		</ol>
 	{/if}
+
+	<ChallengePanel {data} />
 
 	<!-- Pitch view per team -->
 	<div class="grid gap-4 sm:grid-cols-2">

@@ -4,12 +4,14 @@ export type SimPlayer = {
 	position: string;
 	marketValueCents: number | null;
 	auto: boolean;
+	/** Fixed rating; wins over the market value (used for legendary rivals). */
+	rating?: number;
 };
 export type SimTeam = { id: string; name: string; players: SimPlayer[] };
 export type TeamRating = { gk: number; def: number; mid: number; att: number; overall: number };
 export type Goal = { teamId: string; scorer: string; minute: number };
 export type MatchResult = {
-	stage: 'league' | 'final';
+	stage: 'league' | 'final' | 'challenge';
 	homeId: string;
 	awayId: string;
 	/** After extra time if any. */

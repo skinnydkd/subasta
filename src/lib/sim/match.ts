@@ -19,9 +19,18 @@ const POSITION_WEIGHT: Record<string, number> = {
 };
 
 /** Expected goals for the attacking side. */
-export function lambdaFor(att: TeamRating, def: TeamRating, home: boolean): number {
+// Challenge matches are steeper and allow more goals, so a 7-0 is possible.
+const CURVE = { normal: { divisor: 20, max: 4 }, challenge: { divisor: 12, max: 6 } };
+
+export function lambdaFor(
+	att: TeamRating,
+	def: TeamRating,
+	home: boolean,
+	curve: keyof typeof CURVE = 'normal'
+): number {
+	const { divisor, max } = CURVE[curve];
 	const diff = att.att * 0.6 + att.mid * 0.4 - (def.def * 0.5 + def.mid * 0.3 + def.gk * 0.2);
-	return clamp(BASE_GOALS * Math.exp(diff / 20) * (home ? HOME_EDGE : 1), 0.15, 4);
+	return clamp(BASE_GOALS * Math.exp(diff / divisor) * (home ? HOME_EDGE : 1), 0.15, max);
 }
 
 function pickScorer(team: SimTeam, rand: Rand): string {
@@ -72,12 +81,13 @@ export function simulateMatch(
 	away: SimTeam,
 	rh: TeamRating,
 	ra: TeamRating,
-	stage: 'league' | 'final',
+	stage: MatchResult['stage'],
 	seed: string
 ): MatchResult {
 	const rand = rngFor(`${seed}|${stage}|${home.id}|${away.id}`);
-	const lh = lambdaFor(rh, ra, true);
-	const la = lambdaFor(ra, rh, false);
+	const curve = stage === 'challenge' ? 'challenge' : 'normal';
+	const lh = lambdaFor(rh, ra, true, curve);
+	const la = lambdaFor(ra, rh, false, curve);
 	let goals = [
 		...makeGoals(home, poisson(lh, rand), 1, 90, rand),
 		...makeGoals(away, poisson(la, rand), 1, 90, rand)

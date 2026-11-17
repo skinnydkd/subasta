@@ -5,6 +5,7 @@ const EMPTY = 40;
 
 /** 45 for auto players, else 52 + 14*log10(value in M euro), clamped to 40..96. */
 export function playerRating(p: SimPlayer): number {
+	if (p.rating != null) return p.rating;
 	if (p.auto || p.marketValueCents == null) return 45;
 	const millions = Math.max(1, p.marketValueCents / 1e8);
 	return clamp(Math.round(52 + 14 * Math.log10(millions)), 40, 96);

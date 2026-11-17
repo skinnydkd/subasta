@@ -108,6 +108,7 @@ Fases 1-7 del MVP fetes (flux complet: lobby → subhasta `open_timer` → auto-
 - Un tema prim limita la sala: `themes.filter_config.max_members` (seed `22_theme_player_caps.sql`); el servidor retalla `max_members` en crear i rebutja pujar-lo. `node scripts/check-seeds.mjs` valida piscines.
 - **Bots**: usuaris reals amb UUID fix (`src/lib/bots/roster.ts`, seed `23_bots.sql`) que criden les mateixes RPC. Juguen dins el `load` de la sala (`botTick`, `src/lib/server/bots.ts`) als sondejos dels humans: sense humans connectats, no pugen. `get_room_view` amaga equips aliens en `drafting`, per això `botTick` llig els equips dels bots directament.
 - **Torneig** (`settings.result_mode = 'simulation'`): `src/lib/sim/`, determinista amb llavor = id de sala; es recalcula a cada càrrega, no es guarda. Pla: `documents/plans/2026-11-17-bots-i-torneig.md`.
+- **Repte 7-0** (`src/lib/sim/challenge.ts`, rivals a `src/lib/server/legends.ts`): a cada sala acabada, tots els equips contra 3 rivals històrics (un per nivell, triat amb l'id de sala). Un intent determinista per jugador i rival; els rivals tenen una valoració mínima per nivell perquè els valors de «fama» no són comparables entre èpoques. Pla: `documents/plans/2026-11-17-repte-7-0.md`.
 - Pla de la migració: `documents/plans/2026-11-10-neon-migration.md`.
 
 ## Decisions resoltes
