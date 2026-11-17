@@ -17,10 +17,12 @@ test('theme cap limits the room size', async ({ browser }) => {
 		await signIn('Tercer')
 	];
 
-	const theme = host.locator('select[name="theme_id"] option', { hasText: 'Barça històric' });
+	const theme = host.locator('form[action="?/createRoom"] select[name="theme_id"] option', {
+		hasText: 'Barça històric'
+	});
 	await expect(theme).toContainText('màx. 2 jugadors');
 	await host
-		.locator('select[name="theme_id"]')
+		.locator('form[action="?/createRoom"] select[name="theme_id"]')
 		.selectOption({ label: (await theme.textContent())!.trim() });
 	await host.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
 	await host.locator('input[name="max_members"]').fill('5');

@@ -16,6 +16,9 @@ import {
 import { query, rpc } from '$lib/server/db';
 import { FORMATION_PRESETS, type FormationPreset } from '$lib/auction/settings';
 import { parseAmountToCents } from '$lib/utils/currency';
+import { addBots, botTick } from '$lib/server/bots';
+import { isBot } from '$lib/bots/roster';
+import { simulateTournament, type SimTeam, type TournamentResult } from '$lib/sim';
 
 type MyVote = {
 	rank_1_user_id: string;
@@ -124,11 +127,43 @@ export const load: PageServerLoad = async ({ params, locals }) => {
 		myVote = rows[0] ?? null;
 	}
 
+	const botIds = view.members.filter((m) => isBot(m.user_id)).map((m) => m.user_id);
+	// Bots play on the polls of the humans in the room.
+	if (isMember && botIds.length > 0 && view.room.status === 'drafting') await botTick(view);
+
 	const onlineUserIds =
-		isMember && view.room.status !== 'finished' ? await touchPresence(view.room.id, userId!) : [];
+		isMember && view.room.status !== 'finished'
+			? [...(await touchPresence(view.room.id, userId!)), ...botIds]
+			: [];
+
+	// Simulated tournament: deterministic from the room id, so it is recomputed
+	// on every load instead of stored.
+	let tournament: TournamentResult | null = null;
+	if (view.room.status === 'finished' && view.room.settings.result_mode === 'simulation') {
+		const ids = Object.values(view.teams).flatMap((t) => t.map((p) => p.player_id));
+		const values = await query<{ id: string; mv: string | null }>(
+			null,
+			'select id, market_value_cents::text as mv from public.players where id = any($1::uuid[])',
+			[ids]
+		);
+		const mv = new Map(values.map((v) => [v.id, v.mv === null ? null : Number(v.mv)]));
+		const teams: SimTeam[] = view.members.map((m) => ({
+			id: m.user_id,
+			name: m.display_name,
+			players: (view.teams[m.user_id] ?? []).map((p) => ({
+				name: p.player_name,
+				position: p.position_slot,
+				marketValueCents: mv.get(p.player_id) ?? null,
+				auto: p.auction_status === 'auto_assigned'
+			}))
+		}));
+		tournament = simulateTournament(teams, view.room.id);
+	}
 
 	return {
 		onlineUserIds,
+		botIds,
+		tournament,
 		room: {
 			id: view.room.id,
 			code: view.room.code,
@@ -260,6 +295,9 @@ export const actions: Actions = {
 			patch.max_members = m;
 		}
 
+		const resultMode = formData.get('result_mode');
+		if (resultMode === 'vote' || resultMode === 'simulation') patch.result_mode = resultMode;
+
 		const extrasRaw = formData.get('extras');
 		if (extrasRaw !== null && extrasRaw !== '') {
 			const e = Number.parseInt(String(extrasRaw), 10);
@@ -329,6 +367,16 @@ export const actions: Actions = {
 		const result = await transferHost(locals.user.id, room.id, newHostId);
 		if (!result.ok) return fail(400, { transfer: { error: result.error } });
 		return { transfer: { ok: true } };
+	},
+
+	addBot: async ({ params, locals }) => {
+		if (!locals.user) return fail(401, { bots: { error: 'No autenticat.' } });
+		const code = normalizeRoomCode(params.code!);
+		const room = await roomByCode(code);
+		if (!room) return fail(404, { bots: { error: 'Sala no trobada.' } });
+		const result = await addBots(locals.user.id, { id: room.id, code }, 1);
+		if (!result.ok) return fail(400, { bots: { error: result.error } });
+		return { bots: { ok: true } };
 	},
 
 	deleteRoom: async ({ params, locals }) => {

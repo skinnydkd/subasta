@@ -10,6 +10,7 @@
 	import DraftPanel from '$lib/components/room/DraftPanel.svelte';
 	import VotingPanel from '$lib/components/room/VotingPanel.svelte';
 	import ResultsPanel from '$lib/components/room/ResultsPanel.svelte';
+	import TournamentPanel from '$lib/components/room/TournamentPanel.svelte';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -176,7 +177,11 @@
 			{:else if room.status === 'drafting'}
 				<DraftPanel {data} {form} />
 			{:else if room.status === 'voting'}
-				<VotingPanel {data} {form} />
+				{#if room.settings.result_mode === 'simulation'}
+					<TournamentPanel {data} />
+				{:else}
+					<VotingPanel {data} {form} />
+				{/if}
 			{:else}
 				<ResultsPanel {data} />
 			{/if}

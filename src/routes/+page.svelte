@@ -4,12 +4,14 @@
 	import { formatCents } from '$lib/utils/currency';
 	import type { ActionData, PageData } from './$types';
 	import InstallPrompt from '$lib/components/InstallPrompt.svelte';
+	import { BOTS, DIFFICULTIES } from '$lib/bots/roster';
 
 	let { data, form }: { data: PageData; form: ActionData } = $props();
 
 	let creating = $state(false);
 	let joining = $state(false);
 	let signing = $state(false);
+	let soloing = $state(false);
 
 	type RecentRoom = { code: string; visited_at: number; status?: string };
 	let recentRooms = $state<RecentRoom[]>([]);
@@ -201,6 +203,87 @@
 				</form>
 			{/if}
 		</section>
+
+		{#if data.themes.length > 0}
+			<section class="flex flex-col gap-3">
+				<h2 class="text-xl">Contra la màquina</h2>
+				<p class="text-sm text-[color:var(--color-text-muted)]">
+					Juga sol contra bots amb manies pròpies. Al final, un torneig simulat (lliga i final)
+					decideix qui ha fet el millor equip.
+				</p>
+				<form
+					method="POST"
+					action="?/createSoloRoom"
+					class="flex flex-col gap-3"
+					use:enhance={() => {
+						soloing = true;
+						return async ({ update }) => {
+							await update();
+							soloing = false;
+						};
+					}}
+				>
+					<label class="flex flex-col gap-2">
+						<span class="text-sm text-[color:var(--color-text-muted)]">Tema</span>
+						<select
+							name="theme_id"
+							required
+							class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-3 text-base outline-none focus:border-[color:var(--color-accent)]"
+						>
+							{#each data.themes as theme (theme.id)}
+								<option value={theme.id}
+									>{theme.display_name}{theme.max_members
+										? ` (màx. ${theme.max_members - 1} ${theme.max_members === 2 ? 'bot' : 'bots'})`
+										: ''}</option
+								>
+							{/each}
+						</select>
+					</label>
+					<div class="grid grid-cols-2 gap-3">
+						<label class="flex flex-col gap-2">
+							<span class="text-sm text-[color:var(--color-text-muted)]">Rivals</span>
+							<select
+								name="bots"
+								class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-3 text-base outline-none focus:border-[color:var(--color-accent)]"
+							>
+								{#each [1, 2, 3, 4] as n (n)}
+									<option value={n} selected={n === 3}>{n} {n === 1 ? 'bot' : 'bots'}</option>
+								{/each}
+							</select>
+						</label>
+						<label class="flex flex-col gap-2">
+							<span class="text-sm text-[color:var(--color-text-muted)]">Dificultat</span>
+							<select
+								name="difficulty"
+								class="rounded-[var(--radius)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-3 text-base outline-none focus:border-[color:var(--color-accent)]"
+							>
+								{#each DIFFICULTIES as d (d.value)}
+									<option value={d.value} selected={d.value === 'normal'}>{d.label}</option>
+								{/each}
+							</select>
+						</label>
+					</div>
+					<details class="text-sm text-[color:var(--color-text-muted)]">
+						<summary class="cursor-pointer">Qui són els bots?</summary>
+						<ul class="mt-2 flex flex-col gap-1">
+							{#each BOTS as bot (bot.id)}
+								<li><span class="text-[color:var(--color-text)]">{bot.name}</span>: {bot.blurb}</li>
+							{/each}
+						</ul>
+					</details>
+					{#if form && 'solo' in form && form.solo && 'error' in form.solo}
+						<p class="text-sm text-[color:var(--color-accent)]">{form.solo.error}</p>
+					{/if}
+					<button
+						type="submit"
+						disabled={soloing}
+						class="rounded-[var(--radius)] border border-[color:var(--color-accent)] px-4 py-3 text-base font-medium text-[color:var(--color-text)] transition-colors hover:bg-[color:var(--color-accent)] hover:text-[color:var(--color-on-accent)] active:bg-[color:var(--color-accent-active)] disabled:opacity-50"
+					>
+						{soloing ? 'Preparant…' : 'Jugar contra la màquina'}
+					</button>
+				</form>
+			</section>
+		{/if}
 
 		<div class="flex items-center gap-3">
 			<div class="h-px flex-1 bg-[color:var(--color-border)]"></div>

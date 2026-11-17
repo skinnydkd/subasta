@@ -27,7 +27,9 @@ test('three players play a full game', async ({ browser }) => {
 	}
 	const [host, ...guests] = pages;
 
-	await host.locator('select[name="theme_id"]').selectOption({ label: 'Premier League 2025-26' });
+	await host
+		.locator('form[action="?/createRoom"] select[name="theme_id"]')
+		.selectOption({ label: 'Premier League 2025-26' });
 	await host.evaluate(() => document.querySelectorAll('details').forEach((d) => (d.open = true)));
 	await host.locator('select[name="formation"]').selectOption('3-5-2');
 	await host.locator('input[name="max_members"]').fill('3');

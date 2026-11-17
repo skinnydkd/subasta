@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { formatCents } from '$lib/utils/currency';
 	import Pitch from '$lib/components/Pitch.svelte';
+	import TournamentPanel from './TournamentPanel.svelte';
 	import { FORMATION_ROWS, teamByPosition, teamSpentCents } from './shared';
 	import type { RoomData } from './shared';
 	import type { RoomSettings } from '$lib/auction/settings';
@@ -65,31 +66,35 @@
 		<h2 class="text-3xl" style="font-family: var(--font-display);">Resultats</h2>
 	</header>
 
-	<ol class="flex flex-col gap-2">
-		{#each podium as row, i (row.user_id)}
-			<li
-				class="flex items-baseline justify-between rounded-[var(--radius-lg)] border bg-[color:var(--color-surface)] px-4 py-3"
-				class:border-[color:var(--color-accent)]={i === 0}
-				class:border-[color:var(--color-border-strong)]={i !== 0}
-			>
-				<div class="flex items-baseline gap-3">
-					<span
-						class="tnum text-2xl text-[color:var(--color-text-muted)]"
-						style="font-family: var(--font-display);">{i + 1}</span
-					>
-					<span class="text-lg">{row.display_name}</span>
-				</div>
-				<div class="text-right">
-					<p class="tnum text-xl">
-						{row.points} <span class="text-sm text-[color:var(--color-text-muted)]">pts</span>
-					</p>
-					<p class="text-xs text-[color:var(--color-text-faint)]">
-						{row.received} vot{row.received === 1 ? '' : 's'}
-					</p>
-				</div>
-			</li>
-		{/each}
-	</ol>
+	{#if data.tournament}
+		<TournamentPanel {data} />
+	{:else}
+		<ol class="flex flex-col gap-2">
+			{#each podium as row, i (row.user_id)}
+				<li
+					class="flex items-baseline justify-between rounded-[var(--radius-lg)] border bg-[color:var(--color-surface)] px-4 py-3"
+					class:border-[color:var(--color-accent)]={i === 0}
+					class:border-[color:var(--color-border-strong)]={i !== 0}
+				>
+					<div class="flex items-baseline gap-3">
+						<span
+							class="tnum text-2xl text-[color:var(--color-text-muted)]"
+							style="font-family: var(--font-display);">{i + 1}</span
+						>
+						<span class="text-lg">{row.display_name}</span>
+					</div>
+					<div class="text-right">
+						<p class="tnum text-xl">
+							{row.points} <span class="text-sm text-[color:var(--color-text-muted)]">pts</span>
+						</p>
+						<p class="text-xs text-[color:var(--color-text-faint)]">
+							{row.received} vot{row.received === 1 ? '' : 's'}
+						</p>
+					</div>
+				</li>
+			{/each}
+		</ol>
+	{/if}
 
 	<!-- Pitch view per team -->
 	<div class="grid gap-4 sm:grid-cols-2">

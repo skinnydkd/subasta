@@ -106,6 +106,8 @@ Fases 1-7 del MVP fetes (flux complet: lobby → subhasta `open_timer` → auto-
 - Les migracions són a `supabase/migrations/` per història; ja no hi ha Supabase. `db/00_supabase_compat.sql` crea el que esperen (`auth.users`, `auth.uid()`, rols).
 - **Sense `DATABASE_URL`**, `pnpm dev` usa un Postgres en memòria (PGlite, `src/lib/server/db.local.ts`) muntat amb els mateixos SQL; es buida en reiniciar. Els e2e (`npx playwright test`) corren així, contra `vite dev` al port 5174.
 - Un tema prim limita la sala: `themes.filter_config.max_members` (seed `22_theme_player_caps.sql`); el servidor retalla `max_members` en crear i rebutja pujar-lo. `node scripts/check-seeds.mjs` valida piscines.
+- **Bots**: usuaris reals amb UUID fix (`src/lib/bots/roster.ts`, seed `23_bots.sql`) que criden les mateixes RPC. Juguen dins el `load` de la sala (`botTick`, `src/lib/server/bots.ts`) als sondejos dels humans: sense humans connectats, no pugen. `get_room_view` amaga equips aliens en `drafting`, per això `botTick` llig els equips dels bots directament.
+- **Torneig** (`settings.result_mode = 'simulation'`): `src/lib/sim/`, determinista amb llavor = id de sala; es recalcula a cada càrrega, no es guarda. Pla: `documents/plans/2026-11-17-bots-i-torneig.md`.
 - Pla de la migració: `documents/plans/2026-11-10-neon-migration.md`.
 
 ## Decisions resoltes

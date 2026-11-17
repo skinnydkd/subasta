@@ -43,6 +43,17 @@
 		{#if form && 'startRoom' in form && form.startRoom && 'error' in form.startRoom}
 			<p class="mt-2 text-sm text-[color:var(--color-accent)]">{form.startRoom.error}</p>
 		{/if}
+		<form method="POST" action="?/addBot" class="mt-3" use:enhance>
+			<button
+				type="submit"
+				class="w-full rounded-[var(--radius)] border border-[color:var(--color-border-strong)] px-4 py-2 text-sm transition-colors hover:bg-[color:var(--color-elevated)] active:bg-[color:var(--color-bg)]"
+			>
+				Afegir un bot
+			</button>
+		</form>
+		{#if form && 'bots' in form && form.bots && 'error' in form.bots}
+			<p class="mt-2 text-sm text-[color:var(--color-accent)]">{form.bots.error}</p>
+		{/if}
 
 		<details
 			class="mt-3 rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-bg)] px-3 py-2 text-left"
@@ -105,6 +116,20 @@
 						/>
 					</label>
 				</div>
+				<label class="flex flex-col gap-1 text-left text-xs text-[color:var(--color-text-muted)]">
+					<span>Com es decideix el guanyador</span>
+					<select
+						name="result_mode"
+						class="rounded-[var(--radius-sm)] border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-3 py-2 text-sm"
+					>
+						<option value="vote" selected={room.settings.result_mode !== 'simulation'}
+							>Votació entre vosaltres</option
+						>
+						<option value="simulation" selected={room.settings.result_mode === 'simulation'}
+							>Torneig simulat</option
+						>
+					</select>
+				</label>
 				{#if form && 'settings' in form && form.settings && 'error' in form.settings}
 					<p class="text-xs text-[color:var(--color-accent)]">{form.settings.error}</p>
 				{/if}

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import { formatCents } from '$lib/utils/currency';
+	import { isBot } from '$lib/bots/roster';
 	import type { Member, RoomData } from './shared';
 
 	let {
@@ -39,6 +40,12 @@
 						>host</span
 					>
 				{/if}
+				{#if isBot(member.user_id)}
+					<span
+						class="rounded-full border border-[color:var(--color-border-strong)] px-1.5 py-0.5 text-xs text-[color:var(--color-text-muted)]"
+						title="Jugador de la màquina">bot</span
+					>
+				{/if}
 			</div>
 			<div class="flex items-center gap-2">
 				<span class="tnum text-[color:var(--color-text-muted)]"
@@ -53,21 +60,23 @@
 						<div
 							class="absolute top-full right-0 z-10 mt-1 flex flex-col rounded-[var(--radius-sm)] border border-[color:var(--color-border-strong)] bg-[color:var(--color-elevated)] py-1 text-xs shadow"
 						>
-							<form
-								method="POST"
-								action="?/transferHost"
-								use:enhance={({ cancel }) => {
-									if (!confirm('Transferir el rol de host a aquest jugador?')) cancel();
-								}}
-							>
-								<input type="hidden" name="user_id" value={member.user_id} />
-								<button
-									type="submit"
-									class="w-full px-3 py-1.5 text-left whitespace-nowrap hover:bg-[color:var(--color-surface)]"
+							{#if !isBot(member.user_id)}
+								<form
+									method="POST"
+									action="?/transferHost"
+									use:enhance={({ cancel }) => {
+										if (!confirm('Transferir el rol de host a aquest jugador?')) cancel();
+									}}
 								>
-									Fer host
-								</button>
-							</form>
+									<input type="hidden" name="user_id" value={member.user_id} />
+									<button
+										type="submit"
+										class="w-full px-3 py-1.5 text-left whitespace-nowrap hover:bg-[color:var(--color-surface)]"
+									>
+										Fer host
+									</button>
+								</form>
+							{/if}
 							{#if room.status === 'lobby'}
 								<form
 									method="POST"

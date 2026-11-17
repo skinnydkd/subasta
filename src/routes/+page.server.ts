@@ -1,6 +1,8 @@
 import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import { createRoom, getUserStats, joinRoom, themeMaxMembers } from '$lib/server/rooms';
+import { addBots } from '$lib/server/bots';
+import type { BotDifficulty } from '$lib/bots/roster';
 import { isValidRoomCode, normalizeRoomCode } from '$lib/utils/roomCode';
 import { query } from '$lib/server/db';
 import { SESSION_COOKIE, SESSION_MAX_AGE, signSession } from '$lib/server/session';
@@ -116,6 +118,40 @@ export const actions: Actions = {
 		}
 
 		throw redirect(303, `/room/${result.code}`);
+	},
+
+	createSoloRoom: async ({ request, locals }) => {
+		if (!locals.user) return fail(401, { solo: { error: 'No autenticat.' } });
+		const formData = await request.formData();
+		const themeId = String(formData.get('theme_id') ?? '').trim();
+		if (!themeId) return fail(400, { solo: { error: 'Selecciona un tema.' } });
+
+		const wanted = Number.parseInt(String(formData.get('bots') ?? '3'), 10);
+		const cap = (await themeMaxMembers({ themeId })) ?? 8;
+		const bots = Math.min(Number.isFinite(wanted) ? Math.max(1, Math.min(4, wanted)) : 3, cap - 1);
+		const raw = String(formData.get('difficulty') ?? 'normal');
+		const difficulty: BotDifficulty = raw === 'facil' || raw === 'dificil' ? raw : 'normal';
+
+		const created = await createRoom(locals.user.id, {
+			themeId,
+			settings: {
+				max_members: bots + 1,
+				result_mode: 'simulation',
+				bot_difficulty: difficulty,
+				timer_seconds: 30
+			}
+		});
+		if (!created.ok) return fail(500, { solo: { error: created.error } });
+
+		const added = await addBots(
+			locals.user.id,
+			{ id: created.roomId, code: created.code },
+			bots,
+			difficulty
+		);
+		if (!added.ok) return fail(500, { solo: { error: added.error } });
+
+		throw redirect(303, `/room/${created.code}`);
 	},
 
 	joinRoom: async ({ request, locals }) => {
